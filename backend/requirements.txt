@@ -1,0 +1,24 @@
+# Web Framework
+fastapi[all]>=0.110.0
+gunicorn>=21.2.0
+
+# Database & ORM
+sqlalchemy[asyncio]>=2.0.29
+asyncpg>=0.29.0
+alembic>=1.13.1
+
+# Configuration & Validation
+pydantic>=2.7.0
+pydantic-settings>=2.2.1
+
+# Financial Data & Analytics
+yfinance>=0.2.37
+jugaad-data>=0.1.7
+mftool>=2.5
+pandas>=2.2.1
+numpy>=1.26.4
+scipy>=1.13.0
+
+# Utilities
+httpx>=0.27.0
+python-dotenv>=1.0.1
