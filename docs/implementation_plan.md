@@ -1,10 +1,13 @@
-# Flock — Implementation Plan (v1.0)
+# Flock — Implementation Plan (v1.1)
 
 > This is a **thinking document**, not a final blueprint. River & Shades discuss openly here.
 > Nothing is set in stone until both co-founders agree.
 >
 > **v0.2 Changes:** Tech stack updated (PostgreSQL, Go migration path), simulation confirmed
 > (Monte Carlo + Historical for MVP, GARCH for V2), scoring factors now extensible + educational.
+>
+> **v1.1 Changes:** Added Git Agent, Code Reviewer Agent, and Test Agent to the agent map.
+> Added formal V2 Backlog section to track deferred items.
 
 ---
 
@@ -52,6 +55,9 @@ Each agent is a specialized AI role with its own skill file. Here's what Flock n
 | **Quant Agent** | Designs the scoring engine, probability models, volatility calculations | `algo_trading`, `market_microstructure`, new: `quant_models` |
 | **Data Agent** | Builds and maintains the data pipeline — fetching, caching, cleaning stock/MF/gold data | New: `data_pipeline` skill |
 | **UI/UX Agent** | Designs and builds the frontend — communicates with Google Stitch for UI generation | New: `ui_ux_design` skill |
+| **Git Agent** | Manages git branches, pull requests, merges. Enforces branching strategy and commit standards. | New: `git_workflow` skill |
+| **Code Reviewer Agent** | Reviews all code changes for quality, patterns, security, and performance before merge approval. Works with Test Agent. | New: `code_review` skill |
+| **Test Agent** | Writes and maintains automated tests (unit, integration, API). Validates coverage before reviewer approves. | New: `test_engineering` skill |
 | **Security Agent** | Reviews every component for security compliance before it ships | `fintech_security` (already built) |
 | **Compliance Agent** | Ensures every screen has proper disclaimers, no regulatory violations | `india_regulations` (already built) |
 
@@ -69,6 +75,9 @@ Flock/.agents/skills/
 ├── quant_models/SKILL.md         ← NEW: scoring formulas, simulation math, volatility models
 ├── data_pipeline/SKILL.md        ← NEW: fetcher patterns, caching, data cleaning, API reference
 ├── ui_ux_design/SKILL.md         ← NEW: design system, component library, Google Stitch integration
+├── git_workflow/SKILL.md         ← NEW: branching strategy, PR workflow, commit standards
+├── code_review/SKILL.md          ← NEW: review checklist, quality gates, patterns enforcement
+├── test_engineering/SKILL.md     ← NEW: test strategies, coverage rules, fixture patterns
 ├── algo_trading/SKILL.md         ← Done
 ├── financial_modeling/SKILL.md   ← Done
 ├── fintech_architecture/SKILL.md ← Done
@@ -228,13 +237,14 @@ We build this after MVP validates that users care about volatility depth.
 | Phase | What | Status |
 |---|---|---|
 | **Phase 0** | ✅ Skill library built. Co-founder alignment. | DONE |
-| **Phase 1** | Build agent skill files (quant_models, data_pipeline, ui_ux_design) | TODO |
-| **Phase 2** | Rough tech stack + architecture diagram | TODO (this document, in progress) |
+| **Phase 1** | Build agent skill files (quant_models, data_pipeline, ui_ux_design, git_workflow, code_review, test_engineering) | TODO |
+| **Phase 1.5** | Setup Git Agent — branching strategy, branch protections, PR templates | TODO |
+| **Phase 2** | Project structure + DB schema + API contract + docker-compose | TODO |
 | **Phase 3** | Data pipeline MVP — fetch & cache Nifty 200 + Gold + MF data | TODO |
 | **Phase 4** | Fundamental scoring engine (Flock Score) | TODO |
 | **Phase 5** | Probability engine (Monte Carlo + Historical) | TODO |
 | **Phase 6** | Frontend MVP (planner tool — dark mode, charts) | TODO |
-| **Phase 7** | Integration + end-to-end testing | TODO |
+| **Phase 7** | Test Agent writes test suites + Code Reviewer validates all modules | TODO |
 | **Phase 8** | Legal disclaimers, final polish | TODO |
 | **Phase 9** | Deploy to free tier (Render/Railway) | TODO |
 
@@ -251,6 +261,45 @@ We build this after MVP validates that users care about volatility depth.
 
 ---
 
+## 9. V2 Backlog (Deferred from MVP Review)
+
+Items flagged during the v1.0 plan review. These are **not blockers** for MVP but must be addressed in V2.
+
+### Simulation & Modeling
+- [ ] **GARCH + Monte Carlo** — Dynamic volatility modeling for turbulent markets
+- [ ] **Bootstrap Resampling** — Fallback for stocks with <3 years of history
+- [ ] **Fat-tail disclaimer** — GBM assumes log-normal returns; Indian mid/small caps have fat tails. Add statistical disclaimer to simulation output.
+- [ ] **Rolling correlation windows** — Decide on correlation matrix recalculation frequency (currently undefined)
+
+### Scoring Engine
+- [ ] **Sector-relative scoring** — Score factors (e.g., ROE) against sector peers instead of absolute Nifty 200 ranking
+- [ ] **Missing factor handling rules** — Define scoring behavior when a company lacks a factor (e.g., no dividends). Currently undefined.
+- [ ] **Score recalculation cadence** — Batch nightly vs on-demand vs after each data refresh
+
+### Data Pipeline
+- [ ] **Paid data source migration** — EODHD / Kite Connect when revenue justifies it
+- [ ] **Data staleness alerts** — If a fetch fails, serve cached data with "last updated X hours ago" warning
+- [ ] **Rate limiting strategy** — Exponential backoff + per-source cooldowns for yfinance / jugaad-data
+- [ ] **Data validation layer** — NaN handling, stock split adjustments, bonus adjustments before data hits PostgreSQL
+- [ ] **Full historical gold analysis** — Beyond simple allocation
+
+### Frontend & UX
+- [ ] **Auto-select preset based on risk tolerance** — Low risk → Conservative, High risk → Growth (adds UI complexity)
+- [ ] **User accounts & portfolio persistence** — Login, saved portfolios, session history
+- [ ] **Mobile app** — Web-first, mobile on user demand
+
+### Compliance & Legal
+- [ ] **Disclaimer framework** — Define which disclaimers appear on which screens, exact legal language
+- [ ] **Terms of Use gate** — Require acceptance before tool access
+- [ ] **SEBI RIA registration** — Explore after MVP traction
+- [ ] **Lawyer engagement** — Professional legal review before public launch
+
+### Architecture
+- [ ] **Go API Gateway migration** — Move hot paths to Go, keep Python as gRPC workers
+- [ ] **Crisis period seed data file** — Externalize crisis definitions (dates, sectors) from code to config
+
+---
+
 ## Final Decisions (From Shades)
 
 All open questions have been resolved for the MVP:
@@ -263,5 +312,5 @@ All open questions have been resolved for the MVP:
 
 ---
 
-> **Plan Status:** APPROVED (v1.0)
-> **Next Step:** Git repository initialization and Quant Agent creation.
+> **Plan Status:** APPROVED (v1.1)
+> **Next Step:** Create remaining agent skill files (git_workflow, code_review, test_engineering, quant_models, data_pipeline, ui_ux_design), then project structure setup.

@@ -1,0 +1,20 @@
+
+# <type>(<scope>): <short description>
+# |<----  Using a Maximum Of 72 Characters  ---->|
+
+# <optional body — what and why, not how>
+
+# <optional footer — references issues, breaking changes>
+
+# --- Git Agent Instructions ---
+# Types: 
+#   feat     (New feature)
+#   fix      (Bug fix)
+#   refactor (Code restructuring)
+#   test     (Adding/updating tests)
+#   docs     (Documentation changes)
+#   chore    (Build, CI, deps)
+#   style    (Formatting)
+#   perf     (Performance)
+#
+# Scopes: scoring, simulation, data, api, db, ui, charts, auth, compliance, infra
