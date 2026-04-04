@@ -47,6 +47,7 @@ htmlcov/
 
 # Secrets (NEVER COMMIT)
 .env.*
+!.env.example
 secrets.json
 credentials.json
 key.pem
