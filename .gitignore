@@ -51,3 +51,4 @@ htmlcov/
 secrets.json
 credentials.json
 key.pem
+# Keep alembic versions

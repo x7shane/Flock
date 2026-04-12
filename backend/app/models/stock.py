@@ -36,8 +36,8 @@ class Stock(Base):
 
     # Relationships
     prices: Mapped[list["StockPrice"]] = relationship(back_populates="stock", cascade="all, delete-orphan")
-    fundamental: Mapped[Optional["Fundamental"]] = relationship(back_populates="stock", uselist=False)
-    flock_score: Mapped[Optional["FlockScore"]] = relationship(back_populates="stock", uselist=False)
+    fundamentals: Mapped[list["Fundamental"]] = relationship(back_populates="stock", cascade="all, delete-orphan")
+    flock_scores: Mapped[list["FlockScore"]] = relationship(back_populates="stock", cascade="all, delete-orphan")
 
     def __repr__(self) -> str:
         return f"<Stock(ticker={self.ticker}, name={self.company_name})>"
@@ -72,13 +72,22 @@ class StockPrice(Base):
 class Fundamental(Base):
     """
     Fundamental factors for a stock (16 factors for Flock Score).
-    One-to-one with Stock.
+    SCD2: Tracks historical changes with valid_from/valid_to.
     """
 
     __tablename__ = "fundamentals"
+    __table_args__ = (
+        UniqueConstraint("stock_id", "valid_from", name="uq_fundamentals_stock_valid_from"),
+        Index("ix_fundamentals_current", "stock_id", "is_current"),
+    )
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    stock_id: Mapped[int] = mapped_column(ForeignKey("stocks.id", ondelete="CASCADE"), unique=True, nullable=False)
+    stock_id: Mapped[int] = mapped_column(ForeignKey("stocks.id", ondelete="CASCADE"), nullable=False)
+
+    # SCD2 tracking
+    valid_from: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    valid_to: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    is_current: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
 
     # Profitability factors
     roe: Mapped[Optional[float]] = mapped_column(Numeric(8, 4))  # Return on Equity
@@ -111,22 +120,31 @@ class Fundamental(Base):
     fetched_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
 
     # Relationships
-    stock: Mapped["Stock"] = relationship(back_populates="fundamental")
+    stock: Mapped["Stock"] = relationship(back_populates="fundamentals")
 
     def __repr__(self) -> str:
-        return f"<Fundamental(stock_id={self.stock_id}, pe={self.pe_ratio})>"
+        return f"<Fundamental(stock_id={self.stock_id}, pe={self.pe_ratio}, current={self.is_current})>"
 
 
 class FlockScore(Base):
     """
     Pre-computed Flock Scores for a stock.
-    Multiple presets + pillar breakdowns.
+    SCD2: Tracks historical changes with valid_from/valid_to.
     """
 
     __tablename__ = "flock_scores"
+    __table_args__ = (
+        UniqueConstraint("stock_id", "valid_from", name="uq_flock_scores_stock_valid_from"),
+        Index("ix_flock_scores_current", "stock_id", "is_current"),
+    )
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    stock_id: Mapped[int] = mapped_column(ForeignKey("stocks.id", ondelete="CASCADE"), unique=True, nullable=False)
+    stock_id: Mapped[int] = mapped_column(ForeignKey("stocks.id", ondelete="CASCADE"), nullable=False)
+
+    # SCD2 tracking
+    valid_from: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    valid_to: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    is_current: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
 
     # Preset scores (0-100)
     score_balanced: Mapped[Optional[float]] = mapped_column(Numeric(5, 2))
@@ -145,7 +163,7 @@ class FlockScore(Base):
     computed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
 
     # Relationships
-    stock: Mapped["Stock"] = relationship(back_populates="flock_score")
+    stock: Mapped["Stock"] = relationship(back_populates="flock_scores")
 
     def __repr__(self) -> str:
-        return f"<FlockScore(stock_id={self.stock_id}, balanced={self.score_balanced})>"
+        return f"<FlockScore(stock_id={self.stock_id}, balanced={self.score_balanced}, current={self.is_current})>"
