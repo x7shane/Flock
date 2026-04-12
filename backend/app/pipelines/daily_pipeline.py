@@ -9,7 +9,7 @@ Orchestrates all daily data fetches:
 """
 
 import asyncio
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
 from sqlalchemy import select
@@ -114,8 +114,8 @@ class DailyPipeline:
             # Return empty result if no MFs configured
             run = PipelineRun(
                 run_type="mf_nav_fetch",
-                started_at=datetime.utcnow(),
-                completed_at=datetime.utcnow(),
+                started_at=datetime.now(UTC),
+                completed_at=datetime.now(UTC),
                 status="completed",
                 tickers_total=0,
                 tickers_success=0,
@@ -159,8 +159,8 @@ class DailyPipeline:
                 # Create failed run for exception
                 run = PipelineRun(
                     run_type=name.replace("_run", "_fetch"),
-                    started_at=datetime.utcnow(),
-                    completed_at=datetime.utcnow(),
+                    started_at=datetime.now(UTC),
+                    completed_at=datetime.now(UTC),
                     status="failed",
                     error_message=str(result),
                 )
