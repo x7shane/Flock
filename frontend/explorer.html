@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Explorer — Flock</title>
+  <meta name="description" content="Explore 200 Nifty stocks ranked by Flock Score. Filter by sector, search by name, and build your portfolio.">
+  <link rel="stylesheet" href="/css/design-system.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <style>
+    .search-bar {
+      display: flex;
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+      flex-wrap: wrap;
+    }
+    .search-bar .input { max-width: 360px; }
+    .search-bar select {
+      padding: 12px 16px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      outline: none;
+      min-width: 180px;
+    }
+    .search-bar select:focus { border-color: var(--accent-primary); }
+    .ticker-col { font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); font-size: 0.82rem; }
+    .company-col { color: var(--text-primary); }
+    .sector-col .pill { font-size: 0.7rem; }
+    .score-col { text-align: center; }
+    .action-col { text-align: right; }
+    .stock-count { font-size: 0.85rem; color: var(--text-muted); }
+    .add-btn { 
+      padding: 4px 12px; font-size: 0.75rem; border-radius: var(--radius-full);
+      background: var(--accent-subtle); color: var(--accent-primary); border: 1px solid rgba(59, 130, 246, 0.2);
+      cursor: pointer; font-weight: 600; transition: all var(--transition-fast); font-family: var(--font-sans);
+    }
+    .add-btn:hover { background: var(--accent-primary); color: #fff; }
+    .add-btn.added { background: var(--success-subtle); color: var(--success); border-color: rgba(16,185,129,0.2); }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="navbar-brand"><span class="logo-icon">🐦</span><span>Flock</span></a>
+    <ul class="navbar-links">
+      <li><a href="/explorer.html" class="active">Explorer</a></li>
+      <li><a href="/sip.html">SIP Calculator</a></li>
+      <li><a href="/docs" target="_blank" class="btn btn-sm btn-secondary">API</a></li>
+    </ul>
+  </nav>
+
+  <main class="page container">
+    <div class="section-header animate-fade-in-up">
+      <h1>Stock Explorer</h1>
+      <p>Browse the Nifty 200 universe. Click + to add stocks to your portfolio.</p>
+    </div>
+
+    <!-- Search + Filter Bar -->
+    <div class="search-bar animate-fade-in-up" style="animation-delay:0.1s;">
+      <input type="text" class="input" id="search-input" placeholder="Search by ticker or company..." autocomplete="off">
+      <select id="sector-filter">
+        <option value="">All Sectors</option>
+      </select>
+      <span class="stock-count" id="stock-count"></span>
+    </div>
+
+    <!-- Portfolio Preview Bar -->
+    <div id="portfolio-bar" class="card-flat flex items-center justify-between mb-lg hidden animate-fade-in-up">
+      <div class="flex items-center gap-md">
+        <span style="font-size:0.85rem;color:var(--text-secondary);">Portfolio:</span>
+        <span id="portfolio-tickers" style="font-family:var(--font-mono);font-size:0.82rem;color:var(--accent-primary);"></span>
+      </div>
+      <a href="#" id="simulate-btn" class="btn btn-primary btn-sm" onclick="goToPortfolio()">Simulate →</a>
+    </div>
+
+    <!-- Stock Table -->
+    <div class="table-container animate-fade-in-up" style="animation-delay:0.15s;">
+      <table class="data-table" id="stock-table">
+        <thead>
+          <tr>
+            <th>Ticker</th>
+            <th>Company</th>
+            <th>Sector</th>
+            <th class="score-col">Flock Score</th>
+            <th class="action-col"></th>
+          </tr>
+        </thead>
+        <tbody id="stock-tbody">
+          <!-- Skeleton rows -->
+          <tr><td colspan="5"><div class="skeleton" style="height:20px;width:100%;"></div></td></tr>
+          <tr><td colspan="5"><div class="skeleton" style="height:20px;width:100%;"></div></td></tr>
+          <tr><td colspan="5"><div class="skeleton" style="height:20px;width:100%;"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="disclaimer mt-xl">
+      <strong>⚠️ Important:</strong> Flock Scores are quantitative rankings, NOT buy/sell recommendations.
+      Always do your own research and consult a SEBI-registered advisor.
+    </div>
+  </main>
+
+  <script src="/js/format.js"></script>
+  <script src="/js/api.js"></script>
+  <script>
+    // State
+    let allStocks = [];
+    let portfolio = JSON.parse(sessionStorage.getItem('flock_portfolio') || '[]');
+
+    // Load stocks on page load
+    async function loadStocks() {
+      try {
+        allStocks = await StocksAPI.list();
+        renderTable(allStocks);
+        loadSectors();
+        updatePortfolioBar();
+      } catch (e) {
+        document.getElementById('stock-tbody').innerHTML =
+          `<tr><td colspan="5" style="text-align:center;color:var(--danger);padding:24px;">
+             Failed to load stocks. Is the API running?
+           </td></tr>`;
+      }
+    }
+
+    async function loadSectors() {
+      try {
+        const data = await StocksAPI.sectors();
+        const select = document.getElementById('sector-filter');
+        data.sectors.forEach(s => {
+          const opt = document.createElement('option');
+          opt.value = s; opt.textContent = s;
+          select.appendChild(opt);
+        });
+      } catch(e) {}
+    }
+
+    function renderTable(stocks) {
+      const tbody = document.getElementById('stock-tbody');
+      document.getElementById('stock-count').textContent = `${stocks.length} stocks`;
+
+      if (!stocks.length) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:24px;">No stocks found</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = stocks.map(s => {
+        // Generate a deterministic mock score from ticker hash
+        const hash = [...s.ticker].reduce((a, c) => a + c.charCodeAt(0), 0);
+        const score = 35 + (hash % 55);
+        const badgeClass = getScoreBadgeClass(score);
+        const inPortfolio = portfolio.includes(s.ticker);
+        return `
+          <tr>
+            <td class="ticker-col">${s.ticker}</td>
+            <td class="company-col">${s.company_name}</td>
+            <td class="sector-col"><span class="pill">${s.sector || '—'}</span></td>
+            <td class="score-col"><span class="score-badge ${badgeClass}">${score}</span></td>
+            <td class="action-col">
+              <button class="add-btn ${inPortfolio ? 'added' : ''}" onclick="toggleStock('${s.ticker}', this)" id="btn-${s.ticker}">
+                ${inPortfolio ? '✓ Added' : '+ Add'}
+              </button>
+            </td>
+          </tr>`;
+      }).join('');
+    }
+
+    function toggleStock(ticker, btn) {
+      const idx = portfolio.indexOf(ticker);
+      if (idx >= 0) {
+        portfolio.splice(idx, 1);
+        btn.textContent = '+ Add';
+        btn.classList.remove('added');
+      } else {
+        if (portfolio.length >= 10) { alert('Max 10 stocks in portfolio'); return; }
+        portfolio.push(ticker);
+        btn.textContent = '✓ Added';
+        btn.classList.add('added');
+      }
+      sessionStorage.setItem('flock_portfolio', JSON.stringify(portfolio));
+      updatePortfolioBar();
+    }
+
+    function updatePortfolioBar() {
+      const bar = document.getElementById('portfolio-bar');
+      const tickers = document.getElementById('portfolio-tickers');
+      if (portfolio.length > 0) {
+        bar.classList.remove('hidden');
+        tickers.textContent = portfolio.join(', ');
+      } else {
+        bar.classList.add('hidden');
+      }
+    }
+
+    function goToPortfolio() {
+      sessionStorage.setItem('flock_portfolio', JSON.stringify(portfolio));
+      window.location.href = '/portfolio.html';
+    }
+
+    // Search & Filter
+    document.getElementById('search-input').addEventListener('input', applyFilters);
+    document.getElementById('sector-filter').addEventListener('change', applyFilters);
+
+    function applyFilters() {
+      const q = document.getElementById('search-input').value.toLowerCase();
+      const sector = document.getElementById('sector-filter').value;
+      let filtered = allStocks;
+      if (q) {
+        filtered = filtered.filter(s =>
+          s.ticker.toLowerCase().includes(q) || s.company_name.toLowerCase().includes(q)
+        );
+      }
+      if (sector) {
+        filtered = filtered.filter(s => s.sector === sector);
+      }
+      renderTable(filtered);
+    }
+
+    loadStocks();
+  </script>
+</body>
+</html>

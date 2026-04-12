@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flock — See Your Portfolio's Future</title>
+  <meta name="description" content="Free probabilistic portfolio planning for Indian retail investors. Fundamental scoring, Monte Carlo simulation, and risk analysis.">
+  <link rel="stylesheet" href="/css/design-system.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <style>
+    .hero-features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      margin-top: var(--space-3xl);
+      max-width: 900px;
+      width: 100%;
+    }
+    .hero-feature {
+      text-align: center;
+      padding: var(--space-xl) var(--space-lg);
+    }
+    .hero-feature .feature-icon {
+      font-size: 2.2rem;
+      margin-bottom: var(--space-md);
+      display: block;
+    }
+    .hero-feature h3 {
+      font-size: 1rem;
+      margin-bottom: var(--space-sm);
+      color: var(--text-primary);
+    }
+    .hero-feature p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .hero-stats {
+      display: flex;
+      gap: var(--space-2xl);
+      margin-top: var(--space-2xl);
+    }
+    .hero-stat-number {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--accent-primary);
+    }
+    .hero-stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    @media (max-width: 768px) {
+      .hero-features { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: column; gap: var(--space-lg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <a href="/" class="navbar-brand">
+      <span class="logo-icon">🐦</span>
+      <span>Flock</span>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="/explorer.html">Explorer</a></li>
+      <li><a href="/sip.html">SIP Calculator</a></li>
+      <li><a href="/docs" target="_blank" class="btn btn-sm btn-secondary">API Docs</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero page">
+    <h1 class="animate-fade-in-up">
+      What if you could <span class="text-gradient">see your portfolio's future?</span>
+    </h1>
+    <p class="subtitle animate-fade-in-up" style="animation-delay: 0.1s;">
+      Flock uses quantitative analysis and Monte Carlo simulation to show you
+      probability-based outcomes for your Indian equity portfolio. Free. No login needed.
+    </p>
+    <div class="flex gap-md animate-fade-in-up" style="animation-delay: 0.2s;">
+      <a href="/explorer.html" class="btn btn-primary btn-lg btn-glow" id="cta-start">
+        Start Planning →
+      </a>
+      <a href="/sip.html" class="btn btn-secondary btn-lg" id="cta-sip">
+        SIP Calculator
+      </a>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="hero-stats animate-fade-in-up" style="animation-delay: 0.35s;">
+      <div class="text-center">
+        <div class="hero-stat-number">200</div>
+        <div class="hero-stat-label">Nifty 200 Stocks</div>
+      </div>
+      <div class="text-center">
+        <div class="hero-stat-number">16</div>
+        <div class="hero-stat-label">Fundamental Factors</div>
+      </div>
+      <div class="text-center">
+        <div class="hero-stat-number">10K</div>
+        <div class="hero-stat-label">Monte Carlo Paths</div>
+      </div>
+      <div class="text-center">
+        <div class="hero-stat-number">5</div>
+        <div class="hero-stat-label">Crisis Scenarios</div>
+      </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="hero-features stagger" style="animation-delay: 0.4s;">
+      <div class="card hero-feature">
+        <span class="feature-icon">📊</span>
+        <h3>Flock Score</h3>
+        <p>Every stock scored 0-100 across profitability, growth, health, valuation, and quality.</p>
+      </div>
+      <div class="card hero-feature">
+        <span class="feature-icon">🎯</span>
+        <h3>Monte Carlo</h3>
+        <p>10,000 simulated paths show the probability of hitting your return target.</p>
+      </div>
+      <div class="card hero-feature">
+        <span class="feature-icon">⚡</span>
+        <h3>Stress Test</h3>
+        <p>See how your portfolio would survive 2008 GFC, COVID crash, and more.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <footer class="container" style="padding-bottom: var(--space-2xl);">
+    <div class="disclaimer">
+      <strong>⚠️ Important:</strong> Flock is an educational tool, NOT investment advice.
+      Past performance does not guarantee future results. Always consult a
+      SEBI-registered advisor before making investment decisions.
+    </div>
+  </footer>
+</body>
+</html>

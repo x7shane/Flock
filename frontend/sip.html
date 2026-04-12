@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIP Calculator — Flock</title>
+  <meta name="description" content="Calculate your SIP returns with standard and step-up projections. Compare scenarios across different expected returns.">
+  <link rel="stylesheet" href="/css/design-system.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+  <style>
+    .sip-form { max-width:500px; }
+    .sip-form .input-group { margin-bottom:var(--space-lg); }
+    .sip-results { animation: fadeInUp 0.4s ease; }
+    .sip-big-number { font-size:2.5rem; font-weight:800; letter-spacing:-0.03em; }
+    .sip-compare-table { margin-top:var(--space-lg); }
+    .sip-compare-table td { font-family:var(--font-mono); font-size:0.85rem; }
+    .sip-compare-table .highlight { background:var(--accent-subtle); }
+    .yearly-chart-wrapper { position:relative; height:280px; background:var(--bg-secondary); border-radius:var(--radius-md); padding:var(--space-md); border:1px solid var(--border-subtle); }
+    .return-badge { display:inline-block; padding:2px 8px; border-radius:var(--radius-full); font-size:0.78rem; font-weight:600; margin-left:var(--space-sm); }
+    .slider-label { display:flex; justify-content:space-between; align-items:baseline; }
+    .slider-label .slider-val { font-family:var(--font-mono); color:var(--accent-primary); font-weight:600; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="navbar-brand"><span class="logo-icon">🐦</span><span>Flock</span></a>
+    <ul class="navbar-links">
+      <li><a href="/explorer.html">Explorer</a></li>
+      <li><a href="/sip.html" class="active">SIP Calculator</a></li>
+    </ul>
+  </nav>
+
+  <main class="page container">
+    <div class="section-header animate-fade-in-up">
+      <h1>SIP Calculator</h1>
+      <p>Project your Systematic Investment Plan returns — standard or step-up.</p>
+    </div>
+
+    <div class="split animate-fade-in-up" style="animation-delay:0.1s;">
+      <!-- Left: Form -->
+      <div class="sip-form">
+        <div class="input-group">
+          <label for="sip-amount">Monthly SIP Amount (₹)</label>
+          <input type="number" class="input" id="sip-amount" value="10000" min="500" step="500">
+        </div>
+
+        <div class="input-group">
+          <div class="slider-label">
+            <label for="sip-return">Expected Annual Return</label>
+            <span class="slider-val" id="return-val">12%</span>
+          </div>
+          <input type="range" class="slider" id="sip-return" min="4" max="25" value="12" step="0.5">
+        </div>
+
+        <div class="input-group">
+          <div class="slider-label">
+            <label for="sip-horizon">Time Horizon</label>
+            <span class="slider-val" id="horizon-val">10 years</span>
+          </div>
+          <input type="range" class="slider" id="sip-horizon" min="1" max="40" value="10">
+        </div>
+
+        <div class="input-group">
+          <div class="slider-label">
+            <label for="sip-stepup">Annual Step-Up</label>
+            <span class="slider-val" id="stepup-val">0%</span>
+          </div>
+          <input type="range" class="slider" id="sip-stepup" min="0" max="25" value="0" step="1">
+        </div>
+
+        <button class="btn btn-primary btn-lg" id="calc-btn" onclick="calculate()" style="width:100%;">
+          Calculate →
+        </button>
+      </div>
+
+      <!-- Right: Results -->
+      <div id="results-panel">
+        <div class="card-flat" style="text-align:center;padding:var(--space-3xl);color:var(--text-muted);">
+          Set your inputs and click Calculate to see projections.
+        </div>
+      </div>
+    </div>
+
+    <!-- Scenario Comparison -->
+    <section id="compare-section" class="section hidden mt-xl">
+      <div class="divider"></div>
+      <h3 class="mb-md">📈 Scenario Comparison</h3>
+      <p class="text-secondary mb-lg" style="font-size:0.9rem;">Same SIP at different expected returns.</p>
+      <div class="table-container">
+        <table class="data-table sip-compare-table" id="compare-table">
+          <thead>
+            <tr>
+              <th>Return</th>
+              <th>Total Invested</th>
+              <th>Future Value</th>
+              <th>Wealth Gain</th>
+              <th>Effective CAGR</th>
+            </tr>
+          </thead>
+          <tbody id="compare-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="disclaimer mt-xl">
+      <strong>⚠️ Important:</strong> SIP calculators use a fixed rate of return assumption.
+      Actual mutual fund and equity returns vary. Use this as a planning guide, not a guarantee.
+    </div>
+  </main>
+
+  <script src="/js/format.js"></script>
+  <script src="/js/api.js"></script>
+  <script>
+    let growthChart = null;
+
+    // Slider live updates
+    document.getElementById('sip-return').addEventListener('input', function() {
+      document.getElementById('return-val').textContent = this.value + '%';
+    });
+    document.getElementById('sip-horizon').addEventListener('input', function() {
+      document.getElementById('horizon-val').textContent = this.value + ' years';
+    });
+    document.getElementById('sip-stepup').addEventListener('input', function() {
+      document.getElementById('stepup-val').textContent = this.value + '%';
+    });
+
+    async function calculate() {
+      const btn = document.getElementById('calc-btn');
+      btn.disabled = true; btn.textContent = '⏳ Calculating...';
+
+      const amount = parseFloat(document.getElementById('sip-amount').value) || 10000;
+      const annualReturn = parseFloat(document.getElementById('sip-return').value) / 100;
+      const years = parseInt(document.getElementById('sip-horizon').value) || 10;
+      const stepUp = parseFloat(document.getElementById('sip-stepup').value) || 0;
+
+      try {
+        const result = await SipAPI.calculate({
+          monthly_amount: amount,
+          expected_annual_return: annualReturn,
+          time_horizon_years: years,
+          annual_step_up_pct: stepUp,
+        });
+        renderResults(result);
+
+        // Also fetch comparison
+        const compare = await SipAPI.compare({
+          monthly_amount: amount,
+          time_horizon_years: years,
+        });
+        renderComparison(compare.scenarios, annualReturn);
+      } catch (e) {
+        document.getElementById('results-panel').innerHTML =
+          `<div class="card-flat" style="color:var(--danger);padding:24px;">Error: ${e.message}</div>`;
+      } finally {
+        btn.disabled = false; btn.textContent = 'Calculate →';
+      }
+    }
+
+    function renderResults(r) {
+      const gainColor = r.wealth_gain_inr > 0 ? 'text-success' : 'text-danger';
+      const panel = document.getElementById('results-panel');
+      panel.innerHTML = `
+        <div class="sip-results">
+          <div class="card-flat mb-lg" style="text-align:center;">
+            <div class="text-muted" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:var(--space-sm);">Future Value</div>
+            <div class="sip-big-number text-gradient">${formatINRFull(r.future_value_inr)}</div>
+          </div>
+          <div class="grid grid-2 gap-md mb-lg">
+            <div class="card-stat"><div class="stat-value">${formatINRFull(r.total_invested_inr)}</div><div class="stat-label">Total Invested</div></div>
+            <div class="card-stat"><div class="stat-value ${gainColor}">${formatINRFull(r.wealth_gain_inr)}</div><div class="stat-label">Wealth Gain</div></div>
+            <div class="card-stat"><div class="stat-value">${formatPctUnsigned(r.absolute_return_pct,1)}</div><div class="stat-label">Absolute Return</div></div>
+            <div class="card-stat"><div class="stat-value">${formatPctUnsigned(r.effective_cagr_pct,1)}</div><div class="stat-label">Effective CAGR</div></div>
+          </div>
+          ${r.yearly_breakdown ? renderYearlyBreakdown(r.yearly_breakdown) : ''}
+        </div>
+      `;
+    }
+
+    function renderYearlyBreakdown(breakdown) {
+      return `
+        <h4 class="mt-lg mb-md">Step-Up Yearly Breakdown</h4>
+        <div class="table-container">
+          <table class="data-table">
+            <thead><tr><th>Year</th><th>Monthly SIP</th><th>Year Invested</th><th>Cumulative</th></tr></thead>
+            <tbody>
+              ${breakdown.map(y => `
+                <tr>
+                  <td>${y.year}</td>
+                  <td class="text-mono">${formatINRFull(y.monthly_amount)}</td>
+                  <td>${formatINRFull(y.year_invested)}</td>
+                  <td>${formatINRFull(y.cumulative_invested)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderComparison(scenarios, selectedReturn) {
+      const section = document.getElementById('compare-section');
+      section.classList.remove('hidden');
+      const tbody = document.getElementById('compare-tbody');
+      tbody.innerHTML = scenarios.map(s => {
+        const isSelected = Math.abs(s.expected_annual_return_pct / 100 - selectedReturn) < 0.005;
+        return `
+          <tr class="${isSelected ? 'highlight' : ''}">
+            <td>${formatPctUnsigned(s.expected_annual_return_pct,0)} ${isSelected ? '<span class="return-badge" style="background:var(--accent-subtle);color:var(--accent-primary);">Selected</span>' : ''}</td>
+            <td>${formatINR(s.total_invested_inr)}</td>
+            <td style="color:var(--text-primary);font-weight:600;">${formatINR(s.future_value_inr)}</td>
+            <td class="text-success">${formatINR(s.wealth_gain_inr)}</td>
+            <td>${formatPctUnsigned(s.effective_cagr_pct)}</td>
+          </tr>`;
+      }).join('');
+    }
+  </script>
+</body>
+</html>
