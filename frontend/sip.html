@@ -174,24 +174,24 @@
 <label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Monthly SIP Amount</label>
 <div class="relative">
 <span class="absolute left-4 top-1/2 -translate-y-1/2 font-headline font-bold text-primary text-xl">₹</span>
-<input class="w-full bg-surface-container-lowest border-none rounded-xl py-5 pl-10 pr-6 text-2xl font-headline font-bold text-on-surface focus:ring-2 focus:ring-primary/20" type="number" value="10000"/>
+<input id="sip-amount" class="w-full bg-surface-container-lowest border-none rounded-xl py-5 pl-10 pr-6 text-2xl font-headline font-bold text-on-surface focus:ring-2 focus:ring-primary/20" type="number" value="10000" min="500" step="500"/>
 </div>
 </div>
 <!-- Time Horizon Slider -->
 <div class="space-y-4">
 <div class="flex justify-between items-center">
 <label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Time Horizon</label>
-<span class="font-headline font-bold text-primary">15 Years</span>
+<span id="horizon-val" class="font-headline font-bold text-primary">15 Years</span>
 </div>
-<input class="w-full h-1" max="40" min="1" type="range" value="15"/>
+<input id="sip-horizon" class="w-full h-1" max="40" min="1" type="range" value="15" oninput="document.getElementById('horizon-val').textContent=this.value+' Years'"/>
 </div>
 <!-- Expected Return Slider -->
 <div class="space-y-4">
 <div class="flex justify-between items-center">
 <label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Expected Annual Return</label>
-<span class="font-headline font-bold text-primary">12%</span>
+<span id="return-val" class="font-headline font-bold text-primary">12%</span>
 </div>
-<input class="w-full h-1" max="30" min="5" type="range" value="12"/>
+<input id="sip-return" class="w-full h-1" max="30" min="5" type="range" value="12" oninput="document.getElementById('return-val').textContent=this.value+'%'"/>
 </div>
 <!-- Toggles Grid -->
 <div class="grid grid-cols-2 gap-4 pt-4">
@@ -216,7 +216,15 @@
 </div>
 </section>
 <!-- RIGHT COLUMN: Results & Insights -->
-<section class="lg:col-span-7 space-y-12">
+<section id="results-panel" class="lg:col-span-7 space-y-12">
+<!-- Placeholder before first calculation -->
+<div id="results-placeholder" class="flex flex-col items-center justify-center py-20 text-center">
+  <div class="w-16 h-16 bg-surface-container rounded-2xl flex items-center justify-center mb-4">
+    <span class="material-symbols-outlined text-3xl text-on-surface-variant">calculate</span>
+  </div>
+  <h4 class="font-headline font-bold text-lg text-on-surface mb-2">Set your parameters</h4>
+  <p class="text-on-surface-variant text-sm">Fill in the form and hit <strong>Calculate →</strong> to see your SIP projection.</p>
+</div>
 <!-- Stats Cards -->
 <div class="grid grid-cols-3 gap-4">
 <div class="bg-surface-container-lowest p-6 rounded-xl border-b-4 border-surface-container">
