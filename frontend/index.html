@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>Flock — See Your Portfolio's Future</title>
-  <meta name="description" content="Free probabilistic portfolio planning for Indian retail investors. Fundamental scoring, Monte Carlo simulation, and risk analysis.">
+  <meta name="description" content="Free probabilistic portfolio planning for Indian retail investors. Fundamental scoring, Monte Carlo simulation, and risk analysis."/>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-  <script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "surface-container-lowest": "#ffffff", "surface-container": "#eeefe4",
-            "surface-container-low": "#f4f4ea", "on-surface-variant": "#404943",
-            "primary-fixed": "#b1f0ce", "background": "#fafaef",
-            "on-background": "#1a1c16", "on-surface": "#1a1c16", "outline-variant": "#bfc9c1",
-            "surface-container-highest": "#e2e3d9", "outline": "#707973",
-            "surface-container-high": "#e8e9de", "error": "#ba1a1a",
-            "primary-container": "#2d6a4f", "primary": "#0f5238",
-            "surface": "#fafaef", "secondary-container": "#a0f4c8", "secondary": "#0e6c4a",
-            "tertiary": "#7a2e35", "on-primary-fixed-variant": "#0e5138",
-            "secondary-fixed": "#a0f4c8"
+            "inverse-surface": "#2f312a", "surface-container-lowest": "#ffffff",
+            "surface-container": "#eeefe4", "surface-container-low": "#f4f4ea",
+            "surface-container-high": "#e8e9de", "surface-container-highest": "#e2e3d9",
+            "on-surface-variant": "#404943", "on-primary": "#ffffff",
+            "surface-dim": "#dadbd0", "primary-fixed": "#b1f0ce",
+            "tertiary": "#7a2e35", "background": "#fafaef",
+            "on-background": "#1a1c16", "on-surface": "#1a1c16",
+            "outline-variant": "#bfc9c1", "surface-bright": "#fafaef",
+            "outline": "#707973", "error": "#ba1a1a",
+            "primary-container": "#2d6a4f", "surface-variant": "#e2e3d9",
+            "primary": "#0f5238", "surface": "#fafaef",
+            "secondary-container": "#a0f4c8", "secondary": "#0e6c4a",
+            "primary-fixed-dim": "#95d4b3", "on-primary-fixed-variant": "#0e5138"
           },
           fontFamily: { headline: ["Manrope"], body: ["Inter"], label: ["Inter"] }
         }
@@ -34,12 +37,12 @@
     body { font-family: 'Inter', sans-serif; }
     .font-headline { font-family: 'Manrope', sans-serif; }
     .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .animate-in { animation: fadeInUp 0.6s ease forwards; }
-    .delay-1 { animation-delay: 0.1s; opacity: 0; }
-    .delay-2 { animation-delay: 0.2s; opacity: 0; }
-    .delay-3 { animation-delay: 0.35s; opacity: 0; }
-    .delay-4 { animation-delay: 0.5s; opacity: 0; }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+    .fade-up { animation: fadeInUp 0.6s ease both; }
+    .fade-up-1 { animation-delay: 0.1s; }
+    .fade-up-2 { animation-delay: 0.22s; }
+    .fade-up-3 { animation-delay: 0.36s; }
+    .fade-up-4 { animation-delay: 0.48s; }
   </style>
   <script src="/js/nav.js" defer></script>
 </head>
@@ -49,159 +52,155 @@
 <aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low flex flex-col py-10 z-50 hidden md:flex transition-transform duration-300">
   <div class="px-8 mb-10">
     <h1 class="text-3xl font-black text-primary font-headline tracking-tighter">🐦 Flock</h1>
-    <p class="font-label uppercase tracking-widest text-[10px] font-bold text-on-surface-variant mt-1">Smart Wealth</p>
+    <p class="uppercase tracking-widest text-[10px] font-bold text-on-surface-variant mt-1">Smart Wealth</p>
   </div>
   <nav class="flex-1 flex flex-col">
-    <a class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-label uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all" href="/index.html">
+    <a href="/index.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
       <span class="material-symbols-outlined">home</span><span>Home</span>
     </a>
-    <a class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-label uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all" href="/explorer.html">
+    <a href="/explorer.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
       <span class="material-symbols-outlined">search</span><span>Explorer</span>
     </a>
-    <a class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-label uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all" href="/portfolio.html">
+    <a href="/portfolio.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
       <span class="material-symbols-outlined">pie_chart</span><span>Portfolio Simulator</span>
     </a>
-    <a class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-label uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all" href="/sip.html">
+    <a href="/sip.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
       <span class="material-symbols-outlined">trending_up</span><span>SIP Calculator</span>
     </a>
   </nav>
-  <div class="px-8 mt-auto">
-    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-headline font-black text-base">🐦</div>
-  </div>
 </aside>
 
-<!-- Main content -->
+<!-- Main -->
 <div class="flex-1 md:ml-64 flex flex-col min-h-screen">
 
-  <!-- Top bar -->
-  <header class="w-full sticky top-0 z-40 bg-background/90 backdrop-blur-md flex justify-between items-center px-4 md:px-12 py-4 border-b border-outline-variant/20">
+  <!-- TopAppBar -->
+  <header class="sticky top-0 z-40 bg-background/90 backdrop-blur-md flex justify-between items-center px-6 md:px-12 py-4 border-b border-outline-variant/20">
     <div class="flex items-center gap-4">
-      <button class="md:hidden text-primary p-2 rounded-lg hover:bg-surface-container transition-colors">
-        <span class="material-symbols-outlined">menu</span>
-      </button>
-      <span class="font-headline font-bold text-lg text-primary tracking-tight">Flock</span>
+      <button class="md:hidden text-primary p-2 rounded-lg"><span class="material-symbols-outlined">menu</span></button>
+      <span class="font-headline font-bold text-primary text-lg tracking-tight">Welcome to Flock</span>
     </div>
-    <div class="flex items-center gap-3">
-      <a href="/sip.html" class="px-4 py-2 text-primary font-bold text-sm hover:bg-surface-container rounded-xl transition-colors hidden sm:block">SIP Calculator</a>
-      <a href="/explorer.html" class="px-5 py-2.5 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl text-sm font-bold shadow-lg hover:opacity-90 transition-opacity">
-        Start Planning →
-      </a>
-    </div>
+    <a href="/explorer.html" class="px-5 py-2.5 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl text-sm font-bold shadow-lg hover:opacity-90 hidden sm:flex items-center gap-2">
+      <span class="material-symbols-outlined text-base">search</span>
+      Start Planning
+    </a>
   </header>
 
   <!-- Hero -->
-  <main class="flex-1">
-    <section class="min-h-[85vh] flex flex-col items-center justify-center px-6 text-center py-20">
+  <main class="flex-1 px-6 md:px-16 py-16 max-w-6xl mx-auto w-full">
 
-      <!-- Eyebrow label -->
-      <div class="animate-in delay-1 inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest mb-8">
+    <!-- Headline -->
+    <div class="mb-16 fade-up">
+      <div class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
         <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-        Free · No Login · SEBI Compliant
+        Free · No Login · India-First
       </div>
-
-      <!-- Headline -->
-      <h1 class="animate-in delay-1 font-headline font-black text-5xl md:text-7xl text-on-surface tracking-tighter leading-tight max-w-4xl mb-6">
-        What if you could<br>
-        <span class="text-primary">see your portfolio's future?</span>
+      <h1 class="font-headline text-5xl md:text-7xl font-extrabold text-on-surface tracking-tighter leading-[1.05] mb-6">
+        What if you could<br/>
+        <span class="text-primary">see your portfolio's</span><br/>future?
       </h1>
-
-      <!-- Subheadline -->
-      <p class="animate-in delay-2 text-on-surface-variant text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
-        Flock uses quantitative analysis and Monte Carlo simulation to show<br class="hidden md:block">
+      <p class="text-on-surface-variant text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
+        Flock uses quantitative analysis and Monte Carlo simulation to show
         probability-based outcomes for your Indian equity portfolio.
       </p>
-
-      <!-- CTAs -->
-      <div class="animate-in delay-2 flex flex-col sm:flex-row gap-4 mb-16">
+      <div class="flex flex-wrap gap-4 fade-up fade-up-1">
         <a href="/explorer.html" id="cta-start"
-           class="px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-2xl text-base font-bold shadow-xl shadow-primary/20 hover:opacity-90 hover:scale-[1.02] transition-all flex items-center gap-2">
+           class="px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-2xl font-headline font-bold text-base shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2">
           <span class="material-symbols-outlined">search</span>
-          Explore Stocks
+          Start Planning →
         </a>
         <a href="/sip.html" id="cta-sip"
-           class="px-8 py-4 bg-surface-container-lowest border border-outline-variant/30 text-on-surface rounded-2xl text-base font-bold hover:bg-surface-container transition-colors flex items-center gap-2 shadow-sm">
+           class="px-8 py-4 border-2 border-primary text-primary rounded-2xl font-headline font-bold text-base hover:bg-primary/5 transition-colors flex items-center gap-2">
           <span class="material-symbols-outlined">trending_up</span>
           SIP Calculator
         </a>
       </div>
+    </div>
 
-      <!-- Stats bar -->
-      <div class="animate-in delay-3 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 mb-20">
-        <div class="text-center">
-          <div class="font-headline font-black text-4xl text-primary">200</div>
-          <div class="font-label uppercase tracking-widest text-[10px] font-bold text-on-surface-variant mt-1">Nifty Stocks</div>
-        </div>
-        <div class="text-center">
-          <div class="font-headline font-black text-4xl text-primary">16</div>
-          <div class="font-label uppercase tracking-widest text-[10px] font-bold text-on-surface-variant mt-1">Factors Scored</div>
-        </div>
-        <div class="text-center">
-          <div class="font-headline font-black text-4xl text-primary">10K</div>
-          <div class="font-label uppercase tracking-widest text-[10px] font-bold text-on-surface-variant mt-1">Monte Carlo Paths</div>
-        </div>
-        <div class="text-center">
-          <div class="font-headline font-black text-4xl text-primary">5</div>
-          <div class="font-label uppercase tracking-widest text-[10px] font-bold text-on-surface-variant mt-1">Crisis Scenarios</div>
-        </div>
+    <!-- Stats bar -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20 fade-up fade-up-2">
+      <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 shadow-sm">
+        <div class="font-headline text-4xl font-extrabold text-primary">200</div>
+        <div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mt-1">Nifty 200 Stocks</div>
       </div>
-    </section>
+      <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 shadow-sm">
+        <div class="font-headline text-4xl font-extrabold text-primary">16</div>
+        <div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mt-1">Fundamental Factors</div>
+      </div>
+      <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 shadow-sm">
+        <div class="font-headline text-4xl font-extrabold text-primary">10K</div>
+        <div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mt-1">Monte Carlo Paths</div>
+      </div>
+      <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 shadow-sm">
+        <div class="font-headline text-4xl font-extrabold text-primary">5</div>
+        <div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mt-1">Crisis Scenarios</div>
+      </div>
+    </div>
 
     <!-- Feature Cards -->
-    <section class="bg-surface-container-low py-20 px-6">
-      <div class="max-w-5xl mx-auto">
-        <h2 class="animate-in delay-4 font-headline font-black text-3xl text-on-surface text-center tracking-tight mb-12">
-          How Flock works
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 fade-up fade-up-3">
+      <a href="/explorer.html" class="group bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant/10 shadow-sm hover:shadow-md hover:border-primary/20 hover:scale-[1.02] transition-all">
+        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+          <span class="material-symbols-outlined text-primary text-2xl">analytics</span>
+        </div>
+        <h3 class="font-headline font-bold text-lg text-on-surface mb-2">Flock Score</h3>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Every stock scored 0–100 across profitability, growth, health, valuation, and quality.</p>
+      </a>
+      <a href="/portfolio.html" class="group bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant/10 shadow-sm hover:shadow-md hover:border-primary/20 hover:scale-[1.02] transition-all">
+        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+          <span class="material-symbols-outlined text-primary text-2xl">scatter_plot</span>
+        </div>
+        <h3 class="font-headline font-bold text-lg text-on-surface mb-2">Monte Carlo</h3>
+        <p class="text-on-surface-variant text-sm leading-relaxed">10,000 simulated paths show the probability of hitting your return target.</p>
+      </a>
+      <a href="/portfolio.html" class="group bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant/10 shadow-sm hover:shadow-md hover:border-primary/20 hover:scale-[1.02] transition-all">
+        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+          <span class="material-symbols-outlined text-primary text-2xl">bolt</span>
+        </div>
+        <h3 class="font-headline font-bold text-lg text-on-surface mb-2">Stress Test</h3>
+        <p class="text-on-surface-variant text-sm leading-relaxed">See how your portfolio survived the 2008 GFC, COVID crash, and Demonetization.</p>
+      </a>
+    </div>
 
-          <div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm hover:scale-[1.02] transition-transform">
-            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5">
-              <span class="material-symbols-outlined text-primary text-2xl">analytics</span>
-            </div>
-            <h3 class="font-headline font-bold text-lg text-on-surface mb-2">Flock Score</h3>
-            <p class="text-on-surface-variant text-sm leading-relaxed">Every stock scored 0–100 across profitability, growth, financial health, valuation, and quality factors.</p>
-          </div>
-
-          <div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm hover:scale-[1.02] transition-transform">
-            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5">
-              <span class="material-symbols-outlined text-primary text-2xl">casino</span>
-            </div>
-            <h3 class="font-headline font-bold text-lg text-on-surface mb-2">Monte Carlo</h3>
-            <p class="text-on-surface-variant text-sm leading-relaxed">10,000 simulated paths show the probability of hitting your return target — not false precision.</p>
-          </div>
-
-          <div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm hover:scale-[1.02] transition-transform">
-            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-5">
-              <span class="material-symbols-outlined text-primary text-2xl">bolt</span>
-            </div>
-            <h3 class="font-headline font-bold text-lg text-on-surface mb-2">Stress Test</h3>
-            <p class="text-on-surface-variant text-sm leading-relaxed">See how your portfolio would survive 2008 GFC, COVID crash, Demonetization, and more.</p>
-          </div>
+    <!-- Flow Steps -->
+    <div class="bg-surface-container-low rounded-3xl p-8 md:p-12 mb-16 fade-up fade-up-4">
+      <h2 class="font-headline text-3xl font-extrabold text-on-surface tracking-tight mb-8">How it works</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="flex flex-col gap-3">
+          <div class="w-10 h-10 rounded-full bg-primary text-white font-headline font-bold flex items-center justify-center text-sm">1</div>
+          <h4 class="font-headline font-bold text-on-surface">Browse Stocks</h4>
+          <p class="text-sm text-on-surface-variant">Filter 200 Nifty stocks by sector and Flock Score.</p>
+        </div>
+        <div class="flex flex-col gap-3">
+          <div class="w-10 h-10 rounded-full bg-primary text-white font-headline font-bold flex items-center justify-center text-sm">2</div>
+          <h4 class="font-headline font-bold text-on-surface">Build Portfolio</h4>
+          <p class="text-sm text-on-surface-variant">Add stocks and set weights with intuitive sliders.</p>
+        </div>
+        <div class="flex flex-col gap-3">
+          <div class="w-10 h-10 rounded-full bg-primary text-white font-headline font-bold flex items-center justify-center text-sm">3</div>
+          <h4 class="font-headline font-bold text-on-surface">Run Simulation</h4>
+          <p class="text-sm text-on-surface-variant">10,000 Monte Carlo paths reveal realistic outcome ranges.</p>
+        </div>
+        <div class="flex flex-col gap-3">
+          <div class="w-10 h-10 rounded-full bg-primary text-white font-headline font-bold flex items-center justify-center text-sm">4</div>
+          <h4 class="font-headline font-bold text-on-surface">Analyse Risk</h4>
+          <p class="text-sm text-on-surface-variant">Historical stress tests show your crisis resilience.</p>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- CTA Strip -->
-    <section class="py-20 px-6 text-center">
-      <h2 class="font-headline font-black text-3xl text-on-surface tracking-tight mb-4">Ready to see your future?</h2>
-      <p class="text-on-surface-variant mb-8">Free. No login. No investment advice. Just data.</p>
-      <a href="/explorer.html" class="inline-flex items-center gap-2 px-10 py-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-2xl text-base font-bold shadow-xl shadow-primary/20 hover:opacity-90 hover:scale-[1.02] transition-all">
-        <span class="material-symbols-outlined">search</span>
-        Start with the Explorer →
-      </a>
-    </section>
-
-    <!-- Disclaimer -->
-    <footer class="border-t border-outline-variant/20 px-6 py-8">
-      <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-xs text-on-surface-variant text-center md:text-left leading-relaxed max-w-2xl">
-          ⚠️ <strong>Flock is an educational tool, NOT investment advice.</strong> Past performance does not guarantee future results. Always consult a SEBI-registered advisor before investing.
+    <!-- Disclaimer footer -->
+    <footer class="mt-4">
+      <div class="bg-[#fff9e6] p-5 rounded-xl flex gap-3 items-start border border-[#f5e1a4]">
+        <span class="material-symbols-outlined text-[#856404] text-lg mt-0.5">warning</span>
+        <p class="text-xs text-[#856404] leading-relaxed">
+          <strong>SEBI Disclaimer:</strong> Flock is an educational tool, NOT investment advice.
+          Past performance does not guarantee future results. Always consult a SEBI-registered
+          advisor before making investment decisions. The Flock Score is a quantitative ranking,
+          not a buy/sell recommendation.
         </p>
-        <p class="font-label uppercase tracking-widest text-[10px] font-bold text-on-surface-variant whitespace-nowrap">© 2024 Flock</p>
       </div>
     </footer>
   </main>
-
 </div>
 </body>
 </html>
