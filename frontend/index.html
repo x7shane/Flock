@@ -57,8 +57,84 @@
       .hero-stats { flex-direction: column; gap: var(--space-lg); }
     }
   </style>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-surface": "#2f312a", "surface-container-lowest": "#ffffff", "surface-container": "#eeefe4", 
+            "surface-container-low": "#f4f4ea", "on-surface-variant": "#404943", "on-primary": "#ffffff", 
+            "surface-dim": "#dadbd0", "primary-fixed": "#b1f0ce", "tertiary": "#7a2e35", "background": "#fafaef", 
+            "on-background": "#1a1c16", "on-surface": "#1a1c16", "outline-variant": "#bfc9c1", "surface-bright": "#fafaef", 
+            "surface-container-highest": "#e2e3d9", "outline": "#707973", "surface-container-high": "#e8e9de", 
+            "error": "#ba1a1a", "primary-container": "#2d6a4f", "surface-variant": "#e2e3d9", 
+            "primary": "#0f5238", "surface": "#fafaef", "secondary-container": "#a0f4c8", "secondary": "#0e6c4a"
+          },
+          fontFamily: { headline: ["Manrope"], body: ["Inter"], label: ["Inter"] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .font-headline { font-family: 'Manrope', sans-serif; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    
+    /* We still keep some old global CSS to make migration easier, but prefix it */
+    .btn { padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    .btn-primary { background: #0f5238; color: white; }
+    .btn-primary:hover { opacity: 0.9; }
+    .input { padding: 12px 16px; border-radius: 8px; border: 1px solid #bfc9c1; background: #fff; width: 100%; outline:none;}
+    .input:focus { border-color: #0f5238; }
+  </style>
+
 </head>
-<body>
+<body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row">
+
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#f4f4ea] flex flex-col py-8 space-y-6 z-50 border-r border-[#bfc9c1]/20 hidden md:flex">
+  <div class="px-8">
+    <h2 class="text-2xl font-black text-[#0f5238] font-headline tracking-tighter flex items-center gap-2"><span class="text-2xl">🐦</span> Flock</h2>
+    <p class="font-manrope font-semibold text-[10px] tracking-widest uppercase text-on-surface-variant mt-1">Smart Wealth</p>
+  </div>
+  <nav class="flex-1 flex flex-col mt-4">
+    <a class="flex items-center space-x-3 py-3 text-[#404943] pl-8 hover:bg-[#ffffff] hover:text-[#0f5238] transition-all" href="/index.html">
+      <span class="material-symbols-outlined">home</span>
+      <span class="font-manrope font-semibold text-sm tracking-wide uppercase">Home</span>
+    </a>
+    <a class="flex items-center space-x-3 py-3 text-[#404943] pl-8 hover:bg-[#ffffff] hover:text-[#0f5238] transition-all" href="/explorer.html">
+      <span class="material-symbols-outlined">search</span>
+      <span class="font-manrope font-semibold text-sm tracking-wide uppercase">Explorer</span>
+    </a>
+    <a class="flex items-center space-x-3 py-3 text-[#404943] pl-8 hover:bg-[#ffffff] hover:text-[#0f5238] transition-all" href="/portfolio.html">
+      <span class="material-symbols-outlined">pie_chart</span>
+      <span class="font-manrope font-semibold text-sm tracking-wide uppercase">Portfolio Simulator</span>
+    </a>
+    <a class="flex items-center space-x-3 py-3 text-[#404943] pl-8 hover:bg-[#ffffff] hover:text-[#0f5238] transition-all" href="/sip.html">
+      <span class="material-symbols-outlined">trending_up</span>
+      <span class="font-manrope font-semibold text-sm tracking-wide uppercase">SIP Calculator</span>
+    </a>
+  </nav>
+</aside>
+
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen w-full">
+
+<header class="w-full sticky top-0 z-40 bg-[#fafaef]/90 backdrop-blur-md flex justify-between items-center px-4 md:px-12 py-4 border-b border-[#bfc9c1]/20">
+  <div class="flex items-center space-x-4">
+    <button class="md:hidden text-[#0f5238]"><span class="material-symbols-outlined">menu</span></button>
+    <div class="flex flex-col">
+      <span class="font-headline font-bold text-lg text-[#0f5238] tracking-tight leading-tight">Welcome to Flock</span>
+    </div>
+  </div>
+  <div class="flex items-center gap-4">
+    <a href="/explorer.html" class="px-5 py-2.5 bg-[#0f5238] text-white rounded-xl text-sm font-bold shadow-lg shadow-[#0f5238]/20 hover:opacity-90 hidden sm:block">Build Portfolio</a>
+  </div>
+</header>
+
   <!-- Navbar -->
   <nav class="navbar" id="navbar">
     <a href="/" class="navbar-brand">
@@ -82,10 +158,10 @@
       probability-based outcomes for your Indian equity portfolio. Free. No login needed.
     </p>
     <div class="flex gap-md animate-fade-in-up" style="animation-delay: 0.2s;">
-      <a href="/explorer.html" class="btn btn-primary btn-lg btn-glow" id="cta-start">
+      <a href="/explorer.html" class="px-6 py-2.5 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl text-sm font-bold shadow-lg shadow-primary/10 hover:opacity-90 transition-opacity flex items-center justify-center  btn-lg btn-glow" id="cta-start">
         Start Planning →
       </a>
-      <a href="/sip.html" class="btn btn-secondary btn-lg" id="cta-sip">
+      <a href="/sip.html" class="px-5 py-2.5 border border-primary text-primary rounded-xl text-sm font-semibold hover:bg-primary/5 transition-colors flex items-center justify-center  btn-lg" id="cta-sip">
         SIP Calculator
       </a>
     </div>
@@ -138,5 +214,6 @@
       SEBI-registered advisor before making investment decisions.
     </div>
   </footer>
+</main>
 </body>
 </html>

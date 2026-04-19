@@ -1,119 +1,323 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIP Calculator — Flock</title>
-  <meta name="description" content="Calculate your SIP returns with standard and step-up projections. Compare scenarios across different expected returns.">
-  <link rel="stylesheet" href="/css/design-system.css">
-  <link rel="stylesheet" href="/css/components.css">
-  <link rel="stylesheet" href="/css/layout.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
-  <style>
-    .sip-form { max-width:500px; }
-    .sip-form .input-group { margin-bottom:var(--space-lg); }
-    .sip-results { animation: fadeInUp 0.4s ease; }
-    .sip-big-number { font-size:2.5rem; font-weight:800; letter-spacing:-0.03em; }
-    .sip-compare-table { margin-top:var(--space-lg); }
-    .sip-compare-table td { font-family:var(--font-mono); font-size:0.85rem; }
-    .sip-compare-table .highlight { background:var(--accent-subtle); }
-    .yearly-chart-wrapper { position:relative; height:280px; background:var(--bg-secondary); border-radius:var(--radius-md); padding:var(--space-md); border:1px solid var(--border-subtle); }
-    .return-badge { display:inline-block; padding:2px 8px; border-radius:var(--radius-full); font-size:0.78rem; font-weight:600; margin-left:var(--space-sm); }
-    .slider-label { display:flex; justify-content:space-between; align-items:baseline; }
-    .slider-label .slider-val { font-family:var(--font-mono); color:var(--accent-primary); font-weight:600; }
-  </style>
-</head>
-<body>
-  <nav class="navbar">
-    <a href="/" class="navbar-brand"><span class="logo-icon">🐦</span><span>Flock</span></a>
-    <ul class="navbar-links">
-      <li><a href="/explorer.html">Explorer</a></li>
-      <li><a href="/sip.html" class="active">SIP Calculator</a></li>
-    </ul>
-  </nav>
 
-  <main class="page container">
-    <div class="section-header animate-fade-in-up">
-      <h1>SIP Calculator</h1>
-      <p>Project your Systematic Investment Plan returns — standard or step-up.</p>
-    </div>
-
-    <div class="split animate-fade-in-up" style="animation-delay:0.1s;">
-      <!-- Left: Form -->
-      <div class="sip-form">
-        <div class="input-group">
-          <label for="sip-amount">Monthly SIP Amount (₹)</label>
-          <input type="number" class="input" id="sip-amount" value="10000" min="500" step="500">
-        </div>
-
-        <div class="input-group">
-          <div class="slider-label">
-            <label for="sip-return">Expected Annual Return</label>
-            <span class="slider-val" id="return-val">12%</span>
-          </div>
-          <input type="range" class="slider" id="sip-return" min="4" max="25" value="12" step="0.5">
-        </div>
-
-        <div class="input-group">
-          <div class="slider-label">
-            <label for="sip-horizon">Time Horizon</label>
-            <span class="slider-val" id="horizon-val">10 years</span>
-          </div>
-          <input type="range" class="slider" id="sip-horizon" min="1" max="40" value="10">
-        </div>
-
-        <div class="input-group">
-          <div class="slider-label">
-            <label for="sip-stepup">Annual Step-Up</label>
-            <span class="slider-val" id="stepup-val">0%</span>
-          </div>
-          <input type="range" class="slider" id="sip-stepup" min="0" max="25" value="0" step="1">
-        </div>
-
-        <button class="btn btn-primary btn-lg" id="calc-btn" onclick="calculate()" style="width:100%;">
-          Calculate →
-        </button>
-      </div>
-
-      <!-- Right: Results -->
-      <div id="results-panel">
-        <div class="card-flat" style="text-align:center;padding:var(--space-3xl);color:var(--text-muted);">
-          Set your inputs and click Calculate to see projections.
-        </div>
-      </div>
-    </div>
-
-    <!-- Scenario Comparison -->
-    <section id="compare-section" class="section hidden mt-xl">
-      <div class="divider"></div>
-      <h3 class="mb-md">📈 Scenario Comparison</h3>
-      <p class="text-secondary mb-lg" style="font-size:0.9rem;">Same SIP at different expected returns.</p>
-      <div class="table-container">
-        <table class="data-table sip-compare-table" id="compare-table">
-          <thead>
-            <tr>
-              <th>Return</th>
-              <th>Total Invested</th>
-              <th>Future Value</th>
-              <th>Wealth Gain</th>
-              <th>Effective CAGR</th>
-            </tr>
-          </thead>
-          <tbody id="compare-tbody"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <div class="disclaimer mt-xl">
-      <strong>⚠️ Important:</strong> SIP calculators use a fixed rate of return assumption.
-      Actual mutual fund and equity returns vary. Use this as a planning guide, not a guarantee.
-    </div>
-  </main>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flock | SIP Planner</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#f1f1e7",
+                        "tertiary": "#7a2e35",
+                        "surface-container": "#eeefe4",
+                        "outline-variant": "#bfc9c1",
+                        "surface-container-high": "#e8e9de",
+                        "primary-fixed": "#b1f0ce",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-primary-fixed": "#002114",
+                        "surface": "#fafaef",
+                        "inverse-primary": "#95d4b3",
+                        "on-secondary-fixed": "#002113",
+                        "on-background": "#1a1c16",
+                        "primary-container": "#2d6a4f",
+                        "tertiary-fixed": "#ffdada",
+                        "on-tertiary-fixed-variant": "#792e34",
+                        "on-primary-container": "#a8e7c5",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e2e3d9",
+                        "surface-bright": "#fafaef",
+                        "surface-container-low": "#f4f4ea",
+                        "secondary-fixed": "#a0f4c8",
+                        "background": "#fafaef",
+                        "tertiary-container": "#98454b",
+                        "primary-fixed-dim": "#95d4b3",
+                        "on-tertiary-container": "#ffcece",
+                        "surface-dim": "#dadbd0",
+                        "secondary": "#0e6c4a",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1a1c16",
+                        "inverse-surface": "#2f312a",
+                        "on-primary-fixed-variant": "#0e5138",
+                        "outline": "#707973",
+                        "secondary-container": "#a0f4c8",
+                        "primary": "#0f5238",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e2e3d9",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#404943",
+                        "surface-tint": "#2c694e",
+                        "secondary-fixed-dim": "#85d7ad",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb3b5",
+                        "on-tertiary-fixed": "#3f020c",
+                        "on-secondary-container": "#19724f",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        input[type='range'] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type='range']::-webkit-slider-runnable-track {
+            background: #eeefe4;
+            height: 4px;
+            border-radius: 2px;
+        }
+        input[type='range']::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            background: #0f5238;
+            margin-top: -7px;
+            cursor: pointer;
+        }
+    </style>
 
   <script src="/js/format.js"></script>
   <script src="/js/api.js"></script>
-  <script>
-    let growthChart = null;
+</head>
+<body class="bg-surface font-body text-on-surface flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-50 bg-[#f4f4ea] dark:bg-[#151712] flex flex-col py-10">
+<div class="px-8 mb-12">
+<h1 class="text-3xl font-black text-[#0f5238] dark:text-[#95d4b3] tracking-tighter">Flock</h1>
+<p class="font-manrope uppercase tracking-widest text-[11px] font-bold text-[#404943] mt-1">The Digital Curator</p>
+</div>
+<nav class="flex-1 flex flex-col">
+<a class="text-[#404943] dark:text-[#bfc9c1] py-4 px-8 flex items-center gap-3 font-manrope uppercase tracking-widest text-[11px] font-bold hover:text-[#0f5238] transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span>Dashboard</span>
+</a>
+<a class="text-[#404943] dark:text-[#bfc9c1] py-4 px-8 flex items-center gap-3 font-manrope uppercase tracking-widest text-[11px] font-bold hover:text-[#0f5238] transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span>Portfolio</span>
+</a>
+<a class="text-[#404943] dark:text-[#bfc9c1] py-4 px-8 flex items-center gap-3 font-manrope uppercase tracking-widest text-[11px] font-bold hover:text-[#0f5238] transition-all group" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span>Explorer</span>
+</a>
+<a class="bg-[#ffffff] dark:bg-[#1a1c16] text-[#0f5238] dark:text-[#95d4b3] rounded-r-full py-4 px-8 flex items-center gap-3 font-manrope uppercase tracking-widest text-[11px] font-bold shadow-sm translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="savings" style="font-variation-settings: 'FILL' 1;">savings</span>
+<span>SIP Planner</span>
+</a>
+</nav>
+<div class="px-8 mt-auto flex items-center gap-3">
+<img alt="Flock Curator" class="w-10 h-10 rounded-full object-cover grayscale" data-alt="Close up portrait of a professional man in a minimal workspace with soft natural light and neutral tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkvyx2U84VE20bsy2HIU2D5bO2T9OIkACMO_RnKpbp4vE6XBbMFzzDqHEdB-_DQcptaALjh9wIXCrpd0vo4n4wxsvs42tpNlXSLcPXBJGBqPt_RSG6-f6SnWm2d6p8LmjCCjAr4ShVW_KSfhZ6jxTCc8D9drDwMobrGQkygvDMgo1i3ZM4bVY-K_zZG2UuR5u4z-BcfuBMD0VmQU4L2tTQIT1cvVxMnxvMU6nleKPeUYRc-LsL0XB6y_XnGmCTObmupSXC4JgsCg"/>
+<div>
+<p class="text-xs font-bold">Curator Profile</p>
+<p class="text-[10px] text-on-surface-variant">Premium Member</p>
+</div>
+</div>
+</aside>
+<div class="flex-1 ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 z-40 bg-[#fafaef] dark:bg-[#1a1c16] flex justify-between items-center w-full pl-8 pr-8 py-4">
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="bg-surface-container-low border-none rounded-full py-2 pl-10 pr-6 text-sm w-64 focus:ring-1 focus:ring-primary" placeholder="Search funds, stocks..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-[#eeefe4] p-2 rounded-full transition-colors" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-[#eeefe4] p-2 rounded-full transition-colors" data-icon="settings">settings</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant opacity-20"></div>
+<span class="font-manrope font-semibold tracking-tight text-[#0f5238]">SIP Planner</span>
+</div>
+</header>
+<main class="p-8 max-w-7xl mx-auto w-full">
+<!-- Header Section -->
+<div class="mb-12">
+<h2 class="font-headline text-5xl font-extrabold text-on-surface tracking-tighter mb-4">SIP Calculator</h2>
+<p class="text-on-surface-variant max-w-2xl text-lg leading-relaxed">See how a monthly SIP grows over time using historical mutual fund returns. Our calculator uses editorial-grade precision to visualize your future wealth.</p>
+</div>
+<!-- Two-Column Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- LEFT COLUMN: Input Form -->
+<section class="lg:col-span-5 space-y-10">
+<div class="bg-surface-container-low p-8 rounded-xl space-y-8">
+<!-- Monthly SIP Amount -->
+<div class="space-y-4">
+<label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Monthly SIP Amount</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 font-headline font-bold text-primary text-xl">₹</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-xl py-5 pl-10 pr-6 text-2xl font-headline font-bold text-on-surface focus:ring-2 focus:ring-primary/20" type="number" value="10000"/>
+</div>
+</div>
+<!-- Time Horizon Slider -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Time Horizon</label>
+<span class="font-headline font-bold text-primary">15 Years</span>
+</div>
+<input class="w-full h-1" max="40" min="1" type="range" value="15"/>
+</div>
+<!-- Expected Return Slider -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Expected Annual Return</label>
+<span class="font-headline font-bold text-primary">12%</span>
+</div>
+<input class="w-full h-1" max="30" min="5" type="range" value="12"/>
+</div>
+<!-- Toggles Grid -->
+<div class="grid grid-cols-2 gap-4 pt-4">
+<div class="bg-surface-container-high p-4 rounded-xl flex items-center justify-between">
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Inflation (6%)</span>
+<button class="w-10 h-5 bg-primary rounded-full relative flex items-center px-1">
+<div class="w-3 h-3 bg-white rounded-full ml-auto"></div>
+</button>
+</div>
+<div class="bg-surface-container-high p-4 rounded-xl flex items-center justify-between">
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Step-up (+10%)</span>
+<button class="w-10 h-5 bg-outline-variant rounded-full relative flex items-center px-1">
+<div class="w-3 h-3 bg-white rounded-full"></div>
+</button>
+</div>
+</div>
+<!-- Primary CTA -->
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-5 rounded-xl font-headline font-bold text-lg flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-primary/10">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+                            Calculate
+                        </button>
+</div>
+</section>
+<!-- RIGHT COLUMN: Results & Insights -->
+<section class="lg:col-span-7 space-y-12">
+<!-- Stats Cards -->
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-surface-container-lowest p-6 rounded-xl border-b-4 border-surface-container">
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 font-bold">Total Invested</p>
+<h4 class="font-headline text-2xl font-extrabold text-on-surface">₹ 18L</h4>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-b-4 border-primary-fixed-dim">
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 font-bold">Est. Returns</p>
+<h4 class="font-headline text-2xl font-extrabold text-primary">₹ 31.1L</h4>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-b-4 border-primary">
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 font-bold">Final Value</p>
+<h4 class="font-headline text-2xl font-extrabold text-on-surface">₹ 49.1L</h4>
+</div>
+</div>
+<!-- Chart Placeholder -->
+<div class="bg-surface-container-lowest p-8 rounded-xl">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline text-xl font-bold">Growth Projection</h3>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest opacity-60">Wealth</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-surface-container"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest opacity-60">Capital</span>
+</div>
+</div>
+</div>
+<!-- Visual Area Chart Mockup -->
+<div class="h-64 relative overflow-hidden rounded-lg flex items-end">
+<div class="absolute inset-0 flex items-end">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 400 200">
+<path d="M0 200 Q 100 190 200 170 T 400 120 V 200 H 0 Z" fill="#eeefe4"></path>
+<path d="M0 200 Q 100 180 200 140 T 400 20 V 200 H 0 Z" fill="#0f5238" fill-opacity="0.1" stroke="#0f5238" stroke-width="2"></path>
+</svg>
+</div>
+<div class="w-full flex justify-between px-2 pt-4 relative z-10 text-[10px] font-bold opacity-40">
+<span>Year 1</span>
+<span>Year 5</span>
+<span>Year 10</span>
+<span>Year 15</span>
+</div>
+</div>
+</div>
+<!-- Fund Comparison Table -->
+<div class="space-y-6">
+<h3 class="font-headline text-xl font-bold px-1">Curated Comparison</h3>
+<div class="overflow-hidden bg-surface-container-lowest rounded-xl">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+<th class="py-4 px-6">Fund Name</th>
+<th class="py-4 px-6 text-right">1Y</th>
+<th class="py-4 px-6 text-right">3Y</th>
+<th class="py-4 px-6 text-right">5Y</th>
+</tr>
+</thead>
+<tbody class="text-sm font-medium">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-5 px-6 font-bold">HDFC Nifty 50 Index</td>
+<td class="py-5 px-6 text-right text-primary">+14.2%</td>
+<td class="py-5 px-6 text-right text-primary">+12.8%</td>
+<td class="py-5 px-6 text-right text-primary">+15.1%</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-5 px-6 font-bold">Mirae Asset Large Cap</td>
+<td class="py-5 px-6 text-right text-primary">+16.5%</td>
+<td class="py-5 px-6 text-right text-primary">+14.2%</td>
+<td class="py-5 px-6 text-right text-primary">+13.9%</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-5 px-6 font-bold">Axis Bluechip Fund</td>
+<td class="py-5 px-6 text-right text-tertiary">-1.2%</td>
+<td class="py-5 px-6 text-right text-primary">+11.5%</td>
+<td class="py-5 px-6 text-right text-primary">+14.4%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Disclaimer -->
+<footer class="mt-20 mb-12">
+<div class="bg-[#fff9e6] dark:bg-[#2d281a] p-6 rounded-xl flex gap-4 items-start border border-[#f5e1a4] dark:border-[#4a4532]">
+<span class="material-symbols-outlined text-[#856404]" data-icon="warning">warning</span>
+<p class="text-xs text-[#856404] leading-relaxed">
+<strong>SEBI Disclaimer:</strong> Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Historical performance is not an indicator of future results. The calculations provided are based on the inputs given and do not guarantee actual returns.
+                    </p>
+</div>
+<div class="mt-8 flex justify-between items-center opacity-40">
+<p class="text-[10px] font-bold uppercase tracking-widest">© 2024 Flock Digital Assets</p>
+<div class="flex gap-6">
+<a class="text-[10px] font-bold uppercase tracking-widest hover:underline" href="#">Privacy</a>
+<a class="text-[10px] font-bold uppercase tracking-widest hover:underline" href="#">Terms</a>
+</div>
+</div>
+</footer>
+</main>
+</div>
+<script>
+let growthChart = null;
 
     // Slider live updates
     document.getElementById('sip-return').addEventListener('input', function() {
@@ -168,10 +372,10 @@
             <div class="sip-big-number text-gradient">${formatINRFull(r.future_value_inr)}</div>
           </div>
           <div class="grid grid-2 gap-md mb-lg">
-            <div class="card-stat"><div class="stat-value">${formatINRFull(r.total_invested_inr)}</div><div class="stat-label">Total Invested</div></div>
-            <div class="card-stat"><div class="stat-value ${gainColor}">${formatINRFull(r.wealth_gain_inr)}</div><div class="stat-label">Wealth Gain</div></div>
-            <div class="card-stat"><div class="stat-value">${formatPctUnsigned(r.absolute_return_pct,1)}</div><div class="stat-label">Absolute Return</div></div>
-            <div class="card-stat"><div class="stat-value">${formatPctUnsigned(r.effective_cagr_pct,1)}</div><div class="stat-label">Effective CAGR</div></div>
+            <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1">${formatINRFull(r.total_invested_inr)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Total Invested</div></div>
+            <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="stat-value ${gainColor}">${formatINRFull(r.wealth_gain_inr)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Wealth Gain</div></div>
+            <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1">${formatPctUnsigned(r.absolute_return_pct,1)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Absolute Return</div></div>
+            <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1">${formatPctUnsigned(r.effective_cagr_pct,1)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Effective CAGR</div></div>
           </div>
           ${r.yearly_breakdown ? renderYearlyBreakdown(r.yearly_breakdown) : ''}
         </div>
@@ -182,8 +386,8 @@
       return `
         <h4 class="mt-lg mb-md">Step-Up Yearly Breakdown</h4>
         <div class="table-container">
-          <table class="data-table">
-            <thead><tr><th>Year</th><th>Monthly SIP</th><th>Year Invested</th><th>Cumulative</th></tr></thead>
+          <table class="w-full text-left overflow-hidden">
+            <thead><tr><th class="pb-4 font-bold text-[10px] uppercase tracking-[0.15em] text-on-surface-variant/60 border-b border-outline-variant/10">Year</th><th class="pb-4 font-bold text-[10px] uppercase tracking-[0.15em] text-on-surface-variant/60 border-b border-outline-variant/10">Monthly SIP</th><th class="pb-4 font-bold text-[10px] uppercase tracking-[0.15em] text-on-surface-variant/60 border-b border-outline-variant/10">Year Invested</th><th class="pb-4 font-bold text-[10px] uppercase tracking-[0.15em] text-on-surface-variant/60 border-b border-outline-variant/10">Cumulative</th></tr></thead>
             <tbody>
               ${breakdown.map(y => `
                 <tr>
@@ -215,6 +419,5 @@
           </tr>`;
       }).join('');
     }
-  </script>
-</body>
-</html>
+</script>
+</body></html>

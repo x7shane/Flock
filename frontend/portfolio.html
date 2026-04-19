@@ -1,131 +1,431 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Simulator — Flock</title>
-  <meta name="description" content="Build your portfolio, set weights, and run Monte Carlo simulation to see probability-based outcomes.">
-  <link rel="stylesheet" href="/css/design-system.css">
-  <link rel="stylesheet" href="/css/components.css">
-  <link rel="stylesheet" href="/css/layout.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
-  <style>
-    .weight-row { display:flex; align-items:center; gap:var(--space-md); padding:12px 0; border-bottom:1px solid var(--border-subtle); }
-    .weight-ticker { font-family:var(--font-mono); font-weight:600; min-width:120px; font-size:0.85rem; }
-    .weight-slider { flex:1; }
-    .weight-value { font-family:var(--font-mono); font-size:0.85rem; min-width:50px; text-align:right; color:var(--accent-primary); }
-    .weight-remove { background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:1.1rem; padding:4px; }
-    .weight-remove:hover { color:var(--danger); }
-    .weight-total { font-size:0.85rem; color:var(--text-muted); margin-top:var(--space-sm); }
-    .weight-total.invalid { color:var(--danger); }
-    .capital-input { max-width:300px; }
-    .results-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:var(--space-md); }
-    .chart-wrapper { position:relative; height:320px; background:var(--bg-secondary); border-radius:var(--radius-md); padding:var(--space-md); border:1px solid var(--border-subtle); }
-    .crisis-card { padding:var(--space-lg); }
-    .crisis-card h4 { margin-bottom:var(--space-sm); }
-    .crisis-drawdown { font-size:1.5rem; font-weight:700; }
-    .crisis-meta { font-size:0.8rem; color:var(--text-muted); margin-top:var(--space-sm); }
-    .preset-btns { display:flex; gap:var(--space-sm); flex-wrap:wrap; margin-bottom:var(--space-lg); }
-    .preset-btn { padding:6px 16px; font-size:0.8rem; border-radius:var(--radius-full); background:var(--bg-tertiary); border:1px solid var(--border-subtle); color:var(--text-secondary); cursor:pointer; font-family:var(--font-sans); font-weight:500; transition:all var(--transition-fast); }
-    .preset-btn:hover, .preset-btn.active { background:var(--accent-subtle); color:var(--accent-primary); border-color:var(--accent-primary); }
-  </style>
-</head>
-<body>
-  <nav class="navbar">
-    <a href="/" class="navbar-brand"><span class="logo-icon">🐦</span><span>Flock</span></a>
-    <ul class="navbar-links">
-      <li><a href="/explorer.html">Explorer</a></li>
-      <li><a href="/sip.html">SIP Calculator</a></li>
-    </ul>
-  </nav>
 
-  <main class="page container">
-    <!-- Portfolio Builder Section -->
-    <section id="builder-section" class="section">
-      <div class="section-header animate-fade-in-up">
-        <h1>Portfolio Simulator</h1>
-        <p>Set your weights, capital, and time horizon. Then run Monte Carlo simulation.</p>
-      </div>
-
-      <div class="split animate-fade-in-up" style="animation-delay:0.1s;">
-        <!-- Left: Weights -->
-        <div>
-          <h3 class="mb-md">Portfolio Weights</h3>
-          <div id="weight-list">
-            <p class="text-muted" id="empty-msg">No stocks selected. <a href="/explorer.html">Browse stocks →</a></p>
-          </div>
-          <div class="weight-total" id="weight-total"></div>
-
-          <div class="divider"></div>
-
-          <div class="input-group capital-input">
-            <label for="capital-input">Investment Capital (₹)</label>
-            <input type="number" class="input" id="capital-input" value="1000000" min="1000" step="10000">
-          </div>
-
-          <div class="input-group mt-lg" style="max-width:300px;">
-            <label for="horizon-input">Time Horizon: <span id="horizon-value">5</span> years</label>
-            <input type="range" class="slider" id="horizon-input" min="1" max="30" value="5">
-          </div>
-
-          <button class="btn btn-primary btn-lg mt-xl" id="run-btn" onclick="runSimulation()" disabled>
-            🎯 Run Simulation
-          </button>
-        </div>
-
-        <!-- Right: Pie Chart -->
-        <div>
-          <h3 class="mb-md">Allocation</h3>
-          <div class="chart-wrapper">
-            <canvas id="pie-chart"></canvas>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Results Section (hidden initially) -->
-    <section id="results-section" class="section hidden">
-      <div class="divider"></div>
-      <div class="section-header">
-        <h2>📊 Simulation Results</h2>
-        <p>Based on 10,000 Monte Carlo paths using Geometric Brownian Motion.</p>
-      </div>
-
-      <!-- Key Stats -->
-      <div class="results-grid stagger mb-lg" id="stats-grid"></div>
-
-      <!-- Distribution Chart -->
-      <div class="mt-xl mb-lg">
-        <h3 class="mb-md">Return Distribution</h3>
-        <div class="chart-wrapper" style="height:280px;">
-          <canvas id="dist-chart"></canvas>
-        </div>
-      </div>
-
-      <!-- Stress Test Results -->
-      <div class="mt-xl" id="stress-section">
-        <h3 class="mb-md">⚡ Historical Stress Tests</h3>
-        <p class="text-secondary mb-lg" style="font-size:0.9rem;">How your portfolio would have performed during past crises.</p>
-        <div class="grid grid-auto-fill stagger" id="crisis-grid"></div>
-      </div>
-
-      <div class="disclaimer mt-xl">
-        <strong>⚠️ Important Disclaimers:</strong>
-        <ol style="padding-left:20px;margin-top:8px;">
-          <li>These simulations use historical data and statistical models. Past performance does not guarantee future results.</li>
-          <li>The Monte Carlo model assumes returns follow a log-normal distribution. In reality, extreme events happen more often than predicted.</li>
-          <li>Results do not account for taxes, transaction costs, or inflation.</li>
-          <li>This is an educational tool, NOT investment advice. Always consult a SEBI-registered advisor.</li>
-          <li>The Flock Score is a quantitative ranking, not a buy/sell recommendation.</li>
-        </ol>
-      </div>
-    </section>
-  </main>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portfolio Simulator | Flock</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#ffb3b5",
+                      "outline-variant": "#bfc9c1",
+                      "on-error-container": "#93000a",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-container": "#98454b",
+                      "surface-bright": "#fafaef",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed": "#002114",
+                      "background": "#fafaef",
+                      "surface-container": "#eeefe4",
+                      "inverse-on-surface": "#f1f1e7",
+                      "tertiary-fixed": "#ffdada",
+                      "on-surface": "#1a1c16",
+                      "error": "#ba1a1a",
+                      "surface-tint": "#2c694e",
+                      "on-error": "#ffffff",
+                      "on-background": "#1a1c16",
+                      "secondary": "#0e6c4a",
+                      "on-secondary-container": "#19724f",
+                      "secondary-container": "#a0f4c8",
+                      "on-secondary-fixed-variant": "#005236",
+                      "surface-dim": "#dadbd0",
+                      "surface-container-highest": "#e2e3d9",
+                      "on-tertiary-fixed": "#3f020c",
+                      "on-surface-variant": "#404943",
+                      "inverse-surface": "#2f312a",
+                      "primary-container": "#2d6a4f",
+                      "surface": "#fafaef",
+                      "primary-fixed-dim": "#95d4b3",
+                      "primary-fixed": "#b1f0ce",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed-dim": "#85d7ad",
+                      "tertiary": "#7a2e35",
+                      "primary": "#0f5238",
+                      "on-primary": "#ffffff",
+                      "surface-container-low": "#f4f4ea",
+                      "surface-container-high": "#e8e9de",
+                      "on-primary-fixed-variant": "#0e5138",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#a8e7c5",
+                      "secondary-fixed": "#a0f4c8",
+                      "on-tertiary-container": "#ffcece",
+                      "inverse-primary": "#95d4b3",
+                      "on-secondary-fixed": "#002113",
+                      "outline": "#707973",
+                      "on-tertiary-fixed-variant": "#792e34",
+                      "surface-variant": "#e2e3d9"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Manrope"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #fafaef; }
+        ::-webkit-scrollbar-thumb { background: #bfc9c1; border-radius: 10px; }
+    </style>
 
   <script src="/js/format.js"></script>
   <script src="/js/api.js"></script>
-  <script>
-    let portfolio = JSON.parse(sessionStorage.getItem('flock_portfolio') || '[]');
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-50 border-r border-outline-variant/20 bg-surface flex flex-col p-6 space-y-2">
+<div class="mb-10">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-xl" data-icon="nest_eco_leaf">nest_eco_leaf</span>
+</div>
+<div>
+<h1 class="text-xl font-bold text-primary font-headline">Flock</h1>
+<p class="text-[10px] uppercase tracking-[0.1em] text-on-surface-variant font-label">Wealth Curator</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-low transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="grid_view">grid_view</span>
+<span class="font-medium text-sm tracking-wide">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-low transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="pie_chart">pie_chart</span>
+<span class="font-medium text-sm tracking-wide">Portfolio</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-low transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="explore">explore</span>
+<span class="font-medium text-sm tracking-wide">Explorer</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-low transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="calendar_today">calendar_today</span>
+<span class="font-medium text-sm tracking-wide">SIP Planner</span>
+</a>
+<!-- Active Navigation -->
+<a class="flex items-center gap-3 bg-surface-container text-primary rounded-lg px-4 py-3 font-bold group scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-medium text-sm tracking-wide">Simulator</span>
+</a>
+</nav>
+<div class="mt-auto pt-6">
+<div class="bg-primary-container/10 p-4 rounded-xl border border-primary/10">
+<p class="text-xs font-bold text-primary mb-2">Upgrade to Pro</p>
+<p class="text-[10px] text-on-surface-variant leading-relaxed mb-3">Unlock Monte Carlo simulations and advanced risk metrics.</p>
+<button class="w-full py-2 bg-primary text-on-primary rounded-lg text-[11px] font-bold tracking-wider uppercase hover:opacity-90 transition-opacity">Upgrade Now</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-40 w-full px-8 py-4 flex justify-between items-center bg-surface/80 backdrop-blur-md">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm focus:ring-1 focus:ring-primary/20 placeholder:text-outline" placeholder="Search assets or strategies..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-2">
+<img alt="User profile" data-alt="close-up portrait of a professional man in a minimalist office with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmwBItPPjQ2A9cRMkZ86UJK2hhK0E7XO3V6cZzpX6m8m3QQXegId8dU7aoCzk2KDSEjFHYqBGtWGVnOjxw72kpXMnlkyFNqiB3CNIX_HKk1ikuXqeo4HSudIH-b6GTuUVhLIKIqHXkhs7wkmTakzV34SI2U0Gui46nLPUJoFc5yba7Cfl0djnAaS2_4lsbx4jpe5rwdgotKKNtgCqbZ5Ze9q_ulCELUPxWAcAISMHwdLNZbu1jdp8BTDsSeohFZwUYRLBeeuwKLA"/>
+</div>
+</div>
+</header>
+<div class="p-10 max-w-7xl mx-auto">
+<!-- Heading -->
+<div class="mb-10">
+<h2 class="text-4xl font-extrabold font-headline tracking-tight text-on-surface">Portfolio Simulator</h2>
+<div class="h-1 w-20 bg-primary mt-4 rounded-full"></div>
+</div>
+<!-- SECTION 1: Portfolio Builder -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+<!-- Left Column: Portfolio Weights -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-8 rounded-xl shadow-[0_8px_32px_rgba(26,28,22,0.04)]">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-xl font-bold font-headline">Portfolio Weights</h3>
+<div class="flex items-center gap-2 px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-sm font-bold">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                            100.0%
+                        </div>
+</div>
+<div class="space-y-6 mb-10">
+<!-- Weight Row 1 -->
+<div class="flex items-center gap-6">
+<span class="w-24 font-mono font-bold text-sm text-on-surface">RELIANCE</span>
+<input class="flex-1 accent-primary h-1.5 rounded-full cursor-pointer" type="range" value="25"/>
+<span class="w-12 text-right font-semibold text-sm">25%</span>
+<button class="text-outline-variant hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="close">close</span>
+</button>
+</div>
+<!-- Weight Row 2 -->
+<div class="flex items-center gap-6">
+<span class="w-24 font-mono font-bold text-sm text-on-surface">HDFCBANK</span>
+<input class="flex-1 accent-primary h-1.5 rounded-full cursor-pointer" type="range" value="20"/>
+<span class="w-12 text-right font-semibold text-sm">20%</span>
+<button class="text-outline-variant hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="close">close</span>
+</button>
+</div>
+<!-- Weight Row 3 -->
+<div class="flex items-center gap-6">
+<span class="w-24 font-mono font-bold text-sm text-on-surface">INFY</span>
+<input class="flex-1 accent-primary h-1.5 rounded-full cursor-pointer" type="range" value="15"/>
+<span class="w-12 text-right font-semibold text-sm">15%</span>
+<button class="text-outline-variant hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="close">close</span>
+</button>
+</div>
+<!-- Weight Row 4 -->
+<div class="flex items-center gap-6">
+<span class="w-24 font-mono font-bold text-sm text-on-surface">TCS</span>
+<input class="flex-1 accent-primary h-1.5 rounded-full cursor-pointer" type="range" value="15"/>
+<span class="w-12 text-right font-semibold text-sm">15%</span>
+<button class="text-outline-variant hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="close">close</span>
+</button>
+</div>
+<!-- Weight Row 5 -->
+<div class="flex items-center gap-6">
+<span class="w-24 font-mono font-bold text-sm text-on-surface">ICICIBANK</span>
+<input class="flex-1 accent-primary h-1.5 rounded-full cursor-pointer" type="range" value="25"/>
+<span class="w-12 text-right font-semibold text-sm">25%</span>
+<button class="text-outline-variant hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6 mb-8">
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Investment Capital</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-on-surface-variant">₹</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-low border-none rounded-xl text-lg font-bold focus:ring-1 focus:ring-primary/40" type="text" value="10,00,000"/>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Time Horizon</label>
+<div class="px-2">
+<div class="flex justify-between text-[11px] font-bold text-primary mb-2">
+<span>1 Yr</span>
+<span>5 Years</span>
+<span>20 Yr</span>
+</div>
+<input class="w-full accent-primary h-1 rounded-full" max="20" min="1" type="range" value="5"/>
+</div>
+</div>
+</div>
+<button class="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-xl font-bold text-lg shadow-lg hover:opacity-90 transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" data-icon="target">target</span>
+                        Run Simulation
+                    </button>
+</div>
+<!-- Right Column: Allocation Chart -->
+<div class="lg:col-span-5 bg-surface-container-lowest p-8 rounded-xl shadow-[0_8px_32px_rgba(26,28,22,0.04)] flex flex-col items-center">
+<h3 class="text-xl font-bold font-headline mb-8 self-start">Allocation</h3>
+<!-- Donut Chart -->
+<div class="relative w-64 h-64 mb-10">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#0f5238" stroke-dasharray="251.2" stroke-dashoffset="188.4" stroke-width="12"></circle> <!-- 25% -->
+<circle class="transform origin-center rotate-[90deg]" cx="50" cy="50" fill="transparent" r="40" stroke="#0e6c4a" stroke-dasharray="251.2" stroke-dashoffset="200.96" stroke-width="12"></circle> <!-- 20% -->
+<circle class="transform origin-center rotate-[162deg]" cx="50" cy="50" fill="transparent" r="40" stroke="#a0f4c8" stroke-dasharray="251.2" stroke-dashoffset="213.52" stroke-width="12"></circle> <!-- 15% -->
+<circle class="transform origin-center rotate-[216deg]" cx="50" cy="50" fill="transparent" r="40" stroke="#dadbd0" stroke-dasharray="251.2" stroke-dashoffset="213.52" stroke-width="12"></circle> <!-- 15% -->
+<circle class="transform origin-center rotate-[270deg]" cx="50" cy="50" fill="transparent" r="40" stroke="#1a1c16" stroke-dasharray="251.2" stroke-dashoffset="188.4" stroke-width="12"></circle> <!-- 25% -->
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Concentration</span>
+<span class="text-3xl font-headline font-black text-on-surface">Med</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-x-8 gap-y-4 w-full">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-xs font-semibold text-on-surface-variant">Reliance (25%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-xs font-semibold text-on-surface-variant">HDFCBANK (20%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary-container"></span>
+<span class="text-xs font-semibold text-on-surface-variant">INFY (15%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-surface-dim"></span>
+<span class="text-xs font-semibold text-on-surface-variant">TCS (15%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-on-surface"></span>
+<span class="text-xs font-semibold text-on-surface-variant">ICICIBANK (25%)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 2: Simulation Results -->
+<div class="space-y-12">
+<div class="flex items-center gap-4 mb-6">
+<h3 class="text-2xl font-bold font-headline">Simulation Results</h3>
+<div class="h-px flex-1 bg-outline-variant/20"></div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-primary">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Prob. Positive Return</p>
+<p class="text-3xl font-headline font-black text-primary">94.2%</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-primary">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Prob. 10%+ CAGR</p>
+<p class="text-3xl font-headline font-black text-primary">68.5%</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border-l-4 border-primary">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Median CAGR</p>
+<p class="text-3xl font-headline font-black text-primary">14.2%</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Median Portfolio Value</p>
+<p class="text-3xl font-headline font-black text-on-surface">₹19.4L</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Value at Risk 95%</p>
+<p class="text-3xl font-headline font-black text-tertiary">₹8.2L</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">CAGR Range</p>
+<p class="text-3xl font-headline font-black text-on-surface">8 - 22%</p>
+</div>
+</div>
+<!-- Return Distribution -->
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_8px_32px_rgba(26,28,22,0.04)]">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h4 class="text-lg font-bold font-headline">Return Distribution</h4>
+<p class="text-xs text-on-surface-variant">Based on 10,000 Monte Carlo iterations</p>
+</div>
+<div class="flex gap-1">
+<span class="px-2 py-1 bg-surface-container text-[10px] font-bold rounded">MONTHLY</span>
+<span class="px-2 py-1 bg-primary text-on-primary text-[10px] font-bold rounded">ANNUAL</span>
+</div>
+</div>
+<div class="flex items-end gap-1 h-48 w-full mb-4">
+<div class="bg-tertiary/20 flex-1 h-4 rounded-t"></div>
+<div class="bg-tertiary/40 flex-1 h-8 rounded-t"></div>
+<div class="bg-tertiary flex-1 h-16 rounded-t"></div>
+<div class="bg-primary flex-1 h-24 rounded-t"></div>
+<div class="bg-primary flex-1 h-32 rounded-t"></div>
+<div class="bg-primary flex-1 h-44 rounded-t"></div>
+<div class="bg-primary flex-1 h-40 rounded-t"></div>
+<div class="bg-primary flex-1 h-36 rounded-t"></div>
+<div class="bg-primary flex-1 h-28 rounded-t"></div>
+<div class="bg-primary flex-1 h-20 rounded-t"></div>
+<div class="bg-primary flex-1 h-12 rounded-t"></div>
+<div class="bg-primary/40 flex-1 h-6 rounded-t"></div>
+<div class="bg-primary/20 flex-1 h-2 rounded-t"></div>
+</div>
+<div class="flex justify-between text-[10px] font-bold text-outline-variant px-2">
+<span>-40%</span>
+<span>-20%</span>
+<span>0%</span>
+<span>+20%</span>
+<span>+40%</span>
+<span>+60%</span>
+</div>
+</div>
+<!-- Stress Tests -->
+<div>
+<h4 class="text-lg font-bold font-headline mb-6">Historical Stress Tests</h4>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+<!-- Crisis Card 1 -->
+<div class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/10">
+<p class="text-[10px] font-bold text-on-surface-variant leading-tight mb-3">2008 Global Financial Crisis</p>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-headline font-black text-tertiary">-52.4</span>
+<span class="text-xs font-bold text-tertiary">%</span>
+</div>
+<p class="text-[9px] uppercase tracking-tighter text-outline mt-1">Max Drawdown</p>
+</div>
+<!-- Crisis Card 2 -->
+<div class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/10">
+<p class="text-[10px] font-bold text-on-surface-variant leading-tight mb-3">COVID-2020 Crash</p>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-headline font-black text-tertiary">-38.1</span>
+<span class="text-xs font-bold text-tertiary">%</span>
+</div>
+<p class="text-[9px] uppercase tracking-tighter text-outline mt-1">Max Drawdown</p>
+</div>
+<!-- Crisis Card 3 -->
+<div class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/10">
+<p class="text-[10px] font-bold text-on-surface-variant leading-tight mb-3">2016 Demonetization</p>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-headline font-black text-tertiary">-12.8</span>
+<span class="text-xs font-bold text-tertiary">%</span>
+</div>
+<p class="text-[9px] uppercase tracking-tighter text-outline mt-1">Max Drawdown</p>
+</div>
+<!-- Crisis Card 4 -->
+<div class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/10">
+<p class="text-[10px] font-bold text-on-surface-variant leading-tight mb-3">2013 Taper Tantrum</p>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-headline font-black text-tertiary">-15.4</span>
+<span class="text-xs font-bold text-tertiary">%</span>
+</div>
+<p class="text-[9px] uppercase tracking-tighter text-outline mt-1">Max Drawdown</p>
+</div>
+<!-- Crisis Card 5 -->
+<div class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/10">
+<p class="text-[10px] font-bold text-on-surface-variant leading-tight mb-3">2022 Rate Hikes</p>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-headline font-black text-tertiary">-10.2</span>
+<span class="text-xs font-bold text-tertiary">%</span>
+</div>
+<p class="text-[9px] uppercase tracking-tighter text-outline mt-1">Max Drawdown</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="mt-20 border-t border-outline-variant/10 px-10 py-10">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 opacity-60">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 bg-primary rounded flex items-center justify-center text-[10px] font-bold text-on-primary">F</span>
+<span class="text-xs font-bold tracking-tight">Flock Portfolio Intelligence</span>
+</div>
+<div class="flex gap-8">
+<a class="text-[10px] font-bold uppercase tracking-widest hover:text-primary" href="#">Disclosures</a>
+<a class="text-[10px] font-bold uppercase tracking-widest hover:text-primary" href="#">Data Methodology</a>
+<a class="text-[10px] font-bold uppercase tracking-widest hover:text-primary" href="#">Support</a>
+</div>
+<p class="text-[10px] text-on-surface-variant">© 2024 Flock. All rights reserved.</p>
+</div>
+</footer>
+</main>
+<script>
+let portfolio = JSON.parse(sessionStorage.getItem('flock_portfolio') || '[]');
     let weights = {};
     let pieChart = null;
     let distChart = null;
@@ -246,12 +546,12 @@
     function renderStats(stats, capital) {
       const grid = document.getElementById('stats-grid');
       grid.innerHTML = `
-        <div class="card-stat"><div class="stat-value text-success">${formatPctUnsigned(stats.probability_positive_return)}</div><div class="stat-label">Prob. Positive Return</div></div>
-        <div class="card-stat"><div class="stat-value text-gradient">${formatPctUnsigned(stats.probability_10pct_cagr)}</div><div class="stat-label">Prob. 10%+ CAGR</div></div>
-        <div class="card-stat"><div class="stat-value">${formatPctUnsigned(stats.median_cagr_pct)}</div><div class="stat-label">Median CAGR</div></div>
-        <div class="card-stat"><div class="stat-value">${formatINR(stats.median_final_value_inr)}</div><div class="stat-label">Median Portfolio Value</div></div>
-        <div class="card-stat"><div class="stat-value text-danger">${formatINR(stats.var_95_inr)}</div><div class="stat-label">Value at Risk (95%)</div></div>
-        <div class="card-stat"><div class="stat-value">${formatPct(stats.return_range_10_90_pct[0])} to ${formatPct(stats.return_range_10_90_pct[1])}</div><div class="stat-label">CAGR Range (10th-90th)</div></div>
+        <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-secondary mt-1">${formatPctUnsigned(stats.probability_positive_return)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Prob. Positive Return</div></div>
+        <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1 text-primary">${formatPctUnsigned(stats.probability_10pct_cagr)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Prob. 10%+ CAGR</div></div>
+        <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1">${formatPctUnsigned(stats.median_cagr_pct)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Median CAGR</div></div>
+        <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1">${formatINR(stats.median_final_value_inr)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Median Portfolio Value</div></div>
+        <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-error mt-1">${formatINR(stats.var_95_inr)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Value at Risk (95%)</div></div>
+        <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1">${formatPct(stats.return_range_10_90_pct[0])} to ${formatPct(stats.return_range_10_90_pct[1])}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">CAGR Range (10th-90th)</div></div>
       `;
     }
 
@@ -296,21 +596,20 @@
     function renderCrisisCards(results) {
       const grid = document.getElementById('crisis-grid');
       grid.innerHTML = results.map(r => {
-        if (r.error) return `<div class="card crisis-card"><h4>${r.crisis_name}</h4><p class="text-muted">${r.error}</p></div>`;
+        if (r.error) return `<div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 shadow-sm hover:scale-[1.02] transition-transform"><h4>${r.crisis_name}</h4><p class="text-muted">${r.error}</p></div>`;
         const ddColor = r.portfolio_max_drawdown_pct < -20 ? 'text-danger' : r.portfolio_max_drawdown_pct < -10 ? 'text-warning' : 'text-success';
         return `
-          <div class="card crisis-card">
+          <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 shadow-sm hover:scale-[1.02] transition-transform">
             <h4>${r.crisis_name}</h4>
             <div class="crisis-drawdown ${ddColor}">${formatPct(r.portfolio_max_drawdown_pct)}</div>
-            <div class="crisis-meta">Max drawdown on ${r.max_drawdown_date || '—'}</div>
-            <div class="crisis-meta">Worst day: ${formatPct(r.worst_single_day_pct)}</div>
-            <div class="crisis-meta">Recovery: ${r.recovery_days ? r.recovery_days + ' days' : r.recovery_date}</div>
+            <div class="text-xs text-on-surface-variant font-medium mt-1">Max drawdown on ${r.max_drawdown_date || '—'}</div>
+            <div class="text-xs text-on-surface-variant font-medium mt-1">Worst day: ${formatPct(r.worst_single_day_pct)}</div>
+            <div class="text-xs text-on-surface-variant font-medium mt-1">Recovery: ${r.recovery_days ? r.recovery_days + ' days' : r.recovery_date}</div>
             <div class="crisis-meta mt-sm" style="color:var(--text-muted);">Nifty 50: ${formatPct(r.nifty_50_drawdown_pct)}</div>
           </div>`;
       }).join('');
     }
 
     init();
-  </script>
-</body>
-</html>
+</script>
+</body></html>
