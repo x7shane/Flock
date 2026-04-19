@@ -173,7 +173,7 @@
 <label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Monthly SIP Amount</label>
 <div class="relative">
 <span class="absolute left-4 top-1/2 -translate-y-1/2 font-headline font-bold text-primary text-xl">₹</span>
-<input class="w-full bg-surface-container-lowest border-none rounded-xl py-5 pl-10 pr-6 text-2xl font-headline font-bold text-on-surface focus:ring-2 focus:ring-primary/20" type="number" value="10000"/>
+<input id="sip-amount" class="w-full bg-surface-container-lowest border-none rounded-xl py-5 pl-10 pr-6 text-2xl font-headline font-bold text-on-surface focus:ring-2 focus:ring-primary/20" type="number" value="10000"/>
 </div>
 </div>
 <!-- Time Horizon Slider -->
@@ -182,7 +182,7 @@
 <label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Time Horizon</label>
 <span class="font-headline font-bold text-primary">15 Years</span>
 </div>
-<input class="w-full h-1" max="40" min="1" type="range" value="15"/>
+<input id="sip-horizon" class="w-full h-1" max="40" min="1" type="range" value="15"/>
 </div>
 <!-- Expected Return Slider -->
 <div class="space-y-4">
@@ -190,7 +190,7 @@
 <label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Expected Annual Return</label>
 <span class="font-headline font-bold text-primary">12%</span>
 </div>
-<input class="w-full h-1" max="30" min="5" type="range" value="12"/>
+<input id="sip-return" class="w-full h-1" max="30" min="5" type="range" value="12"/>
 </div>
 <!-- Toggles Grid -->
 <div class="grid grid-cols-2 gap-4 pt-4">
@@ -208,10 +208,10 @@
 </div>
 </div>
 <!-- Primary CTA -->
-<button class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-5 rounded-xl font-headline font-bold text-lg flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-primary/10">
-<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
-                            Calculate
-                        </button>
+<button id="calc-btn" onclick="calculate()" class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-5 rounded-xl font-headline font-bold text-lg flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-primary/10">
+<span class="material-symbols-outlined">trending_up</span>
+Calculate
+</button>
 </div>
 </section>
 <!-- RIGHT COLUMN: Results & Insights -->
