@@ -89,6 +89,8 @@
   <script src="/js/format.js"></script>
   <script src="/js/api.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+
+  <script src="/js/nav.js" defer></script>
 </head>
 <body class="bg-surface font-body text-on-surface">
 <!-- SideNavBar -->
@@ -175,6 +177,20 @@
                         </div>
 </div>
 <div class="space-y-6 mb-10">
+<!-- Empty State (shown when no stocks selected) -->
+<div id="empty-msg" class="flex flex-col items-center justify-center py-16 text-center">
+  <div class="w-16 h-16 bg-surface-container rounded-2xl flex items-center justify-center mb-4">
+    <span class="material-symbols-outlined text-3xl text-on-surface-variant">pie_chart</span>
+  </div>
+  <h4 class="font-headline font-bold text-lg text-on-surface mb-2">No stocks selected yet</h4>
+  <p class="text-on-surface-variant text-sm mb-6 max-w-xs">Browse the Nifty 200 universe and add stocks to start building your portfolio.</p>
+  <a href="/explorer.html" class="px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl text-sm font-bold shadow-lg hover:opacity-90 transition-opacity flex items-center gap-2">
+    <span class="material-symbols-outlined text-base">search</span>
+    Browse Stock Explorer →
+  </a>
+</div>
+<!-- Dynamic weight rows injected by JS -->
+<div id="weight-list"></div>
 <!-- Weight Row 1 -->
 <div class="flex items-center gap-6">
 <span class="w-24 font-mono font-bold text-sm text-on-surface">RELIANCE</span>
