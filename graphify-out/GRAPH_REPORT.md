@@ -1,12 +1,12 @@
-# Graph Report - /home/shades/Documents/Claude_Projects/Flock  (2026-04-25)
+# Graph Report - /home/shades/Documents/Claude_Projects/Flock  (2026-04-27)
 
 ## Corpus Check
-- 57 files · ~86,825 words
+- 57 files · ~89,033 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 682 nodes · 1373 edges · 37 communities detected
-- Extraction: 51% EXTRACTED · 49% INFERRED · 0% AMBIGUOUS · INFERRED: 668 edges (avg confidence: 0.59)
+- 691 nodes · 1417 edges · 38 communities detected
+- Extraction: 50% EXTRACTED · 50% INFERRED · 0% AMBIGUOUS · INFERRED: 705 edges (avg confidence: 0.59)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
@@ -47,15 +47,16 @@
 - [[_COMMUNITY_Community 34|Community 34]]
 - [[_COMMUNITY_Community 35|Community 35]]
 - [[_COMMUNITY_Community 36|Community 36]]
+- [[_COMMUNITY_Community 37|Community 37]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `PipelineRun` - 81 edges
-2. `Stock` - 63 edges
+2. `Stock` - 68 edges
 3. `MutualFund` - 54 edges
 4. `PriceFetcher` - 51 edges
 5. `MfFetcher` - 50 edges
 6. `FundamentalsFetcher` - 49 edges
-7. `Fundamental` - 43 edges
+7. `Fundamental` - 48 edges
 8. `GoldFetcher` - 41 edges
 9. `MfNav` - 31 edges
 10. `StockPrice` - 31 edges
@@ -65,30 +66,30 @@
   /home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/models/gold.py
 - `Base` --uses--> `Daily Gold prices (INR per gram).`  [INFERRED]
   /home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/models/gold.py
-- `Base` --uses--> `Audit log for data pipeline executions.`  [INFERRED]
-  /home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/models/pipeline.py
-- `Fundamental` --uses--> `If no existing fundamental, a new record with is_current=True is created.`  [INFERRED]
-  /home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py → /home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py
-- `Fundamental` --uses--> `If data hasn't changed, no new record should be inserted.`  [INFERRED]
-  /home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py → /home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py
+- `FundamentalsFetcher` --uses--> `If no existing fundamental, a new record with is_current=True is created.`  [INFERRED]
+  /home/shades/Documents/Claude_Projects/Flock/backend/app/services/fundamentals_fetcher.py → /home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py
+- `FundamentalsFetcher` --uses--> `If data hasn't changed, no new record should be inserted.`  [INFERRED]
+  /home/shades/Documents/Claude_Projects/Flock/backend/app/services/fundamentals_fetcher.py → /home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py
+- `FundamentalsFetcher` --uses--> `When data changes, old record is closed (is_current=False) and new is inserted.`  [INFERRED]
+  /home/shades/Documents/Claude_Projects/Flock/backend/app/services/fundamentals_fetcher.py → /home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py
 
 ## Communities
 
 ### Community 0 - "Community 0"
-Cohesion: 0.06
-Nodes (76): Base, mock_session(), override_settings(), Shared pytest fixtures for Flock backend tests.  Provides:   - Override settings, Force test-safe settings. Prevents real DB connections during unit tests., A MagicMock that mimics an AsyncSession.      execute() returns a mock scalars-c, A minimal Stock ORM object for testing., A minimal Fundamental record for testing SCD2 logic. (+68 more)
+Cohesion: 0.05
+Nodes (78): Base, DailyPipeline, IncrementalPipeline, Daily Pipeline Orchestration.  Orchestrates all daily data fetches: - Stock pric, Run fundamentals fetch pipeline with SCD2., Run MF NAV fetch pipeline., Run gold price fetch pipeline., Run all daily pipelines concurrently.          Returns:             Dict with Pi (+70 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.04
-Nodes (46): calculate_flock_score(), calculate_pillar_score(), normalize_factor(), Flock Score — Fundamental Scoring Engine.  Pure math layer: no database, no asyn, Normalize a single factor value to 0-100 percentile rank.      Args:         val, Average the factor percentile scores within a pillar, excluding None values., Weighted sum of pillar scores, re-normalized if any pillar is missing.      Args, Score the entire universe of stocks from raw fundamentals.      Args:         fu (+38 more)
+Cohesion: 0.06
+Nodes (54): A minimal Fundamental record for testing SCD2 logic., sample_fundamental(), Flock Score Calculator — DB Integration Layer.  Reads current fundamentals from, Save computed scores to the flock_scores table using SCD2.          For each sto, Compare current DB scores with newly computed scores., Full scoring pipeline: load → compute → save.          Returns:             (cre, Top-level entry point: creates a PipelineRun, runs scoring, logs results., Orchestrates: load fundamentals → compute scores → save with SCD2. (+46 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.07
-Nodes (51): Base, SQLAlchemy Declarative Base.  All ORM models inherit from this Base class. Impor, Base class for all SQLAlchemy ORM models in Flock., DeclarativeBase, SQLAlchemy ORM Models.  All models are imported here so Alembic can autodetect t, MfFetcher, Mutual Fund NAV Fetcher Service.  Fetches NAV data from mfapi.in and saves to da, Save NAV data to database.          Args:             session: AsyncSession (+43 more)
+Cohesion: 0.05
+Nodes (38): calculate_flock_score(), calculate_pillar_score(), normalize_factor(), Flock Score — Fundamental Scoring Engine.  Pure math layer: no database, no asyn, Normalize a single factor value to 0-100 percentile rank.      Args:         val, Average the factor percentile scores within a pillar, excluding None values., Weighted sum of pillar scores, re-normalized if any pillar is missing.      Args, Score the entire universe of stocks from raw fundamentals.      Args:         fu (+30 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.08
-Nodes (46): BaseModel, FlockScoreResponse, PillarScores, Pydantic schemas for Flock Score API responses., Pillar-level score breakdown., Flock Score for a single stock., Lightweight stock info for listing., StockListItem (+38 more)
+Nodes (45): Base, SQLAlchemy Declarative Base.  All ORM models inherit from this Base class. Impor, Base class for all SQLAlchemy ORM models in Flock., DeclarativeBase, MfFetcher, Mutual Fund NAV Fetcher Service.  Fetches NAV data from mfapi.in and saves to da, Save NAV data to database.          Args:             session: AsyncSession, Fetch NAV history and save to database.          Args:             session: Asyn (+37 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.05
@@ -107,24 +108,24 @@ Cohesion: 0.1
 Nodes (31): get_gold_price_history(), GoldFetcher, Gold Price Fetcher Service.  Fetches gold price data from yfinance (GC=F for gol, Save gold price to database.          Args:             session: AsyncSession, Fetch gold price and save to database.          Args:             session: Async, Run gold price fetch pipeline.      Returns:         PipelineRun with results, Get gold price history from database.      Args:         days: Number of days to, Fetches gold price data from yfinance (GC=F × INR=X → INR/gram). (+23 more)
 
 ### Community 8 - "Community 8"
+Cohesion: 0.12
+Nodes (34): BaseModel, list_crises(), Pydantic schemas for simulation API (Monte Carlo + Stress Test)., Request body for Monte Carlo simulation., List available crisis scenarios for stress testing., Monte Carlo output statistics., Run Monte Carlo simulation on a portfolio.      For MVP, uses synthetic return p, Monte Carlo simulation result. (+26 more)
+
+### Community 9 - "Community 9"
+Cohesion: 0.09
+Nodes (20): BaseSettings, Flock Application Configuration.  Loads settings from environment variables (via, Application settings loaded from environment variables., Settings, mock_session(), override_settings(), Shared pytest fixtures for Flock backend tests.  Provides:   - Override settings, Force test-safe settings. Prevents real DB connections during unit tests. (+12 more)
+
+### Community 10 - "Community 10"
 Cohesion: 0.09
 Nodes (23): build_covariance_matrix(), estimate_return_parameters(), Estimate annualized expected return and volatility from historical prices., Build annualized covariance matrix from daily prices.      Args:         price_d, _make_price_dataframe(), _make_price_series(), Tests for Monte Carlo Simulation Engine.  All tests are pure math — no mocking n, Covariance matrix must be symmetric. (+15 more)
 
-### Community 9 - "Community 9"
-Cohesion: 0.1
-Nodes (25): Flock Score Calculator — DB Integration Layer.  Reads current fundamentals from, Save computed scores to the flock_scores table using SCD2.          For each sto, Compare current DB scores with newly computed scores., Full scoring pipeline: load → compute → save.          Returns:             (cre, Top-level entry point: creates a PipelineRun, runs scoring, logs results., Orchestrates: load fundamentals → compute scores → save with SCD2., Load all current Fundamental records into a DataFrame.          Returns:, Run the scoring engine on the loaded fundamentals.          Args:             fu (+17 more)
-
-### Community 10 - "Community 10"
-Cohesion: 0.14
-Nodes (14): fetch_single_fundamentals(), FundamentalsFetcher, run_fundamentals_pipeline(), Tests for FundamentalsFetcher service — specifically SCD2 version tracking logic, If no existing fundamental, a new record with is_current=True is created., If data hasn't changed, no new record should be inserted., When data changes, old record is closed (is_current=False) and new is inserted., Values > 1 are assumed to be percentages and should be divided by 100. (+6 more)
-
 ### Community 11 - "Community 11"
-Cohesion: 0.13
-Nodes (11): BaseSettings, Flock Application Configuration.  Loads settings from environment variables (via, Application settings loaded from environment variables., Settings, Tests for app.core.config — Settings loading and parsing., Verify default values when no env vars are set., Verify CORS_ORIGINS string → list conversion., Verify environment variables override defaults. (+3 more)
-
-### Community 12 - "Community 12"
 Cohesion: 0.1
 Nodes (14): get_db(), Async Database Session Management.  Provides:   - engine: AsyncEngine connected, Yields an async database session for a single request.      Usage in a route:, Tests for app.db.session — Session factory and get_db dependency.  These are lig, Verify the async_session_factory is properly configured., expire_on_commit=False is critical for async — prevents lazy loading errors., Verify engine is configured with sensible pool settings., pool_pre_ping=True ensures stale connections are detected before use. (+6 more)
+
+### Community 12 - "Community 12"
+Cohesion: 0.14
+Nodes (8): Validate that scoring config is complete and consistent., All 16 factors must be in FACTOR_DIRECTION., Every factor in PILLARS must have a direction in FACTOR_DIRECTION., Every factor in FACTOR_DIRECTION must be assigned to exactly one pillar., No factor should appear in multiple pillars., Each preset's weights must sum to 1.0., Each preset must have weights for all 5 pillars., TestConfigIntegrity
 
 ### Community 13 - "Community 13"
 Cohesion: 0.2
@@ -222,8 +223,12 @@ Nodes (1): If an exception is raised inside the dependency, rollback must be cal
 Cohesion: 1.0
 Nodes (0): 
 
+### Community 37 - "Community 37"
+Cohesion: 1.0
+Nodes (1): Yields an async database session for a single request.      Usage in a route:
+
 ## Knowledge Gaps
-- **175 isolated node(s):** `Flock API — Application Entrypoint.  Run with:     uvicorn app.main:app --reload`, `Liveness probe for monitoring and deployment health checks.`, `Flock Application Configuration.  Loads settings from environment variables (via`, `Application settings loaded from environment variables.`, `Parse CORS_ORIGINS string into a list.` (+170 more)
+- **179 isolated node(s):** `Flock API — Application Entrypoint.  Run with:     uvicorn app.main:app --reload`, `Liveness probe for monitoring and deployment health checks.`, `Flock Application Configuration.  Loads settings from environment variables (via`, `Application settings loaded from environment variables.`, `Parse CORS_ORIGINS string into a list.` (+174 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **Thin community `Community 20`** (2 nodes): `fetchJSON()`, `api.js`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
@@ -259,20 +264,22 @@ Nodes (0):
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 36`** (1 nodes): `__init__.py`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 37`** (1 nodes): `Yields an async database session for a single request.      Usage in a route:`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `PipelineRun` connect `Community 0` to `Community 9`, `Community 2`, `Community 10`, `Community 7`?**
-  _High betweenness centrality (0.129) - this node is a cross-community bridge._
-- **Why does `score_all_stocks()` connect `Community 1` to `Community 9`?**
-  _High betweenness centrality (0.103) - this node is a cross-community bridge._
-- **Why does `ScoreCalculator` connect `Community 9` to `Community 0`, `Community 2`?**
-  _High betweenness centrality (0.077) - this node is a cross-community bridge._
+- **Why does `Stock` connect `Community 0` to `Community 1`, `Community 3`, `Community 9`?**
+  _High betweenness centrality (0.214) - this node is a cross-community bridge._
+- **Why does `run_monte_carlo()` connect `Community 5` to `Community 8`?**
+  _High betweenness centrality (0.185) - this node is a cross-community bridge._
+- **Why does `Fundamental` connect `Community 1` to `Community 0`, `Community 9`, `Community 3`?**
+  _High betweenness centrality (0.184) - this node is a cross-community bridge._
 - **Are the 77 inferred relationships involving `PipelineRun` (e.g. with `Base` and `SQLAlchemy ORM Models.  All models are imported here so Alembic can autodetect t`) actually correct?**
   _`PipelineRun` has 77 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 59 inferred relationships involving `Stock` (e.g. with `SQLAlchemy ORM Models.  All models are imported here so Alembic can autodetect t` and `Base`) actually correct?**
-  _`Stock` has 59 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 64 inferred relationships involving `Stock` (e.g. with `Stocks API — list Nifty 200 universe.` and `List stocks in the Nifty 200 universe.      Filters by sector and search term (t`) actually correct?**
+  _`Stock` has 64 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 50 inferred relationships involving `MutualFund` (e.g. with `Base` and `SQLAlchemy ORM Models.  All models are imported here so Alembic can autodetect t`) actually correct?**
   _`MutualFund` has 50 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 42 inferred relationships involving `PriceFetcher` (e.g. with `PipelineRun` and `Stock`) actually correct?**

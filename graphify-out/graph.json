@@ -67,66 +67,12 @@
       "norm_label": "__init__.py"
     },
     {
-      "label": "stocks.py",
-      "file_type": "code",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L1",
-      "id": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
-      "community": 3,
-      "norm_label": "stocks.py"
-    },
-    {
-      "label": "list_stocks()",
-      "file_type": "code",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L14",
-      "id": "stocks_list_stocks",
-      "community": 3,
-      "norm_label": "list_stocks()"
-    },
-    {
-      "label": "list_sectors()",
-      "file_type": "code",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L53",
-      "id": "stocks_list_sectors",
-      "community": 3,
-      "norm_label": "list_sectors()"
-    },
-    {
-      "label": "Stocks API \u2014 list Nifty 200 universe.",
-      "file_type": "rationale",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L1",
-      "community": 3,
-      "norm_label": "stocks api \u2014 list nifty 200 universe.",
-      "id": "stocks_rationale_1"
-    },
-    {
-      "label": "List stocks in the Nifty 200 universe.      Filters by sector and search term (t",
-      "file_type": "rationale",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L20",
-      "community": 3,
-      "norm_label": "list stocks in the nifty 200 universe.      filters by sector and search term (t",
-      "id": "stocks_rationale_20"
-    },
-    {
-      "label": "List all unique sectors in the universe.",
-      "file_type": "rationale",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L54",
-      "community": 3,
-      "norm_label": "list all unique sectors in the universe.",
-      "id": "stocks_rationale_54"
-    },
-    {
       "label": "simulate.py",
       "file_type": "code",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/simulate.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_api_v1_simulate_py",
-      "community": 3,
+      "community": 8,
       "norm_label": "simulate.py"
     },
     {
@@ -135,7 +81,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/simulate.py",
       "source_location": "L30",
       "id": "simulate_run_simulation",
-      "community": 3,
+      "community": 8,
       "norm_label": "run_simulation()"
     },
     {
@@ -144,7 +90,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/simulate.py",
       "source_location": "L79",
       "id": "simulate_run_stress_test_endpoint",
-      "community": 3,
+      "community": 8,
       "norm_label": "run_stress_test_endpoint()"
     },
     {
@@ -153,7 +99,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/simulate.py",
       "source_location": "L129",
       "id": "simulate_list_crises",
-      "community": 3,
+      "community": 8,
       "norm_label": "list_crises()"
     },
     {
@@ -161,7 +107,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/simulate.py",
       "source_location": "L1",
-      "community": 3,
+      "community": 8,
       "norm_label": "pydantic schemas for simulation api (monte carlo + stress test).",
       "id": "simulate_rationale_1"
     },
@@ -170,7 +116,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/simulate.py",
       "source_location": "L31",
-      "community": 3,
+      "community": 8,
       "norm_label": "run monte carlo simulation on a portfolio.      for mvp, uses synthetic return p",
       "id": "simulate_rationale_31"
     },
@@ -179,7 +125,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/simulate.py",
       "source_location": "L80",
-      "community": 3,
+      "community": 8,
       "norm_label": "run historical stress test on a portfolio.      for mvp, generates synthetic cri",
       "id": "simulate_rationale_80"
     },
@@ -188,7 +134,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/simulate.py",
       "source_location": "L130",
-      "community": 3,
+      "community": 8,
       "norm_label": "list available crisis scenarios for stress testing.",
       "id": "simulate_rationale_130"
     },
@@ -198,7 +144,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/sip.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_api_v1_sip_py",
-      "community": 3,
+      "community": 8,
       "norm_label": "sip.py"
     },
     {
@@ -207,7 +153,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/sip.py",
       "source_location": "L22",
       "id": "sip_calculate_sip",
-      "community": 3,
+      "community": 8,
       "norm_label": "calculate_sip()"
     },
     {
@@ -216,7 +162,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/sip.py",
       "source_location": "L38",
       "id": "sip_compare_sip",
-      "community": 3,
+      "community": 8,
       "norm_label": "compare_sip()"
     },
     {
@@ -224,7 +170,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/sip.py",
       "source_location": "L23",
-      "community": 3,
+      "community": 8,
       "norm_label": "calculate sip future value projection.",
       "id": "sip_rationale_23"
     },
@@ -233,9 +179,99 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/sip.py",
       "source_location": "L39",
-      "community": 3,
+      "community": 8,
       "norm_label": "compare sip outcomes across different return scenarios.",
       "id": "sip_rationale_39"
+    },
+    {
+      "label": "stocks.py",
+      "file_type": "code",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L1",
+      "id": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
+      "community": 1,
+      "norm_label": "stocks.py"
+    },
+    {
+      "label": "list_stocks()",
+      "file_type": "code",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L18",
+      "id": "stocks_list_stocks",
+      "community": 1,
+      "norm_label": "list_stocks()"
+    },
+    {
+      "label": "list_sectors()",
+      "file_type": "code",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L57",
+      "id": "stocks_list_sectors",
+      "community": 1,
+      "norm_label": "list_sectors()"
+    },
+    {
+      "label": "get_stock_fundamentals()",
+      "file_type": "code",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L64",
+      "id": "stocks_get_stock_fundamentals",
+      "community": 1,
+      "norm_label": "get_stock_fundamentals()"
+    },
+    {
+      "label": "get_stock_score()",
+      "file_type": "code",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L120",
+      "id": "stocks_get_stock_score",
+      "community": 1,
+      "norm_label": "get_stock_score()"
+    },
+    {
+      "label": "Stocks API \u2014 list Nifty 200 universe.",
+      "file_type": "rationale",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L1",
+      "community": 1,
+      "norm_label": "stocks api \u2014 list nifty 200 universe.",
+      "id": "stocks_rationale_1"
+    },
+    {
+      "label": "List stocks in the Nifty 200 universe.      Filters by sector and search term (t",
+      "file_type": "rationale",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L24",
+      "id": "stocks_rationale_24",
+      "community": 1,
+      "norm_label": "list stocks in the nifty 200 universe.      filters by sector and search term (t"
+    },
+    {
+      "label": "List all unique sectors in the universe.",
+      "file_type": "rationale",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L58",
+      "id": "stocks_rationale_58",
+      "community": 1,
+      "norm_label": "list all unique sectors in the universe."
+    },
+    {
+      "label": "Get current fundamental data for a single stock.      Returns all 16 raw factor",
+      "file_type": "rationale",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L65",
+      "id": "stocks_rationale_65",
+      "community": 1,
+      "norm_label": "get current fundamental data for a single stock.      returns all 16 raw factor"
+    },
+    {
+      "label": "Get Flock score breakdown for a single stock.      Returns the current score wit",
+      "file_type": "rationale",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L121",
+      "id": "stocks_rationale_121",
+      "community": 1,
+      "norm_label": "get flock score breakdown for a single stock.      returns the current score wit"
     },
     {
       "label": "__init__.py",
@@ -252,7 +288,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/core/config.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_core_config_py",
-      "community": 11,
+      "community": 9,
       "norm_label": "config.py"
     },
     {
@@ -261,7 +297,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/core/config.py",
       "source_location": "L11",
       "id": "config_settings",
-      "community": 11,
+      "community": 9,
       "norm_label": "settings"
     },
     {
@@ -270,7 +306,7 @@
       "source_file": "",
       "source_location": "",
       "id": "basesettings",
-      "community": 11,
+      "community": 9,
       "norm_label": "basesettings"
     },
     {
@@ -279,7 +315,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/core/config.py",
       "source_location": "L40",
       "id": "config_cors_origin_list",
-      "community": 11,
+      "community": 9,
       "norm_label": "cors_origin_list()"
     },
     {
@@ -287,7 +323,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/core/config.py",
       "source_location": "L1",
-      "community": 11,
+      "community": 9,
       "norm_label": "flock application configuration.  loads settings from environment variables (via",
       "id": "config_rationale_1"
     },
@@ -296,7 +332,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/core/config.py",
       "source_location": "L12",
-      "community": 11,
+      "community": 9,
       "norm_label": "application settings loaded from environment variables.",
       "id": "config_rationale_12"
     },
@@ -441,7 +477,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_db_base_py",
-      "community": 2,
+      "community": 3,
       "norm_label": "base.py"
     },
     {
@@ -450,7 +486,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py",
       "source_location": "L12",
       "id": "base_base",
-      "community": 2,
+      "community": 3,
       "norm_label": "base"
     },
     {
@@ -459,7 +495,7 @@
       "source_file": "",
       "source_location": "",
       "id": "declarativebase",
-      "community": 2,
+      "community": 3,
       "norm_label": "declarativebase"
     },
     {
@@ -467,7 +503,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py",
       "source_location": "L1",
-      "community": 2,
+      "community": 3,
       "norm_label": "sqlalchemy declarative base.  all orm models inherit from this base class. impor",
       "id": "base_rationale_1"
     },
@@ -476,7 +512,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py",
       "source_location": "L13",
-      "community": 2,
+      "community": 3,
       "norm_label": "base class for all sqlalchemy orm models in flock.",
       "id": "base_rationale_13"
     },
@@ -486,16 +522,16 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/db/session.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_db_session_py",
-      "community": 12,
+      "community": 11,
       "norm_label": "session.py"
     },
     {
       "label": "get_db()",
       "file_type": "code",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/db/session.py",
-      "source_location": "L36",
+      "source_location": "L37",
       "id": "session_get_db",
-      "community": 12,
+      "community": 11,
       "norm_label": "get_db()"
     },
     {
@@ -503,7 +539,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/db/session.py",
       "source_location": "L1",
-      "community": 12,
+      "community": 11,
       "norm_label": "async database session management.  provides:   - engine: asyncengine connected",
       "id": "session_rationale_1"
     },
@@ -511,10 +547,10 @@
       "label": "Yields an async database session for a single request.      Usage in a route:",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/db/session.py",
-      "source_location": "L37",
-      "community": 12,
-      "norm_label": "yields an async database session for a single request.      usage in a route:",
-      "id": "session_rationale_37"
+      "source_location": "L38",
+      "id": "session_rationale_38",
+      "community": 11,
+      "norm_label": "yields an async database session for a single request.      usage in a route:"
     },
     {
       "label": "mutual_fund.py",
@@ -522,7 +558,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/mutual_fund.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_models_mutual_fund_py",
-      "community": 2,
+      "community": 3,
       "norm_label": "mutual_fund.py"
     },
     {
@@ -531,7 +567,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/mutual_fund.py",
       "source_location": "L20",
       "id": "mutual_fund_mutualfund",
-      "community": 2,
+      "community": 3,
       "norm_label": "mutualfund"
     },
     {
@@ -549,7 +585,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/mutual_fund.py",
       "source_location": "L36",
       "id": "mutual_fund_mutualfund_repr",
-      "community": 2,
+      "community": 3,
       "norm_label": ".__repr__()"
     },
     {
@@ -558,7 +594,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/mutual_fund.py",
       "source_location": "L40",
       "id": "mutual_fund_mfnav",
-      "community": 2,
+      "community": 3,
       "norm_label": "mfnav"
     },
     {
@@ -567,7 +603,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/mutual_fund.py",
       "source_location": "L56",
       "id": "mutual_fund_mfnav_repr",
-      "community": 2,
+      "community": 3,
       "norm_label": ".__repr__()"
     },
     {
@@ -575,7 +611,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/mutual_fund.py",
       "source_location": "L1",
-      "community": 2,
+      "community": 3,
       "norm_label": "mutual fund entity and nav data.  - mutualfund: curated list of index funds - mf",
       "id": "mutual_fund_rationale_1"
     },
@@ -584,7 +620,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/mutual_fund.py",
       "source_location": "L21",
-      "community": 2,
+      "community": 3,
       "norm_label": "curated list of index funds.",
       "id": "mutual_fund_rationale_21"
     },
@@ -593,7 +629,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/mutual_fund.py",
       "source_location": "L41",
-      "community": 2,
+      "community": 3,
       "norm_label": "daily nav data for mutual funds.",
       "id": "mutual_fund_rationale_41"
     },
@@ -648,7 +684,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/pipeline.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_models_pipeline_py",
-      "community": 2,
+      "community": 3,
       "norm_label": "pipeline.py"
     },
     {
@@ -674,7 +710,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/pipeline.py",
       "source_location": "L1",
-      "community": 2,
+      "community": 3,
       "norm_label": "pipeline run audit log.  - pipelinerun: logs data pipeline job executions",
       "id": "pipeline_rationale_1"
     },
@@ -683,7 +719,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/pipeline.py",
       "source_location": "L17",
-      "community": 0,
+      "community": 3,
       "norm_label": "audit log for data pipeline executions.",
       "id": "pipeline_rationale_17"
     },
@@ -693,7 +729,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/__init__.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_models_init_py",
-      "community": 2,
+      "community": 0,
       "norm_label": "__init__.py"
     },
     {
@@ -701,7 +737,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/__init__.py",
       "source_location": "L1",
-      "community": 2,
+      "community": 0,
       "norm_label": "sqlalchemy orm models.  all models are imported here so alembic can autodetect t",
       "id": "init_rationale_1"
     },
@@ -756,7 +792,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py",
       "source_location": "L72",
       "id": "stock_fundamental",
-      "community": 0,
+      "community": 1,
       "norm_label": "fundamental"
     },
     {
@@ -765,7 +801,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py",
       "source_location": "L125",
       "id": "stock_fundamental_repr",
-      "community": 0,
+      "community": 1,
       "norm_label": ".__repr__()"
     },
     {
@@ -774,7 +810,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py",
       "source_location": "L129",
       "id": "stock_flockscore",
-      "community": 2,
+      "community": 1,
       "norm_label": "flockscore"
     },
     {
@@ -783,7 +819,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py",
       "source_location": "L168",
       "id": "stock_flockscore_repr",
-      "community": 2,
+      "community": 1,
       "norm_label": ".__repr__()"
     },
     {
@@ -791,7 +827,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py",
       "source_location": "L1",
-      "community": 2,
+      "community": 0,
       "norm_label": "stock entity and related models.  - stock: universe of indian equities (nifty 20",
       "id": "stock_rationale_1"
     },
@@ -800,7 +836,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py",
       "source_location": "L24",
-      "community": 2,
+      "community": 0,
       "norm_label": "universe of indian equities (nifty 200).",
       "id": "stock_rationale_24"
     },
@@ -809,7 +845,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py",
       "source_location": "L47",
-      "community": 2,
+      "community": 0,
       "norm_label": "daily ohlcv data for stocks.",
       "id": "stock_rationale_47"
     },
@@ -818,7 +854,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py",
       "source_location": "L73",
-      "community": 2,
+      "community": 1,
       "norm_label": "fundamental factors for a stock (16 factors for flock score).     scd2: tracks h",
       "id": "stock_rationale_73"
     },
@@ -827,7 +863,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py",
       "source_location": "L130",
-      "community": 2,
+      "community": 1,
       "norm_label": "pre-computed flock scores for a stock.     scd2: tracks historical changes with",
       "id": "stock_rationale_130"
     },
@@ -846,7 +882,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_schemas_scores_py",
-      "community": 3,
+      "community": 1,
       "norm_label": "scores.py"
     },
     {
@@ -855,7 +891,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
       "source_location": "L10",
       "id": "scores_pillarscores",
-      "community": 3,
+      "community": 1,
       "norm_label": "pillarscores"
     },
     {
@@ -864,7 +900,7 @@
       "source_file": "",
       "source_location": "",
       "id": "basemodel",
-      "community": 3,
+      "community": 8,
       "norm_label": "basemodel"
     },
     {
@@ -873,7 +909,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
       "source_location": "L19",
       "id": "scores_flockscoreresponse",
-      "community": 3,
+      "community": 1,
       "norm_label": "flockscoreresponse"
     },
     {
@@ -882,15 +918,24 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
       "source_location": "L32",
       "id": "scores_stocklistitem",
-      "community": 3,
+      "community": 1,
       "norm_label": "stocklistitem"
+    },
+    {
+      "label": "FundamentalsResponse",
+      "file_type": "code",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
+      "source_location": "L42",
+      "id": "scores_fundamentalsresponse",
+      "community": 1,
+      "norm_label": "fundamentalsresponse"
     },
     {
       "label": "Pydantic schemas for Flock Score API responses.",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
       "source_location": "L1",
-      "community": 3,
+      "community": 1,
       "norm_label": "pydantic schemas for flock score api responses.",
       "id": "scores_rationale_1"
     },
@@ -899,7 +944,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
       "source_location": "L11",
-      "community": 3,
+      "community": 1,
       "norm_label": "pillar-level score breakdown.",
       "id": "scores_rationale_11"
     },
@@ -908,7 +953,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
       "source_location": "L20",
-      "community": 3,
+      "community": 1,
       "norm_label": "flock score for a single stock.",
       "id": "scores_rationale_20"
     },
@@ -917,9 +962,18 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
       "source_location": "L33",
-      "community": 3,
+      "community": 1,
       "norm_label": "lightweight stock info for listing.",
       "id": "scores_rationale_33"
+    },
+    {
+      "label": "Current fundamental factors for a stock \u2014 all 16 Flock factors.",
+      "file_type": "rationale",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
+      "source_location": "L43",
+      "id": "scores_rationale_43",
+      "community": 1,
+      "norm_label": "current fundamental factors for a stock \u2014 all 16 flock factors."
     },
     {
       "label": "simulate.py",
@@ -927,7 +981,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/simulate.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_schemas_simulate_py",
-      "community": 3,
+      "community": 8,
       "norm_label": "simulate.py"
     },
     {
@@ -936,7 +990,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/simulate.py",
       "source_location": "L10",
       "id": "simulate_simulaterequest",
-      "community": 3,
+      "community": 8,
       "norm_label": "simulaterequest"
     },
     {
@@ -945,7 +999,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/simulate.py",
       "source_location": "L19",
       "id": "simulate_simulationstatistics",
-      "community": 3,
+      "community": 8,
       "norm_label": "simulationstatistics"
     },
     {
@@ -954,7 +1008,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/simulate.py",
       "source_location": "L34",
       "id": "simulate_simulateresponse",
-      "community": 3,
+      "community": 8,
       "norm_label": "simulateresponse"
     },
     {
@@ -963,7 +1017,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/simulate.py",
       "source_location": "L43",
       "id": "simulate_stresstestrequest",
-      "community": 3,
+      "community": 8,
       "norm_label": "stresstestrequest"
     },
     {
@@ -972,7 +1026,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/simulate.py",
       "source_location": "L51",
       "id": "simulate_stresstestresult",
-      "community": 3,
+      "community": 8,
       "norm_label": "stresstestresult"
     },
     {
@@ -981,7 +1035,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/simulate.py",
       "source_location": "L67",
       "id": "simulate_stresstestresponse",
-      "community": 3,
+      "community": 8,
       "norm_label": "stresstestresponse"
     },
     {
@@ -989,7 +1043,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/simulate.py",
       "source_location": "L11",
-      "community": 3,
+      "community": 8,
       "norm_label": "request body for monte carlo simulation.",
       "id": "simulate_rationale_11"
     },
@@ -998,7 +1052,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/simulate.py",
       "source_location": "L20",
-      "community": 3,
+      "community": 8,
       "norm_label": "monte carlo output statistics.",
       "id": "simulate_rationale_20"
     },
@@ -1007,7 +1061,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/simulate.py",
       "source_location": "L35",
-      "community": 3,
+      "community": 8,
       "norm_label": "monte carlo simulation result.",
       "id": "simulate_rationale_35"
     },
@@ -1016,7 +1070,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/simulate.py",
       "source_location": "L44",
-      "community": 3,
+      "community": 8,
       "norm_label": "request body for historical stress test.",
       "id": "simulate_rationale_44"
     },
@@ -1025,7 +1079,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/simulate.py",
       "source_location": "L52",
-      "community": 3,
+      "community": 8,
       "norm_label": "single crisis stress test result.",
       "id": "simulate_rationale_52"
     },
@@ -1035,7 +1089,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/sip.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_schemas_sip_py",
-      "community": 3,
+      "community": 8,
       "norm_label": "sip.py"
     },
     {
@@ -1044,7 +1098,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/sip.py",
       "source_location": "L10",
       "id": "sip_siprequest",
-      "community": 3,
+      "community": 8,
       "norm_label": "siprequest"
     },
     {
@@ -1053,7 +1107,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/sip.py",
       "source_location": "L18",
       "id": "sip_yearlybreakdown",
-      "community": 3,
+      "community": 8,
       "norm_label": "yearlybreakdown"
     },
     {
@@ -1062,7 +1116,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/sip.py",
       "source_location": "L26",
       "id": "sip_sipresponse",
-      "community": 3,
+      "community": 8,
       "norm_label": "sipresponse"
     },
     {
@@ -1071,7 +1125,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/sip.py",
       "source_location": "L41",
       "id": "sip_sipcomparerequest",
-      "community": 3,
+      "community": 8,
       "norm_label": "sipcomparerequest"
     },
     {
@@ -1080,7 +1134,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/sip.py",
       "source_location": "L48",
       "id": "sip_sipcompareresponse",
-      "community": 3,
+      "community": 8,
       "norm_label": "sipcompareresponse"
     },
     {
@@ -1088,7 +1142,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/sip.py",
       "source_location": "L1",
-      "community": 3,
+      "community": 8,
       "norm_label": "pydantic schemas for sip calculator api.",
       "id": "sip_rationale_1"
     },
@@ -1097,7 +1151,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/sip.py",
       "source_location": "L11",
-      "community": 3,
+      "community": 8,
       "norm_label": "request body for sip projection.",
       "id": "sip_rationale_11"
     },
@@ -1106,7 +1160,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/sip.py",
       "source_location": "L19",
-      "community": 3,
+      "community": 8,
       "norm_label": "one year's sip details (for step-up sip).",
       "id": "sip_rationale_19"
     },
@@ -1115,7 +1169,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/sip.py",
       "source_location": "L27",
-      "community": 3,
+      "community": 8,
       "norm_label": "sip projection result.",
       "id": "sip_rationale_27"
     },
@@ -1124,7 +1178,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/sip.py",
       "source_location": "L42",
-      "community": 3,
+      "community": 8,
       "norm_label": "request to compare sip scenarios.",
       "id": "sip_rationale_42"
     },
@@ -1133,7 +1187,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/sip.py",
       "source_location": "L49",
-      "community": 3,
+      "community": 8,
       "norm_label": "multiple sip scenario results.",
       "id": "sip_rationale_49"
     },
@@ -1287,7 +1341,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/fundamentals_fetcher.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_services_fundamentals_fetcher_py",
-      "community": 10,
+      "community": 0,
       "norm_label": "fundamentals_fetcher.py"
     },
     {
@@ -1296,7 +1350,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/fundamentals_fetcher.py",
       "source_location": "L35",
       "id": "fundamentals_fetcher_fundamentalsfetcher",
-      "community": 10,
+      "community": 0,
       "norm_label": "fundamentalsfetcher"
     },
     {
@@ -1305,7 +1359,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/fundamentals_fetcher.py",
       "source_location": "L40",
       "id": "fundamentals_fetcher_fundamentalsfetcher_init",
-      "community": 10,
+      "community": 0,
       "norm_label": ".__init__()"
     },
     {
@@ -1314,7 +1368,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/fundamentals_fetcher.py",
       "source_location": "L43",
       "id": "fundamentals_fetcher_fundamentalsfetcher_rate_limit",
-      "community": 10,
+      "community": 0,
       "norm_label": "._rate_limit()"
     },
     {
@@ -1323,7 +1377,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/fundamentals_fetcher.py",
       "source_location": "L51",
       "id": "fundamentals_fetcher_fundamentalsfetcher_fetch_fundamentals",
-      "community": 10,
+      "community": 0,
       "norm_label": ".fetch_fundamentals()"
     },
     {
@@ -1332,7 +1386,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/fundamentals_fetcher.py",
       "source_location": "L89",
       "id": "fundamentals_fetcher_fundamentalsfetcher_extract_factors",
-      "community": 10,
+      "community": 0,
       "norm_label": "._extract_factors()"
     },
     {
@@ -1341,7 +1395,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/fundamentals_fetcher.py",
       "source_location": "L180",
       "id": "fundamentals_fetcher_fundamentalsfetcher_data_changed",
-      "community": 10,
+      "community": 0,
       "norm_label": "._data_changed()"
     },
     {
@@ -1350,7 +1404,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/fundamentals_fetcher.py",
       "source_location": "L219",
       "id": "fundamentals_fetcher_fundamentalsfetcher_save_fundamentals_scd2",
-      "community": 10,
+      "community": 0,
       "norm_label": ".save_fundamentals_scd2()"
     },
     {
@@ -1359,7 +1413,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/fundamentals_fetcher.py",
       "source_location": "L280",
       "id": "fundamentals_fetcher_fundamentalsfetcher_fetch_and_save",
-      "community": 10,
+      "community": 0,
       "norm_label": ".fetch_and_save()"
     },
     {
@@ -1368,7 +1422,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/fundamentals_fetcher.py",
       "source_location": "L311",
       "id": "fundamentals_fetcher_run_fundamentals_pipeline",
-      "community": 10,
+      "community": 0,
       "norm_label": "run_fundamentals_pipeline()"
     },
     {
@@ -1377,7 +1431,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/fundamentals_fetcher.py",
       "source_location": "L369",
       "id": "fundamentals_fetcher_fetch_single_fundamentals",
-      "community": 10,
+      "community": 0,
       "norm_label": "fetch_single_fundamentals()"
     },
     {
@@ -1467,7 +1521,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_services_mf_fetcher_py",
-      "community": 2,
+      "community": 3,
       "norm_label": "mf_fetcher.py"
     },
     {
@@ -1476,7 +1530,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L26",
       "id": "mf_fetcher_mffetcher",
-      "community": 2,
+      "community": 3,
       "norm_label": "mffetcher"
     },
     {
@@ -1485,7 +1539,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L31",
       "id": "mf_fetcher_mffetcher_init",
-      "community": 2,
+      "community": 3,
       "norm_label": ".__init__()"
     },
     {
@@ -1494,7 +1548,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L34",
       "id": "mf_fetcher_mffetcher_rate_limit",
-      "community": 2,
+      "community": 3,
       "norm_label": "._rate_limit()"
     },
     {
@@ -1503,7 +1557,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L42",
       "id": "mf_fetcher_mffetcher_fetch_mf_nav",
-      "community": 2,
+      "community": 3,
       "norm_label": ".fetch_mf_nav()"
     },
     {
@@ -1512,7 +1566,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L79",
       "id": "mf_fetcher_mffetcher_fetch_mf_nav_history",
-      "community": 2,
+      "community": 3,
       "norm_label": ".fetch_mf_nav_history()"
     },
     {
@@ -1521,7 +1575,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L129",
       "id": "mf_fetcher_mffetcher_save_mf_nav",
-      "community": 2,
+      "community": 3,
       "norm_label": ".save_mf_nav()"
     },
     {
@@ -1530,7 +1584,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L166",
       "id": "mf_fetcher_mffetcher_fetch_and_save",
-      "community": 2,
+      "community": 3,
       "norm_label": ".fetch_and_save()"
     },
     {
@@ -1539,7 +1593,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L203",
       "id": "mf_fetcher_run_mf_nav_pipeline",
-      "community": 2,
+      "community": 3,
       "norm_label": "run_mf_nav_pipeline()"
     },
     {
@@ -1548,7 +1602,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L262",
       "id": "mf_fetcher_search_mf_schemes",
-      "community": 2,
+      "community": 3,
       "norm_label": "search_mf_schemes()"
     },
     {
@@ -1556,7 +1610,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L1",
-      "community": 2,
+      "community": 3,
       "norm_label": "mutual fund nav fetcher service.  fetches nav data from mfapi.in and saves to da",
       "id": "mf_fetcher_rationale_1"
     },
@@ -1565,7 +1619,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L27",
-      "community": 2,
+      "community": 3,
       "norm_label": "fetches mutual fund nav data from mfapi.in.",
       "id": "mf_fetcher_rationale_27"
     },
@@ -1574,7 +1628,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L43",
-      "community": 2,
+      "community": 3,
       "norm_label": "fetch nav data for a mutual fund scheme.          args:             scheme_code:",
       "id": "mf_fetcher_rationale_43"
     },
@@ -1583,7 +1637,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L84",
-      "community": 2,
+      "community": 3,
       "norm_label": "fetch nav history for a mutual fund scheme.          args:             scheme_co",
       "id": "mf_fetcher_rationale_84"
     },
@@ -1592,7 +1646,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L135",
-      "community": 2,
+      "community": 3,
       "norm_label": "save nav data to database.          args:             session: asyncsession",
       "id": "mf_fetcher_rationale_135"
     },
@@ -1601,7 +1655,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L171",
-      "community": 2,
+      "community": 3,
       "norm_label": "fetch nav history and save to database.          args:             session: asyn",
       "id": "mf_fetcher_rationale_171"
     },
@@ -1610,7 +1664,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L207",
-      "community": 2,
+      "community": 3,
       "norm_label": "run mf nav fetch pipeline for multiple schemes.      args:         scheme_codes:",
       "id": "mf_fetcher_rationale_207"
     },
@@ -1619,7 +1673,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/mf_fetcher.py",
       "source_location": "L263",
-      "community": 2,
+      "community": 3,
       "norm_label": "search for mutual fund schemes.      args:         query: search query (e.g., \"h",
       "id": "mf_fetcher_rationale_263"
     },
@@ -1782,7 +1836,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/scoring_engine.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_services_scoring_engine_py",
-      "community": 1,
+      "community": 2,
       "norm_label": "scoring_engine.py"
     },
     {
@@ -1791,7 +1845,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/scoring_engine.py",
       "source_location": "L101",
       "id": "scoring_engine_normalize_factor",
-      "community": 1,
+      "community": 2,
       "norm_label": "normalize_factor()"
     },
     {
@@ -1800,7 +1854,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/scoring_engine.py",
       "source_location": "L144",
       "id": "scoring_engine_calculate_pillar_score",
-      "community": 1,
+      "community": 2,
       "norm_label": "calculate_pillar_score()"
     },
     {
@@ -1809,7 +1863,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/scoring_engine.py",
       "source_location": "L173",
       "id": "scoring_engine_calculate_flock_score",
-      "community": 1,
+      "community": 2,
       "norm_label": "calculate_flock_score()"
     },
     {
@@ -1818,7 +1872,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/scoring_engine.py",
       "source_location": "L212",
       "id": "scoring_engine_score_all_stocks",
-      "community": 1,
+      "community": 2,
       "norm_label": "score_all_stocks()"
     },
     {
@@ -1826,7 +1880,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/scoring_engine.py",
       "source_location": "L1",
-      "community": 1,
+      "community": 2,
       "norm_label": "flock score \u2014 fundamental scoring engine.  pure math layer: no database, no asyn",
       "id": "scoring_engine_rationale_1"
     },
@@ -1835,7 +1889,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/scoring_engine.py",
       "source_location": "L106",
-      "community": 1,
+      "community": 2,
       "norm_label": "normalize a single factor value to 0-100 percentile rank.      args:         val",
       "id": "scoring_engine_rationale_106"
     },
@@ -1844,7 +1898,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/scoring_engine.py",
       "source_location": "L148",
-      "community": 1,
+      "community": 2,
       "norm_label": "average the factor percentile scores within a pillar, excluding none values.",
       "id": "scoring_engine_rationale_148"
     },
@@ -1853,7 +1907,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/scoring_engine.py",
       "source_location": "L177",
-      "community": 1,
+      "community": 2,
       "norm_label": "weighted sum of pillar scores, re-normalized if any pillar is missing.      args",
       "id": "scoring_engine_rationale_177"
     },
@@ -1862,7 +1916,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/scoring_engine.py",
       "source_location": "L215",
-      "community": 1,
+      "community": 2,
       "norm_label": "score the entire universe of stocks from raw fundamentals.      args:         fu",
       "id": "scoring_engine_rationale_215"
     },
@@ -1872,7 +1926,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_app_services_score_calculator_py",
-      "community": 9,
+      "community": 1,
       "norm_label": "score_calculator.py"
     },
     {
@@ -1881,7 +1935,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L34",
       "id": "score_calculator_scorecalculator",
-      "community": 9,
+      "community": 1,
       "norm_label": "scorecalculator"
     },
     {
@@ -1890,7 +1944,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L39",
       "id": "score_calculator_scorecalculator_load_fundamentals",
-      "community": 9,
+      "community": 1,
       "norm_label": ".load_fundamentals()"
     },
     {
@@ -1899,7 +1953,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L81",
       "id": "score_calculator_scorecalculator_compute_scores",
-      "community": 9,
+      "community": 1,
       "norm_label": ".compute_scores()"
     },
     {
@@ -1908,7 +1962,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L98",
       "id": "score_calculator_scorecalculator_save_scores_scd2",
-      "community": 9,
+      "community": 1,
       "norm_label": ".save_scores_scd2()"
     },
     {
@@ -1917,7 +1971,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L175",
       "id": "score_calculator_scorecalculator_scores_changed",
-      "community": 9,
+      "community": 1,
       "norm_label": "._scores_changed()"
     },
     {
@@ -1926,7 +1980,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L199",
       "id": "score_calculator_scorecalculator_run",
-      "community": 9,
+      "community": 1,
       "norm_label": ".run()"
     },
     {
@@ -1935,7 +1989,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L216",
       "id": "score_calculator_run_scoring_pipeline",
-      "community": 9,
+      "community": 1,
       "norm_label": "run_scoring_pipeline()"
     },
     {
@@ -1943,7 +1997,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L1",
-      "community": 9,
+      "community": 1,
       "norm_label": "flock score calculator \u2014 db integration layer.  reads current fundamentals from",
       "id": "score_calculator_rationale_1"
     },
@@ -1952,7 +2006,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L35",
-      "community": 9,
+      "community": 1,
       "norm_label": "orchestrates: load fundamentals \u2192 compute scores \u2192 save with scd2.",
       "id": "score_calculator_rationale_35"
     },
@@ -1961,7 +2015,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L40",
-      "community": 9,
+      "community": 1,
       "norm_label": "load all current fundamental records into a dataframe.          returns:",
       "id": "score_calculator_rationale_40"
     },
@@ -1970,7 +2024,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L82",
-      "community": 9,
+      "community": 1,
       "norm_label": "run the scoring engine on the loaded fundamentals.          args:             fu",
       "id": "score_calculator_rationale_82"
     },
@@ -1979,7 +2033,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L103",
-      "community": 9,
+      "community": 1,
       "norm_label": "save computed scores to the flock_scores table using scd2.          for each sto",
       "id": "score_calculator_rationale_103"
     },
@@ -1988,7 +2042,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L180",
-      "community": 9,
+      "community": 1,
       "norm_label": "compare current db scores with newly computed scores.",
       "id": "score_calculator_rationale_180"
     },
@@ -1997,7 +2051,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L200",
-      "community": 9,
+      "community": 1,
       "norm_label": "full scoring pipeline: load \u2192 compute \u2192 save.          returns:             (cre",
       "id": "score_calculator_rationale_200"
     },
@@ -2006,7 +2060,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/score_calculator.py",
       "source_location": "L217",
-      "community": 9,
+      "community": 1,
       "norm_label": "top-level entry point: creates a pipelinerun, runs scoring, logs results.",
       "id": "score_calculator_rationale_217"
     },
@@ -2025,7 +2079,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/monte_carlo.py",
       "source_location": "L25",
       "id": "monte_carlo_estimate_return_parameters",
-      "community": 8,
+      "community": 10,
       "norm_label": "estimate_return_parameters()"
     },
     {
@@ -2034,7 +2088,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/monte_carlo.py",
       "source_location": "L75",
       "id": "monte_carlo_build_covariance_matrix",
-      "community": 8,
+      "community": 10,
       "norm_label": "build_covariance_matrix()"
     },
     {
@@ -2087,7 +2141,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/monte_carlo.py",
       "source_location": "L29",
-      "community": 8,
+      "community": 10,
       "norm_label": "estimate annualized expected return and volatility from historical prices.",
       "id": "monte_carlo_rationale_29"
     },
@@ -2096,7 +2150,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/monte_carlo.py",
       "source_location": "L78",
-      "community": 8,
+      "community": 10,
       "norm_label": "build annualized covariance matrix from daily prices.      args:         price_d",
       "id": "monte_carlo_rationale_78"
     },
@@ -2529,7 +2583,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/conftest.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_tests_conftest_py",
-      "community": 0,
+      "community": 9,
       "norm_label": "conftest.py"
     },
     {
@@ -2538,7 +2592,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/conftest.py",
       "source_location": "L21",
       "id": "conftest_override_settings",
-      "community": 0,
+      "community": 9,
       "norm_label": "override_settings()"
     },
     {
@@ -2547,7 +2601,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/conftest.py",
       "source_location": "L34",
       "id": "conftest_mock_session",
-      "community": 0,
+      "community": 9,
       "norm_label": "mock_session()"
     },
     {
@@ -2556,7 +2610,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/conftest.py",
       "source_location": "L61",
       "id": "conftest_sample_stock",
-      "community": 0,
+      "community": 9,
       "norm_label": "sample_stock()"
     },
     {
@@ -2565,7 +2619,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/conftest.py",
       "source_location": "L77",
       "id": "conftest_sample_fundamental",
-      "community": 0,
+      "community": 1,
       "norm_label": "sample_fundamental()"
     },
     {
@@ -2574,7 +2628,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/conftest.py",
       "source_location": "L96",
       "id": "conftest_sample_price_df",
-      "community": 0,
+      "community": 9,
       "norm_label": "sample_price_df()"
     },
     {
@@ -2582,7 +2636,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/conftest.py",
       "source_location": "L1",
-      "community": 0,
+      "community": 9,
       "norm_label": "shared pytest fixtures for flock backend tests.  provides:   - override settings",
       "id": "conftest_rationale_1"
     },
@@ -2591,7 +2645,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/conftest.py",
       "source_location": "L22",
-      "community": 0,
+      "community": 9,
       "norm_label": "force test-safe settings. prevents real db connections during unit tests.",
       "id": "conftest_rationale_22"
     },
@@ -2600,7 +2654,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/conftest.py",
       "source_location": "L35",
-      "community": 0,
+      "community": 9,
       "norm_label": "a magicmock that mimics an asyncsession.      execute() returns a mock scalars-c",
       "id": "conftest_rationale_35"
     },
@@ -2609,7 +2663,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/conftest.py",
       "source_location": "L62",
-      "community": 0,
+      "community": 9,
       "norm_label": "a minimal stock orm object for testing.",
       "id": "conftest_rationale_62"
     },
@@ -2618,7 +2672,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/conftest.py",
       "source_location": "L78",
-      "community": 0,
+      "community": 1,
       "norm_label": "a minimal fundamental record for testing scd2 logic.",
       "id": "conftest_rationale_78"
     },
@@ -2627,7 +2681,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/conftest.py",
       "source_location": "L97",
-      "community": 0,
+      "community": 9,
       "norm_label": "minimal yfinance-like dataframe for price tests.",
       "id": "conftest_rationale_97"
     },
@@ -2646,7 +2700,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_tests_core_test_config_py",
-      "community": 11,
+      "community": 9,
       "norm_label": "test_config.py"
     },
     {
@@ -2655,7 +2709,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L9",
       "id": "test_config_testsettingsdefaults",
-      "community": 11,
+      "community": 9,
       "norm_label": "testsettingsdefaults"
     },
     {
@@ -2664,7 +2718,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L12",
       "id": "test_config_testsettingsdefaults_test_app_name_default",
-      "community": 11,
+      "community": 9,
       "norm_label": ".test_app_name_default()"
     },
     {
@@ -2673,7 +2727,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L16",
       "id": "test_config_testsettingsdefaults_test_version_default",
-      "community": 11,
+      "community": 9,
       "norm_label": ".test_version_default()"
     },
     {
@@ -2682,7 +2736,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L20",
       "id": "test_config_testsettingsdefaults_test_debug_default_is_false",
-      "community": 11,
+      "community": 9,
       "norm_label": ".test_debug_default_is_false()"
     },
     {
@@ -2691,7 +2745,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L25",
       "id": "test_config_testsettingsdefaults_test_api_prefix_default",
-      "community": 11,
+      "community": 9,
       "norm_label": ".test_api_prefix_default()"
     },
     {
@@ -2700,7 +2754,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L29",
       "id": "test_config_testsettingsdefaults_test_database_url_default_is_asyncpg",
-      "community": 11,
+      "community": 9,
       "norm_label": ".test_database_url_default_is_asyncpg()"
     },
     {
@@ -2709,7 +2763,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L33",
       "id": "test_config_testsettingsdefaults_test_rate_limit_is_positive",
-      "community": 11,
+      "community": 9,
       "norm_label": ".test_rate_limit_is_positive()"
     },
     {
@@ -2718,7 +2772,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L40",
       "id": "test_config_testcorsoriginparsing",
-      "community": 11,
+      "community": 9,
       "norm_label": "testcorsoriginparsing"
     },
     {
@@ -2727,7 +2781,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L43",
       "id": "test_config_testcorsoriginparsing_test_wildcard_returns_list_with_star",
-      "community": 11,
+      "community": 9,
       "norm_label": ".test_wildcard_returns_list_with_star()"
     },
     {
@@ -2736,7 +2790,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L48",
       "id": "test_config_testcorsoriginparsing_test_single_origin_parsed",
-      "community": 11,
+      "community": 9,
       "norm_label": ".test_single_origin_parsed()"
     },
     {
@@ -2745,7 +2799,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L53",
       "id": "test_config_testcorsoriginparsing_test_multiple_origins_parsed",
-      "community": 11,
+      "community": 9,
       "norm_label": ".test_multiple_origins_parsed()"
     },
     {
@@ -2754,7 +2808,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L61",
       "id": "test_config_testcorsoriginparsing_test_whitespace_trimmed",
-      "community": 11,
+      "community": 9,
       "norm_label": ".test_whitespace_trimmed()"
     },
     {
@@ -2763,7 +2817,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L69",
       "id": "test_config_testenvoverride",
-      "community": 11,
+      "community": 9,
       "norm_label": "testenvoverride"
     },
     {
@@ -2772,7 +2826,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L72",
       "id": "test_config_testenvoverride_test_debug_override",
-      "community": 11,
+      "community": 9,
       "norm_label": ".test_debug_override()"
     },
     {
@@ -2781,7 +2835,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L77",
       "id": "test_config_testenvoverride_test_app_name_override",
-      "community": 11,
+      "community": 9,
       "norm_label": ".test_app_name_override()"
     },
     {
@@ -2790,7 +2844,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L82",
       "id": "test_config_testenvoverride_test_database_url_override",
-      "community": 11,
+      "community": 9,
       "norm_label": ".test_database_url_override()"
     },
     {
@@ -2798,7 +2852,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L1",
-      "community": 11,
+      "community": 9,
       "norm_label": "tests for app.core.config \u2014 settings loading and parsing.",
       "id": "test_config_rationale_1"
     },
@@ -2807,7 +2861,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L10",
-      "community": 11,
+      "community": 9,
       "norm_label": "verify default values when no env vars are set.",
       "id": "test_config_rationale_10"
     },
@@ -2816,7 +2870,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L41",
-      "community": 11,
+      "community": 9,
       "norm_label": "verify cors_origins string \u2192 list conversion.",
       "id": "test_config_rationale_41"
     },
@@ -2825,7 +2879,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/core/test_config.py",
       "source_location": "L70",
-      "community": 11,
+      "community": 9,
       "norm_label": "verify environment variables override defaults.",
       "id": "test_config_rationale_70"
     },
@@ -2844,7 +2898,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_tests_db_test_session_py",
-      "community": 12,
+      "community": 11,
       "norm_label": "test_session.py"
     },
     {
@@ -2853,7 +2907,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L13",
       "id": "test_session_testsessionfactory",
-      "community": 12,
+      "community": 11,
       "norm_label": "testsessionfactory"
     },
     {
@@ -2862,7 +2916,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L16",
       "id": "test_session_testsessionfactory_test_session_factory_is_async_sessionmaker",
-      "community": 12,
+      "community": 11,
       "norm_label": ".test_session_factory_is_async_sessionmaker()"
     },
     {
@@ -2871,7 +2925,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L20",
       "id": "test_session_testsessionfactory_test_session_class_is_async_session",
-      "community": 12,
+      "community": 11,
       "norm_label": ".test_session_class_is_async_session()"
     },
     {
@@ -2880,7 +2934,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L24",
       "id": "test_session_testsessionfactory_test_expire_on_commit_is_false",
-      "community": 12,
+      "community": 11,
       "norm_label": ".test_expire_on_commit_is_false()"
     },
     {
@@ -2889,7 +2943,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L30",
       "id": "test_session_testengine",
-      "community": 12,
+      "community": 11,
       "norm_label": "testengine"
     },
     {
@@ -2898,7 +2952,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L33",
       "id": "test_session_testengine_test_engine_pool_pre_ping",
-      "community": 12,
+      "community": 11,
       "norm_label": ".test_engine_pool_pre_ping()"
     },
     {
@@ -2907,7 +2961,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L38",
       "id": "test_session_testengine_test_engine_dialect_is_asyncpg",
-      "community": 12,
+      "community": 11,
       "norm_label": ".test_engine_dialect_is_asyncpg()"
     },
     {
@@ -2916,7 +2970,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L43",
       "id": "test_session_testgetdbdependency",
-      "community": 12,
+      "community": 11,
       "norm_label": "testgetdbdependency"
     },
     {
@@ -2925,7 +2979,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L47",
       "id": "test_session_test_get_db_yields_session",
-      "community": 12,
+      "community": 11,
       "norm_label": "test_get_db_yields_session()"
     },
     {
@@ -2934,7 +2988,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L65",
       "id": "test_session_test_get_db_rolls_back_on_exception",
-      "community": 12,
+      "community": 11,
       "norm_label": "test_get_db_rolls_back_on_exception()"
     },
     {
@@ -2942,7 +2996,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L1",
-      "community": 12,
+      "community": 11,
       "norm_label": "tests for app.db.session \u2014 session factory and get_db dependency.  these are lig",
       "id": "test_session_rationale_1"
     },
@@ -2951,7 +3005,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L14",
-      "community": 12,
+      "community": 11,
       "norm_label": "verify the async_session_factory is properly configured.",
       "id": "test_session_rationale_14"
     },
@@ -2960,7 +3014,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L25",
-      "community": 12,
+      "community": 11,
       "norm_label": "expire_on_commit=false is critical for async \u2014 prevents lazy loading errors.",
       "id": "test_session_rationale_25"
     },
@@ -2969,7 +3023,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L31",
-      "community": 12,
+      "community": 11,
       "norm_label": "verify engine is configured with sensible pool settings.",
       "id": "test_session_rationale_31"
     },
@@ -2978,7 +3032,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L34",
-      "community": 12,
+      "community": 11,
       "norm_label": "pool_pre_ping=true ensures stale connections are detected before use.",
       "id": "test_session_rationale_34"
     },
@@ -2987,7 +3041,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/db/test_session.py",
       "source_location": "L44",
-      "community": 12,
+      "community": 11,
       "norm_label": "verify get_db yields a session and rolls back on exception.",
       "id": "test_session_rationale_44"
     },
@@ -3249,7 +3303,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_tests_services_test_fundamentals_fetcher_py",
-      "community": 10,
+      "community": 0,
       "norm_label": "test_fundamentals_fetcher.py"
     },
     {
@@ -3258,7 +3312,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L17",
       "id": "test_fundamentals_fetcher_testextractfactors",
-      "community": 10,
+      "community": 0,
       "norm_label": "testextractfactors"
     },
     {
@@ -3267,7 +3321,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L19",
       "id": "test_fundamentals_fetcher_testextractfactors_test_extracts_roe",
-      "community": 10,
+      "community": 0,
       "norm_label": ".test_extracts_roe()"
     },
     {
@@ -3276,7 +3330,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L25",
       "id": "test_fundamentals_fetcher_testextractfactors_test_none_values_stay_none",
-      "community": 10,
+      "community": 0,
       "norm_label": ".test_none_values_stay_none()"
     },
     {
@@ -3285,7 +3339,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L33",
       "id": "test_fundamentals_fetcher_testextractfactors_test_converts_percentage_roe_to_decimal",
-      "community": 10,
+      "community": 0,
       "norm_label": ".test_converts_percentage_roe_to_decimal()"
     },
     {
@@ -3294,7 +3348,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L40",
       "id": "test_fundamentals_fetcher_testextractfactors_test_dividend_yield_percentage_converted",
-      "community": 10,
+      "community": 0,
       "norm_label": ".test_dividend_yield_percentage_converted()"
     },
     {
@@ -3303,7 +3357,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L46",
       "id": "test_fundamentals_fetcher_testextractfactors_test_safe_float_handles_bad_values",
-      "community": 10,
+      "community": 0,
       "norm_label": ".test_safe_float_handles_bad_values()"
     },
     {
@@ -3312,7 +3366,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L56",
       "id": "test_fundamentals_fetcher_testdatachanged",
-      "community": 10,
+      "community": 0,
       "norm_label": "testdatachanged"
     },
     {
@@ -3321,7 +3375,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L58",
       "id": "test_fundamentals_fetcher_testdatachanged_test_no_change_returns_false",
-      "community": 10,
+      "community": 0,
       "norm_label": ".test_no_change_returns_false()"
     },
     {
@@ -3330,7 +3384,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L81",
       "id": "test_fundamentals_fetcher_testdatachanged_test_change_detected_on_roe_update",
-      "community": 10,
+      "community": 0,
       "norm_label": ".test_change_detected_on_roe_update()"
     },
     {
@@ -3339,7 +3393,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L104",
       "id": "test_fundamentals_fetcher_testdatachanged_test_new_value_where_none_was_registers_as_change",
-      "community": 10,
+      "community": 0,
       "norm_label": ".test_new_value_where_none_was_registers_as_change()"
     },
     {
@@ -3348,7 +3402,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L119",
       "id": "test_fundamentals_fetcher_testsavefundamentalsscd2",
-      "community": 10,
+      "community": 0,
       "norm_label": "testsavefundamentalsscd2"
     },
     {
@@ -3357,7 +3411,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L122",
       "id": "test_fundamentals_fetcher_test_first_record_inserted_with_is_current",
-      "community": 10,
+      "community": 0,
       "norm_label": "test_first_record_inserted_with_is_current()"
     },
     {
@@ -3366,7 +3420,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L148",
       "id": "test_fundamentals_fetcher_test_unchanged_data_skips_insert",
-      "community": 10,
+      "community": 0,
       "norm_label": "test_unchanged_data_skips_insert()"
     },
     {
@@ -3375,7 +3429,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L173",
       "id": "test_fundamentals_fetcher_test_changed_data_closes_old_and_inserts_new",
-      "community": 10,
+      "community": 0,
       "norm_label": "test_changed_data_closes_old_and_inserts_new()"
     },
     {
@@ -3383,7 +3437,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L1",
-      "community": 10,
+      "community": 0,
       "norm_label": "tests for fundamentalsfetcher service \u2014 specifically scd2 version tracking logic",
       "id": "test_fundamentals_fetcher_rationale_1"
     },
@@ -3392,7 +3446,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L34",
-      "community": 10,
+      "community": 0,
       "norm_label": "values > 1 are assumed to be percentages and should be divided by 100.",
       "id": "test_fundamentals_fetcher_rationale_34"
     },
@@ -3401,7 +3455,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L123",
-      "community": 10,
+      "community": 1,
       "norm_label": "if no existing fundamental, a new record with is_current=true is created.",
       "id": "test_fundamentals_fetcher_rationale_123"
     },
@@ -3410,7 +3464,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L149",
-      "community": 10,
+      "community": 1,
       "norm_label": "if data hasn't changed, no new record should be inserted.",
       "id": "test_fundamentals_fetcher_rationale_149"
     },
@@ -3419,7 +3473,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py",
       "source_location": "L176",
-      "community": 10,
+      "community": 1,
       "norm_label": "when data changes, old record is closed (is_current=false) and new is inserted.",
       "id": "test_fundamentals_fetcher_rationale_176"
     },
@@ -3591,7 +3645,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_tests_services_test_mf_fetcher_py",
-      "community": 2,
+      "community": 3,
       "norm_label": "test_mf_fetcher.py"
     },
     {
@@ -3600,7 +3654,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L32",
       "id": "test_mf_fetcher_make_mock_response",
-      "community": 2,
+      "community": 3,
       "norm_label": "make_mock_response()"
     },
     {
@@ -3609,7 +3663,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L40",
       "id": "test_mf_fetcher_testfetchmfnav",
-      "community": 2,
+      "community": 3,
       "norm_label": "testfetchmfnav"
     },
     {
@@ -3618,7 +3672,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L44",
       "id": "test_mf_fetcher_test_returns_nav_dict_on_success",
-      "community": 2,
+      "community": 3,
       "norm_label": "test_returns_nav_dict_on_success()"
     },
     {
@@ -3627,7 +3681,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L63",
       "id": "test_mf_fetcher_test_returns_none_on_non_200_status",
-      "community": 2,
+      "community": 3,
       "norm_label": "test_returns_none_on_non_200_status()"
     },
     {
@@ -3636,7 +3690,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L79",
       "id": "test_mf_fetcher_test_returns_none_on_network_exception",
-      "community": 2,
+      "community": 3,
       "norm_label": "test_returns_none_on_network_exception()"
     },
     {
@@ -3645,7 +3699,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L93",
       "id": "test_mf_fetcher_testfetchmfnavhistory",
-      "community": 2,
+      "community": 3,
       "norm_label": "testfetchmfnavhistory"
     },
     {
@@ -3654,7 +3708,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L97",
       "id": "test_mf_fetcher_test_parses_all_nav_records",
-      "community": 2,
+      "community": 3,
       "norm_label": "test_parses_all_nav_records()"
     },
     {
@@ -3663,7 +3717,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L118",
       "id": "test_mf_fetcher_test_skips_malformed_records",
-      "community": 2,
+      "community": 3,
       "norm_label": "test_skips_malformed_records()"
     },
     {
@@ -3672,7 +3726,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L145",
       "id": "test_mf_fetcher_testsavemfnav",
-      "community": 2,
+      "community": 3,
       "norm_label": "testsavemfnav"
     },
     {
@@ -3681,7 +3735,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L149",
       "id": "test_mf_fetcher_test_inserts_new_nav",
-      "community": 2,
+      "community": 3,
       "norm_label": "test_inserts_new_nav()"
     },
     {
@@ -3690,7 +3744,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L166",
       "id": "test_mf_fetcher_test_skips_duplicate_nav",
-      "community": 2,
+      "community": 3,
       "norm_label": "test_skips_duplicate_nav()"
     },
     {
@@ -3698,7 +3752,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L1",
-      "community": 2,
+      "community": 3,
       "norm_label": "tests for mffetcher service.  all http calls to mfapi.in are mocked via httpx.",
       "id": "test_mf_fetcher_rationale_1"
     },
@@ -3707,7 +3761,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L33",
-      "community": 2,
+      "community": 3,
       "norm_label": "build a mock httpx response.",
       "id": "test_mf_fetcher_rationale_33"
     },
@@ -3716,7 +3770,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L41",
-      "community": 2,
+      "community": 3,
       "norm_label": "unit tests for the single-scheme latest nav fetch.",
       "id": "test_mf_fetcher_rationale_41"
     },
@@ -3725,7 +3779,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L45",
-      "community": 2,
+      "community": 3,
       "norm_label": "valid api response \u2192 parsed nav dict.",
       "id": "test_mf_fetcher_rationale_45"
     },
@@ -3734,7 +3788,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L64",
-      "community": 2,
+      "community": 3,
       "norm_label": "non-200 status \u2192 none returned.",
       "id": "test_mf_fetcher_rationale_64"
     },
@@ -3743,7 +3797,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L80",
-      "community": 2,
+      "community": 3,
       "norm_label": "network exception \u2192 none returned, not re-raised.",
       "id": "test_mf_fetcher_rationale_80"
     },
@@ -3752,7 +3806,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L94",
-      "community": 2,
+      "community": 3,
       "norm_label": "unit tests for the multi-day nav history fetch.",
       "id": "test_mf_fetcher_rationale_94"
     },
@@ -3761,7 +3815,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L98",
-      "community": 2,
+      "community": 3,
       "norm_label": "should parse all records within the requested date range.",
       "id": "test_mf_fetcher_rationale_98"
     },
@@ -3770,7 +3824,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L119",
-      "community": 2,
+      "community": 3,
       "norm_label": "records with unparseable dates are gracefully skipped.",
       "id": "test_mf_fetcher_rationale_119"
     },
@@ -3779,7 +3833,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L146",
-      "community": 2,
+      "community": 3,
       "norm_label": "unit tests for saving nav records to database.",
       "id": "test_mf_fetcher_rationale_146"
     },
@@ -3788,7 +3842,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L150",
-      "community": 2,
+      "community": 3,
       "norm_label": "no existing nav for this date \u2192 should insert and return true.",
       "id": "test_mf_fetcher_rationale_150"
     },
@@ -3797,7 +3851,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_mf_fetcher.py",
       "source_location": "L167",
-      "community": 2,
+      "community": 3,
       "norm_label": "existing nav for same date \u2192 skip and return false.",
       "id": "test_mf_fetcher_rationale_167"
     },
@@ -3807,7 +3861,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_tests_services_test_scoring_engine_py",
-      "community": 1,
+      "community": 2,
       "norm_label": "test_scoring_engine.py"
     },
     {
@@ -3816,7 +3870,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L26",
       "id": "test_scoring_engine_testnormalizefactor",
-      "community": 1,
+      "community": 2,
       "norm_label": "testnormalizefactor"
     },
     {
@@ -3825,7 +3879,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L29",
       "id": "test_scoring_engine_testnormalizefactor_test_higher_is_better_top_value",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_higher_is_better_top_value()"
     },
     {
@@ -3834,7 +3888,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L35",
       "id": "test_scoring_engine_testnormalizefactor_test_higher_is_better_bottom_value",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_higher_is_better_bottom_value()"
     },
     {
@@ -3843,7 +3897,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L41",
       "id": "test_scoring_engine_testnormalizefactor_test_lower_is_better_inverts",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_lower_is_better_inverts()"
     },
     {
@@ -3852,7 +3906,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L48",
       "id": "test_scoring_engine_testnormalizefactor_test_lower_is_better_top_raw_value",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_lower_is_better_top_raw_value()"
     },
     {
@@ -3861,7 +3915,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L54",
       "id": "test_scoring_engine_testnormalizefactor_test_none_returns_none",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_none_returns_none()"
     },
     {
@@ -3870,7 +3924,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L59",
       "id": "test_scoring_engine_testnormalizefactor_test_nan_returns_none",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_nan_returns_none()"
     },
     {
@@ -3879,7 +3933,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L64",
       "id": "test_scoring_engine_testnormalizefactor_test_empty_universe_returns_none",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_empty_universe_returns_none()"
     },
     {
@@ -3888,7 +3942,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L69",
       "id": "test_scoring_engine_testnormalizefactor_test_nans_in_universe_excluded",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_nans_in_universe_excluded()"
     },
     {
@@ -3897,7 +3951,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L81",
       "id": "test_scoring_engine_testcalculatepillarscore",
-      "community": 1,
+      "community": 2,
       "norm_label": "testcalculatepillarscore"
     },
     {
@@ -3906,7 +3960,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L84",
       "id": "test_scoring_engine_testcalculatepillarscore_test_averages_valid_scores",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_averages_valid_scores()"
     },
     {
@@ -3915,7 +3969,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L90",
       "id": "test_scoring_engine_testcalculatepillarscore_test_excludes_none_values",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_excludes_none_values()"
     },
     {
@@ -3924,7 +3978,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L96",
       "id": "test_scoring_engine_testcalculatepillarscore_test_all_none_returns_none",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_all_none_returns_none()"
     },
     {
@@ -3933,7 +3987,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L102",
       "id": "test_scoring_engine_testcalculatepillarscore_test_missing_factor_key_treated_as_none",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_missing_factor_key_treated_as_none()"
     },
     {
@@ -3942,7 +3996,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L112",
       "id": "test_scoring_engine_testcalculateflockscore",
-      "community": 1,
+      "community": 2,
       "norm_label": "testcalculateflockscore"
     },
     {
@@ -3951,7 +4005,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L115",
       "id": "test_scoring_engine_testcalculateflockscore_test_balanced_preset",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_balanced_preset()"
     },
     {
@@ -3960,7 +4014,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L131",
       "id": "test_scoring_engine_testcalculateflockscore_test_renormalization_on_missing_pillar",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_renormalization_on_missing_pillar()"
     },
     {
@@ -3969,7 +4023,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L150",
       "id": "test_scoring_engine_testcalculateflockscore_test_no_data_returns_zero",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_no_data_returns_zero()"
     },
     {
@@ -3978,7 +4032,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L162",
       "id": "test_scoring_engine_testcalculateflockscore_test_single_pillar_available",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_single_pillar_available()"
     },
     {
@@ -3987,7 +4041,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L178",
       "id": "test_scoring_engine_testconfigintegrity",
-      "community": 1,
+      "community": 12,
       "norm_label": "testconfigintegrity"
     },
     {
@@ -3996,7 +4050,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L181",
       "id": "test_scoring_engine_testconfigintegrity_test_factor_direction_covers_all_16_factors",
-      "community": 1,
+      "community": 12,
       "norm_label": ".test_factor_direction_covers_all_16_factors()"
     },
     {
@@ -4005,7 +4059,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L185",
       "id": "test_scoring_engine_testconfigintegrity_test_all_pillar_factors_exist_in_direction_map",
-      "community": 1,
+      "community": 12,
       "norm_label": ".test_all_pillar_factors_exist_in_direction_map()"
     },
     {
@@ -4014,7 +4068,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L193",
       "id": "test_scoring_engine_testconfigintegrity_test_no_orphan_factors",
-      "community": 1,
+      "community": 12,
       "norm_label": ".test_no_orphan_factors()"
     },
     {
@@ -4023,7 +4077,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L201",
       "id": "test_scoring_engine_testconfigintegrity_test_no_duplicate_factors_across_pillars",
-      "community": 1,
+      "community": 12,
       "norm_label": ".test_no_duplicate_factors_across_pillars()"
     },
     {
@@ -4032,7 +4086,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L209",
       "id": "test_scoring_engine_testconfigintegrity_test_preset_weights_sum_to_one",
-      "community": 1,
+      "community": 12,
       "norm_label": ".test_preset_weights_sum_to_one()"
     },
     {
@@ -4041,7 +4095,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L215",
       "id": "test_scoring_engine_testconfigintegrity_test_preset_weights_cover_all_pillars",
-      "community": 1,
+      "community": 12,
       "norm_label": ".test_preset_weights_cover_all_pillars()"
     },
     {
@@ -4050,7 +4104,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L227",
       "id": "test_scoring_engine_testscoreallstocks",
-      "community": 1,
+      "community": 2,
       "norm_label": "testscoreallstocks"
     },
     {
@@ -4059,7 +4113,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L230",
       "id": "test_scoring_engine_testscoreallstocks_test_empty_dataframe_returns_empty",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_empty_dataframe_returns_empty()"
     },
     {
@@ -4068,7 +4122,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L235",
       "id": "test_scoring_engine_testscoreallstocks_test_output_shape",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_output_shape()"
     },
     {
@@ -4077,7 +4131,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L247",
       "id": "test_scoring_engine_testscoreallstocks_test_higher_roe_gets_higher_profitability_score",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_higher_roe_gets_higher_profitability_score()"
     },
     {
@@ -4086,7 +4140,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L260",
       "id": "test_scoring_engine_testscoreallstocks_test_lower_pe_gets_higher_valuation_score",
-      "community": 1,
+      "community": 2,
       "norm_label": ".test_lower_pe_gets_higher_valuation_score()"
     },
     {
@@ -4094,7 +4148,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L1",
-      "community": 1,
+      "community": 2,
       "norm_label": "tests for flock score scoring engine \u2014 pure math layer.  no mocking needed. thes",
       "id": "test_scoring_engine_rationale_1"
     },
@@ -4103,7 +4157,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L27",
-      "community": 1,
+      "community": 2,
       "norm_label": "tests for percentile-rank normalization.",
       "id": "test_scoring_engine_rationale_27"
     },
@@ -4112,7 +4166,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L30",
-      "community": 1,
+      "community": 2,
       "norm_label": "highest value in universe should get ~100 percentile.",
       "id": "test_scoring_engine_rationale_30"
     },
@@ -4121,7 +4175,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L36",
-      "community": 1,
+      "community": 2,
       "norm_label": "lowest value gets lowest percentile.",
       "id": "test_scoring_engine_rationale_36"
     },
@@ -4130,7 +4184,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L42",
-      "community": 1,
+      "community": 2,
       "norm_label": "when lower is better, low raw value \u2192 high percentile.",
       "id": "test_scoring_engine_rationale_42"
     },
@@ -4139,7 +4193,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L49",
-      "community": 1,
+      "community": 2,
       "norm_label": "when lower is better, highest raw value \u2192 lowest score.",
       "id": "test_scoring_engine_rationale_49"
     },
@@ -4148,7 +4202,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L55",
-      "community": 1,
+      "community": 2,
       "norm_label": "none ticker value returns none.",
       "id": "test_scoring_engine_rationale_55"
     },
@@ -4157,7 +4211,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L60",
-      "community": 1,
+      "community": 2,
       "norm_label": "nan ticker value returns none.",
       "id": "test_scoring_engine_rationale_60"
     },
@@ -4166,7 +4220,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L65",
-      "community": 1,
+      "community": 2,
       "norm_label": "empty universe array returns none.",
       "id": "test_scoring_engine_rationale_65"
     },
@@ -4175,7 +4229,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L70",
-      "community": 1,
+      "community": 2,
       "norm_label": "nan values in universe are excluded from ranking.",
       "id": "test_scoring_engine_rationale_70"
     },
@@ -4184,7 +4238,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L82",
-      "community": 1,
+      "community": 2,
       "norm_label": "tests for pillar aggregation.",
       "id": "test_scoring_engine_rationale_82"
     },
@@ -4193,7 +4247,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L85",
-      "community": 1,
+      "community": 2,
       "norm_label": "average of valid factor percentiles.",
       "id": "test_scoring_engine_rationale_85"
     },
@@ -4202,7 +4256,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L91",
-      "community": 1,
+      "community": 2,
       "norm_label": "none factors excluded from average.",
       "id": "test_scoring_engine_rationale_91"
     },
@@ -4211,7 +4265,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L97",
-      "community": 1,
+      "community": 2,
       "norm_label": "all-none pillar \u2192 none.",
       "id": "test_scoring_engine_rationale_97"
     },
@@ -4220,7 +4274,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L103",
-      "community": 1,
+      "community": 2,
       "norm_label": "factor not in dict treated as missing.",
       "id": "test_scoring_engine_rationale_103"
     },
@@ -4229,7 +4283,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L113",
-      "community": 1,
+      "community": 2,
       "norm_label": "tests for final flock score calculation.",
       "id": "test_scoring_engine_rationale_113"
     },
@@ -4238,7 +4292,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L116",
-      "community": 1,
+      "community": 2,
       "norm_label": "correct weighted sum with balanced weights.",
       "id": "test_scoring_engine_rationale_116"
     },
@@ -4247,7 +4301,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L132",
-      "community": 1,
+      "community": 2,
       "norm_label": "weight redistribution when a pillar is none.",
       "id": "test_scoring_engine_rationale_132"
     },
@@ -4256,7 +4310,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L151",
-      "community": 1,
+      "community": 2,
       "norm_label": "all pillars none \u2192 0.0.",
       "id": "test_scoring_engine_rationale_151"
     },
@@ -4265,7 +4319,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L163",
-      "community": 1,
+      "community": 2,
       "norm_label": "only one pillar present \u2192 that pillar's score is the flock score.",
       "id": "test_scoring_engine_rationale_163"
     },
@@ -4274,7 +4328,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L179",
-      "community": 1,
+      "community": 12,
       "norm_label": "validate that scoring config is complete and consistent.",
       "id": "test_scoring_engine_rationale_179"
     },
@@ -4283,7 +4337,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L182",
-      "community": 1,
+      "community": 12,
       "norm_label": "all 16 factors must be in factor_direction.",
       "id": "test_scoring_engine_rationale_182"
     },
@@ -4292,7 +4346,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L186",
-      "community": 1,
+      "community": 12,
       "norm_label": "every factor in pillars must have a direction in factor_direction.",
       "id": "test_scoring_engine_rationale_186"
     },
@@ -4301,7 +4355,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L194",
-      "community": 1,
+      "community": 12,
       "norm_label": "every factor in factor_direction must be assigned to exactly one pillar.",
       "id": "test_scoring_engine_rationale_194"
     },
@@ -4310,7 +4364,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L202",
-      "community": 1,
+      "community": 12,
       "norm_label": "no factor should appear in multiple pillars.",
       "id": "test_scoring_engine_rationale_202"
     },
@@ -4319,7 +4373,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L210",
-      "community": 1,
+      "community": 12,
       "norm_label": "each preset's weights must sum to 1.0.",
       "id": "test_scoring_engine_rationale_210"
     },
@@ -4328,7 +4382,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L216",
-      "community": 1,
+      "community": 12,
       "norm_label": "each preset must have weights for all 5 pillars.",
       "id": "test_scoring_engine_rationale_216"
     },
@@ -4337,7 +4391,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L228",
-      "community": 1,
+      "community": 2,
       "norm_label": "tests for the batch scoring entry point.",
       "id": "test_scoring_engine_rationale_228"
     },
@@ -4346,7 +4400,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L231",
-      "community": 1,
+      "community": 2,
       "norm_label": "empty input \u2192 empty output.",
       "id": "test_scoring_engine_rationale_231"
     },
@@ -4355,7 +4409,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L236",
-      "community": 1,
+      "community": 2,
       "norm_label": "output has correct columns for 2 stocks.",
       "id": "test_scoring_engine_rationale_236"
     },
@@ -4364,7 +4418,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L248",
-      "community": 1,
+      "community": 2,
       "norm_label": "stock with higher roe should rank higher on profitability pillar.",
       "id": "test_scoring_engine_rationale_248"
     },
@@ -4373,7 +4427,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_scoring_engine.py",
       "source_location": "L261",
-      "community": 1,
+      "community": 2,
       "norm_label": "stock with lower p/e should rank higher on valuation pillar.",
       "id": "test_scoring_engine_rationale_261"
     },
@@ -4383,7 +4437,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_tests_services_test_score_calculator_py",
-      "community": 9,
+      "community": 1,
       "norm_label": "test_score_calculator.py"
     },
     {
@@ -4392,7 +4446,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L16",
       "id": "test_score_calculator_testloadfundamentals",
-      "community": 9,
+      "community": 1,
       "norm_label": "testloadfundamentals"
     },
     {
@@ -4401,7 +4455,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L20",
       "id": "test_score_calculator_test_returns_empty_when_no_data",
-      "community": 9,
+      "community": 1,
       "norm_label": "test_returns_empty_when_no_data()"
     },
     {
@@ -4410,7 +4464,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L32",
       "id": "test_score_calculator_test_loads_current_records",
-      "community": 9,
+      "community": 1,
       "norm_label": "test_loads_current_records()"
     },
     {
@@ -4419,7 +4473,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L68",
       "id": "test_score_calculator_testsavescoresscd2",
-      "community": 9,
+      "community": 1,
       "norm_label": "testsavescoresscd2"
     },
     {
@@ -4428,7 +4482,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L72",
       "id": "test_score_calculator_test_creates_new_score",
-      "community": 9,
+      "community": 1,
       "norm_label": "test_creates_new_score()"
     },
     {
@@ -4437,7 +4491,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L107",
       "id": "test_score_calculator_test_skips_unchanged_score",
-      "community": 9,
+      "community": 1,
       "norm_label": "test_skips_unchanged_score()"
     },
     {
@@ -4446,7 +4500,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L152",
       "id": "test_score_calculator_test_updates_changed_score",
-      "community": 9,
+      "community": 1,
       "norm_label": "test_updates_changed_score()"
     },
     {
@@ -4454,7 +4508,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L1",
-      "community": 9,
+      "community": 1,
       "norm_label": "tests for flock score calculator \u2014 db integration layer.  uses mocked asyncsessi",
       "id": "test_score_calculator_rationale_1"
     },
@@ -4463,7 +4517,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L17",
-      "community": 9,
+      "community": 1,
       "norm_label": "tests for loading current fundamentals from the database.",
       "id": "test_score_calculator_rationale_17"
     },
@@ -4472,7 +4526,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L21",
-      "community": 9,
+      "community": 1,
       "norm_label": "empty db \u2192 empty dataframe.",
       "id": "test_score_calculator_rationale_21"
     },
@@ -4481,7 +4535,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L33",
-      "community": 9,
+      "community": 1,
       "norm_label": "should load all current fundamental records into dataframe.",
       "id": "test_score_calculator_rationale_33"
     },
@@ -4490,7 +4544,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L69",
-      "community": 9,
+      "community": 1,
       "norm_label": "tests for scd2 score persistence.",
       "id": "test_score_calculator_rationale_69"
     },
@@ -4499,7 +4553,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L73",
-      "community": 9,
+      "community": 1,
       "norm_label": "first score for a stock \u2192 insert.",
       "id": "test_score_calculator_rationale_73"
     },
@@ -4508,7 +4562,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L108",
-      "community": 9,
+      "community": 1,
       "norm_label": "same scores \u2192 no insert, count as unchanged.",
       "id": "test_score_calculator_rationale_108"
     },
@@ -4517,7 +4571,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_score_calculator.py",
       "source_location": "L153",
-      "community": 9,
+      "community": 1,
       "norm_label": "changed scores \u2192 close old record, insert new.",
       "id": "test_score_calculator_rationale_153"
     },
@@ -4527,7 +4581,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L1",
       "id": "home_shades_documents_claude_projects_flock_backend_tests_services_test_monte_carlo_py",
-      "community": 8,
+      "community": 10,
       "norm_label": "test_monte_carlo.py"
     },
     {
@@ -4536,7 +4590,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L23",
       "id": "test_monte_carlo_make_price_series",
-      "community": 8,
+      "community": 10,
       "norm_label": "_make_price_series()"
     },
     {
@@ -4545,7 +4599,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L34",
       "id": "test_monte_carlo_make_price_dataframe",
-      "community": 8,
+      "community": 10,
       "norm_label": "_make_price_dataframe()"
     },
     {
@@ -4554,7 +4608,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L53",
       "id": "test_monte_carlo_testestimatereturnparameters",
-      "community": 8,
+      "community": 10,
       "norm_label": "testestimatereturnparameters"
     },
     {
@@ -4563,7 +4617,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L56",
       "id": "test_monte_carlo_testestimatereturnparameters_test_returns_tuple_of_floats",
-      "community": 8,
+      "community": 10,
       "norm_label": ".test_returns_tuple_of_floats()"
     },
     {
@@ -4572,7 +4626,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L63",
       "id": "test_monte_carlo_testestimatereturnparameters_test_positive_volatility",
-      "community": 8,
+      "community": 10,
       "norm_label": ".test_positive_volatility()"
     },
     {
@@ -4581,7 +4635,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L69",
       "id": "test_monte_carlo_testestimatereturnparameters_test_reasonable_annual_return",
-      "community": 8,
+      "community": 10,
       "norm_label": ".test_reasonable_annual_return()"
     },
     {
@@ -4590,7 +4644,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L76",
       "id": "test_monte_carlo_testestimatereturnparameters_test_raises_on_insufficient_data",
-      "community": 8,
+      "community": 10,
       "norm_label": ".test_raises_on_insufficient_data()"
     },
     {
@@ -4599,7 +4653,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L82",
       "id": "test_monte_carlo_testestimatereturnparameters_test_raises_on_empty_series",
-      "community": 8,
+      "community": 10,
       "norm_label": ".test_raises_on_empty_series()"
     },
     {
@@ -4608,7 +4662,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L91",
       "id": "test_monte_carlo_testbuildcovariancematrix",
-      "community": 8,
+      "community": 10,
       "norm_label": "testbuildcovariancematrix"
     },
     {
@@ -4617,7 +4671,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L94",
       "id": "test_monte_carlo_testbuildcovariancematrix_test_output_shape",
-      "community": 8,
+      "community": 10,
       "norm_label": ".test_output_shape()"
     },
     {
@@ -4626,7 +4680,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L100",
       "id": "test_monte_carlo_testbuildcovariancematrix_test_symmetric",
-      "community": 8,
+      "community": 10,
       "norm_label": ".test_symmetric()"
     },
     {
@@ -4635,7 +4689,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L106",
       "id": "test_monte_carlo_testbuildcovariancematrix_test_positive_diagonal",
-      "community": 8,
+      "community": 10,
       "norm_label": ".test_positive_diagonal()"
     },
     {
@@ -4644,7 +4698,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L112",
       "id": "test_monte_carlo_testbuildcovariancematrix_test_raises_on_single_asset",
-      "community": 8,
+      "community": 10,
       "norm_label": ".test_raises_on_single_asset()"
     },
     {
@@ -4653,7 +4707,7 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L118",
       "id": "test_monte_carlo_testbuildcovariancematrix_test_raises_on_insufficient_data",
-      "community": 8,
+      "community": 10,
       "norm_label": ".test_raises_on_insufficient_data()"
     },
     {
@@ -4823,7 +4877,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L1",
-      "community": 8,
+      "community": 10,
       "norm_label": "tests for monte carlo simulation engine.  all tests are pure math \u2014 no mocking n",
       "id": "test_monte_carlo_rationale_1"
     },
@@ -4832,7 +4886,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L24",
-      "community": 8,
+      "community": 10,
       "norm_label": "generate a synthetic daily price series with ~12% annual return.",
       "id": "test_monte_carlo_rationale_24"
     },
@@ -4841,7 +4895,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L35",
-      "community": 8,
+      "community": 10,
       "norm_label": "generate synthetic prices for 3 correlated assets.",
       "id": "test_monte_carlo_rationale_35"
     },
@@ -4850,7 +4904,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L54",
-      "community": 8,
+      "community": 10,
       "norm_label": "tests for historical return/vol estimation.",
       "id": "test_monte_carlo_rationale_54"
     },
@@ -4859,7 +4913,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L57",
-      "community": 8,
+      "community": 10,
       "norm_label": "should return (annual_return, annual_volatility).",
       "id": "test_monte_carlo_rationale_57"
     },
@@ -4868,7 +4922,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L64",
-      "community": 8,
+      "community": 10,
       "norm_label": "volatility must always be positive.",
       "id": "test_monte_carlo_rationale_64"
     },
@@ -4877,7 +4931,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L70",
-      "community": 8,
+      "community": 10,
       "norm_label": "estimated return should be in a reasonable range for synthetic data.",
       "id": "test_monte_carlo_rationale_70"
     },
@@ -4886,7 +4940,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L77",
-      "community": 8,
+      "community": 10,
       "norm_label": "should raise valueerror if less than min_years of data.",
       "id": "test_monte_carlo_rationale_77"
     },
@@ -4895,7 +4949,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L83",
-      "community": 8,
+      "community": 10,
       "norm_label": "should raise valueerror on empty input.",
       "id": "test_monte_carlo_rationale_83"
     },
@@ -4904,7 +4958,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L92",
-      "community": 8,
+      "community": 10,
       "norm_label": "tests for covariance matrix construction.",
       "id": "test_monte_carlo_rationale_92"
     },
@@ -4913,7 +4967,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L95",
-      "community": 8,
+      "community": 10,
       "norm_label": "should return n\u00d7n matrix for n assets.",
       "id": "test_monte_carlo_rationale_95"
     },
@@ -4922,7 +4976,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L101",
-      "community": 8,
+      "community": 10,
       "norm_label": "covariance matrix must be symmetric.",
       "id": "test_monte_carlo_rationale_101"
     },
@@ -4931,7 +4985,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L107",
-      "community": 8,
+      "community": 10,
       "norm_label": "diagonal (variances) must be positive.",
       "id": "test_monte_carlo_rationale_107"
     },
@@ -4940,7 +4994,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L113",
-      "community": 8,
+      "community": 10,
       "norm_label": "need at least 2 assets.",
       "id": "test_monte_carlo_rationale_113"
     },
@@ -4949,7 +5003,7 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_monte_carlo.py",
       "source_location": "L119",
-      "community": 8,
+      "community": 10,
       "norm_label": "need at least 252 data points.",
       "id": "test_monte_carlo_rationale_119"
     },
@@ -6016,24 +6070,6 @@
       "id": "add_scd2_to_fundamentals_and_flock_scores_rationale_89"
     },
     {
-      "label": "api.js",
-      "file_type": "code",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/frontend/js/api.js",
-      "source_location": "L1",
-      "id": "home_shades_documents_claude_projects_flock_frontend_js_api_js",
-      "community": 20,
-      "norm_label": "api.js"
-    },
-    {
-      "label": "fetchJSON()",
-      "file_type": "code",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/frontend/js/api.js",
-      "source_location": "L9",
-      "id": "api_fetchjson",
-      "community": 20,
-      "norm_label": "fetchjson()"
-    },
-    {
       "label": "format.js",
       "file_type": "code",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/frontend/js/format.js",
@@ -6140,6 +6176,51 @@
       "id": "nav_closemobilenav",
       "community": 19,
       "norm_label": "closemobilenav()"
+    },
+    {
+      "label": "api.js",
+      "file_type": "code",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/frontend/js/api.js",
+      "source_location": "L1",
+      "id": "home_shades_documents_claude_projects_flock_frontend_js_api_js",
+      "community": 20,
+      "norm_label": "api.js"
+    },
+    {
+      "label": "fetchJSON()",
+      "file_type": "code",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/frontend/js/api.js",
+      "source_location": "L9",
+      "id": "api_fetchjson",
+      "community": 20,
+      "norm_label": "fetchjson()"
+    },
+    {
+      "label": "List stocks in the Nifty 200 universe.      Filters by sector and search term (t",
+      "file_type": "rationale",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L20",
+      "community": 1,
+      "norm_label": "list stocks in the nifty 200 universe.      filters by sector and search term (t",
+      "id": "stocks_rationale_20"
+    },
+    {
+      "label": "List all unique sectors in the universe.",
+      "file_type": "rationale",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L54",
+      "community": 1,
+      "norm_label": "list all unique sectors in the universe.",
+      "id": "stocks_rationale_54"
+    },
+    {
+      "label": "Yields an async database session for a single request.      Usage in a route:",
+      "file_type": "rationale",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/db/session.py",
+      "source_location": "L37",
+      "community": 37,
+      "norm_label": "yields an async database session for a single request.      usage in a route:",
+      "id": "session_rationale_37"
     }
   ],
   "links": [
@@ -6178,114 +6259,6 @@
       "source": "main_health_check",
       "target": "main_rationale_38",
       "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L14",
-      "weight": 1.0,
-      "_src": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
-      "_tgt": "stocks_list_stocks",
-      "source": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
-      "target": "stocks_list_stocks",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L53",
-      "weight": 1.0,
-      "_src": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
-      "_tgt": "stocks_list_sectors",
-      "source": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
-      "target": "stocks_list_sectors",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_src": "stocks_rationale_1",
-      "_tgt": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
-      "source": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
-      "target": "stocks_rationale_1",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L20",
-      "weight": 1.0,
-      "_src": "stocks_rationale_20",
-      "_tgt": "stocks_list_stocks",
-      "source": "stocks_list_stocks",
-      "target": "stocks_rationale_20",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L41",
-      "weight": 1.0,
-      "_src": "stocks_list_stocks",
-      "_tgt": "scores_stocklistitem",
-      "source": "stocks_list_stocks",
-      "target": "scores_stocklistitem"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L54",
-      "weight": 1.0,
-      "_src": "stocks_rationale_54",
-      "_tgt": "stocks_list_sectors",
-      "source": "stocks_list_sectors",
-      "target": "stocks_rationale_54",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L8",
-      "weight": 0.8,
-      "_src": "stocks_rationale_1",
-      "_tgt": "scores_stocklistitem",
-      "confidence_score": 0.5,
-      "source": "stocks_rationale_1",
-      "target": "scores_stocklistitem"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L8",
-      "weight": 0.8,
-      "_src": "stocks_rationale_20",
-      "_tgt": "scores_stocklistitem",
-      "confidence_score": 0.5,
-      "source": "stocks_rationale_20",
-      "target": "scores_stocklistitem"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
-      "source_location": "L8",
-      "weight": 0.8,
-      "_src": "stocks_rationale_54",
-      "_tgt": "scores_stocklistitem",
-      "confidence_score": 0.5,
-      "source": "stocks_rationale_54",
-      "target": "scores_stocklistitem"
     },
     {
       "relation": "contains",
@@ -6958,6 +6931,582 @@
       "confidence_score": 0.5,
       "source": "sip_rationale_39",
       "target": "sip_sipresponse"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
+      "_tgt": "stocks_list_stocks",
+      "source": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
+      "target": "stocks_list_stocks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_src": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
+      "_tgt": "stocks_list_sectors",
+      "source": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
+      "target": "stocks_list_sectors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_src": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
+      "_tgt": "stocks_get_stock_fundamentals",
+      "source": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
+      "target": "stocks_get_stock_fundamentals",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L120",
+      "weight": 1.0,
+      "_src": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
+      "_tgt": "stocks_get_stock_score",
+      "source": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
+      "target": "stocks_get_stock_score",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "stocks_rationale_1",
+      "_tgt": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
+      "source": "home_shades_documents_claude_projects_flock_backend_app_api_v1_stocks_py",
+      "target": "stocks_rationale_1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_src": "stocks_rationale_24",
+      "_tgt": "stocks_list_stocks",
+      "source": "stocks_list_stocks",
+      "target": "stocks_rationale_24",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_src": "stocks_list_stocks",
+      "_tgt": "scores_stocklistitem",
+      "source": "stocks_list_stocks",
+      "target": "scores_stocklistitem"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L58",
+      "weight": 1.0,
+      "_src": "stocks_rationale_58",
+      "_tgt": "stocks_list_sectors",
+      "source": "stocks_list_sectors",
+      "target": "stocks_rationale_58",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_src": "stocks_rationale_65",
+      "_tgt": "stocks_get_stock_fundamentals",
+      "source": "stocks_get_stock_fundamentals",
+      "target": "stocks_rationale_65",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L93",
+      "weight": 1.0,
+      "_src": "stocks_get_stock_fundamentals",
+      "_tgt": "scores_fundamentalsresponse",
+      "source": "stocks_get_stock_fundamentals",
+      "target": "scores_fundamentalsresponse"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L121",
+      "weight": 1.0,
+      "_src": "stocks_rationale_121",
+      "_tgt": "stocks_get_stock_score",
+      "source": "stocks_get_stock_score",
+      "target": "stocks_rationale_121",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L144",
+      "weight": 1.0,
+      "_src": "stocks_get_stock_score",
+      "_tgt": "scores_flockscoreresponse",
+      "source": "stocks_get_stock_score",
+      "target": "scores_flockscoreresponse"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L153",
+      "weight": 1.0,
+      "_src": "stocks_get_stock_score",
+      "_tgt": "scores_pillarscores",
+      "source": "stocks_get_stock_score",
+      "target": "scores_pillarscores"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_1",
+      "_tgt": "stock_flockscore",
+      "source": "stocks_rationale_1",
+      "target": "stock_flockscore",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_1",
+      "_tgt": "stock_fundamental",
+      "source": "stocks_rationale_1",
+      "target": "stock_fundamental",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_1",
+      "_tgt": "stock_stock",
+      "source": "stocks_rationale_1",
+      "target": "stock_stock",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_1",
+      "_tgt": "scores_flockscoreresponse",
+      "source": "stocks_rationale_1",
+      "target": "scores_flockscoreresponse",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_1",
+      "_tgt": "scores_fundamentalsresponse",
+      "source": "stocks_rationale_1",
+      "target": "scores_fundamentalsresponse",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_1",
+      "_tgt": "scores_pillarscores",
+      "source": "stocks_rationale_1",
+      "target": "scores_pillarscores",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L8",
+      "weight": 0.8,
+      "_src": "stocks_rationale_1",
+      "_tgt": "scores_stocklistitem",
+      "confidence_score": 0.5,
+      "source": "stocks_rationale_1",
+      "target": "scores_stocklistitem"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_24",
+      "_tgt": "stock_flockscore",
+      "source": "stocks_rationale_24",
+      "target": "stock_flockscore",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_24",
+      "_tgt": "stock_fundamental",
+      "source": "stocks_rationale_24",
+      "target": "stock_fundamental",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_24",
+      "_tgt": "stock_stock",
+      "source": "stocks_rationale_24",
+      "target": "stock_stock",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_24",
+      "_tgt": "scores_flockscoreresponse",
+      "source": "stocks_rationale_24",
+      "target": "scores_flockscoreresponse",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_24",
+      "_tgt": "scores_fundamentalsresponse",
+      "source": "stocks_rationale_24",
+      "target": "scores_fundamentalsresponse",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_24",
+      "_tgt": "scores_pillarscores",
+      "source": "stocks_rationale_24",
+      "target": "scores_pillarscores",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_24",
+      "_tgt": "scores_stocklistitem",
+      "source": "stocks_rationale_24",
+      "target": "scores_stocklistitem",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_58",
+      "_tgt": "stock_flockscore",
+      "source": "stocks_rationale_58",
+      "target": "stock_flockscore",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_58",
+      "_tgt": "stock_fundamental",
+      "source": "stocks_rationale_58",
+      "target": "stock_fundamental",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_58",
+      "_tgt": "stock_stock",
+      "source": "stocks_rationale_58",
+      "target": "stock_stock",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_58",
+      "_tgt": "scores_flockscoreresponse",
+      "source": "stocks_rationale_58",
+      "target": "scores_flockscoreresponse",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_58",
+      "_tgt": "scores_fundamentalsresponse",
+      "source": "stocks_rationale_58",
+      "target": "scores_fundamentalsresponse",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_58",
+      "_tgt": "scores_pillarscores",
+      "source": "stocks_rationale_58",
+      "target": "scores_pillarscores",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_58",
+      "_tgt": "scores_stocklistitem",
+      "source": "stocks_rationale_58",
+      "target": "scores_stocklistitem",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_65",
+      "_tgt": "stock_flockscore",
+      "source": "stocks_rationale_65",
+      "target": "stock_flockscore",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_65",
+      "_tgt": "stock_fundamental",
+      "source": "stocks_rationale_65",
+      "target": "stock_fundamental",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_65",
+      "_tgt": "stock_stock",
+      "source": "stocks_rationale_65",
+      "target": "stock_stock",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_65",
+      "_tgt": "scores_flockscoreresponse",
+      "source": "stocks_rationale_65",
+      "target": "scores_flockscoreresponse",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_65",
+      "_tgt": "scores_fundamentalsresponse",
+      "source": "stocks_rationale_65",
+      "target": "scores_fundamentalsresponse",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_65",
+      "_tgt": "scores_pillarscores",
+      "source": "stocks_rationale_65",
+      "target": "scores_pillarscores",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_65",
+      "_tgt": "scores_stocklistitem",
+      "source": "stocks_rationale_65",
+      "target": "scores_stocklistitem",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_121",
+      "_tgt": "stock_flockscore",
+      "source": "stocks_rationale_121",
+      "target": "stock_flockscore",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_121",
+      "_tgt": "stock_fundamental",
+      "source": "stocks_rationale_121",
+      "target": "stock_fundamental",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "stocks_rationale_121",
+      "_tgt": "stock_stock",
+      "source": "stocks_rationale_121",
+      "target": "stock_stock",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_121",
+      "_tgt": "scores_flockscoreresponse",
+      "source": "stocks_rationale_121",
+      "target": "scores_flockscoreresponse",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_121",
+      "_tgt": "scores_fundamentalsresponse",
+      "source": "stocks_rationale_121",
+      "target": "scores_fundamentalsresponse",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_121",
+      "_tgt": "scores_pillarscores",
+      "source": "stocks_rationale_121",
+      "target": "scores_pillarscores",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "stocks_rationale_121",
+      "_tgt": "scores_stocklistitem",
+      "source": "stocks_rationale_121",
+      "target": "scores_stocklistitem",
+      "confidence_score": 0.5
     },
     {
       "relation": "contains",
@@ -7791,7 +8340,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/db/session.py",
-      "source_location": "L36",
+      "source_location": "L37",
       "weight": 1.0,
       "_src": "home_shades_documents_claude_projects_flock_backend_app_db_session_py",
       "_tgt": "session_get_db",
@@ -7815,12 +8364,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/db/session.py",
-      "source_location": "L37",
+      "source_location": "L38",
       "weight": 1.0,
-      "_src": "session_rationale_37",
+      "_src": "session_rationale_38",
       "_tgt": "session_get_db",
       "source": "session_get_db",
-      "target": "session_rationale_37",
+      "target": "session_rationale_38",
       "confidence_score": 1.0
     },
     {
@@ -11904,6 +12453,18 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_src": "home_shades_documents_claude_projects_flock_backend_app_schemas_scores_py",
+      "_tgt": "scores_fundamentalsresponse",
+      "source": "home_shades_documents_claude_projects_flock_backend_app_schemas_scores_py",
+      "target": "scores_fundamentalsresponse",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
@@ -11961,6 +12522,18 @@
       "_tgt": "basemodel",
       "source": "basemodel",
       "target": "scores_stocklistitem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_src": "scores_fundamentalsresponse",
+      "_tgt": "basemodel",
+      "source": "basemodel",
+      "target": "scores_fundamentalsresponse",
       "confidence_score": 1.0
     },
     {
@@ -12117,6 +12690,42 @@
       "_tgt": "scores_stocklistitem",
       "source": "scores_stocklistitem",
       "target": "scores_rationale_33",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L8",
+      "weight": 0.8,
+      "_src": "stocks_rationale_20",
+      "_tgt": "scores_stocklistitem",
+      "confidence_score": 0.5,
+      "source": "scores_stocklistitem",
+      "target": "stocks_rationale_20"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
+      "source_location": "L8",
+      "weight": 0.8,
+      "_src": "stocks_rationale_54",
+      "_tgt": "scores_stocklistitem",
+      "confidence_score": 0.5,
+      "source": "scores_stocklistitem",
+      "target": "stocks_rationale_54"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_src": "scores_rationale_43",
+      "_tgt": "scores_fundamentalsresponse",
+      "source": "scores_fundamentalsresponse",
+      "target": "scores_rationale_43",
       "confidence_score": 1.0
     },
     {
@@ -22466,18 +23075,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "/home/shades/Documents/Claude_Projects/Flock/frontend/js/api.js",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_src": "home_shades_documents_claude_projects_flock_frontend_js_api_js",
-      "_tgt": "api_fetchjson",
-      "source": "home_shades_documents_claude_projects_flock_frontend_js_api_js",
-      "target": "api_fetchjson",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/frontend/js/format.js",
       "source_location": "L8",
       "weight": 1.0,
@@ -22617,6 +23214,18 @@
       "_tgt": "nav_openmobilenav",
       "source": "nav_togglemobilenav",
       "target": "nav_openmobilenav",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/shades/Documents/Claude_Projects/Flock/frontend/js/api.js",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_src": "home_shades_documents_claude_projects_flock_frontend_js_api_js",
+      "_tgt": "api_fetchjson",
+      "source": "home_shades_documents_claude_projects_flock_frontend_js_api_js",
+      "target": "api_fetchjson",
       "confidence_score": 1.0
     }
   ],
