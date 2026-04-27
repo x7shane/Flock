@@ -109,36 +109,35 @@
 </head>
 <body class="bg-surface font-body text-on-surface flex min-h-screen">
 <!-- SideNavBar -->
-<aside class="h-screen w-64 fixed left-0 top-0 z-50 bg-[#f4f4ea] dark:bg-[#151712] flex flex-col py-10">
-<div class="px-8 mb-12">
-<h1 class="text-3xl font-black text-[#0f5238] dark:text-[#95d4b3] tracking-tighter">Flock</h1>
-<p class="font-manrope uppercase tracking-widest text-[11px] font-bold text-[#404943] mt-1">The Digital Curator</p>
-</div>
-<nav class="flex-1 flex flex-col">
-<a class="text-[#404943] dark:text-[#bfc9c1] py-4 px-8 flex items-center gap-3 font-manrope uppercase tracking-widest text-[11px] font-bold hover:text-[#0f5238] transition-all group" href="/index.html">
-<span class="material-symbols-outlined">home</span>
-<span>Home</span>
-</a>
-<a class="text-[#404943] dark:text-[#bfc9c1] py-4 px-8 flex items-center gap-3 font-manrope uppercase tracking-widest text-[11px] font-bold hover:text-[#0f5238] transition-all group" href="/explorer.html">
-<span class="material-symbols-outlined">search</span>
-<span>Explorer</span>
-</a>
-<a class="text-[#404943] dark:text-[#bfc9c1] py-4 px-8 flex items-center gap-3 font-manrope uppercase tracking-widest text-[11px] font-bold hover:text-[#0f5238] transition-all group" href="/portfolio.html">
-<span class="material-symbols-outlined">pie_chart</span>
-<span>Portfolio</span>
-</a>
-<a class="bg-[#ffffff] dark:bg-[#1a1c16] text-[#0f5238] dark:text-[#95d4b3] rounded-r-full py-4 px-8 flex items-center gap-3 font-manrope uppercase tracking-widest text-[11px] font-bold shadow-sm translate-x-1 duration-300" href="/sip.html">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">savings</span>
-<span>SIP Calculator</span>
-</a>
-</nav>
-<div class="px-8 mt-auto flex items-center gap-3">
-<img alt="Flock Curator" class="w-10 h-10 rounded-full object-cover grayscale" data-alt="Close up portrait of a professional man in a minimal workspace with soft natural light and neutral tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkvyx2U84VE20bsy2HIU2D5bO2T9OIkACMO_RnKpbp4vE6XBbMFzzDqHEdB-_DQcptaALjh9wIXCrpd0vo4n4wxsvs42tpNlXSLcPXBJGBqPt_RSG6-f6SnWm2d6p8LmjCCjAr4ShVW_KSfhZ6jxTCc8D9drDwMobrGQkygvDMgo1i3ZM4bVY-K_zZG2UuR5u4z-BcfuBMD0VmQU4L2tTQIT1cvVxMnxvMU6nleKPeUYRc-LsL0XB6y_XnGmCTObmupSXC4JgsCg"/>
-<div>
-<p class="text-xs font-bold">Curator Profile</p>
-<p class="text-[10px] text-on-surface-variant">Premium Member</p>
-</div>
-</div>
+<aside class="h-screen w-64 fixed left-0 top-0 z-50 bg-surface-container-low flex flex-col py-10">
+  <div class="px-8 mb-10">
+    <h1 class="text-3xl font-black text-primary font-headline tracking-tighter">Flock</h1>
+    <p class="uppercase tracking-widest text-[10px] font-bold text-on-surface-variant mt-1">Digital Curator</p>
+  </div>
+  <nav class="flex-1 flex flex-col">
+    <a href="/index.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
+      <span class="material-symbols-outlined">home</span><span>Home</span>
+    </a>
+    <a href="/explorer.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
+      <span class="material-symbols-outlined">search</span><span>Explorer</span>
+    </a>
+    <a href="/portfolio.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
+      <span class="material-symbols-outlined">pie_chart</span><span>Portfolio</span>
+    </a>
+    <!-- Active -->
+    <a href="/sip.html" class="bg-surface-container-lowest text-primary py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold shadow-sm">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">trending_up</span><span>SIP Calculator</span>
+    </a>
+  </nav>
+  <div class="px-8 mt-auto border-t border-outline-variant/20 pt-6 flex items-center gap-3">
+    <div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center">
+      <span class="material-symbols-outlined text-sm">person</span>
+    </div>
+    <div>
+      <p class="text-xs font-bold">Account</p>
+      <p class="text-[10px] text-on-surface-variant">Premium Curator</p>
+    </div>
+  </div>
 </aside>
 <div class="flex-1 ml-64 min-h-screen flex flex-col">
 <!-- TopNavBar -->
@@ -193,20 +192,32 @@
 </div>
 <input id="sip-return" class="w-full h-1" max="30" min="5" type="range" value="12" oninput="document.getElementById('return-val').textContent=this.value+'%'"/>
 </div>
-<!-- Toggles Grid -->
-<div class="grid grid-cols-2 gap-4 pt-4">
-<div class="bg-surface-container-high p-4 rounded-xl flex items-center justify-between">
-<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Inflation (6%)</span>
-<button class="w-10 h-5 bg-primary rounded-full relative flex items-center px-1">
-<div class="w-3 h-3 bg-white rounded-full ml-auto"></div>
-</button>
+<!-- Inflation Slider -->
+<div class="space-y-4">
+  <div class="flex justify-between items-center">
+    <label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Inflation Rate</label>
+    <span id="inflation-val" class="font-headline font-bold text-primary">6%</span>
+  </div>
+  <input id="sip-inflation" class="w-full h-1" max="10" min="2" step="0.5" type="range" value="6" oninput="document.getElementById('inflation-val').textContent=this.value+'%'"/>
+  <p class="text-[10px] text-on-surface-variant">Adjusts for purchasing power erosion. India's average CPI is ~5–6%.</p>
 </div>
-<div class="bg-surface-container-high p-4 rounded-xl flex items-center justify-between">
-<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Step-up (+10%)</span>
-<button class="w-10 h-5 bg-outline-variant rounded-full relative flex items-center px-1">
-<div class="w-3 h-3 bg-white rounded-full"></div>
-</button>
-</div>
+<!-- Step-up Slider -->
+<div class="space-y-4">
+  <div class="flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Annual Step-up</label>
+      <div class="relative group">
+        <span class="material-symbols-outlined text-sm text-on-surface-variant cursor-help">help_outline</span>
+        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-on-surface text-surface text-[11px] leading-relaxed p-3 rounded-xl shadow-xl opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-20">
+          <strong>Step-up</strong> means increasing your monthly SIP by this % every year.<br/><br/>
+          Example: ₹10,000/month at 10% step-up → ₹11,000 in Year 2 → ₹12,100 in Year 3. Mimics salary growth and accelerates wealth building significantly.
+        </div>
+      </div>
+    </div>
+    <span id="stepup-val" class="font-headline font-bold text-primary">0%</span>
+  </div>
+  <input id="sip-stepup" class="w-full h-1" max="30" min="0" step="1" type="range" value="0" oninput="document.getElementById('stepup-val').textContent=this.value+'%'"/>
+  <p class="text-[10px] text-on-surface-variant">Set to 0 for a flat SIP. Try 10–15% to match typical annual salary increments.</p>
 </div>
 <!-- Primary CTA -->
 <button id="calc-btn" onclick="calculate()" class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-5 rounded-xl font-headline font-bold text-lg flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-primary/10">
@@ -335,10 +346,7 @@ let growthChart = null;
       document.getElementById('return-val').textContent = this.value + '%';
     });
     document.getElementById('sip-horizon').addEventListener('input', function() {
-      document.getElementById('horizon-val').textContent = this.value + ' years';
-    });
-    document.getElementById('sip-stepup').addEventListener('input', function() {
-      document.getElementById('stepup-val').textContent = this.value + '%';
+      document.getElementById('horizon-val').textContent = this.value + ' Years';
     });
 
     async function calculate() {
@@ -348,33 +356,36 @@ let growthChart = null;
       const amount = parseFloat(document.getElementById('sip-amount').value) || 10000;
       const annualReturn = parseFloat(document.getElementById('sip-return').value) / 100;
       const years = parseInt(document.getElementById('sip-horizon').value) || 10;
-      const stepUp = parseFloat(document.getElementById('sip-stepup').value) || 0;
+      const stepUp = parseFloat(document.getElementById('sip-stepup')?.value) || 0;
+      const inflation = parseFloat(document.getElementById('sip-inflation')?.value) || 6;
 
       try {
-        const result = await SipAPI.calculate({
-          monthly_amount: amount,
-          expected_annual_return: annualReturn,
-          time_horizon_years: years,
-          annual_step_up_pct: stepUp,
-        });
-        renderResults(result);
+        const result = await SipAPI.calculate(amount, annualReturn, years, stepUp / 100);
+        renderResults(result, inflation);
 
-        // Also fetch comparison
-        const compare = await SipAPI.compare({
-          monthly_amount: amount,
-          time_horizon_years: years,
-        });
-        renderComparison(compare.scenarios, annualReturn);
+
+        // Fetch comparison scenarios
+        try {
+          const compare = await SipAPI.compare({
+            monthly_amount: amount,
+            time_horizon_years: years,
+            return_scenarios: [0.08, 0.10, 0.12, 0.14, 0.16],
+          });
+          appendComparison(compare.scenarios, annualReturn);
+        } catch(_) { /* Comparison is non-critical, ignore */ }
+
       } catch (e) {
         document.getElementById('results-panel').innerHTML =
-          `<div class="card-flat" style="color:var(--danger);padding:24px;">Error: ${e.message}</div>`;
+          `<div class="bg-error-container text-error p-6 rounded-xl">Error: ${e.message}</div>`;
       } finally {
-        btn.disabled = false; btn.textContent = 'Calculate →';
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-symbols-outlined">trending_up</span> Calculate →';
       }
     }
 
-    function renderResults(r) {
+    function renderResults(r, inflation=6) {
       const gainColor = r.wealth_gain_inr > 0 ? 'text-success' : 'text-danger';
+      const realValue = r.future_value_inr / Math.pow(1 + inflation/100, parseInt(document.getElementById('sip-horizon').value)||10);
       const panel = document.getElementById('results-panel');
       panel.innerHTML = `
         <div class="sip-results">
@@ -387,6 +398,13 @@ let growthChart = null;
             <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="stat-value ${gainColor}">${formatINRFull(r.wealth_gain_inr)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Wealth Gain</div></div>
             <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1">${formatPctUnsigned(r.absolute_return_pct,1)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Absolute Return</div></div>
             <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1">${formatPctUnsigned(r.effective_cagr_pct,1)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Effective CAGR</div></div>
+          </div>
+          <div class="bg-surface-container-low p-4 rounded-xl mt-2 flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-primary mt-0.5">trending_down</span>
+            <div>
+              <p class="font-bold text-on-surface">Real Value (inflation-adjusted)</p>
+              <p class="text-on-surface-variant text-xs mt-1">At ${inflation}% inflation, your <strong>${formatINRFull(r.future_value_inr)}</strong> will have the purchasing power of <strong>${formatINRFull(Math.round(realValue))}</strong> in today's money.</p>
+            </div>
           </div>
           ${r.yearly_breakdown ? renderYearlyBreakdown(r.yearly_breakdown) : ''}
         </div>
@@ -414,21 +432,41 @@ let growthChart = null;
       `;
     }
 
-    function renderComparison(scenarios, selectedReturn) {
-      const section = document.getElementById('compare-section');
-      section.classList.remove('hidden');
-      const tbody = document.getElementById('compare-tbody');
-      tbody.innerHTML = scenarios.map(s => {
+    function appendComparison(scenarios, selectedReturn) {
+      const panel = document.getElementById('results-panel');
+      const existing = document.getElementById('compare-table-section');
+      if (existing) existing.remove();
+
+      const rows = scenarios.map(s => {
         const isSelected = Math.abs(s.expected_annual_return_pct / 100 - selectedReturn) < 0.005;
         return `
-          <tr class="${isSelected ? 'highlight' : ''}">
-            <td>${formatPctUnsigned(s.expected_annual_return_pct,0)} ${isSelected ? '<span class="return-badge" style="background:var(--accent-subtle);color:var(--accent-primary);">Selected</span>' : ''}</td>
-            <td>${formatINR(s.total_invested_inr)}</td>
-            <td style="color:var(--text-primary);font-weight:600;">${formatINR(s.future_value_inr)}</td>
-            <td class="text-success">${formatINR(s.wealth_gain_inr)}</td>
-            <td>${formatPctUnsigned(s.effective_cagr_pct)}</td>
+          <tr class="hover:bg-surface-container-low transition-colors ${isSelected ? 'bg-primary-fixed/30' : ''}">
+            <td class="py-3 px-4 font-bold text-sm">${s.expected_annual_return_pct.toFixed(0)}%${isSelected ? ' <span class="ml-2 px-2 py-0.5 bg-primary text-white rounded-full text-[10px] font-bold">SELECTED</span>' : ''}</td>
+            <td class="py-3 px-4 text-sm">${formatINR ? formatINR(s.total_invested_inr) : '₹'+s.total_invested_inr}</td>
+            <td class="py-3 px-4 text-sm font-bold text-on-surface">${formatINR ? formatINR(s.future_value_inr) : '₹'+s.future_value_inr}</td>
+            <td class="py-3 px-4 text-sm text-primary font-bold">${formatINR ? formatINR(s.wealth_gain_inr) : '₹'+s.wealth_gain_inr}</td>
           </tr>`;
       }).join('');
+
+      const section = document.createElement('div');
+      section.id = 'compare-table-section';
+      section.className = 'space-y-4 mt-6';
+      section.innerHTML = `
+        <h4 class="font-headline text-lg font-bold">Return Scenario Comparison</h4>
+        <div class="overflow-hidden bg-surface-container-lowest rounded-xl">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-surface-container text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+                <th class="py-3 px-4">Return Rate</th>
+                <th class="py-3 px-4">Total Invested</th>
+                <th class="py-3 px-4">Future Value</th>
+                <th class="py-3 px-4">Wealth Gain</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>`;
+      panel.appendChild(section);
     }
 </script>
 </body></html>

@@ -1,7 +1,7 @@
-# Graph Report - /home/shades/Documents/Claude_Projects/Flock  (2026-04-20)
+# Graph Report - /home/shades/Documents/Claude_Projects/Flock  (2026-04-25)
 
 ## Corpus Check
-- 57 files · ~30,855 words
+- 57 files · ~86,825 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -61,16 +61,16 @@
 10. `StockPrice` - 31 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Gold price data.  - GoldPrice: Daily gold prices in INR per gram` --uses--> `Base`  [INFERRED]
-  /home/shades/Documents/Claude_Projects/Flock/backend/app/models/gold.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py
-- `Daily Gold prices (INR per gram).` --uses--> `Base`  [INFERRED]
-  /home/shades/Documents/Claude_Projects/Flock/backend/app/models/gold.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py
-- `Audit log for data pipeline executions.` --uses--> `Base`  [INFERRED]
-  /home/shades/Documents/Claude_Projects/Flock/backend/app/models/pipeline.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py
-- `If no existing fundamental, a new record with is_current=True is created.` --uses--> `Fundamental`  [INFERRED]
-  /home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py
-- `If data hasn't changed, no new record should be inserted.` --uses--> `Fundamental`  [INFERRED]
-  /home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py
+- `Base` --uses--> `Gold price data.  - GoldPrice: Daily gold prices in INR per gram`  [INFERRED]
+  /home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/models/gold.py
+- `Base` --uses--> `Daily Gold prices (INR per gram).`  [INFERRED]
+  /home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/models/gold.py
+- `Base` --uses--> `Audit log for data pipeline executions.`  [INFERRED]
+  /home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/models/pipeline.py
+- `Fundamental` --uses--> `If no existing fundamental, a new record with is_current=True is created.`  [INFERRED]
+  /home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py → /home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py
+- `Fundamental` --uses--> `If data hasn't changed, no new record should be inserted.`  [INFERRED]
+  /home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py → /home/shades/Documents/Claude_Projects/Flock/backend/tests/services/test_fundamentals_fetcher.py
 
 ## Communities
 

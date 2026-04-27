@@ -22,6 +22,7 @@ engine = create_async_engine(
     pool_size=10,
     max_overflow=20,
     pool_pre_ping=True,  # Verify connections are alive before using
+    connect_args={"timeout": 5},  # Fail fast if DB is unreachable (prevents hangs)
 )
 
 # ── Session Factory ──────────────────────────────────────

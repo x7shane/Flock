@@ -52,3 +52,6 @@ secrets.json
 credentials.json
 key.pem
 # Keep alembic versions
+
+# Graphify — exclude raw JSON (auto-generated, cosmetic churn); keep GRAPH_REPORT.md
+graphify-out/graph.json

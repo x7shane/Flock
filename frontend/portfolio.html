@@ -94,37 +94,35 @@
 </head>
 <body class="bg-surface font-body text-on-surface">
 <!-- SideNavBar -->
-<aside class="h-screen w-64 fixed left-0 top-0 z-50 border-r border-outline-variant/20 bg-surface flex flex-col p-6 space-y-2">
-<div class="mb-10">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-on-primary">
-<span class="material-symbols-outlined text-xl" data-icon="nest_eco_leaf">nest_eco_leaf</span>
-</div>
-<div>
-<h1 class="text-xl font-bold text-primary font-headline">Flock</h1>
-<p class="text-[10px] uppercase tracking-[0.1em] text-on-surface-variant font-label">Wealth Curator</p>
-</div>
-</div>
-</div>
-<nav class="flex-1 space-y-1">
-<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-low transition-all duration-200 rounded-lg group" href="/index.html">
-<span class="material-symbols-outlined">home</span>
-<span class="font-medium text-sm tracking-wide">Home</span>
-</a>
-<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-low transition-all duration-200 rounded-lg group" href="/explorer.html">
-<span class="material-symbols-outlined">search</span>
-<span class="font-medium text-sm tracking-wide">Explorer</span>
-</a>
-<!-- Active -->
-<a class="flex items-center gap-3 bg-surface-container-low text-primary rounded-lg px-4 py-3 font-bold" href="/portfolio.html">
-<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">pie_chart</span>
-<span class="font-medium text-sm tracking-wide">Portfolio Simulator</span>
-</a>
-<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-low transition-all duration-200 rounded-lg group" href="/sip.html">
-<span class="material-symbols-outlined">trending_up</span>
-<span class="font-medium text-sm tracking-wide">SIP Calculator</span>
-</a>
-</nav>
+<aside class="h-screen w-64 fixed left-0 top-0 z-50 bg-surface-container-low flex flex-col py-10">
+  <div class="px-8 mb-10">
+    <h1 class="text-3xl font-black text-primary font-headline tracking-tighter">Flock</h1>
+    <p class="uppercase tracking-widest text-[10px] font-bold text-on-surface-variant mt-1">Digital Curator</p>
+  </div>
+  <nav class="flex-1 flex flex-col">
+    <a href="/index.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
+      <span class="material-symbols-outlined">home</span><span>Home</span>
+    </a>
+    <a href="/explorer.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
+      <span class="material-symbols-outlined">search</span><span>Explorer</span>
+    </a>
+    <!-- Active -->
+    <a href="/portfolio.html" class="bg-surface-container-lowest text-primary py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold shadow-sm">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">pie_chart</span><span>Portfolio</span>
+    </a>
+    <a href="/sip.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
+      <span class="material-symbols-outlined">trending_up</span><span>SIP Calculator</span>
+    </a>
+  </nav>
+  <div class="px-8 mt-auto border-t border-outline-variant/20 pt-6 flex items-center gap-3">
+    <div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center">
+      <span class="material-symbols-outlined text-sm">person</span>
+    </div>
+    <div>
+      <p class="text-xs font-bold">Account</p>
+      <p class="text-[10px] text-on-surface-variant">Premium Curator</p>
+    </div>
+  </div>
 </aside>
 <!-- Main Content Area -->
 <main class="ml-64 min-h-screen">
