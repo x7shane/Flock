@@ -1,10 +1,11 @@
 """
-Stocks API — list Nifty 200 universe.
+Stocks API — list Nifty 200 universe with Flock Scores.
 """
 
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy import select
+from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import aliased
 
 from app.data.nifty200 import NIFTY_200
 from app.db.session import get_db
@@ -20,36 +21,62 @@ async def list_stocks(
     search: str | None = None,
     limit: int = 200,
     offset: int = 0,
+    session: AsyncSession = Depends(get_db),
 ):
     """
-    List stocks in the Nifty 200 universe.
+    List stocks in the Nifty 200 universe with their current Flock Score.
 
-    Filters by sector and search term (ticker or company name).
+    Reads from the database and joins with flock_scores (is_current=True)
+    to include the balanced score. Filters by sector and search term.
     """
-    stocks = NIFTY_200
+    # Build query: stocks LEFT JOIN current flock_scores
+    CurrentScore = aliased(FlockScore)
 
+    query = (
+        select(
+            Stock.id,
+            Stock.ticker,
+            Stock.company_name,
+            Stock.sector,
+            Stock.industry,
+            Stock.is_active,
+            CurrentScore.score_balanced,
+        )
+        .outerjoin(
+            CurrentScore,
+            (CurrentScore.stock_id == Stock.id) & (CurrentScore.is_current == True),  # noqa: E712
+        )
+        .where(Stock.is_active == True)  # noqa: E712
+        .order_by(Stock.id)
+    )
+
+    # Apply filters
     if sector:
-        stocks = [s for s in stocks if s.sector and s.sector.lower() == sector.lower()]
+        query = query.where(func.lower(Stock.sector) == sector.lower())
 
     if search:
-        q = search.lower()
-        stocks = [
-            s for s in stocks
-            if q in s.ticker.lower() or q in s.company_name.lower()
-        ]
+        q = f"%{search.lower()}%"
+        query = query.where(
+            func.lower(Stock.ticker).like(q) | func.lower(Stock.company_name).like(q)
+        )
 
-    total = len(stocks)
-    stocks = stocks[offset: offset + limit]
+    # Pagination
+    query = query.offset(offset).limit(limit)
+
+    result = await session.execute(query)
+    rows = result.all()
 
     return [
         StockListItem(
-            id=i + offset + 1,
-            ticker=s.ticker,
-            company_name=s.company_name,
-            sector=s.sector,
-            industry=s.industry,
+            id=row.id,
+            ticker=row.ticker,
+            company_name=row.company_name,
+            sector=row.sector,
+            industry=row.industry,
+            is_active=row.is_active,
+            flock_score=round(float(row.score_balanced), 1) if row.score_balanced is not None else None,
         )
-        for i, s in enumerate(stocks)
+        for row in rows
     ]
 
 

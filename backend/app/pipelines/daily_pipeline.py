@@ -6,9 +6,11 @@ Orchestrates all daily data fetches:
 - Fundamentals (yfinance with SCD2)
 - MF NAV (mfapi.in)
 - Gold price (external API)
+- Flock Score computation (after data fetches complete)
 """
 
 import asyncio
+import logging
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
@@ -21,13 +23,18 @@ from app.db.session import async_session_factory
 from app.models.mutual_fund import MutualFund
 from app.models.pipeline import PipelineRun
 from app.models.stock import Stock
-from app.services.fundamentals_fetcher import FundamentalsFetcher
-from app.services.gold_fetcher import GoldFetcher
-from app.services.mf_fetcher import MfFetcher
-from app.services.price_fetcher import PriceFetcher
+
+# Import the module-level pipeline functions (NOT the class instances)
+from app.services.fundamentals_fetcher import run_fundamentals_pipeline
+from app.services.gold_fetcher import run_gold_price_pipeline
+from app.services.mf_fetcher import run_mf_nav_pipeline
+from app.services.price_fetcher import run_price_fetch_pipeline
+from app.services.score_calculator import run_scoring_pipeline
 
 if TYPE_CHECKING:
     pass
+
+logger = logging.getLogger(__name__)
 
 
 class DailyPipeline:
@@ -43,6 +50,7 @@ class DailyPipeline:
         - fundamentals_run: PipelineRun for fundamentals
         - mf_nav_run: PipelineRun for MF NAV
         - gold_run: PipelineRun for gold price
+        - scoring_run: PipelineRun for Flock Score computation
     """
 
     def __init__(self, tickers: list[str] | None = None):
@@ -53,10 +61,6 @@ class DailyPipeline:
             tickers: Optional list of tickers. If None, uses Nifty 200.
         """
         self.tickers = tickers or get_tickers()
-        self.price_fetcher = PriceFetcher()
-        self.fundamentals_fetcher = FundamentalsFetcher()
-        self.mf_fetcher = MfFetcher()
-        self.gold_fetcher = GoldFetcher()
 
     async def ensure_stocks_exist(self, session: AsyncSession) -> int:
         """
@@ -97,11 +101,11 @@ class DailyPipeline:
 
     async def run_price_pipeline(self) -> PipelineRun:
         """Run stock price fetch pipeline."""
-        return await self.price_fetcher.run_price_pipeline(self.tickers, days=30)
+        return await run_price_fetch_pipeline(self.tickers, days=30)
 
     async def run_fundamentals_pipeline(self) -> PipelineRun:
         """Run fundamentals fetch pipeline with SCD2."""
-        return await self.fundamentals_fetcher.run_fundamentals_pipeline(self.tickers)
+        return await run_fundamentals_pipeline(self.tickers)
 
     async def run_mf_nav_pipeline(self) -> PipelineRun:
         """Run MF NAV fetch pipeline."""
@@ -123,15 +127,19 @@ class DailyPipeline:
             )
             return run
 
-        return await self.mf_fetcher.run_mf_nav_pipeline(scheme_codes, days=30)
+        return await run_mf_nav_pipeline(scheme_codes, days=30)
 
     async def run_gold_pipeline(self) -> PipelineRun:
         """Run gold price fetch pipeline."""
-        return await self.gold_fetcher.run_gold_price_pipeline()
+        return await run_gold_price_pipeline()
+
+    async def run_scoring(self) -> PipelineRun:
+        """Run Flock Score computation after data fetches complete."""
+        return await run_scoring_pipeline()
 
     async def run(self) -> dict[str, PipelineRun]:
         """
-        Run all daily pipelines concurrently.
+        Run all daily pipelines concurrently, then compute scores.
 
         Returns:
             Dict with PipelineRun for each pipeline type
@@ -140,8 +148,10 @@ class DailyPipeline:
         async with async_session_factory() as session:
             created = await self.ensure_stocks_exist(session)
             await session.commit()
+            if created:
+                logger.info("Created %d new stocks in database", created)
 
-        # Run all pipelines concurrently
+        # Run all data fetch pipelines concurrently
         results = await asyncio.gather(
             self.run_price_pipeline(),
             self.run_fundamentals_pipeline(),
@@ -156,6 +166,7 @@ class DailyPipeline:
 
         for name, result in zip(pipeline_names, results):
             if isinstance(result, Exception):
+                logger.error("Pipeline %s failed: %s", name, result)
                 # Create failed run for exception
                 run = PipelineRun(
                     run_type=name.replace("_run", "_fetch"),
@@ -167,6 +178,21 @@ class DailyPipeline:
             else:
                 run = result
             output[name] = run
+
+        # After data fetches, compute Flock Scores
+        try:
+            scoring_run = await self.run_scoring()
+            output["scoring_run"] = scoring_run
+            logger.info("Scoring pipeline completed: %s", scoring_run.status)
+        except Exception as e:
+            logger.error("Scoring pipeline failed: %s", e)
+            output["scoring_run"] = PipelineRun(
+                run_type="flock_score_compute",
+                started_at=datetime.now(UTC),
+                completed_at=datetime.now(UTC),
+                status="failed",
+                error_message=str(e),
+            )
 
         return output
 

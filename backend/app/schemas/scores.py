@@ -37,6 +37,7 @@ class StockListItem(BaseModel):
     sector: str | None = None
     industry: str | None = None
     is_active: bool = True
+    flock_score: float | None = Field(None, description="Flock balanced score (0-100), None if not yet computed")
 
 
 class FundamentalsResponse(BaseModel):

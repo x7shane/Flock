@@ -94,9 +94,14 @@ class PriceFetcher:
 
             # Reset index to make date a column
             df = df.reset_index()
-            df.columns = [col.lower().replace(" ", "_") for col in df.columns]
 
-            # Rename columns to match our schema
+            # Handle MultiIndex columns (yfinance >= 0.2.37 returns MultiIndex for single tickers)
+            if isinstance(df.columns, pd.MultiIndex):
+                df.columns = [col[0].lower().replace(" ", "_") if isinstance(col, tuple) else str(col).lower().replace(" ", "_") for col in df.columns]
+            else:
+                df.columns = [str(col).lower().replace(" ", "_") for col in df.columns]
+
+            # Normalize column names to match our schema
             column_mapping = {
                 "date": "date",
                 "open": "open",
@@ -104,6 +109,7 @@ class PriceFetcher:
                 "low": "low",
                 "close": "close",
                 "adj_close": "adj_close",
+                "adj close": "adj_close",
                 "volume": "volume",
             }
             df = df.rename(columns=column_mapping)

@@ -536,9 +536,9 @@ function renderTable(stocks, startIndex = 0) {
   }
 
   tbody.innerHTML = stocks.map((s, index) => {
-    const hash = [...s.ticker].reduce((a, c) => a + c.charCodeAt(0), 0);
-    const score = 35 + (hash % 55);
-    const badgeClass = getScoreBadgeClass(score);
+    const score = s.flock_score != null ? Math.round(s.flock_score) : null;
+    const scoreDisplay = score != null ? score : '—';
+    const badgeClass = score != null ? getScoreBadgeClass(score) : 'bg-surface-container text-on-surface-variant';
     const inPortfolio = portfolio.includes(s.ticker);
     const serialNum = startIndex + index + 1;
     return `
@@ -547,7 +547,7 @@ function renderTable(stocks, startIndex = 0) {
         <td class="py-3 font-mono font-bold text-sm text-on-surface border-b border-outline-variant/5">${s.ticker}</td>
         <td class="py-3 text-sm font-medium text-on-surface border-b border-outline-variant/5">${s.company_name}</td>
         <td class="py-3 border-b border-outline-variant/5"><span class="px-2 py-1 bg-surface-container rounded-lg text-[10px] font-bold text-on-surface-variant uppercase">${s.sector || '—'}</span></td>
-        <td class="py-3 border-b border-outline-variant/5 text-center"><span class="px-3 py-1 rounded-full text-xs font-bold ${badgeClass}">${score}</span></td>
+        <td class="py-3 border-b border-outline-variant/5 text-center"><span class="px-3 py-1 rounded-full text-xs font-bold ${badgeClass}">${scoreDisplay}</span></td>
         <td class="py-3 border-b border-outline-variant/5 text-right pr-2">
           <button class="add-btn px-4 py-2 rounded-lg text-sm font-bold transition-all ${inPortfolio ? 'bg-primary text-white' : 'bg-surface-container text-on-surface hover:bg-primary/10'}" onclick="event.stopPropagation(); toggleStock('${s.ticker}', this)" id="btn-${s.ticker}">
             ${inPortfolio ? '✓ Added' : '+ Add'}
