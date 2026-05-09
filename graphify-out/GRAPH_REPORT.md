@@ -1,7 +1,7 @@
 # Graph Report - /home/shades/Documents/Claude_Projects/Flock  (2026-05-10)
 
 ## Corpus Check
-- 62 files · ~96,348 words
+- 62 files · ~100,427 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -68,12 +68,12 @@
   /home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/models/gold.py
 - `Base` --uses--> `Daily Gold prices (INR per gram).`  [INFERRED]
   /home/shades/Documents/Claude_Projects/Flock/backend/app/db/base.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/models/gold.py
-- `Database Initialization Script.  Usage:     python -m scripts.init_db [--seed]` --uses--> `Stock`  [INFERRED]
-  /home/shades/Documents/Claude_Projects/Flock/backend/scripts/init_db.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py
-- `Initialize the database.      1. Run Alembic migrations     2. Optionally seed w` --uses--> `Stock`  [INFERRED]
-  /home/shades/Documents/Claude_Projects/Flock/backend/scripts/init_db.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py
-- `Seed the database with Nifty 200 stocks.` --uses--> `Stock`  [INFERRED]
-  /home/shades/Documents/Claude_Projects/Flock/backend/scripts/init_db.py → /home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py
+- `Stock` --uses--> `Database Initialization Script.  Usage:     python -m scripts.init_db [--seed]`  [INFERRED]
+  /home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py → /home/shades/Documents/Claude_Projects/Flock/backend/scripts/init_db.py
+- `Stock` --uses--> `Initialize the database.      1. Run Alembic migrations     2. Optionally seed w`  [INFERRED]
+  /home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py → /home/shades/Documents/Claude_Projects/Flock/backend/scripts/init_db.py
+- `Stock` --uses--> `Seed the database with Nifty 200 stocks.`  [INFERRED]
+  /home/shades/Documents/Claude_Projects/Flock/backend/app/models/stock.py → /home/shades/Documents/Claude_Projects/Flock/backend/scripts/init_db.py
 
 ## Communities
 

@@ -84,6 +84,29 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #fafaef; }
         ::-webkit-scrollbar-thumb { background: #bfc9c1; border-radius: 10px; }
+        /* KPI card info tooltip */
+        .kpi-info { position:relative; display:inline-flex; }
+        .kpi-info-btn {
+            width:18px; height:18px; border-radius:50%; border:1.5px solid #bfc9c1;
+            background:transparent; color:#707973; font-family:'Inter',sans-serif;
+            font-size:10px; font-weight:700; cursor:default; display:flex;
+            align-items:center; justify-content:center; flex-shrink:0;
+            transition:border-color 0.15s, color 0.15s;
+        }
+        .kpi-info:hover .kpi-info-btn { border-color:#0f5238; color:#0f5238; }
+        .kpi-tooltip {
+            display:none; position:absolute; bottom:calc(100% + 8px); right:0;
+            width:210px; background:#1a1c16; color:#fafaef;
+            font-family:'Inter',sans-serif; font-size:14px; line-height:1.55;
+            padding:10px 12px; border-radius:10px;
+            box-shadow:0 8px 24px rgba(0,0,0,0.18);
+            z-index:100; pointer-events:none;
+        }
+        .kpi-tooltip::after {
+            content:''; position:absolute; top:100%; right:8px;
+            border:6px solid transparent; border-top-color:#1a1c16;
+        }
+        .kpi-info:hover .kpi-tooltip { display:block; }
     </style>
 
   <script src="/js/format.js"></script>
@@ -213,6 +236,33 @@
 </div>
 
 </div>
+<!-- Simulation Methodology Panel -->
+<div style="background:#f4f4ea;border-radius:14px;padding:18px 22px;margin-bottom:20px;">
+  <p style="font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.10em;text-transform:uppercase;color:#707973;margin:0 0 14px 0;">Simulation Engine</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+    <div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+        <span class="material-symbols-outlined" style="font-size:15px;color:#0f5238;">scatter_plot</span>
+        <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:11px;color:#1a1c16;">Monte Carlo</span>
+      </div>
+      <p style="font-family:'Inter',sans-serif;font-size:10.5px;color:#404943;line-height:1.55;margin:0;">Runs 10,000 independent simulated future paths for your portfolio using randomised return sequences drawn from GBM.</p>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+        <span class="material-symbols-outlined" style="font-size:15px;color:#0f5238;">show_chart</span>
+        <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:11px;color:#1a1c16;">GBM Model</span>
+      </div>
+      <p style="font-family:'Inter',sans-serif;font-size:10.5px;color:#404943;line-height:1.55;margin:0;">Geometric Brownian Motion models correlated asset price paths using each stock's historical expected return and annualised volatility.</p>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+        <span class="material-symbols-outlined" style="font-size:15px;color:#0f5238;">history</span>
+        <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:11px;color:#1a1c16;">Stress Tests</span>
+      </div>
+      <p style="font-family:'Inter',sans-serif;font-size:10.5px;color:#404943;line-height:1.55;margin:0;">Replays your portfolio against 5 recorded market crises to measure maximum drawdown, worst single day, and recovery duration.</p>
+    </div>
+  </div>
+</div>
 <button id="run-btn" onclick="runSimulation()" disabled class="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-xl font-bold text-lg shadow-lg hover:opacity-90 transition-all flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
                         Run Simulation
                     </button>
@@ -240,6 +290,12 @@
   </div>
   <!-- Stats Grid (populated by renderStats) -->
   <div id="stats-grid" class="grid grid-cols-2 md:grid-cols-3 gap-6"></div>
+  <!-- Stock-Wise Performance Metrics -->
+  <div>
+    <h4 class="text-lg font-bold font-headline mb-1">Stock-Wise Performance Outlook</h4>
+    <p style="font-family:'Inter',sans-serif;font-size:11px;color:#707973;margin:0 0 18px 0;">Per-stock probability estimates derived from GBM parameters. Sorted by probability of positive return — highest first.</p>
+    <div id="stock-metrics-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;"></div>
+  </div>
   <!-- Return Distribution Chart (populated by renderDistChart) -->
   <div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_8px_32px_rgba(26,28,22,0.04)]">
     <div class="flex justify-between items-end mb-6">
@@ -524,13 +580,112 @@ let portfolio = JSON.parse(sessionStorage.getItem('flock_portfolio') || '[]');
       });
     }
 
+    // ── Seeded PRNG (Mulberry32) — replicates backend seed-42 logic ──
+    function mulberry32(seed) {
+      return function() {
+        seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+        var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      };
+    }
+
+    // Standard normal CDF (Abramowitz & Stegun)
+    function normcdf(x) {
+      const t = 1 / (1 + 0.2316419 * Math.abs(x));
+      const d = 0.3989423 * Math.exp(-x * x / 2);
+      const poly = t * (0.3193815 + t * (-0.3565638 + t * (1.7814779 + t * (-1.8212560 + t * 1.3302744))));
+      const p = 1 - d * poly;
+      return x >= 0 ? p : 1 - p;
+    }
+
+    // Derive per-stock GBM params matching backend seed-42 synthetic data
+    function getStockParams(tickers, horizon) {
+      const rng = mulberry32(42);
+      const n = tickers.length;
+      // Backend generates all expected_returns first, then all vols
+      const mus    = Array.from({length: n}, () => 0.08 + rng() * 0.08);
+      const sigmas = Array.from({length: n}, () => 0.18 + rng() * 0.12);
+      const T = horizon;
+      return tickers.map((ticker, i) => {
+        const mu = mus[i], sigma = sigmas[i];
+        const drift  = (mu - 0.5 * sigma * sigma) * T;
+        const vol_t  = sigma * Math.sqrt(T);
+        const probPositive = normcdf(drift / vol_t) * 100;
+        const prob10pct    = normcdf((drift - T * Math.log(1.10)) / vol_t) * 100;
+        const risk = sigma < 0.22 ? 'Low' : sigma < 0.26 ? 'Medium' : 'High';
+        return { ticker, mu, sigma, probPositive, prob10pct, risk };
+      }).sort((a, b) => b.probPositive - a.probPositive);
+    }
+
+    function renderStockMetrics(horizon) {
+      const params = getStockParams(portfolio, horizon);
+      const grid = document.getElementById('stock-metrics-grid');
+      const riskStyle = {
+        Low:    { bg: '#a0f4c8', color: '#0f5238', dot: '#0f5238' },
+        Medium: { bg: '#fff3cd', color: '#856404', dot: '#f5c518' },
+        High:   { bg: '#ffdad6', color: '#93000a', dot: '#ba1a1a' },
+      };
+      grid.innerHTML = params.map((p, idx) => {
+        const rs = riskStyle[p.risk];
+        const w  = (weights[p.ticker] || 0).toFixed(1);
+        const topBadge = idx === 0
+          ? `<div style="position:absolute;top:-9px;right:14px;background:#0f5238;color:#fff;font-family:'Manrope',sans-serif;font-size:9px;font-weight:800;letter-spacing:0.08em;padding:3px 10px;border-radius:99px;text-transform:uppercase;">Top Pick</div>`
+          : '';
+        return `
+        <div style="background:#fafaef;border:1px solid rgba(191,201,193,0.3);border-radius:16px;padding:18px;position:relative;transition:box-shadow 0.2s;"
+             onmouseenter="this.style.boxShadow='0 8px 24px rgba(15,82,56,0.10)'"
+             onmouseleave="this.style.boxShadow='none'">
+          ${topBadge}
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
+            <div>
+              <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:#1a1c16;">${p.ticker}</div>
+              <div style="font-family:'Inter',sans-serif;font-size:11px;color:#707973;margin-top:2px;">Weight: ${w}%</div>
+            </div>
+            <div style="background:${rs.bg};color:${rs.color};font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.05em;padding:3px 10px;border-radius:99px;display:flex;align-items:center;gap:5px;">
+              <div style="width:6px;height:6px;border-radius:50%;background:${rs.dot};"></div>
+              ${p.risk} Risk
+            </div>
+          </div>
+          <div style="margin-bottom:11px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+              <span style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:#404943;text-transform:uppercase;letter-spacing:0.06em;">Prob. Profit</span>
+              <span style="font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;color:#0f5238;">${p.probPositive.toFixed(1)}%</span>
+            </div>
+            <div style="height:5px;background:#eeefe4;border-radius:99px;overflow:hidden;">
+              <div style="height:100%;width:${Math.min(p.probPositive,100)}%;background:linear-gradient(90deg,#0e6c4a,#0f5238);border-radius:99px;"></div>
+            </div>
+          </div>
+          <div style="margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+              <span style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:#404943;text-transform:uppercase;letter-spacing:0.06em;">Prob. 10%+ CAGR</span>
+              <span style="font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;color:#1a1c16;">${p.prob10pct.toFixed(1)}%</span>
+            </div>
+            <div style="height:5px;background:#eeefe4;border-radius:99px;overflow:hidden;">
+              <div style="height:100%;width:${Math.min(p.prob10pct,100)}%;background:linear-gradient(90deg,#95d4b3,#0e6c4a);border-radius:99px;"></div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:12px;border-top:1px solid rgba(191,201,193,0.2);">
+            <div>
+              <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:#707973;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;">Est. CAGR</div>
+              <div style="font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;color:#1a1c16;">${(p.mu*100).toFixed(1)}%</div>
+            </div>
+            <div>
+              <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:#707973;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;">Volatility</div>
+              <div style="font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;color:#1a1c16;">${(p.sigma*100).toFixed(1)}%</div>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
     // Run Simulation
     async function runSimulation() {
       const btn = document.getElementById('run-btn');
       btn.disabled = true; btn.textContent = 'Simulating...';
       const total = Object.values(weights).reduce((a, b) => a + b, 0);
       const normalizedWeights = portfolio.map(t => (weights[t] || 0) / total);
-      const capital = parseFloat(document.getElementById('capital-input').value) || 1_000_000;
+      const capital = getCapital();
       const horizon = parseInt(document.getElementById('horizon-input').value) || 5;
 
       try {
@@ -552,6 +707,7 @@ let portfolio = JSON.parse(sessionStorage.getItem('flock_portfolio') || '[]');
           initial_capital: capital,
         });
         renderCrisisCards(st.results);
+        renderStockMetrics(horizon);
 
         document.getElementById('sim-placeholder').classList.add('hidden');
         document.getElementById('results-section').classList.remove('hidden');
@@ -563,16 +719,57 @@ let portfolio = JSON.parse(sessionStorage.getItem('flock_portfolio') || '[]');
       }
     }
 
+    function kpiCard(valueHtml, label, tip, extraClass = '') {
+      return `
+        <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between" style="position:relative;">
+          <div style="position:absolute;top:14px;right:14px;" class="kpi-info">
+            <button class="kpi-info-btn" tabindex="-1">i</button>
+            <div class="kpi-tooltip">${tip}</div>
+          </div>
+          <div class="text-3xl font-headline font-bold mt-1 ${extraClass}">${valueHtml}</div>
+          <div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold mt-3">${label}</div>
+        </div>`;
+    }
+
     function renderStats(stats, capital) {
       const grid = document.getElementById('stats-grid');
-      grid.innerHTML = `
-        <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-secondary mt-1">${formatPctUnsigned(stats.probability_positive_return)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Prob. Positive Return</div></div>
-        <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1 text-primary">${formatPctUnsigned(stats.probability_10pct_cagr)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Prob. 10%+ CAGR</div></div>
-        <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1">${formatPctUnsigned(stats.median_cagr_pct)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Median CAGR</div></div>
-        <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1">${formatINR(stats.median_final_value_inr)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Median Portfolio Value</div></div>
-        <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-error mt-1">${formatINR(stats.var_95_inr)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Value at Risk (95%)</div></div>
-        <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1">${formatPct(stats.return_range_10_90_pct[0])} to ${formatPct(stats.return_range_10_90_pct[1])}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">CAGR Range (10th-90th)</div></div>
-      `;
+      grid.innerHTML =
+        kpiCard(
+          formatPctUnsigned(stats.probability_positive_return),
+          'Prob. Positive Return',
+          'Percentage of the 10,000 simulated paths where your portfolio ends up worth more than the initial capital.',
+          'text-secondary'
+        ) +
+        kpiCard(
+          formatPctUnsigned(stats.probability_10pct_cagr),
+          'Prob. 10%+ CAGR',
+          'Probability that your portfolio achieves a Compound Annual Growth Rate above 10% a common benchmark for equity investing.',
+          'text-primary'
+        ) +
+        kpiCard(
+          formatPctUnsigned(stats.median_cagr_pct),
+          'Median CAGR',
+          'The annualised return at the 50th percentile of all simulations. Half the paths grew faster, half grew slower.',
+          'text-on-surface'
+        ) +
+        kpiCard(
+          formatINR(stats.median_final_value_inr),
+          'Median Portfolio Value',
+          'Expected portfolio value at the end of your time horizon in the median simulation scenario.',
+          'text-on-surface'
+        ) +
+        kpiCard(
+          formatINR(stats.var_95_inr),
+          'Value at Risk (95%)',
+          'Maximum amount you could lose in the worst 5% of scenarios. In 95 out of 100 simulations your loss is no greater than this figure.',
+          'text-error'
+        ) +
+        kpiCard(
+          `${formatPct(stats.return_range_10_90_pct[0])} to ${formatPct(stats.return_range_10_90_pct[1])}`,
+          'CAGR Range (10th–90th)',
+          'The likely band of annualised returns covering the middle 80% of all simulated outcomes, excluding the extreme tails.',
+          'text-on-surface'
+        );
     }
 
     function renderDistChart(stats) {

@@ -242,36 +242,36 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L26",
-      "id": "stocks_rationale_26",
       "community": 11,
-      "norm_label": "list stocks in the nifty 200 universe with their current flock score.      reads"
+      "norm_label": "list stocks in the nifty 200 universe with their current flock score.      reads",
+      "id": "stocks_rationale_26"
     },
     {
       "label": "List all unique sectors in the universe.",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L85",
-      "id": "stocks_rationale_85",
       "community": 11,
-      "norm_label": "list all unique sectors in the universe."
+      "norm_label": "list all unique sectors in the universe.",
+      "id": "stocks_rationale_85"
     },
     {
       "label": "Get current fundamental data for a single stock.      Returns all 16 raw factor",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L92",
-      "id": "stocks_rationale_92",
       "community": 11,
-      "norm_label": "get current fundamental data for a single stock.      returns all 16 raw factor"
+      "norm_label": "get current fundamental data for a single stock.      returns all 16 raw factor",
+      "id": "stocks_rationale_92"
     },
     {
       "label": "Get Flock score breakdown for a single stock.      Returns the current score wit",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L148",
-      "id": "stocks_rationale_148",
       "community": 11,
-      "norm_label": "get flock score breakdown for a single stock.      returns the current score wit"
+      "norm_label": "get flock score breakdown for a single stock.      returns the current score wit",
+      "id": "stocks_rationale_148"
     },
     {
       "label": "__init__.py",
@@ -971,9 +971,9 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/schemas/scores.py",
       "source_location": "L44",
-      "id": "scores_rationale_44",
       "community": 11,
-      "norm_label": "current fundamental factors for a stock \u2014 all 16 flock factors."
+      "norm_label": "current fundamental factors for a stock \u2014 all 16 flock factors.",
+      "id": "scores_rationale_44"
     },
     {
       "label": "simulate.py",
@@ -1304,36 +1304,36 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L133",
-      "id": "price_fetcher_rationale_133",
       "community": 0,
-      "norm_label": "save price data to database.          uses upsert logic: insert new records, ski"
+      "norm_label": "save price data to database.          uses upsert logic: insert new records, ski",
+      "id": "price_fetcher_rationale_133"
     },
     {
       "label": "Fetch prices and save to database.          Args:             session: AsyncSess",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L185",
-      "id": "price_fetcher_rationale_185",
       "community": 0,
-      "norm_label": "fetch prices and save to database.          args:             session: asyncsess"
+      "norm_label": "fetch prices and save to database.          args:             session: asyncsess",
+      "id": "price_fetcher_rationale_185"
     },
     {
       "label": "Run price fetch pipeline for multiple tickers.      Args:         tickers: List",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L216",
-      "id": "price_fetcher_rationale_216",
       "community": 0,
-      "norm_label": "run price fetch pipeline for multiple tickers.      args:         tickers: list"
+      "norm_label": "run price fetch pipeline for multiple tickers.      args:         tickers: list",
+      "id": "price_fetcher_rationale_216"
     },
     {
       "label": "Fetch prices for a single stock (no database save).",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L273",
-      "id": "price_fetcher_rationale_273",
       "community": 0,
-      "norm_label": "fetch prices for a single stock (no database save)."
+      "norm_label": "fetch prices for a single stock (no database save).",
+      "id": "price_fetcher_rationale_273"
     },
     {
       "label": "fundamentals_fetcher.py",
@@ -2465,27 +2465,27 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L41",
-      "id": "daily_pipeline_rationale_41",
       "community": 0,
-      "norm_label": "orchestrates daily data fetch pipeline.      usage:         pipeline = dailypipe"
+      "norm_label": "orchestrates daily data fetch pipeline.      usage:         pipeline = dailypipe",
+      "id": "daily_pipeline_rationale_41"
     },
     {
       "label": "Initialize pipeline.          Args:             tickers: Optional list of ticker",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L57",
-      "id": "daily_pipeline_rationale_57",
       "community": 0,
-      "norm_label": "initialize pipeline.          args:             tickers: optional list of ticker"
+      "norm_label": "initialize pipeline.          args:             tickers: optional list of ticker",
+      "id": "daily_pipeline_rationale_57"
     },
     {
       "label": "Ensure all tickers exist in stocks table.          Creates missing stocks with b",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L66",
-      "id": "daily_pipeline_rationale_66",
       "community": 0,
-      "norm_label": "ensure all tickers exist in stocks table.          creates missing stocks with b"
+      "norm_label": "ensure all tickers exist in stocks table.          creates missing stocks with b",
+      "id": "daily_pipeline_rationale_66"
     },
     {
       "label": "Run fundamentals fetch pipeline with SCD2.",
@@ -2510,9 +2510,9 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L111",
-      "id": "daily_pipeline_rationale_111",
       "community": 0,
-      "norm_label": "run mf nav fetch pipeline."
+      "norm_label": "run mf nav fetch pipeline.",
+      "id": "daily_pipeline_rationale_111"
     },
     {
       "label": "Run all daily pipelines concurrently.          Returns:             Dict with Pi",
@@ -2528,18 +2528,18 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L137",
-      "id": "daily_pipeline_rationale_137",
       "community": 8,
-      "norm_label": "run flock score computation after data fetches complete."
+      "norm_label": "run flock score computation after data fetches complete.",
+      "id": "daily_pipeline_rationale_137"
     },
     {
       "label": "Run all daily pipelines concurrently, then compute scores.          Returns:",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L141",
-      "id": "daily_pipeline_rationale_141",
       "community": 0,
-      "norm_label": "run all daily pipelines concurrently, then compute scores.          returns:"
+      "norm_label": "run all daily pipelines concurrently, then compute scores.          returns:",
+      "id": "daily_pipeline_rationale_141"
     },
     {
       "label": "Run daily pipelines (prices, NAV, gold).",
@@ -2555,27 +2555,27 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L215",
-      "id": "daily_pipeline_rationale_215",
       "community": 0,
-      "norm_label": "pipeline for incremental updates (less frequent full refresh).      - daily: sto"
+      "norm_label": "pipeline for incremental updates (less frequent full refresh).      - daily: sto",
+      "id": "daily_pipeline_rationale_215"
     },
     {
       "label": "Run daily pipelines (prices, NAV, gold).",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L227",
-      "id": "daily_pipeline_rationale_227",
       "community": 0,
-      "norm_label": "run daily pipelines (prices, nav, gold)."
+      "norm_label": "run daily pipelines (prices, nav, gold).",
+      "id": "daily_pipeline_rationale_227"
     },
     {
       "label": "Run weekly pipeline (full refresh including fundamentals).",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L242",
-      "id": "daily_pipeline_rationale_242",
       "community": 0,
-      "norm_label": "run weekly pipeline (full refresh including fundamentals)."
+      "norm_label": "run weekly pipeline (full refresh including fundamentals).",
+      "id": "daily_pipeline_rationale_242"
     },
     {
       "label": "__init__.py",
@@ -6128,27 +6128,27 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/init_db.py",
       "source_location": "L1",
-      "id": "init_db_rationale_1",
       "community": 16,
-      "norm_label": "database initialization script.  usage:     python -m scripts.init_db [--seed]"
+      "norm_label": "database initialization script.  usage:     python -m scripts.init_db [--seed]",
+      "id": "init_db_rationale_1"
     },
     {
       "label": "Initialize the database.      1. Run Alembic migrations     2. Optionally seed w",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/init_db.py",
       "source_location": "L26",
-      "id": "init_db_rationale_26",
       "community": 16,
-      "norm_label": "initialize the database.      1. run alembic migrations     2. optionally seed w"
+      "norm_label": "initialize the database.      1. run alembic migrations     2. optionally seed w",
+      "id": "init_db_rationale_26"
     },
     {
       "label": "Seed the database with Nifty 200 stocks.",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/init_db.py",
       "source_location": "L57",
-      "id": "init_db_rationale_57",
       "community": 16,
-      "norm_label": "seed the database with nifty 200 stocks."
+      "norm_label": "seed the database with nifty 200 stocks.",
+      "id": "init_db_rationale_57"
     },
     {
       "label": "__init__.py",
@@ -6182,18 +6182,18 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_migrations.py",
       "source_location": "L1",
-      "id": "run_migrations_rationale_1",
       "community": 13,
-      "norm_label": "run alembic migrations.  usage:     python -m scripts.run_migrations  this scrip"
+      "norm_label": "run alembic migrations.  usage:     python -m scripts.run_migrations  this scrip",
+      "id": "run_migrations_rationale_1"
     },
     {
       "label": "Run Alembic migrations.",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_migrations.py",
       "source_location": "L22",
-      "id": "run_migrations_rationale_22",
       "community": 13,
-      "norm_label": "run alembic migrations."
+      "norm_label": "run alembic migrations.",
+      "id": "run_migrations_rationale_22"
     },
     {
       "label": "seed_stocks.py",
@@ -6227,18 +6227,18 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/seed_stocks.py",
       "source_location": "L1",
-      "id": "seed_stocks_rationale_1",
       "community": 17,
-      "norm_label": "seed nifty 200 stocks.  usage:     python -m scripts.seed_stocks  this script po"
+      "norm_label": "seed nifty 200 stocks.  usage:     python -m scripts.seed_stocks  this script po",
+      "id": "seed_stocks_rationale_1"
     },
     {
       "label": "Seed the database with Nifty 200 stocks.",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/seed_stocks.py",
       "source_location": "L25",
-      "id": "seed_stocks_rationale_25",
       "community": 17,
-      "norm_label": "seed the database with nifty 200 stocks."
+      "norm_label": "seed the database with nifty 200 stocks.",
+      "id": "seed_stocks_rationale_25"
     },
     {
       "label": "run_pipeline.py",
@@ -6281,27 +6281,27 @@
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_pipeline.py",
       "source_location": "L1",
-      "id": "run_pipeline_rationale_1",
       "community": 14,
-      "norm_label": "run data pipeline \u2014 fetch fundamentals, prices, and compute flock scores.  usage"
+      "norm_label": "run data pipeline \u2014 fetch fundamentals, prices, and compute flock scores.  usage",
+      "id": "run_pipeline_rationale_1"
     },
     {
       "label": "Run the full data pipeline.",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_pipeline.py",
       "source_location": "L41",
-      "id": "run_pipeline_rationale_41",
       "community": 14,
-      "norm_label": "run the full data pipeline."
+      "norm_label": "run the full data pipeline.",
+      "id": "run_pipeline_rationale_41"
     },
     {
       "label": "Print DB state summary.",
       "file_type": "rationale",
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_pipeline.py",
       "source_location": "L99",
-      "id": "run_pipeline_rationale_99",
       "community": 14,
-      "norm_label": "print db state summary."
+      "norm_label": "print db state summary.",
+      "id": "run_pipeline_rationale_99"
     },
     {
       "label": "format.js",
@@ -7567,9 +7567,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_26",
       "_tgt": "stock_flockscore",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_26",
-      "target": "stock_flockscore",
-      "confidence_score": 0.5
+      "target": "stock_flockscore"
     },
     {
       "relation": "uses",
@@ -7579,9 +7579,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_26",
       "_tgt": "stock_fundamental",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_26",
-      "target": "stock_fundamental",
-      "confidence_score": 0.5
+      "target": "stock_fundamental"
     },
     {
       "relation": "uses",
@@ -7591,9 +7591,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_26",
       "_tgt": "stock_stock",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_26",
-      "target": "stock_stock",
-      "confidence_score": 0.5
+      "target": "stock_stock"
     },
     {
       "relation": "uses",
@@ -7603,9 +7603,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_26",
       "_tgt": "scores_flockscoreresponse",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_26",
-      "target": "scores_flockscoreresponse",
-      "confidence_score": 0.5
+      "target": "scores_flockscoreresponse"
     },
     {
       "relation": "uses",
@@ -7615,9 +7615,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_26",
       "_tgt": "scores_fundamentalsresponse",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_26",
-      "target": "scores_fundamentalsresponse",
-      "confidence_score": 0.5
+      "target": "scores_fundamentalsresponse"
     },
     {
       "relation": "uses",
@@ -7627,9 +7627,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_26",
       "_tgt": "scores_pillarscores",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_26",
-      "target": "scores_pillarscores",
-      "confidence_score": 0.5
+      "target": "scores_pillarscores"
     },
     {
       "relation": "uses",
@@ -7639,9 +7639,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_26",
       "_tgt": "scores_stocklistitem",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_26",
-      "target": "scores_stocklistitem",
-      "confidence_score": 0.5
+      "target": "scores_stocklistitem"
     },
     {
       "relation": "uses",
@@ -7651,9 +7651,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_85",
       "_tgt": "stock_flockscore",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_85",
-      "target": "stock_flockscore",
-      "confidence_score": 0.5
+      "target": "stock_flockscore"
     },
     {
       "relation": "uses",
@@ -7663,9 +7663,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_85",
       "_tgt": "stock_fundamental",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_85",
-      "target": "stock_fundamental",
-      "confidence_score": 0.5
+      "target": "stock_fundamental"
     },
     {
       "relation": "uses",
@@ -7675,9 +7675,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_85",
       "_tgt": "stock_stock",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_85",
-      "target": "stock_stock",
-      "confidence_score": 0.5
+      "target": "stock_stock"
     },
     {
       "relation": "uses",
@@ -7687,9 +7687,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_85",
       "_tgt": "scores_flockscoreresponse",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_85",
-      "target": "scores_flockscoreresponse",
-      "confidence_score": 0.5
+      "target": "scores_flockscoreresponse"
     },
     {
       "relation": "uses",
@@ -7699,9 +7699,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_85",
       "_tgt": "scores_fundamentalsresponse",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_85",
-      "target": "scores_fundamentalsresponse",
-      "confidence_score": 0.5
+      "target": "scores_fundamentalsresponse"
     },
     {
       "relation": "uses",
@@ -7711,9 +7711,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_85",
       "_tgt": "scores_pillarscores",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_85",
-      "target": "scores_pillarscores",
-      "confidence_score": 0.5
+      "target": "scores_pillarscores"
     },
     {
       "relation": "uses",
@@ -7723,9 +7723,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_85",
       "_tgt": "scores_stocklistitem",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_85",
-      "target": "scores_stocklistitem",
-      "confidence_score": 0.5
+      "target": "scores_stocklistitem"
     },
     {
       "relation": "uses",
@@ -7735,9 +7735,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_92",
       "_tgt": "stock_flockscore",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_92",
-      "target": "stock_flockscore",
-      "confidence_score": 0.5
+      "target": "stock_flockscore"
     },
     {
       "relation": "uses",
@@ -7747,9 +7747,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_92",
       "_tgt": "stock_fundamental",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_92",
-      "target": "stock_fundamental",
-      "confidence_score": 0.5
+      "target": "stock_fundamental"
     },
     {
       "relation": "uses",
@@ -7759,9 +7759,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_92",
       "_tgt": "stock_stock",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_92",
-      "target": "stock_stock",
-      "confidence_score": 0.5
+      "target": "stock_stock"
     },
     {
       "relation": "uses",
@@ -7771,9 +7771,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_92",
       "_tgt": "scores_flockscoreresponse",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_92",
-      "target": "scores_flockscoreresponse",
-      "confidence_score": 0.5
+      "target": "scores_flockscoreresponse"
     },
     {
       "relation": "uses",
@@ -7783,9 +7783,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_92",
       "_tgt": "scores_fundamentalsresponse",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_92",
-      "target": "scores_fundamentalsresponse",
-      "confidence_score": 0.5
+      "target": "scores_fundamentalsresponse"
     },
     {
       "relation": "uses",
@@ -7795,9 +7795,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_92",
       "_tgt": "scores_pillarscores",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_92",
-      "target": "scores_pillarscores",
-      "confidence_score": 0.5
+      "target": "scores_pillarscores"
     },
     {
       "relation": "uses",
@@ -7807,9 +7807,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_92",
       "_tgt": "scores_stocklistitem",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_92",
-      "target": "scores_stocklistitem",
-      "confidence_score": 0.5
+      "target": "scores_stocklistitem"
     },
     {
       "relation": "uses",
@@ -7819,9 +7819,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_148",
       "_tgt": "stock_flockscore",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_148",
-      "target": "stock_flockscore",
-      "confidence_score": 0.5
+      "target": "stock_flockscore"
     },
     {
       "relation": "uses",
@@ -7831,9 +7831,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_148",
       "_tgt": "stock_fundamental",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_148",
-      "target": "stock_fundamental",
-      "confidence_score": 0.5
+      "target": "stock_fundamental"
     },
     {
       "relation": "uses",
@@ -7843,9 +7843,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_148",
       "_tgt": "stock_stock",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_148",
-      "target": "stock_stock",
-      "confidence_score": 0.5
+      "target": "stock_stock"
     },
     {
       "relation": "uses",
@@ -7855,9 +7855,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_148",
       "_tgt": "scores_flockscoreresponse",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_148",
-      "target": "scores_flockscoreresponse",
-      "confidence_score": 0.5
+      "target": "scores_flockscoreresponse"
     },
     {
       "relation": "uses",
@@ -7867,9 +7867,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_148",
       "_tgt": "scores_fundamentalsresponse",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_148",
-      "target": "scores_fundamentalsresponse",
-      "confidence_score": 0.5
+      "target": "scores_fundamentalsresponse"
     },
     {
       "relation": "uses",
@@ -7879,9 +7879,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_148",
       "_tgt": "scores_pillarscores",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_148",
-      "target": "scores_pillarscores",
-      "confidence_score": 0.5
+      "target": "scores_pillarscores"
     },
     {
       "relation": "uses",
@@ -7891,9 +7891,9 @@
       "weight": 0.8,
       "_src": "stocks_rationale_148",
       "_tgt": "scores_stocklistitem",
+      "confidence_score": 0.5,
       "source": "stocks_rationale_148",
-      "target": "scores_stocklistitem",
-      "confidence_score": 0.5
+      "target": "scores_stocklistitem"
     },
     {
       "relation": "contains",
@@ -8394,8 +8394,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_pipeline.py",
       "source_location": "L154",
       "weight": 1.0,
-      "_src": "run_pipeline_main",
-      "_tgt": "nifty200_get_tickers",
+      "_src": "nifty200_get_tickers",
+      "_tgt": "run_pipeline_main",
       "source": "nifty200_get_tickers",
       "target": "run_pipeline_main"
     },
@@ -9137,11 +9137,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L23",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_41",
-      "_tgt": "mutual_fund_mutualfund",
+      "_src": "mutual_fund_mutualfund",
+      "_tgt": "daily_pipeline_rationale_41",
+      "confidence_score": 0.5,
       "source": "mutual_fund_mutualfund",
-      "target": "daily_pipeline_rationale_41",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_41"
     },
     {
       "relation": "uses",
@@ -9149,11 +9149,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L23",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_57",
-      "_tgt": "mutual_fund_mutualfund",
+      "_src": "mutual_fund_mutualfund",
+      "_tgt": "daily_pipeline_rationale_57",
+      "confidence_score": 0.5,
       "source": "mutual_fund_mutualfund",
-      "target": "daily_pipeline_rationale_57",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_57"
     },
     {
       "relation": "uses",
@@ -9161,11 +9161,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L23",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_66",
-      "_tgt": "mutual_fund_mutualfund",
+      "_src": "mutual_fund_mutualfund",
+      "_tgt": "daily_pipeline_rationale_66",
+      "confidence_score": 0.5,
       "source": "mutual_fund_mutualfund",
-      "target": "daily_pipeline_rationale_66",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_66"
     },
     {
       "relation": "uses",
@@ -9197,11 +9197,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L23",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_111",
-      "_tgt": "mutual_fund_mutualfund",
+      "_src": "mutual_fund_mutualfund",
+      "_tgt": "daily_pipeline_rationale_111",
+      "confidence_score": 0.5,
       "source": "mutual_fund_mutualfund",
-      "target": "daily_pipeline_rationale_111",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_111"
     },
     {
       "relation": "uses",
@@ -9221,11 +9221,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L23",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_137",
-      "_tgt": "mutual_fund_mutualfund",
+      "_src": "mutual_fund_mutualfund",
+      "_tgt": "daily_pipeline_rationale_137",
+      "confidence_score": 0.5,
       "source": "mutual_fund_mutualfund",
-      "target": "daily_pipeline_rationale_137",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_137"
     },
     {
       "relation": "uses",
@@ -9233,11 +9233,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L23",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_141",
-      "_tgt": "mutual_fund_mutualfund",
+      "_src": "mutual_fund_mutualfund",
+      "_tgt": "daily_pipeline_rationale_141",
+      "confidence_score": 0.5,
       "source": "mutual_fund_mutualfund",
-      "target": "daily_pipeline_rationale_141",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_141"
     },
     {
       "relation": "uses",
@@ -9257,11 +9257,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L23",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_215",
-      "_tgt": "mutual_fund_mutualfund",
+      "_src": "mutual_fund_mutualfund",
+      "_tgt": "daily_pipeline_rationale_215",
+      "confidence_score": 0.5,
       "source": "mutual_fund_mutualfund",
-      "target": "daily_pipeline_rationale_215",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_215"
     },
     {
       "relation": "uses",
@@ -9269,11 +9269,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L23",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_227",
-      "_tgt": "mutual_fund_mutualfund",
+      "_src": "mutual_fund_mutualfund",
+      "_tgt": "daily_pipeline_rationale_227",
+      "confidence_score": 0.5,
       "source": "mutual_fund_mutualfund",
-      "target": "daily_pipeline_rationale_227",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_227"
     },
     {
       "relation": "uses",
@@ -9281,11 +9281,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L23",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_242",
-      "_tgt": "mutual_fund_mutualfund",
+      "_src": "mutual_fund_mutualfund",
+      "_tgt": "daily_pipeline_rationale_242",
+      "confidence_score": 0.5,
       "source": "mutual_fund_mutualfund",
-      "target": "daily_pipeline_rationale_242",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_242"
     },
     {
       "relation": "uses",
@@ -10493,11 +10493,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L21",
       "weight": 0.8,
-      "_src": "price_fetcher_rationale_133",
-      "_tgt": "pipeline_pipelinerun",
+      "_src": "pipeline_pipelinerun",
+      "_tgt": "price_fetcher_rationale_133",
+      "confidence_score": 0.5,
       "source": "pipeline_pipelinerun",
-      "target": "price_fetcher_rationale_133",
-      "confidence_score": 0.5
+      "target": "price_fetcher_rationale_133"
     },
     {
       "relation": "uses",
@@ -10505,11 +10505,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L21",
       "weight": 0.8,
-      "_src": "price_fetcher_rationale_185",
-      "_tgt": "pipeline_pipelinerun",
+      "_src": "pipeline_pipelinerun",
+      "_tgt": "price_fetcher_rationale_185",
+      "confidence_score": 0.5,
       "source": "pipeline_pipelinerun",
-      "target": "price_fetcher_rationale_185",
-      "confidence_score": 0.5
+      "target": "price_fetcher_rationale_185"
     },
     {
       "relation": "uses",
@@ -10517,11 +10517,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L21",
       "weight": 0.8,
-      "_src": "price_fetcher_rationale_216",
-      "_tgt": "pipeline_pipelinerun",
+      "_src": "pipeline_pipelinerun",
+      "_tgt": "price_fetcher_rationale_216",
+      "confidence_score": 0.5,
       "source": "pipeline_pipelinerun",
-      "target": "price_fetcher_rationale_216",
-      "confidence_score": 0.5
+      "target": "price_fetcher_rationale_216"
     },
     {
       "relation": "uses",
@@ -10529,11 +10529,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L21",
       "weight": 0.8,
-      "_src": "price_fetcher_rationale_273",
-      "_tgt": "pipeline_pipelinerun",
+      "_src": "pipeline_pipelinerun",
+      "_tgt": "price_fetcher_rationale_273",
+      "confidence_score": 0.5,
       "source": "pipeline_pipelinerun",
-      "target": "price_fetcher_rationale_273",
-      "confidence_score": 0.5
+      "target": "price_fetcher_rationale_273"
     },
     {
       "relation": "uses",
@@ -11009,11 +11009,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L24",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_41",
-      "_tgt": "pipeline_pipelinerun",
+      "_src": "pipeline_pipelinerun",
+      "_tgt": "daily_pipeline_rationale_41",
+      "confidence_score": 0.5,
       "source": "pipeline_pipelinerun",
-      "target": "daily_pipeline_rationale_41",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_41"
     },
     {
       "relation": "uses",
@@ -11021,11 +11021,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L24",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_57",
-      "_tgt": "pipeline_pipelinerun",
+      "_src": "pipeline_pipelinerun",
+      "_tgt": "daily_pipeline_rationale_57",
+      "confidence_score": 0.5,
       "source": "pipeline_pipelinerun",
-      "target": "daily_pipeline_rationale_57",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_57"
     },
     {
       "relation": "uses",
@@ -11033,11 +11033,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L24",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_66",
-      "_tgt": "pipeline_pipelinerun",
+      "_src": "pipeline_pipelinerun",
+      "_tgt": "daily_pipeline_rationale_66",
+      "confidence_score": 0.5,
       "source": "pipeline_pipelinerun",
-      "target": "daily_pipeline_rationale_66",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_66"
     },
     {
       "relation": "uses",
@@ -11069,11 +11069,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L24",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_111",
-      "_tgt": "pipeline_pipelinerun",
+      "_src": "pipeline_pipelinerun",
+      "_tgt": "daily_pipeline_rationale_111",
+      "confidence_score": 0.5,
       "source": "pipeline_pipelinerun",
-      "target": "daily_pipeline_rationale_111",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_111"
     },
     {
       "relation": "uses",
@@ -11093,11 +11093,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L24",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_137",
-      "_tgt": "pipeline_pipelinerun",
+      "_src": "pipeline_pipelinerun",
+      "_tgt": "daily_pipeline_rationale_137",
+      "confidence_score": 0.5,
       "source": "pipeline_pipelinerun",
-      "target": "daily_pipeline_rationale_137",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_137"
     },
     {
       "relation": "uses",
@@ -11105,11 +11105,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L24",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_141",
-      "_tgt": "pipeline_pipelinerun",
+      "_src": "pipeline_pipelinerun",
+      "_tgt": "daily_pipeline_rationale_141",
+      "confidence_score": 0.5,
       "source": "pipeline_pipelinerun",
-      "target": "daily_pipeline_rationale_141",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_141"
     },
     {
       "relation": "uses",
@@ -11129,11 +11129,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L24",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_215",
-      "_tgt": "pipeline_pipelinerun",
+      "_src": "pipeline_pipelinerun",
+      "_tgt": "daily_pipeline_rationale_215",
+      "confidence_score": 0.5,
       "source": "pipeline_pipelinerun",
-      "target": "daily_pipeline_rationale_215",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_215"
     },
     {
       "relation": "uses",
@@ -11141,11 +11141,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L24",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_227",
-      "_tgt": "pipeline_pipelinerun",
+      "_src": "pipeline_pipelinerun",
+      "_tgt": "daily_pipeline_rationale_227",
+      "confidence_score": 0.5,
       "source": "pipeline_pipelinerun",
-      "target": "daily_pipeline_rationale_227",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_227"
     },
     {
       "relation": "uses",
@@ -11153,11 +11153,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L24",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_242",
-      "_tgt": "pipeline_pipelinerun",
+      "_src": "pipeline_pipelinerun",
+      "_tgt": "daily_pipeline_rationale_242",
+      "confidence_score": 0.5,
       "source": "pipeline_pipelinerun",
-      "target": "daily_pipeline_rationale_242",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_242"
     },
     {
       "relation": "calls",
@@ -11597,11 +11597,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L22",
       "weight": 0.8,
-      "_src": "price_fetcher_rationale_133",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "price_fetcher_rationale_133",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "price_fetcher_rationale_133",
-      "confidence_score": 0.5
+      "target": "price_fetcher_rationale_133"
     },
     {
       "relation": "uses",
@@ -11609,11 +11609,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L22",
       "weight": 0.8,
-      "_src": "price_fetcher_rationale_185",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "price_fetcher_rationale_185",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "price_fetcher_rationale_185",
-      "confidence_score": 0.5
+      "target": "price_fetcher_rationale_185"
     },
     {
       "relation": "uses",
@@ -11621,11 +11621,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L22",
       "weight": 0.8,
-      "_src": "price_fetcher_rationale_216",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "price_fetcher_rationale_216",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "price_fetcher_rationale_216",
-      "confidence_score": 0.5
+      "target": "price_fetcher_rationale_216"
     },
     {
       "relation": "uses",
@@ -11633,11 +11633,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L22",
       "weight": 0.8,
-      "_src": "price_fetcher_rationale_273",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "price_fetcher_rationale_273",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "price_fetcher_rationale_273",
-      "confidence_score": 0.5
+      "target": "price_fetcher_rationale_273"
     },
     {
       "relation": "uses",
@@ -11801,11 +11801,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L25",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_41",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "daily_pipeline_rationale_41",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "daily_pipeline_rationale_41",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_41"
     },
     {
       "relation": "uses",
@@ -11813,11 +11813,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L25",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_57",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "daily_pipeline_rationale_57",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "daily_pipeline_rationale_57",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_57"
     },
     {
       "relation": "uses",
@@ -11825,11 +11825,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L25",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_66",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "daily_pipeline_rationale_66",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "daily_pipeline_rationale_66",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_66"
     },
     {
       "relation": "uses",
@@ -11861,11 +11861,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L25",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_111",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "daily_pipeline_rationale_111",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "daily_pipeline_rationale_111",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_111"
     },
     {
       "relation": "uses",
@@ -11885,11 +11885,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L25",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_137",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "daily_pipeline_rationale_137",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "daily_pipeline_rationale_137",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_137"
     },
     {
       "relation": "uses",
@@ -11897,11 +11897,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L25",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_141",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "daily_pipeline_rationale_141",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "daily_pipeline_rationale_141",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_141"
     },
     {
       "relation": "uses",
@@ -11921,11 +11921,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L25",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_215",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "daily_pipeline_rationale_215",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "daily_pipeline_rationale_215",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_215"
     },
     {
       "relation": "uses",
@@ -11933,11 +11933,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L25",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_227",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "daily_pipeline_rationale_227",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "daily_pipeline_rationale_227",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_227"
     },
     {
       "relation": "uses",
@@ -11945,11 +11945,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L25",
       "weight": 0.8,
-      "_src": "daily_pipeline_rationale_242",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "daily_pipeline_rationale_242",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "daily_pipeline_rationale_242",
-      "confidence_score": 0.5
+      "target": "daily_pipeline_rationale_242"
     },
     {
       "relation": "uses",
@@ -12197,11 +12197,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/init_db.py",
       "source_location": "L22",
       "weight": 0.8,
-      "_src": "init_db_rationale_1",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "init_db_rationale_1",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "init_db_rationale_1",
-      "confidence_score": 0.5
+      "target": "init_db_rationale_1"
     },
     {
       "relation": "uses",
@@ -12209,11 +12209,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/init_db.py",
       "source_location": "L22",
       "weight": 0.8,
-      "_src": "init_db_rationale_26",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "init_db_rationale_26",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "init_db_rationale_26",
-      "confidence_score": 0.5
+      "target": "init_db_rationale_26"
     },
     {
       "relation": "uses",
@@ -12221,11 +12221,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/init_db.py",
       "source_location": "L22",
       "weight": 0.8,
-      "_src": "init_db_rationale_57",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "init_db_rationale_57",
+      "confidence_score": 0.5,
       "source": "stock_stock",
-      "target": "init_db_rationale_57",
-      "confidence_score": 0.5
+      "target": "init_db_rationale_57"
     },
     {
       "relation": "calls",
@@ -12257,8 +12257,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L11",
       "weight": 0.8,
-      "_src": "stocks_rationale_24",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "stocks_rationale_24",
       "confidence_score": 0.5,
       "source": "stock_stock",
       "target": "stocks_rationale_24"
@@ -12269,8 +12269,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L11",
       "weight": 0.8,
-      "_src": "stocks_rationale_58",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "stocks_rationale_58",
       "confidence_score": 0.5,
       "source": "stock_stock",
       "target": "stocks_rationale_58"
@@ -12281,8 +12281,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L11",
       "weight": 0.8,
-      "_src": "stocks_rationale_65",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "stocks_rationale_65",
       "confidence_score": 0.5,
       "source": "stock_stock",
       "target": "stocks_rationale_65"
@@ -12293,8 +12293,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L11",
       "weight": 0.8,
-      "_src": "stocks_rationale_121",
-      "_tgt": "stock_stock",
+      "_src": "stock_stock",
+      "_tgt": "stocks_rationale_121",
       "confidence_score": 0.5,
       "source": "stock_stock",
       "target": "stocks_rationale_121"
@@ -12521,11 +12521,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L22",
       "weight": 0.8,
-      "_src": "price_fetcher_rationale_133",
-      "_tgt": "stock_stockprice",
+      "_src": "stock_stockprice",
+      "_tgt": "price_fetcher_rationale_133",
+      "confidence_score": 0.5,
       "source": "stock_stockprice",
-      "target": "price_fetcher_rationale_133",
-      "confidence_score": 0.5
+      "target": "price_fetcher_rationale_133"
     },
     {
       "relation": "uses",
@@ -12533,11 +12533,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L22",
       "weight": 0.8,
-      "_src": "price_fetcher_rationale_185",
-      "_tgt": "stock_stockprice",
+      "_src": "stock_stockprice",
+      "_tgt": "price_fetcher_rationale_185",
+      "confidence_score": 0.5,
       "source": "stock_stockprice",
-      "target": "price_fetcher_rationale_185",
-      "confidence_score": 0.5
+      "target": "price_fetcher_rationale_185"
     },
     {
       "relation": "uses",
@@ -12545,11 +12545,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L22",
       "weight": 0.8,
-      "_src": "price_fetcher_rationale_216",
-      "_tgt": "stock_stockprice",
+      "_src": "stock_stockprice",
+      "_tgt": "price_fetcher_rationale_216",
+      "confidence_score": 0.5,
       "source": "stock_stockprice",
-      "target": "price_fetcher_rationale_216",
-      "confidence_score": 0.5
+      "target": "price_fetcher_rationale_216"
     },
     {
       "relation": "uses",
@@ -12557,11 +12557,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/services/price_fetcher.py",
       "source_location": "L22",
       "weight": 0.8,
-      "_src": "price_fetcher_rationale_273",
-      "_tgt": "stock_stockprice",
+      "_src": "stock_stockprice",
+      "_tgt": "price_fetcher_rationale_273",
+      "confidence_score": 0.5,
       "source": "stock_stockprice",
-      "target": "price_fetcher_rationale_273",
-      "confidence_score": 0.5
+      "target": "price_fetcher_rationale_273"
     },
     {
       "relation": "uses",
@@ -13241,8 +13241,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L11",
       "weight": 0.8,
-      "_src": "stocks_rationale_24",
-      "_tgt": "stock_fundamental",
+      "_src": "stock_fundamental",
+      "_tgt": "stocks_rationale_24",
       "confidence_score": 0.5,
       "source": "stock_fundamental",
       "target": "stocks_rationale_24"
@@ -13253,8 +13253,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L11",
       "weight": 0.8,
-      "_src": "stocks_rationale_58",
-      "_tgt": "stock_fundamental",
+      "_src": "stock_fundamental",
+      "_tgt": "stocks_rationale_58",
       "confidence_score": 0.5,
       "source": "stock_fundamental",
       "target": "stocks_rationale_58"
@@ -13265,8 +13265,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L11",
       "weight": 0.8,
-      "_src": "stocks_rationale_65",
-      "_tgt": "stock_fundamental",
+      "_src": "stock_fundamental",
+      "_tgt": "stocks_rationale_65",
       "confidence_score": 0.5,
       "source": "stock_fundamental",
       "target": "stocks_rationale_65"
@@ -13277,8 +13277,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L11",
       "weight": 0.8,
-      "_src": "stocks_rationale_121",
-      "_tgt": "stock_fundamental",
+      "_src": "stock_fundamental",
+      "_tgt": "stocks_rationale_121",
       "confidence_score": 0.5,
       "source": "stock_fundamental",
       "target": "stocks_rationale_121"
@@ -13433,8 +13433,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L11",
       "weight": 0.8,
-      "_src": "stocks_rationale_24",
-      "_tgt": "stock_flockscore",
+      "_src": "stock_flockscore",
+      "_tgt": "stocks_rationale_24",
       "confidence_score": 0.5,
       "source": "stock_flockscore",
       "target": "stocks_rationale_24"
@@ -13445,8 +13445,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L11",
       "weight": 0.8,
-      "_src": "stocks_rationale_58",
-      "_tgt": "stock_flockscore",
+      "_src": "stock_flockscore",
+      "_tgt": "stocks_rationale_58",
       "confidence_score": 0.5,
       "source": "stock_flockscore",
       "target": "stocks_rationale_58"
@@ -13457,8 +13457,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L11",
       "weight": 0.8,
-      "_src": "stocks_rationale_65",
-      "_tgt": "stock_flockscore",
+      "_src": "stock_flockscore",
+      "_tgt": "stocks_rationale_65",
       "confidence_score": 0.5,
       "source": "stock_flockscore",
       "target": "stocks_rationale_65"
@@ -13469,8 +13469,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L11",
       "weight": 0.8,
-      "_src": "stocks_rationale_121",
-      "_tgt": "stock_flockscore",
+      "_src": "stock_flockscore",
+      "_tgt": "stocks_rationale_121",
       "confidence_score": 0.5,
       "source": "stock_flockscore",
       "target": "stocks_rationale_121"
@@ -13565,8 +13565,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_24",
-      "_tgt": "scores_pillarscores",
+      "_src": "scores_pillarscores",
+      "_tgt": "stocks_rationale_24",
       "confidence_score": 0.5,
       "source": "scores_pillarscores",
       "target": "stocks_rationale_24"
@@ -13577,8 +13577,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_58",
-      "_tgt": "scores_pillarscores",
+      "_src": "scores_pillarscores",
+      "_tgt": "stocks_rationale_58",
       "confidence_score": 0.5,
       "source": "scores_pillarscores",
       "target": "stocks_rationale_58"
@@ -13589,8 +13589,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_65",
-      "_tgt": "scores_pillarscores",
+      "_src": "scores_pillarscores",
+      "_tgt": "stocks_rationale_65",
       "confidence_score": 0.5,
       "source": "scores_pillarscores",
       "target": "stocks_rationale_65"
@@ -13601,8 +13601,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_121",
-      "_tgt": "scores_pillarscores",
+      "_src": "scores_pillarscores",
+      "_tgt": "stocks_rationale_121",
       "confidence_score": 0.5,
       "source": "scores_pillarscores",
       "target": "stocks_rationale_121"
@@ -13793,8 +13793,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_24",
-      "_tgt": "scores_flockscoreresponse",
+      "_src": "scores_flockscoreresponse",
+      "_tgt": "stocks_rationale_24",
       "confidence_score": 0.5,
       "source": "scores_flockscoreresponse",
       "target": "stocks_rationale_24"
@@ -13805,8 +13805,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_58",
-      "_tgt": "scores_flockscoreresponse",
+      "_src": "scores_flockscoreresponse",
+      "_tgt": "stocks_rationale_58",
       "confidence_score": 0.5,
       "source": "scores_flockscoreresponse",
       "target": "stocks_rationale_58"
@@ -13817,8 +13817,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_65",
-      "_tgt": "scores_flockscoreresponse",
+      "_src": "scores_flockscoreresponse",
+      "_tgt": "stocks_rationale_65",
       "confidence_score": 0.5,
       "source": "scores_flockscoreresponse",
       "target": "stocks_rationale_65"
@@ -13829,8 +13829,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_121",
-      "_tgt": "scores_flockscoreresponse",
+      "_src": "scores_flockscoreresponse",
+      "_tgt": "stocks_rationale_121",
       "confidence_score": 0.5,
       "source": "scores_flockscoreresponse",
       "target": "stocks_rationale_121"
@@ -13853,8 +13853,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_24",
-      "_tgt": "scores_stocklistitem",
+      "_src": "scores_stocklistitem",
+      "_tgt": "stocks_rationale_24",
       "confidence_score": 0.5,
       "source": "scores_stocklistitem",
       "target": "stocks_rationale_24"
@@ -13865,8 +13865,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_58",
-      "_tgt": "scores_stocklistitem",
+      "_src": "scores_stocklistitem",
+      "_tgt": "stocks_rationale_58",
       "confidence_score": 0.5,
       "source": "scores_stocklistitem",
       "target": "stocks_rationale_58"
@@ -13877,8 +13877,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_65",
-      "_tgt": "scores_stocklistitem",
+      "_src": "scores_stocklistitem",
+      "_tgt": "stocks_rationale_65",
       "confidence_score": 0.5,
       "source": "scores_stocklistitem",
       "target": "stocks_rationale_65"
@@ -13889,8 +13889,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_121",
-      "_tgt": "scores_stocklistitem",
+      "_src": "scores_stocklistitem",
+      "_tgt": "stocks_rationale_121",
       "confidence_score": 0.5,
       "source": "scores_stocklistitem",
       "target": "stocks_rationale_121"
@@ -13937,8 +13937,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_24",
-      "_tgt": "scores_fundamentalsresponse",
+      "_src": "scores_fundamentalsresponse",
+      "_tgt": "stocks_rationale_24",
       "confidence_score": 0.5,
       "source": "scores_fundamentalsresponse",
       "target": "stocks_rationale_24"
@@ -13949,8 +13949,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_58",
-      "_tgt": "scores_fundamentalsresponse",
+      "_src": "scores_fundamentalsresponse",
+      "_tgt": "stocks_rationale_58",
       "confidence_score": 0.5,
       "source": "scores_fundamentalsresponse",
       "target": "stocks_rationale_58"
@@ -13961,8 +13961,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_65",
-      "_tgt": "scores_fundamentalsresponse",
+      "_src": "scores_fundamentalsresponse",
+      "_tgt": "stocks_rationale_65",
       "confidence_score": 0.5,
       "source": "scores_fundamentalsresponse",
       "target": "stocks_rationale_65"
@@ -13973,8 +13973,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/api/v1/stocks.py",
       "source_location": "L12",
       "weight": 0.8,
-      "_src": "stocks_rationale_121",
-      "_tgt": "scores_fundamentalsresponse",
+      "_src": "scores_fundamentalsresponse",
+      "_tgt": "stocks_rationale_121",
       "confidence_score": 0.5,
       "source": "scores_fundamentalsresponse",
       "target": "stocks_rationale_121"
@@ -15054,8 +15054,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L104",
       "weight": 1.0,
-      "_src": "daily_pipeline_dailypipeline_run_price_pipeline",
-      "_tgt": "price_fetcher_run_price_fetch_pipeline",
+      "_src": "price_fetcher_run_price_fetch_pipeline",
+      "_tgt": "daily_pipeline_dailypipeline_run_price_pipeline",
       "source": "price_fetcher_run_price_fetch_pipeline",
       "target": "daily_pipeline_dailypipeline_run_price_pipeline"
     },
@@ -15066,8 +15066,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_pipeline.py",
       "source_location": "L65",
       "weight": 1.0,
-      "_src": "run_pipeline_run_pipeline",
-      "_tgt": "price_fetcher_run_price_fetch_pipeline",
+      "_src": "price_fetcher_run_price_fetch_pipeline",
+      "_tgt": "run_pipeline_run_pipeline",
       "source": "price_fetcher_run_price_fetch_pipeline",
       "target": "run_pipeline_run_pipeline"
     },
@@ -15353,11 +15353,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_pipeline.py",
       "source_location": "L19",
       "weight": 0.8,
-      "_src": "run_pipeline_rationale_1",
-      "_tgt": "fundamentals_fetcher_fundamentalsfetcher",
+      "_src": "fundamentals_fetcher_fundamentalsfetcher",
+      "_tgt": "run_pipeline_rationale_1",
+      "confidence_score": 0.5,
       "source": "fundamentals_fetcher_fundamentalsfetcher",
-      "target": "run_pipeline_rationale_1",
-      "confidence_score": 0.5
+      "target": "run_pipeline_rationale_1"
     },
     {
       "relation": "uses",
@@ -15365,11 +15365,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_pipeline.py",
       "source_location": "L19",
       "weight": 0.8,
-      "_src": "run_pipeline_rationale_41",
-      "_tgt": "fundamentals_fetcher_fundamentalsfetcher",
+      "_src": "fundamentals_fetcher_fundamentalsfetcher",
+      "_tgt": "run_pipeline_rationale_41",
+      "confidence_score": 0.5,
       "source": "fundamentals_fetcher_fundamentalsfetcher",
-      "target": "run_pipeline_rationale_41",
-      "confidence_score": 0.5
+      "target": "run_pipeline_rationale_41"
     },
     {
       "relation": "uses",
@@ -15377,11 +15377,11 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_pipeline.py",
       "source_location": "L19",
       "weight": 0.8,
-      "_src": "run_pipeline_rationale_99",
-      "_tgt": "fundamentals_fetcher_fundamentalsfetcher",
+      "_src": "fundamentals_fetcher_fundamentalsfetcher",
+      "_tgt": "run_pipeline_rationale_99",
+      "confidence_score": 0.5,
       "source": "fundamentals_fetcher_fundamentalsfetcher",
-      "target": "run_pipeline_rationale_99",
-      "confidence_score": 0.5
+      "target": "run_pipeline_rationale_99"
     },
     {
       "relation": "calls",
@@ -17526,8 +17526,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_pipeline.py",
       "source_location": "L75",
       "weight": 1.0,
-      "_src": "run_pipeline_run_pipeline",
-      "_tgt": "gold_fetcher_run_gold_price_pipeline",
+      "_src": "gold_fetcher_run_gold_price_pipeline",
+      "_tgt": "run_pipeline_run_pipeline",
       "source": "gold_fetcher_run_gold_price_pipeline",
       "target": "run_pipeline_run_pipeline"
     },
@@ -18438,8 +18438,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/app/pipelines/daily_pipeline.py",
       "source_location": "L138",
       "weight": 1.0,
-      "_src": "daily_pipeline_dailypipeline_run_scoring",
-      "_tgt": "score_calculator_run_scoring_pipeline",
+      "_src": "score_calculator_run_scoring_pipeline",
+      "_tgt": "daily_pipeline_dailypipeline_run_scoring",
       "source": "score_calculator_run_scoring_pipeline",
       "target": "daily_pipeline_dailypipeline_run_scoring"
     },
@@ -18450,8 +18450,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_pipeline.py",
       "source_location": "L84",
       "weight": 1.0,
-      "_src": "run_pipeline_run_pipeline",
-      "_tgt": "score_calculator_run_scoring_pipeline",
+      "_src": "score_calculator_run_scoring_pipeline",
+      "_tgt": "run_pipeline_run_pipeline",
       "source": "score_calculator_run_scoring_pipeline",
       "target": "run_pipeline_run_pipeline"
     },
@@ -19734,8 +19734,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_pipeline.py",
       "source_location": "L53",
       "weight": 1.0,
-      "_src": "run_pipeline_run_pipeline",
-      "_tgt": "daily_pipeline_dailypipeline_run_fundamentals_pipeline",
+      "_src": "daily_pipeline_dailypipeline_run_fundamentals_pipeline",
+      "_tgt": "run_pipeline_run_pipeline",
       "source": "daily_pipeline_dailypipeline_run_fundamentals_pipeline",
       "target": "run_pipeline_run_pipeline"
     },
@@ -19890,8 +19890,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/init_db.py",
       "source_location": "L103",
       "weight": 1.0,
-      "_src": "init_db_main",
-      "_tgt": "daily_pipeline_dailypipeline_run",
+      "_src": "daily_pipeline_dailypipeline_run",
+      "_tgt": "init_db_main",
       "source": "daily_pipeline_dailypipeline_run",
       "target": "init_db_main"
     },
@@ -19902,8 +19902,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/seed_stocks.py",
       "source_location": "L85",
       "weight": 1.0,
-      "_src": "seed_stocks_main",
-      "_tgt": "daily_pipeline_dailypipeline_run",
+      "_src": "daily_pipeline_dailypipeline_run",
+      "_tgt": "seed_stocks_main",
       "source": "daily_pipeline_dailypipeline_run",
       "target": "seed_stocks_main"
     },
@@ -19914,8 +19914,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_pipeline.py",
       "source_location": "L146",
       "weight": 1.0,
-      "_src": "run_pipeline_main",
-      "_tgt": "daily_pipeline_dailypipeline_run",
+      "_src": "daily_pipeline_dailypipeline_run",
+      "_tgt": "run_pipeline_main",
       "source": "daily_pipeline_dailypipeline_run",
       "target": "run_pipeline_main"
     },
@@ -24522,8 +24522,8 @@
       "source_file": "/home/shades/Documents/Claude_Projects/Flock/backend/scripts/run_migrations.py",
       "source_location": "L38",
       "weight": 1.0,
-      "_src": "run_migrations_run_migrations",
-      "_tgt": "add_scd2_to_fundamentals_and_flock_scores_upgrade",
+      "_src": "add_scd2_to_fundamentals_and_flock_scores_upgrade",
+      "_tgt": "run_migrations_run_migrations",
       "source": "add_scd2_to_fundamentals_and_flock_scores_upgrade",
       "target": "run_migrations_run_migrations"
     },
