@@ -314,13 +314,13 @@ let portfolio = JSON.parse(sessionStorage.getItem('flock_portfolio') || '[]');
         if (inputMode === 'pct') {
           return `
           <div class="weight-row" style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(191,201,193,0.15);">
-            <span style="font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;min-width:72px;color:#1a1c16;">${t}</span>
-            <div style="flex:1;position:relative;">
+            <span style="font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;width:80px;flex-shrink:0;color:#1a1c16;">${t}</span>
+            <div style="width:110px;position:relative;flex-shrink:0;">
               <input type="text" inputmode="decimal" id="wi-${t}" value="${pct.toFixed(1)}"
                 oninput="updateWeight('${t}', this.value)" onkeydown="allowDecimalOnly(event)"
-                style="width:100%;padding:8px 36px 8px 12px;background:#f4f4ea;border:1.5px solid #bfc9c1;border-radius:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#1a1c16;outline:none;transition:border-color 0.2s;"
+                style="width:100%;padding:8px 32px 8px 10px;background:#f4f4ea;border:1.5px solid #bfc9c1;border-radius:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#1a1c16;outline:none;transition:border-color 0.2s;"
                 onfocus="this.style.borderColor='#0f5238'" onblur="this.style.borderColor='#bfc9c1'"/>
-              <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:#707973;pointer-events:none;">%</span>
+              <span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:#707973;pointer-events:none;">%</span>
             </div>
             <span id="wa-${t}" style="min-width:80px;text-align:right;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:#0e6c4a;white-space:nowrap;">${formatINR(amt)}</span>
             <button onclick="removeStock('${t}')" title="Remove" style="width:28px;height:28px;border-radius:50%;border:none;background:#eeefe4;color:#707973;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.2s,color 0.2s;" onmouseenter="this.style.background='#ffdad6';this.style.color='#ba1a1a'" onmouseleave="this.style.background='#eeefe4';this.style.color='#707973'">✕</button>
@@ -330,12 +330,12 @@ let portfolio = JSON.parse(sessionStorage.getItem('flock_portfolio') || '[]');
           const fmtAmt = Math.round(amt).toLocaleString('en-IN');
           return `
           <div class="weight-row" style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(191,201,193,0.15);">
-            <span style="font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;min-width:72px;color:#1a1c16;">${t}</span>
-            <div style="flex:1;position:relative;">
+            <span style="font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;width:80px;flex-shrink:0;color:#1a1c16;">${t}</span>
+            <div style="width:150px;position:relative;flex-shrink:0;">
               <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:#707973;pointer-events:none;">₹</span>
               <input type="text" inputmode="numeric" id="wi-${t}" value="${fmtAmt}"
                 oninput="updateAmount('${t}', this.value)" onkeydown="allowIntegerOnly(event)"
-                style="width:100%;padding:8px 12px 8px 28px;background:#f4f4ea;border:1.5px solid #bfc9c1;border-radius:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#1a1c16;outline:none;transition:border-color 0.2s;"
+                style="width:100%;padding:8px 10px 8px 26px;background:#f4f4ea;border:1.5px solid #bfc9c1;border-radius:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#1a1c16;outline:none;transition:border-color 0.2s;"
                 onfocus="this.style.borderColor='#0f5238'" onblur="this.style.borderColor='#bfc9c1'"/>
             </div>
             <span id="wa-${t}" style="min-width:52px;text-align:right;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:#0e6c4a;white-space:nowrap;">${pct.toFixed(1)}%</span>
