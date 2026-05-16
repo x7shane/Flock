@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portfolio Simulator | Flock</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#ffb3b5",
+                      "outline-variant": "#bfc9c1",
+                      "on-error-container": "#93000a",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-container": "#98454b",
+                      "surface-bright": "#fafaef",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed": "#002114",
+                      "background": "#fafaef",
+                      "surface-container": "#eeefe4",
+                      "inverse-on-surface": "#f1f1e7",
+                      "tertiary-fixed": "#ffdada",
+                      "on-surface": "#1a1c16",
+                      "error": "#ba1a1a",
+                      "surface-tint": "#2c694e",
+                      "on-error": "#ffffff",
+                      "on-background": "#1a1c16",
+                      "secondary": "#0e6c4a",
+                      "on-secondary-container": "#19724f",
+                      "secondary-container": "#a0f4c8",
+                      "on-secondary-fixed-variant": "#005236",
+                      "surface-dim": "#dadbd0",
+                      "surface-container-highest": "#e2e3d9",
+                      "on-tertiary-fixed": "#3f020c",
+                      "on-surface-variant": "#404943",
+                      "inverse-surface": "#2f312a",
+                      "primary-container": "#2d6a4f",
+                      "surface": "#fafaef",
+                      "primary-fixed-dim": "#95d4b3",
+                      "primary-fixed": "#b1f0ce",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed-dim": "#85d7ad",
+                      "tertiary": "#7a2e35",
+                      "primary": "#0f5238",
+                      "on-primary": "#ffffff",
+                      "surface-container-low": "#f4f4ea",
+                      "surface-container-high": "#e8e9de",
+                      "on-primary-fixed-variant": "#0e5138",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#a8e7c5",
+                      "secondary-fixed": "#a0f4c8",
+                      "on-tertiary-container": "#ffcece",
+                      "inverse-primary": "#95d4b3",
+                      "on-secondary-fixed": "#002113",
+                      "outline": "#707973",
+                      "on-tertiary-fixed-variant": "#792e34",
+                      "surface-variant": "#e2e3d9"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Manrope"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #fafaef; }
+        ::-webkit-scrollbar-thumb { background: #bfc9c1; border-radius: 10px; }
+        /* KPI card info tooltip */
+        .kpi-info { position:relative; display:inline-flex; }
+        .kpi-info-btn {
+            width:18px; height:18px; border-radius:50%; border:1.5px solid #bfc9c1;
+            background:transparent; color:#707973; font-family:'Inter',sans-serif;
+            font-size:10px; font-weight:700; cursor:default; display:flex;
+            align-items:center; justify-content:center; flex-shrink:0;
+            transition:border-color 0.15s, color 0.15s;
+        }
+        .kpi-info:hover .kpi-info-btn { border-color:#0f5238; color:#0f5238; }
+        .kpi-tooltip {
+            display:none; position:absolute; bottom:calc(100% + 8px); right:0;
+            width:210px; background:#1a1c16; color:#fafaef;
+            font-family:'Inter',sans-serif; font-size:14px; line-height:1.55;
+            padding:10px 12px; border-radius:10px;
+            box-shadow:0 8px 24px rgba(0,0,0,0.18);
+            z-index:100; pointer-events:none;
+        }
+        .kpi-tooltip::after {
+            content:''; position:absolute; top:100%; right:8px;
+            border:6px solid transparent; border-top-color:#1a1c16;
+        }
+        .kpi-info:hover .kpi-tooltip { display:block; }
+    </style>
+
+  <script src="/js/format.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+
+  <script src="/js/nav.js" defer></script>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-50 bg-surface-container-low flex flex-col py-10">
+  <div class="px-8 mb-10">
+    <h1 class="text-3xl font-black text-primary font-headline tracking-tighter">Flock</h1>
+    <p class="uppercase tracking-widest text-[10px] font-bold text-on-surface-variant mt-1">Digital Curator</p>
+  </div>
+  <nav class="flex-1 flex flex-col">
+    <a href="/index.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
+      <span class="material-symbols-outlined">home</span><span>Home</span>
+    </a>
+    <a href="/explorer.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
+      <span class="material-symbols-outlined">search</span><span>Explorer</span>
+    </a>
+    <!-- Active -->
+    <a href="/portfolio.html" class="bg-surface-container-lowest text-primary py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold shadow-sm">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">pie_chart</span><span>Portfolio</span>
+    </a>
+    <a href="/sip.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
+      <span class="material-symbols-outlined">trending_up</span><span>SIP Calculator</span>
+    </a>
+  </nav>
+  <div class="px-8 mt-auto border-t border-outline-variant/20 pt-6 flex items-center gap-3">
+    <div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center">
+      <span class="material-symbols-outlined text-sm">person</span>
+    </div>
+    <div>
+      <p class="text-xs font-bold">Account</p>
+      <p class="text-[10px] text-on-surface-variant">Premium Curator</p>
+    </div>
+  </div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-40 w-full px-8 py-4 flex justify-between items-center bg-surface/80 backdrop-blur-md">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm focus:ring-1 focus:ring-primary/20 placeholder:text-outline" placeholder="Search assets or strategies..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-2">
+<img alt="User profile" data-alt="close-up portrait of a professional man in a minimalist office with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmwBItPPjQ2A9cRMkZ86UJK2hhK0E7XO3V6cZzpX6m8m3QQXegId8dU7aoCzk2KDSEjFHYqBGtWGVnOjxw72kpXMnlkyFNqiB3CNIX_HKk1ikuXqeo4HSudIH-b6GTuUVhLIKIqHXkhs7wkmTakzV34SI2U0Gui46nLPUJoFc5yba7Cfl0djnAaS2_4lsbx4jpe5rwdgotKKNtgCqbZ5Ze9q_ulCELUPxWAcAISMHwdLNZbu1jdp8BTDsSeohFZwUYRLBeeuwKLA"/>
+</div>
+</div>
+</header>
+<div class="p-10 max-w-7xl mx-auto">
+<!-- Heading -->
+<div class="mb-10">
+<h2 class="text-4xl font-extrabold font-headline tracking-tight text-on-surface">Portfolio Simulator</h2>
+<div class="h-1 w-20 bg-primary mt-4 rounded-full"></div>
+</div>
+<!-- SECTION 1: Portfolio Builder -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+<!-- Left Column: Portfolio Weights -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-8 rounded-xl shadow-[0_8px_32px_rgba(26,28,22,0.04)]">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-xl font-bold font-headline">Portfolio Weights</h3>
+<div style="display:flex;align-items:center;gap:10px;">
+  <!-- Mode toggle pill -->
+  <div id="mode-toggle" style="display:flex;background:#eeefe4;border-radius:9999px;padding:3px;gap:2px;">
+    <button id="btn-pct" onclick="toggleInputMode('pct')" style="padding:4px 14px;border-radius:9999px;border:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.18s;background:#0f5238;color:#fff;">%</button>
+    <button id="btn-amt" onclick="toggleInputMode('amt')" style="padding:4px 14px;border-radius:9999px;border:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.18s;background:transparent;color:#707973;">₹</button>
+  </div>
+  <div id="total-badge" class="flex items-center gap-2 px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-sm font-bold transition-all">
+    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+    <span id="total-badge-pct">0%</span>
+  </div>
+</div>
+</div>
+<div class="space-y-6 mb-10">
+<!-- Empty State (shown when no stocks selected) -->
+<div id="empty-msg" class="flex flex-col items-center justify-center py-16 text-center">
+  <div class="w-16 h-16 bg-surface-container rounded-2xl flex items-center justify-center mb-4">
+    <span class="material-symbols-outlined text-3xl text-on-surface-variant">pie_chart</span>
+  </div>
+  <h4 class="font-headline font-bold text-lg text-on-surface mb-2">No stocks selected yet</h4>
+  <p class="text-on-surface-variant text-sm mb-6 max-w-xs">Browse the Nifty 200 universe and add stocks to start building your portfolio.</p>
+  <a href="/explorer.html" class="px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl text-sm font-bold shadow-lg hover:opacity-90 transition-opacity flex items-center gap-2">
+    <span class="material-symbols-outlined text-base">search</span>
+    Browse Stock Explorer →
+  </a>
+</div>
+<!-- Dynamic weight rows injected by JS -->
+<div id="weight-list"></div>
+</div>
+<div class="grid grid-cols-2 gap-6 mb-8">
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Investment Capital</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-on-surface-variant">₹</span>
+<input id="capital-input"
+  type="text" inputmode="numeric"
+  value="10,00,000"
+  class="w-full pl-10 pr-4 py-3 bg-surface-container-low border-none rounded-xl text-lg font-bold focus:ring-1 focus:ring-primary/40"
+  onkeydown="if(!/[\d\b]/.test(event.key) && !['Backspace','Delete','ArrowLeft','ArrowRight','Home','End','Tab'].includes(event.key)) event.preventDefault()"
+  oninput="formatCapitalInput(this)"
+/>
+</div>
+
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Time Horizon</label>
+<div class="relative">
+  <input id="horizon-input" type="number" min="1" max="30" value="5"
+    class="w-full pl-4 pr-14 py-3 bg-surface-container-low border-none rounded-xl text-lg font-bold focus:ring-1 focus:ring-primary/40"
+    style="appearance:textfield;-moz-appearance:textfield;"
+  />
+  <span class="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-bold text-on-surface-variant pointer-events-none">Yrs</span>
+</div>
+</div>
+
+</div>
+<!-- Simulation Methodology Panel -->
+<div style="background:#f4f4ea;border-radius:14px;padding:18px 22px;margin-bottom:20px;">
+  <p style="font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.10em;text-transform:uppercase;color:#707973;margin:0 0 14px 0;">Simulation Engine</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+    <div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+        <span class="material-symbols-outlined" style="font-size:15px;color:#0f5238;">scatter_plot</span>
+        <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:11px;color:#1a1c16;">Monte Carlo</span>
+      </div>
+      <p style="font-family:'Inter',sans-serif;font-size:10.5px;color:#404943;line-height:1.55;margin:0;">Runs 10,000 independent simulated future paths for your portfolio using randomised return sequences drawn from GBM.</p>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+        <span class="material-symbols-outlined" style="font-size:15px;color:#0f5238;">show_chart</span>
+        <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:11px;color:#1a1c16;">GBM Model</span>
+      </div>
+      <p style="font-family:'Inter',sans-serif;font-size:10.5px;color:#404943;line-height:1.55;margin:0;">Geometric Brownian Motion models correlated asset price paths using each stock's historical expected return and annualised volatility.</p>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+        <span class="material-symbols-outlined" style="font-size:15px;color:#0f5238;">history</span>
+        <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:11px;color:#1a1c16;">Stress Tests</span>
+      </div>
+      <p style="font-family:'Inter',sans-serif;font-size:10.5px;color:#404943;line-height:1.55;margin:0;">Replays your portfolio against 5 recorded market crises to measure maximum drawdown, worst single day, and recovery duration.</p>
+    </div>
+  </div>
+</div>
+<button id="run-btn" onclick="runSimulation()" disabled class="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-xl font-bold text-lg shadow-lg hover:opacity-90 transition-all flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+                        Run Simulation
+                    </button>
+</div>
+<!-- Right Column: Allocation Chart (Chart.js canvas) -->
+<div class="lg:col-span-5 bg-surface-container-lowest p-8 rounded-xl shadow-[0_8px_32px_rgba(26,28,22,0.04)] flex flex-col">
+  <h3 class="text-xl font-bold font-headline mb-6">Allocation</h3>
+  <div id="pie-empty" class="flex flex-col items-center justify-center flex-1 py-12 text-center text-on-surface-variant">
+    <span class="material-symbols-outlined text-4xl mb-3">donut_large</span>
+    <p class="text-sm">Add stocks in Explorer to see allocation</p>
+  </div>
+  <div id="pie-wrap" class="hidden flex-1 flex flex-col">
+    <div class="relative h-64 w-full">
+      <canvas id="pie-chart"></canvas>
+    </div>
+    <div id="weight-total" class="mt-4 text-center text-sm font-bold text-on-surface-variant">Total: 0%</div>
+  </div>
+</div>
+</div>
+<!-- SECTION 2: Simulation Results — hidden until Run Simulation -->
+<div id="results-section" class="hidden space-y-12 mt-4">
+  <div class="flex items-center gap-4 mb-6">
+    <h3 class="text-2xl font-bold font-headline">Simulation Results</h3>
+    <div class="h-px flex-1 bg-outline-variant/20"></div>
+  </div>
+  <!-- Stats Grid (populated by renderStats) -->
+  <div id="stats-grid" class="grid grid-cols-2 md:grid-cols-3 gap-6"></div>
+  <!-- Stock-Wise Performance Metrics -->
+  <div>
+    <h4 class="text-lg font-bold font-headline mb-1">Stock-Wise Performance Outlook</h4>
+    <p style="font-family:'Inter',sans-serif;font-size:11px;color:#707973;margin:0 0 18px 0;">Per-stock probability estimates derived from GBM parameters. Sorted by probability of positive return — highest first.</p>
+    <div id="stock-metrics-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;"></div>
+  </div>
+  <!-- Return Distribution Chart (populated by renderDistChart) -->
+  <div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_8px_32px_rgba(26,28,22,0.04)]">
+    <div class="flex justify-between items-end mb-6">
+      <div>
+        <h4 class="text-lg font-bold font-headline">Return Distribution</h4>
+        <p class="text-xs text-on-surface-variant">Based on 10,000 Monte Carlo iterations</p>
+      </div>
+    </div>
+    <div class="relative h-56 w-full">
+      <canvas id="dist-chart"></canvas>
+    </div>
+  </div>
+  <!-- Stress Tests (populated by renderCrisisCards) -->
+  <div>
+    <h4 class="text-lg font-bold font-headline mb-6">Historical Stress Tests</h4>
+    <div id="crisis-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4"></div>
+  </div>
+  <!-- SEBI Disclaimer -->
+  <div class="bg-[#fff9e6] p-5 rounded-xl flex gap-3 items-start border border-[#f5e1a4]">
+    <span class="material-symbols-outlined text-[#856404] text-lg mt-0.5">warning</span>
+    <p class="text-xs text-[#856404] leading-relaxed"><strong>SEBI Disclaimer:</strong> Flock is an educational tool, NOT investment advice. Past performance does not guarantee future results. Simulation results are probabilistic estimates only.</p>
+  </div>
+</div>
+<!-- Pre-simulation placeholder -->
+<div id="sim-placeholder" class="flex flex-col items-center justify-center py-20 text-center text-on-surface-variant mt-4">
+  <span class="material-symbols-outlined text-5xl mb-4">scatter_plot</span>
+  <h4 class="font-headline font-bold text-xl text-on-surface mb-2">Ready to simulate</h4>
+  <p class="text-sm max-w-sm">Set your portfolio weights and capital above, then click <strong>Run Simulation</strong> to see 10,000 Monte Carlo paths.</p>
+</div>
+<footer class="mt-20 border-t border-outline-variant/10 px-10 py-10">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 opacity-60">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 bg-primary rounded flex items-center justify-center text-[10px] font-bold text-on-primary">F</span>
+<span class="text-xs font-bold tracking-tight">Flock Portfolio Intelligence</span>
+</div>
+<div class="flex gap-8">
+<a class="text-[10px] font-bold uppercase tracking-widest hover:text-primary" href="#">Disclosures</a>
+<a class="text-[10px] font-bold uppercase tracking-widest hover:text-primary" href="#">Data Methodology</a>
+<a class="text-[10px] font-bold uppercase tracking-widest hover:text-primary" href="#">Support</a>
+</div>
+<p class="text-[10px] text-on-surface-variant">© 2024 Flock. All rights reserved.</p>
+</div>
+</footer>
+</main>
+<script>
+let portfolio = JSON.parse(sessionStorage.getItem('flock_portfolio') || '[]');
+    let weights = {};
+    let pieChart = null;
+    let distChart = null;
+    let inputMode = 'pct'; // 'pct' | 'amt'
+
+    // Initialize
+    function init() {
+      if (portfolio.length === 0) return;
+      document.getElementById('empty-msg').style.display = 'none';
+      document.getElementById('run-btn').disabled = false;
+
+      // Equal weights
+      const w = +(100 / portfolio.length).toFixed(1);
+      portfolio.forEach(t => weights[t] = w);
+
+      renderWeights();
+      renderPieChart();
+    }
+
+    function renderWeights() {
+      const list = document.getElementById('weight-list');
+      const cap = getCapital();
+      list.innerHTML = portfolio.map(t => {
+        const pct = weights[t] || 0;
+        const amt = pct / 100 * cap;
+        if (inputMode === 'pct') {
+          return `
+          <div class="weight-row" style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(191,201,193,0.15);">
+            <span style="font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;width:80px;flex-shrink:0;color:#1a1c16;">${t}</span>
+            <div style="width:110px;position:relative;flex-shrink:0;">
+              <input type="text" inputmode="decimal" id="wi-${t}" value="${pct.toFixed(1)}"
+                oninput="updateWeight('${t}', this.value)" onkeydown="allowDecimalOnly(event)"
+                style="width:100%;padding:8px 32px 8px 10px;background:#f4f4ea;border:1.5px solid #bfc9c1;border-radius:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#1a1c16;outline:none;transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='#0f5238'" onblur="this.style.borderColor='#bfc9c1'"/>
+              <span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:#707973;pointer-events:none;">%</span>
+            </div>
+            <span id="wa-${t}" style="min-width:80px;text-align:right;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:#0e6c4a;white-space:nowrap;">${formatINR(amt)}</span>
+            <button onclick="removeStock('${t}')" title="Remove" style="width:28px;height:28px;border-radius:50%;border:none;background:#eeefe4;color:#707973;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.2s,color 0.2s;" onmouseenter="this.style.background='#ffdad6';this.style.color='#ba1a1a'" onmouseleave="this.style.background='#eeefe4';this.style.color='#707973'">✕</button>
+          </div>`;
+        } else {
+          // ₹ amount mode
+          const fmtAmt = Math.round(amt).toLocaleString('en-IN');
+          return `
+          <div class="weight-row" style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(191,201,193,0.15);">
+            <span style="font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;width:80px;flex-shrink:0;color:#1a1c16;">${t}</span>
+            <div style="width:150px;position:relative;flex-shrink:0;">
+              <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:#707973;pointer-events:none;">₹</span>
+              <input type="text" inputmode="numeric" id="wi-${t}" value="${fmtAmt}"
+                oninput="updateAmount('${t}', this.value)" onkeydown="allowIntegerOnly(event)"
+                style="width:100%;padding:8px 10px 8px 26px;background:#f4f4ea;border:1.5px solid #bfc9c1;border-radius:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#1a1c16;outline:none;transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='#0f5238'" onblur="this.style.borderColor='#bfc9c1'"/>
+            </div>
+            <span id="wa-${t}" style="min-width:52px;text-align:right;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:#0e6c4a;white-space:nowrap;">${pct.toFixed(1)}%</span>
+            <button onclick="removeStock('${t}')" title="Remove" style="width:28px;height:28px;border-radius:50%;border:none;background:#eeefe4;color:#707973;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.2s,color 0.2s;" onmouseenter="this.style.background='#ffdad6';this.style.color='#ba1a1a'" onmouseleave="this.style.background='#eeefe4';this.style.color='#707973'">✕</button>
+          </div>`;
+        }
+      }).join('');
+      updateWeightTotal();
+    }
+
+    function getCapital() {
+      const raw = document.getElementById('capital-input').value.replace(/,/g, '');
+      return parseFloat(raw) || 1_000_000;
+    }
+
+    function formatCapitalInput(el) {
+      const pos = el.selectionStart;
+      const before = el.value.length;
+      const digits = el.value.replace(/[^\d]/g, '');
+      if (!digits) { el.value = ''; return; }
+      const num = parseInt(digits, 10);
+      el.value = num.toLocaleString('en-IN');
+      const after = el.value.length;
+      el.setSelectionRange(pos + (after - before), pos + (after - before));
+      // In ₹ mode, re-derive weights from amounts and re-render
+      if (inputMode === 'amt') {
+        renderWeights();
+      } else {
+        // In % mode, just refresh side chips
+        const cap = parseFloat(digits) || 0;
+        portfolio.forEach(t => {
+          const amtEl = document.getElementById(`wa-${t}`);
+          if (amtEl) amtEl.textContent = formatINR((weights[t] || 0) / 100 * cap);
+        });
+      }
+      updateWeightTotal();
+      renderPieChart();
+    }
+
+    function allowDecimalOnly(e) {
+      const allowed = ['Backspace','Delete','ArrowLeft','ArrowRight','Home','End','Tab'];
+      if (allowed.includes(e.key)) return;
+      // Allow one dot
+      if (e.key === '.' && !e.target.value.includes('.')) return;
+      // Allow digits
+      if (/^\d$/.test(e.key)) return;
+      e.preventDefault();
+    }
+
+    function toggleInputMode(mode) {
+      inputMode = mode;
+      // Update toggle button styles
+      document.getElementById('btn-pct').style.background = mode === 'pct' ? '#0f5238' : 'transparent';
+      document.getElementById('btn-pct').style.color    = mode === 'pct' ? '#fff' : '#707973';
+      document.getElementById('btn-amt').style.background = mode === 'amt' ? '#0f5238' : 'transparent';
+      document.getElementById('btn-amt').style.color    = mode === 'amt' ? '#fff' : '#707973';
+      renderWeights();
+      updateWeightTotal();
+    }
+
+    function updateWeight(ticker, rawVal) {
+      let val = parseFloat(rawVal);
+      if (isNaN(val)) return;
+      val = Math.max(0, val);
+      weights[ticker] = val;
+      const cap = getCapital();
+      const amtEl = document.getElementById(`wa-${ticker}`);
+      if (amtEl) amtEl.textContent = formatINR(val / 100 * cap);
+      updateWeightTotal();
+      renderPieChart();
+    }
+
+    function updateAmount(ticker, rawVal) {
+      // Format with Indian commas as user types
+      const el = document.getElementById(`wi-${ticker}`);
+      const pos = el.selectionStart;
+      const before = el.value.length;
+      const digits = rawVal.replace(/[^\d]/g, '');
+      const num = digits ? parseInt(digits, 10) : 0;
+      el.value = num ? num.toLocaleString('en-IN') : '';
+      const after = el.value.length;
+      try { el.setSelectionRange(pos + (after - before), pos + (after - before)); } catch(e){}
+
+      const cap = getCapital();
+      weights[ticker] = cap > 0 ? (num / cap * 100) : 0;
+      const pctEl = document.getElementById(`wa-${ticker}`);
+      if (pctEl) pctEl.textContent = (weights[ticker] || 0).toFixed(1) + '%';
+      updateWeightTotal();
+      renderPieChart();
+    }
+
+    function allowIntegerOnly(e) {
+      const nav = ['Backspace','Delete','ArrowLeft','ArrowRight','Home','End','Tab'];
+      if (nav.includes(e.key)) return;
+      if (/^\d$/.test(e.key)) return;
+      e.preventDefault();
+    }
+
+
+
+
+    function removeStock(ticker) {
+      portfolio = portfolio.filter(t => t !== ticker);
+      delete weights[ticker];
+      sessionStorage.setItem('flock_portfolio', JSON.stringify(portfolio));
+      if (portfolio.length === 0) { document.getElementById('empty-msg').style.display = ''; document.getElementById('run-btn').disabled = true; }
+      renderWeights();
+      renderPieChart();
+    }
+
+    function updateWeightTotal() {
+      const total = Object.values(weights).reduce((a, b) => a + b, 0);
+      const cap = getCapital();
+
+      // Inline total below pie chart
+      const el = document.getElementById('weight-total');
+      if (el) {
+        el.textContent = inputMode === 'pct'
+          ? `Total: ${total.toFixed(1)}%`
+          : `Total: ${formatINR(total / 100 * cap)} (${total.toFixed(1)}%)`;
+        el.className = Math.abs(total - 100) > 1 ? 'weight-total invalid' : 'weight-total';
+      }
+
+      // Header badge
+      const badge = document.getElementById('total-badge');
+      const badgePct = document.getElementById('total-badge-pct');
+      if (badge && badgePct) {
+        badgePct.textContent = inputMode === 'pct'
+          ? `${total.toFixed(1)}%`
+          : `${formatINR(total / 100 * cap)}`;
+        if (total > 100.05) {
+          badge.style.background = '#ffdad6'; badge.style.color = '#93000a';
+        } else if (Math.abs(total - 100) <= 1) {
+          badge.style.background = '#a0f4c8'; badge.style.color = '#0f5238';
+        } else {
+          badge.style.background = '#fff3cd'; badge.style.color = '#856404';
+        }
+      }
+    }
+
+
+
+
+    // Pie Chart
+    function renderPieChart() {
+      if (portfolio.length === 0) {
+        document.getElementById('pie-empty').classList.remove('hidden');
+        document.getElementById('pie-wrap').classList.add('hidden');
+        return;
+      }
+      document.getElementById('pie-empty').classList.add('hidden');
+      document.getElementById('pie-wrap').classList.remove('hidden');
+      const ctx = document.getElementById('pie-chart').getContext('2d');
+      const colors = ['#0f5238','#0e6c4a','#a0f4c8','#2d6a4f','#95d4b3','#dadbd0','#7a2e35','#ffdada','#404943','#bfc9c1'];
+      const cap = getCapital();
+      if (pieChart) pieChart.destroy();
+      pieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: portfolio,
+          datasets: [{ data: portfolio.map(t => weights[t]||0), backgroundColor: colors.slice(0, portfolio.length), borderWidth: 0 }],
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { position:'bottom', labels: { color:'#404943', font: { family:'Inter', size:11 }, padding:12 } },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  const pct = ctx.parsed;
+                  const amt = formatINR(pct / 100 * cap);
+                  return `  ${pct.toFixed(1)}%  ·  ${amt}`;
+                }
+              },
+              backgroundColor: '#1a1c16',
+              titleColor: '#fafaef',
+              bodyColor: '#a0f4c8',
+              padding: 10,
+              cornerRadius: 8,
+              titleFont: { family: 'Manrope', weight: '700' },
+              bodyFont: { family: 'Inter', size: 12 },
+            }
+          },
+          cutout: '65%',
+        },
+      });
+    }
+
+    // ── Seeded PRNG (Mulberry32) — replicates backend seed-42 logic ──
+    function mulberry32(seed) {
+      return function() {
+        seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+        var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      };
+    }
+
+    // Standard normal CDF (Abramowitz & Stegun)
+    function normcdf(x) {
+      const t = 1 / (1 + 0.2316419 * Math.abs(x));
+      const d = 0.3989423 * Math.exp(-x * x / 2);
+      const poly = t * (0.3193815 + t * (-0.3565638 + t * (1.7814779 + t * (-1.8212560 + t * 1.3302744))));
+      const p = 1 - d * poly;
+      return x >= 0 ? p : 1 - p;
+    }
+
+    // Derive per-stock GBM params matching backend seed-42 synthetic data
+    function getStockParams(tickers, horizon) {
+      const rng = mulberry32(42);
+      const n = tickers.length;
+      // Backend generates all expected_returns first, then all vols
+      const mus    = Array.from({length: n}, () => 0.08 + rng() * 0.08);
+      const sigmas = Array.from({length: n}, () => 0.18 + rng() * 0.12);
+      const T = horizon;
+      return tickers.map((ticker, i) => {
+        const mu = mus[i], sigma = sigmas[i];
+        const drift  = (mu - 0.5 * sigma * sigma) * T;
+        const vol_t  = sigma * Math.sqrt(T);
+        const probPositive = normcdf(drift / vol_t) * 100;
+        const prob10pct    = normcdf((drift - T * Math.log(1.10)) / vol_t) * 100;
+        const risk = sigma < 0.22 ? 'Low' : sigma < 0.26 ? 'Medium' : 'High';
+        return { ticker, mu, sigma, probPositive, prob10pct, risk };
+      }).sort((a, b) => b.probPositive - a.probPositive);
+    }
+
+    function renderStockMetrics(horizon) {
+      const params = getStockParams(portfolio, horizon);
+      const grid = document.getElementById('stock-metrics-grid');
+      const riskStyle = {
+        Low:    { bg: '#a0f4c8', color: '#0f5238', dot: '#0f5238' },
+        Medium: { bg: '#fff3cd', color: '#856404', dot: '#f5c518' },
+        High:   { bg: '#ffdad6', color: '#93000a', dot: '#ba1a1a' },
+      };
+      grid.innerHTML = params.map((p, idx) => {
+        const rs = riskStyle[p.risk];
+        const w  = (weights[p.ticker] || 0).toFixed(1);
+        const topBadge = idx === 0
+          ? `<div style="position:absolute;top:-9px;right:14px;background:#0f5238;color:#fff;font-family:'Manrope',sans-serif;font-size:9px;font-weight:800;letter-spacing:0.08em;padding:3px 10px;border-radius:99px;text-transform:uppercase;">Top Pick</div>`
+          : '';
+        return `
+        <div style="background:#fafaef;border:1px solid rgba(191,201,193,0.3);border-radius:16px;padding:18px;position:relative;transition:box-shadow 0.2s;"
+             onmouseenter="this.style.boxShadow='0 8px 24px rgba(15,82,56,0.10)'"
+             onmouseleave="this.style.boxShadow='none'">
+          ${topBadge}
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
+            <div>
+              <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:#1a1c16;">${p.ticker}</div>
+              <div style="font-family:'Inter',sans-serif;font-size:11px;color:#707973;margin-top:2px;">Weight: ${w}%</div>
+            </div>
+            <div style="background:${rs.bg};color:${rs.color};font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.05em;padding:3px 10px;border-radius:99px;display:flex;align-items:center;gap:5px;">
+              <div style="width:6px;height:6px;border-radius:50%;background:${rs.dot};"></div>
+              ${p.risk} Risk
+            </div>
+          </div>
+          <div style="margin-bottom:11px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+              <span style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:#404943;text-transform:uppercase;letter-spacing:0.06em;">Prob. Profit</span>
+              <span style="font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;color:#0f5238;">${p.probPositive.toFixed(1)}%</span>
+            </div>
+            <div style="height:5px;background:#eeefe4;border-radius:99px;overflow:hidden;">
+              <div style="height:100%;width:${Math.min(p.probPositive,100)}%;background:linear-gradient(90deg,#0e6c4a,#0f5238);border-radius:99px;"></div>
+            </div>
+          </div>
+          <div style="margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+              <span style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:#404943;text-transform:uppercase;letter-spacing:0.06em;">Prob. 10%+ CAGR</span>
+              <span style="font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;color:#1a1c16;">${p.prob10pct.toFixed(1)}%</span>
+            </div>
+            <div style="height:5px;background:#eeefe4;border-radius:99px;overflow:hidden;">
+              <div style="height:100%;width:${Math.min(p.prob10pct,100)}%;background:linear-gradient(90deg,#95d4b3,#0e6c4a);border-radius:99px;"></div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:12px;border-top:1px solid rgba(191,201,193,0.2);">
+            <div>
+              <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:#707973;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;">Est. CAGR</div>
+              <div style="font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;color:#1a1c16;">${(p.mu*100).toFixed(1)}%</div>
+            </div>
+            <div>
+              <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:#707973;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;">Volatility</div>
+              <div style="font-family:'Manrope',sans-serif;font-size:13px;font-weight:800;color:#1a1c16;">${(p.sigma*100).toFixed(1)}%</div>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    // Run Simulation
+    async function runSimulation() {
+      const btn = document.getElementById('run-btn');
+      btn.disabled = true; btn.textContent = 'Simulating...';
+      const total = Object.values(weights).reduce((a, b) => a + b, 0);
+      const normalizedWeights = portfolio.map(t => (weights[t] || 0) / total);
+      const capital = getCapital();
+      const horizon = parseInt(document.getElementById('horizon-input').value) || 5;
+
+      try {
+        // Monte Carlo
+        const mc = await SimulateAPI.run({
+          tickers: portfolio,
+          weights: normalizedWeights,
+          initial_capital: capital,
+          time_horizon_years: horizon,
+          num_simulations: 10000,
+        });
+        renderStats(mc.statistics, capital);
+        renderDistChart(mc.statistics);
+
+        // Stress Test
+        const st = await SimulateAPI.stressTest({
+          tickers: portfolio,
+          weights: normalizedWeights,
+          initial_capital: capital,
+        });
+        renderCrisisCards(st.results);
+        renderStockMetrics(horizon);
+
+        document.getElementById('sim-placeholder').classList.add('hidden');
+        document.getElementById('results-section').classList.remove('hidden');
+        document.getElementById('results-section').scrollIntoView({ behavior:'smooth' });
+      } catch (e) {
+        alert('Simulation failed: ' + e.message);
+      } finally {
+        btn.disabled = false; btn.textContent = 'Run Simulation';
+      }
+    }
+
+    function kpiCard(valueHtml, label, tip, extraClass = '') {
+      return `
+        <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between" style="position:relative;">
+          <div style="position:absolute;top:14px;right:14px;" class="kpi-info">
+            <button class="kpi-info-btn" tabindex="-1">i</button>
+            <div class="kpi-tooltip">${tip}</div>
+          </div>
+          <div class="text-3xl font-headline font-bold mt-1 ${extraClass}">${valueHtml}</div>
+          <div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold mt-3">${label}</div>
+        </div>`;
+    }
+
+    function renderStats(stats, capital) {
+      const grid = document.getElementById('stats-grid');
+      grid.innerHTML =
+        kpiCard(
+          formatPctUnsigned(stats.probability_positive_return),
+          'Prob. Positive Return',
+          'Percentage of the 10,000 simulated paths where your portfolio ends up worth more than the initial capital.',
+          'text-secondary'
+        ) +
+        kpiCard(
+          formatPctUnsigned(stats.probability_10pct_cagr),
+          'Prob. 10%+ CAGR',
+          'Probability that your portfolio achieves a Compound Annual Growth Rate above 10% a common benchmark for equity investing.',
+          'text-primary'
+        ) +
+        kpiCard(
+          formatPctUnsigned(stats.median_cagr_pct),
+          'Median CAGR',
+          'The annualised return at the 50th percentile of all simulations. Half the paths grew faster, half grew slower.',
+          'text-on-surface'
+        ) +
+        kpiCard(
+          formatINR(stats.median_final_value_inr),
+          'Median Portfolio Value',
+          'Expected portfolio value at the end of your time horizon in the median simulation scenario.',
+          'text-on-surface'
+        ) +
+        kpiCard(
+          formatINR(stats.var_95_inr),
+          'Value at Risk (95%)',
+          'Maximum amount you could lose in the worst 5% of scenarios. In 95 out of 100 simulations your loss is no greater than this figure.',
+          'text-error'
+        ) +
+        kpiCard(
+          `${formatPct(stats.return_range_10_90_pct[0])} to ${formatPct(stats.return_range_10_90_pct[1])}`,
+          'CAGR Range (10th–90th)',
+          'The likely band of annualised returns covering the middle 80% of all simulated outcomes, excluding the extreme tails.',
+          'text-on-surface'
+        );
+    }
+
+    function renderDistChart(stats) {
+      const ctx = document.getElementById('dist-chart').getContext('2d');
+      if (distChart) distChart.destroy();
+      // Simulated histogram bins from stats
+      const median = stats.median_cagr_pct;
+      const bins = [];
+      for (let i = -20; i <= 40; i += 2) {
+        const center = i + 1;
+        const dist = Math.abs(center - median);
+        const height = Math.max(0, 500 * Math.exp(-(dist*dist) / (2 * 100)));
+        bins.push({ label: i + '%', value: Math.round(height) });
+      }
+      distChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: bins.map(b => b.label),
+          datasets: [{
+            data: bins.map(b => b.value),
+            backgroundColor: bins.map(b => {
+              const v = parseFloat(b.label);
+              if (v < 0) return 'rgba(239,68,68,0.6)';
+              if (v < 10) return 'rgba(245,158,11,0.6)';
+              return 'rgba(16,185,129,0.6)';
+            }),
+            borderRadius: 3,
+          }],
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color:'#1e293b' }, ticks: { color:'#64748b', font: { size:10 } }, title: { display:true, text:'Annual Return (CAGR)', color:'#94a3b8' } },
+            y: { grid: { color:'#1e293b' }, ticks: { color:'#64748b' }, title: { display:true, text:'Frequency', color:'#94a3b8' } },
+          },
+        },
+      });
+    }
+
+    function renderCrisisCards(results) {
+      const grid = document.getElementById('crisis-grid');
+      grid.innerHTML = results.map(r => {
+        if (r.error) return `<div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 shadow-sm hover:scale-[1.02] transition-transform"><h4>${r.crisis_name}</h4><p class="text-muted">${r.error}</p></div>`;
+        const ddColor = r.portfolio_max_drawdown_pct < -20 ? 'text-danger' : r.portfolio_max_drawdown_pct < -10 ? 'text-warning' : 'text-success';
+        return `
+          <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 shadow-sm hover:scale-[1.02] transition-transform">
+            <h4>${r.crisis_name}</h4>
+            <div class="crisis-drawdown ${ddColor}">${formatPct(r.portfolio_max_drawdown_pct)}</div>
+            <div class="text-xs text-on-surface-variant font-medium mt-1">Max drawdown on ${r.max_drawdown_date || '—'}</div>
+            <div class="text-xs text-on-surface-variant font-medium mt-1">Worst day: ${formatPct(r.worst_single_day_pct)}</div>
+            <div class="text-xs text-on-surface-variant font-medium mt-1">Recovery: ${r.recovery_days ? r.recovery_days + ' days' : r.recovery_date}</div>
+            <div class="crisis-meta mt-sm" style="color:var(--text-muted);">Nifty 50: ${formatPct(r.nifty_50_drawdown_pct)}</div>
+          </div>`;
+      }).join('');
+    }
+
+    init();
+</script>
+</body></html>

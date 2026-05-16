@@ -1,0 +1,205 @@
+/*
+ * Flock Layout System — Grid, Responsive, Page Structure
+ */
+
+/* ── Container ─────────────────────────────────────── */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.container-narrow {
+  max-width: 800px;
+}
+
+.container-wide {
+  max-width: 1440px;
+}
+
+/* ── Page wrapper (accounts for fixed navbar) ──────── */
+
+.page {
+  padding-top: 96px; /* 64px navbar + 32px space */
+  padding-bottom: var(--space-3xl);
+  min-height: 100vh;
+}
+
+/* ── Grid System ───────────────────────────────────── */
+
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+.grid-auto-fill {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* ── Flex Utilities ────────────────────────────────── */
+
+.flex       { display: flex; }
+.flex-col   { flex-direction: column; }
+.flex-wrap  { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center  { justify-content: center; }
+.gap-sm  { gap: var(--space-sm); }
+.gap-md  { gap: var(--space-md); }
+.gap-lg  { gap: var(--space-lg); }
+.gap-xl  { gap: var(--space-xl); }
+
+/* ── Section spacing ───────────────────────────────── */
+
+.section {
+  margin-bottom: var(--space-3xl);
+}
+
+.section-header {
+  margin-bottom: var(--space-xl);
+}
+
+.section-header h2 {
+  margin-bottom: var(--space-xs);
+}
+
+.section-header p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* ── Hero Section ──────────────────────────────────── */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: calc(100vh - 64px);
+  padding: var(--space-3xl) var(--space-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  max-width: 700px;
+  margin-bottom: var(--space-lg);
+}
+
+.hero .subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin-bottom: var(--space-2xl);
+  line-height: 1.7;
+}
+
+/* Hero background gradient orbs */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -15%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Split Layout ──────────────────────────────────── */
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.split-sidebar {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: var(--space-xl);
+}
+
+/* ── Responsive ────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+
+  .split, .split-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 { font-size: 2.5rem; }
+}
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .navbar {
+    padding: 0 var(--space-md);
+  }
+
+  .navbar-links {
+    gap: var(--space-md);
+  }
+
+  .hero h1 { font-size: 2rem; }
+  .hero .subtitle { font-size: 1rem; }
+
+  .container {
+    padding: 0 var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-links a span {
+    display: none;
+  }
+
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+}
+
+/* ── Utility ───────────────────────────────────────── */
+
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.hidden { display: none !important; }

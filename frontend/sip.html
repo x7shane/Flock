@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flock | SIP Planner</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#f1f1e7",
+                        "tertiary": "#7a2e35",
+                        "surface-container": "#eeefe4",
+                        "outline-variant": "#bfc9c1",
+                        "surface-container-high": "#e8e9de",
+                        "primary-fixed": "#b1f0ce",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-primary-fixed": "#002114",
+                        "surface": "#fafaef",
+                        "inverse-primary": "#95d4b3",
+                        "on-secondary-fixed": "#002113",
+                        "on-background": "#1a1c16",
+                        "primary-container": "#2d6a4f",
+                        "tertiary-fixed": "#ffdada",
+                        "on-tertiary-fixed-variant": "#792e34",
+                        "on-primary-container": "#a8e7c5",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e2e3d9",
+                        "surface-bright": "#fafaef",
+                        "surface-container-low": "#f4f4ea",
+                        "secondary-fixed": "#a0f4c8",
+                        "background": "#fafaef",
+                        "tertiary-container": "#98454b",
+                        "primary-fixed-dim": "#95d4b3",
+                        "on-tertiary-container": "#ffcece",
+                        "surface-dim": "#dadbd0",
+                        "secondary": "#0e6c4a",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1a1c16",
+                        "inverse-surface": "#2f312a",
+                        "on-primary-fixed-variant": "#0e5138",
+                        "outline": "#707973",
+                        "secondary-container": "#a0f4c8",
+                        "primary": "#0f5238",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e2e3d9",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#404943",
+                        "surface-tint": "#2c694e",
+                        "secondary-fixed-dim": "#85d7ad",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb3b5",
+                        "on-tertiary-fixed": "#3f020c",
+                        "on-secondary-container": "#19724f",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        input[type='range'] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+        }
+        input[type='range']::-webkit-slider-runnable-track {
+            background: #eeefe4;
+            height: 4px;
+            border-radius: 2px;
+        }
+        input[type='range']::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            background: #0f5238;
+            margin-top: -7px;
+            cursor: pointer;
+        }
+    </style>
+
+  <script src="/js/format.js"></script>
+  <script src="/js/api.js"></script>
+
+  <script src="/js/nav.js" defer></script>
+</head>
+<body class="bg-surface font-body text-on-surface flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-50 bg-surface-container-low flex flex-col py-10">
+  <div class="px-8 mb-10">
+    <h1 class="text-3xl font-black text-primary font-headline tracking-tighter">Flock</h1>
+    <p class="uppercase tracking-widest text-[10px] font-bold text-on-surface-variant mt-1">Digital Curator</p>
+  </div>
+  <nav class="flex-1 flex flex-col">
+    <a href="/index.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
+      <span class="material-symbols-outlined">home</span><span>Home</span>
+    </a>
+    <a href="/explorer.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
+      <span class="material-symbols-outlined">search</span><span>Explorer</span>
+    </a>
+    <a href="/portfolio.html" class="text-on-surface-variant py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold hover:text-primary hover:bg-surface-container-lowest transition-all">
+      <span class="material-symbols-outlined">pie_chart</span><span>Portfolio</span>
+    </a>
+    <!-- Active -->
+    <a href="/sip.html" class="bg-surface-container-lowest text-primary py-4 px-8 flex items-center gap-3 font-headline uppercase tracking-widest text-[11px] font-bold shadow-sm">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">trending_up</span><span>SIP Calculator</span>
+    </a>
+  </nav>
+  <div class="px-8 mt-auto border-t border-outline-variant/20 pt-6 flex items-center gap-3">
+    <div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center">
+      <span class="material-symbols-outlined text-sm">person</span>
+    </div>
+    <div>
+      <p class="text-xs font-bold">Account</p>
+      <p class="text-[10px] text-on-surface-variant">Premium Curator</p>
+    </div>
+  </div>
+</aside>
+<div class="flex-1 ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 z-40 bg-[#fafaef] dark:bg-[#1a1c16] flex justify-between items-center w-full pl-8 pr-8 py-4">
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="bg-surface-container-low border-none rounded-full py-2 pl-10 pr-6 text-sm w-64 focus:ring-1 focus:ring-primary" placeholder="Search funds, stocks..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-[#eeefe4] p-2 rounded-full transition-colors" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-[#eeefe4] p-2 rounded-full transition-colors" data-icon="settings">settings</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant opacity-20"></div>
+<span class="font-manrope font-semibold tracking-tight text-[#0f5238]">SIP Planner</span>
+</div>
+</header>
+<main class="p-8 max-w-7xl mx-auto w-full">
+<!-- Header Section -->
+<div class="mb-12">
+<h2 class="font-headline text-5xl font-extrabold text-on-surface tracking-tighter mb-4">SIP Calculator</h2>
+<p class="text-on-surface-variant max-w-2xl text-lg leading-relaxed">See how a monthly SIP grows over time using historical mutual fund returns. Our calculator uses editorial-grade precision to visualize your future wealth.</p>
+</div>
+<!-- Two-Column Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- LEFT COLUMN: Input Form -->
+<section class="lg:col-span-5 space-y-10">
+<div class="bg-surface-container-low p-8 rounded-xl space-y-8">
+<!-- Monthly SIP Amount -->
+<div class="space-y-4">
+<label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Monthly SIP Amount</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 font-headline font-bold text-primary text-xl">₹</span>
+<input id="sip-amount" class="w-full bg-surface-container-lowest border-none rounded-xl py-5 pl-10 pr-6 text-2xl font-headline font-bold text-on-surface focus:ring-2 focus:ring-primary/20" type="number" value="10000" min="500" step="500"/>
+</div>
+</div>
+<!-- Time Horizon Slider -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Time Horizon</label>
+<span id="horizon-val" class="font-headline font-bold text-primary">15 Years</span>
+</div>
+<input id="sip-horizon" class="w-full h-1" max="40" min="1" type="range" value="15" oninput="document.getElementById('horizon-val').textContent=this.value+' Years'"/>
+</div>
+<!-- Expected Return Slider -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Expected Annual Return</label>
+<span id="return-val" class="font-headline font-bold text-primary">12%</span>
+</div>
+<input id="sip-return" class="w-full h-1" max="30" min="5" type="range" value="12" oninput="document.getElementById('return-val').textContent=this.value+'%'"/>
+</div>
+<!-- Inflation Slider -->
+<div class="space-y-4">
+  <div class="flex justify-between items-center">
+    <label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Inflation Rate</label>
+    <span id="inflation-val" class="font-headline font-bold text-primary">6%</span>
+  </div>
+  <input id="sip-inflation" class="w-full h-1" max="10" min="2" step="0.5" type="range" value="6" oninput="document.getElementById('inflation-val').textContent=this.value+'%'"/>
+  <p class="text-[10px] text-on-surface-variant">Adjusts for purchasing power erosion. India's average CPI is ~5–6%.</p>
+</div>
+<!-- Step-up Slider -->
+<div class="space-y-4">
+  <div class="flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <label class="font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant">Annual Step-up</label>
+      <div class="relative group">
+        <span class="material-symbols-outlined text-sm text-on-surface-variant cursor-help">help_outline</span>
+        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-on-surface text-surface text-[11px] leading-relaxed p-3 rounded-xl shadow-xl opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-20">
+          <strong>Step-up</strong> means increasing your monthly SIP by this % every year.<br/><br/>
+          Example: ₹10,000/month at 10% step-up → ₹11,000 in Year 2 → ₹12,100 in Year 3. Mimics salary growth and accelerates wealth building significantly.
+        </div>
+      </div>
+    </div>
+    <span id="stepup-val" class="font-headline font-bold text-primary">0%</span>
+  </div>
+  <input id="sip-stepup" class="w-full h-1" max="30" min="0" step="1" type="range" value="0" oninput="document.getElementById('stepup-val').textContent=this.value+'%'"/>
+  <p class="text-[10px] text-on-surface-variant">Set to 0 for a flat SIP. Try 10–15% to match typical annual salary increments.</p>
+</div>
+<!-- Primary CTA -->
+<button id="calc-btn" onclick="calculate()" class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-5 rounded-xl font-headline font-bold text-lg flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-primary/10">
+<span class="material-symbols-outlined">trending_up</span>
+  Calculate →
+</button>
+</div>
+</section>
+<!-- RIGHT COLUMN: Results & Insights -->
+<section id="results-panel" class="lg:col-span-7 space-y-12">
+<!-- Placeholder before first calculation -->
+<div id="results-placeholder" class="flex flex-col items-center justify-center py-20 text-center">
+  <div class="w-16 h-16 bg-surface-container rounded-2xl flex items-center justify-center mb-4">
+    <span class="material-symbols-outlined text-3xl text-on-surface-variant">calculate</span>
+  </div>
+  <h4 class="font-headline font-bold text-lg text-on-surface mb-2">Set your parameters</h4>
+  <p class="text-on-surface-variant text-sm">Fill in the form and hit <strong>Calculate →</strong> to see your SIP projection.</p>
+</div>
+<!-- Stats Cards -->
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-surface-container-lowest p-6 rounded-xl border-b-4 border-surface-container">
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 font-bold">Total Invested</p>
+<h4 class="font-headline text-2xl font-extrabold text-on-surface">₹ 18L</h4>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-b-4 border-primary-fixed-dim">
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 font-bold">Est. Returns</p>
+<h4 class="font-headline text-2xl font-extrabold text-primary">₹ 31.1L</h4>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-b-4 border-primary">
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 font-bold">Final Value</p>
+<h4 class="font-headline text-2xl font-extrabold text-on-surface">₹ 49.1L</h4>
+</div>
+</div>
+<!-- Chart Placeholder -->
+<div class="bg-surface-container-lowest p-8 rounded-xl">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline text-xl font-bold">Growth Projection</h3>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest opacity-60">Wealth</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-surface-container"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest opacity-60">Capital</span>
+</div>
+</div>
+</div>
+<!-- Visual Area Chart Mockup -->
+<div class="h-64 relative overflow-hidden rounded-lg flex items-end">
+<div class="absolute inset-0 flex items-end">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 400 200">
+<path d="M0 200 Q 100 190 200 170 T 400 120 V 200 H 0 Z" fill="#eeefe4"></path>
+<path d="M0 200 Q 100 180 200 140 T 400 20 V 200 H 0 Z" fill="#0f5238" fill-opacity="0.1" stroke="#0f5238" stroke-width="2"></path>
+</svg>
+</div>
+<div class="w-full flex justify-between px-2 pt-4 relative z-10 text-[10px] font-bold opacity-40">
+<span>Year 1</span>
+<span>Year 5</span>
+<span>Year 10</span>
+<span>Year 15</span>
+</div>
+</div>
+</div>
+<!-- Fund Comparison Table -->
+<div class="space-y-6">
+<h3 class="font-headline text-xl font-bold px-1">Curated Comparison</h3>
+<div class="overflow-hidden bg-surface-container-lowest rounded-xl">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+<th class="py-4 px-6">Fund Name</th>
+<th class="py-4 px-6 text-right">1Y</th>
+<th class="py-4 px-6 text-right">3Y</th>
+<th class="py-4 px-6 text-right">5Y</th>
+</tr>
+</thead>
+<tbody class="text-sm font-medium">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-5 px-6 font-bold">HDFC Nifty 50 Index</td>
+<td class="py-5 px-6 text-right text-primary">+14.2%</td>
+<td class="py-5 px-6 text-right text-primary">+12.8%</td>
+<td class="py-5 px-6 text-right text-primary">+15.1%</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-5 px-6 font-bold">Mirae Asset Large Cap</td>
+<td class="py-5 px-6 text-right text-primary">+16.5%</td>
+<td class="py-5 px-6 text-right text-primary">+14.2%</td>
+<td class="py-5 px-6 text-right text-primary">+13.9%</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-5 px-6 font-bold">Axis Bluechip Fund</td>
+<td class="py-5 px-6 text-right text-tertiary">-1.2%</td>
+<td class="py-5 px-6 text-right text-primary">+11.5%</td>
+<td class="py-5 px-6 text-right text-primary">+14.4%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Disclaimer -->
+<footer class="mt-20 mb-12">
+<div class="bg-[#fff9e6] dark:bg-[#2d281a] p-6 rounded-xl flex gap-4 items-start border border-[#f5e1a4] dark:border-[#4a4532]">
+<span class="material-symbols-outlined text-[#856404]" data-icon="warning">warning</span>
+<p class="text-xs text-[#856404] leading-relaxed">
+<strong>SEBI Disclaimer:</strong> Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Historical performance is not an indicator of future results. The calculations provided are based on the inputs given and do not guarantee actual returns.
+                    </p>
+</div>
+<div class="mt-8 flex justify-between items-center opacity-40">
+<p class="text-[10px] font-bold uppercase tracking-widest">© 2024 Flock Digital Assets</p>
+<div class="flex gap-6">
+<a class="text-[10px] font-bold uppercase tracking-widest hover:underline" href="#">Privacy</a>
+<a class="text-[10px] font-bold uppercase tracking-widest hover:underline" href="#">Terms</a>
+</div>
+</div>
+</footer>
+</main>
+</div>
+<script>
+let growthChart = null;
+
+    // Slider live updates
+    document.getElementById('sip-return').addEventListener('input', function() {
+      document.getElementById('return-val').textContent = this.value + '%';
+    });
+    document.getElementById('sip-horizon').addEventListener('input', function() {
+      document.getElementById('horizon-val').textContent = this.value + ' Years';
+    });
+
+    async function calculate() {
+      const btn = document.getElementById('calc-btn');
+      btn.disabled = true; btn.textContent = '⏳ Calculating...';
+
+      const amount = parseFloat(document.getElementById('sip-amount').value) || 10000;
+      const annualReturn = parseFloat(document.getElementById('sip-return').value) / 100;
+      const years = parseInt(document.getElementById('sip-horizon').value) || 10;
+      const stepUp = parseFloat(document.getElementById('sip-stepup')?.value) || 0;
+      const inflation = parseFloat(document.getElementById('sip-inflation')?.value) || 6;
+
+      try {
+        const result = await SipAPI.calculate(amount, annualReturn, years, stepUp / 100);
+        renderResults(result, inflation);
+
+
+        // Fetch comparison scenarios
+        try {
+          const compare = await SipAPI.compare({
+            monthly_amount: amount,
+            time_horizon_years: years,
+            return_scenarios: [0.08, 0.10, 0.12, 0.14, 0.16],
+          });
+          appendComparison(compare.scenarios, annualReturn);
+        } catch(_) { /* Comparison is non-critical, ignore */ }
+
+      } catch (e) {
+        document.getElementById('results-panel').innerHTML =
+          `<div class="bg-error-container text-error p-6 rounded-xl">Error: ${e.message}</div>`;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-symbols-outlined">trending_up</span> Calculate →';
+      }
+    }
+
+    function renderResults(r, inflation=6) {
+      const gainColor = r.wealth_gain_inr > 0 ? 'text-success' : 'text-danger';
+      const realValue = r.future_value_inr / Math.pow(1 + inflation/100, parseInt(document.getElementById('sip-horizon').value)||10);
+      const panel = document.getElementById('results-panel');
+      panel.innerHTML = `
+        <div class="sip-results">
+          <div class="card-flat mb-lg" style="text-align:center;">
+            <div class="text-muted" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:var(--space-sm);">Future Value</div>
+            <div class="sip-big-number text-gradient">${formatINRFull(r.future_value_inr)}</div>
+          </div>
+          <div class="grid grid-2 gap-md mb-lg">
+            <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1">${formatINRFull(r.total_invested_inr)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Total Invested</div></div>
+            <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="stat-value ${gainColor}">${formatINRFull(r.wealth_gain_inr)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Wealth Gain</div></div>
+            <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1">${formatPctUnsigned(r.absolute_return_pct,1)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Absolute Return</div></div>
+            <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/10 flex flex-col justify-between"><div class="text-3xl font-headline font-bold text-on-surface mt-1">${formatPctUnsigned(r.effective_cagr_pct,1)}</div><div class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Effective CAGR</div></div>
+          </div>
+          <div class="bg-surface-container-low p-4 rounded-xl mt-2 flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-primary mt-0.5">trending_down</span>
+            <div>
+              <p class="font-bold text-on-surface">Real Value (inflation-adjusted)</p>
+              <p class="text-on-surface-variant text-xs mt-1">At ${inflation}% inflation, your <strong>${formatINRFull(r.future_value_inr)}</strong> will have the purchasing power of <strong>${formatINRFull(Math.round(realValue))}</strong> in today's money.</p>
+            </div>
+          </div>
+          ${r.yearly_breakdown ? renderYearlyBreakdown(r.yearly_breakdown) : ''}
+        </div>
+      `;
+    }
+
+    function renderYearlyBreakdown(breakdown) {
+      return `
+        <h4 class="mt-lg mb-md">Step-Up Yearly Breakdown</h4>
+        <div class="table-container">
+          <table class="w-full text-left overflow-hidden">
+            <thead><tr><th class="pb-4 font-bold text-[10px] uppercase tracking-[0.15em] text-on-surface-variant/60 border-b border-outline-variant/10">Year</th><th class="pb-4 font-bold text-[10px] uppercase tracking-[0.15em] text-on-surface-variant/60 border-b border-outline-variant/10">Monthly SIP</th><th class="pb-4 font-bold text-[10px] uppercase tracking-[0.15em] text-on-surface-variant/60 border-b border-outline-variant/10">Year Invested</th><th class="pb-4 font-bold text-[10px] uppercase tracking-[0.15em] text-on-surface-variant/60 border-b border-outline-variant/10">Cumulative</th></tr></thead>
+            <tbody>
+              ${breakdown.map(y => `
+                <tr>
+                  <td>${y.year}</td>
+                  <td class="text-mono">${formatINRFull(y.monthly_amount)}</td>
+                  <td>${formatINRFull(y.year_invested)}</td>
+                  <td>${formatINRFull(y.cumulative_invested)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function appendComparison(scenarios, selectedReturn) {
+      const panel = document.getElementById('results-panel');
+      const existing = document.getElementById('compare-table-section');
+      if (existing) existing.remove();
+
+      const rows = scenarios.map(s => {
+        const isSelected = Math.abs(s.expected_annual_return_pct / 100 - selectedReturn) < 0.005;
+        return `
+          <tr class="hover:bg-surface-container-low transition-colors ${isSelected ? 'bg-primary-fixed/30' : ''}">
+            <td class="py-3 px-4 font-bold text-sm">${s.expected_annual_return_pct.toFixed(0)}%${isSelected ? ' <span class="ml-2 px-2 py-0.5 bg-primary text-white rounded-full text-[10px] font-bold">SELECTED</span>' : ''}</td>
+            <td class="py-3 px-4 text-sm">${formatINR ? formatINR(s.total_invested_inr) : '₹'+s.total_invested_inr}</td>
+            <td class="py-3 px-4 text-sm font-bold text-on-surface">${formatINR ? formatINR(s.future_value_inr) : '₹'+s.future_value_inr}</td>
+            <td class="py-3 px-4 text-sm text-primary font-bold">${formatINR ? formatINR(s.wealth_gain_inr) : '₹'+s.wealth_gain_inr}</td>
+          </tr>`;
+      }).join('');
+
+      const section = document.createElement('div');
+      section.id = 'compare-table-section';
+      section.className = 'space-y-4 mt-6';
+      section.innerHTML = `
+        <h4 class="font-headline text-lg font-bold">Return Scenario Comparison</h4>
+        <div class="overflow-hidden bg-surface-container-lowest rounded-xl">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-surface-container text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+                <th class="py-3 px-4">Return Rate</th>
+                <th class="py-3 px-4">Total Invested</th>
+                <th class="py-3 px-4">Future Value</th>
+                <th class="py-3 px-4">Wealth Gain</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>`;
+      panel.appendChild(section);
+    }
+</script>
+</body></html>
