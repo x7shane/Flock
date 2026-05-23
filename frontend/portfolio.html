@@ -107,6 +107,49 @@
             border:6px solid transparent; border-top-color:#1a1c16;
         }
         .kpi-info:hover .kpi-tooltip { display:block; }
+
+        /* Risk badge tooltip */
+        .risk-badge-wrap {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+        .risk-tooltip {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 9px);
+            right: 0;
+            width: 230px;
+            background: #1a1c16;
+            color: #fafaef;
+            font-family: 'Inter', sans-serif;
+            font-size: 11.5px;
+            line-height: 1.6;
+            padding: 10px 13px;
+            border-radius: 11px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+            z-index: 200;
+            pointer-events: none;
+            white-space: normal;
+        }
+        .risk-tooltip .rt-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .risk-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            right: 12px;
+            border: 6px solid transparent;
+            border-top-color: #1a1c16;
+        }
+        .risk-badge-wrap:hover .risk-tooltip { display: block; }
+        .risk-badge-wrap:hover .risk-pill { opacity: 0.88; }
     </style>
 
   <script src="/js/format.js"></script>
@@ -614,7 +657,17 @@ let portfolio = JSON.parse(sessionStorage.getItem('flock_portfolio') || '[]');
         const probPositive = normcdf(drift / vol_t) * 100;
         const prob10pct    = normcdf((drift - T * Math.log(1.10)) / vol_t) * 100;
         const risk = sigma < 0.22 ? 'Low' : sigma < 0.26 ? 'Medium' : 'High';
-        return { ticker, mu, sigma, probPositive, prob10pct, risk };
+        // Build plain-English tooltip for the risk badge
+        const sigmaStr = (sigma * 100).toFixed(1);
+        let riskTooltip;
+        if (risk === 'Low') {
+          riskTooltip = `<div class="rt-title" style="color:#a0f4c8;">Low Risk</div>Annualised volatility is <strong>${sigmaStr}%</strong> (below 22%). This stock's price swings are relatively contained, suggesting more predictable returns over your time horizon.`;
+        } else if (risk === 'Medium') {
+          riskTooltip = `<div class="rt-title" style="color:#ffe28a;">Medium Risk</div>Annualised volatility is <strong>${sigmaStr}%</strong> (between 22%–26%). This stock experiences moderate price fluctuations — gains can be meaningful, but so can short-term dips.`;
+        } else {
+          riskTooltip = `<div class="rt-title" style="color:#ffb4ab;">High Risk</div>Annualised volatility is <strong>${sigmaStr}%</strong> (above 26%). This stock is historically more volatile, implying wider swings in both directions. Potential for higher returns, but also deeper drawdowns.`;
+        }
+        return { ticker, mu, sigma, probPositive, prob10pct, risk, riskTooltip };
       }).sort((a, b) => b.probPositive - a.probPositive);
     }
 
@@ -642,9 +695,12 @@ let portfolio = JSON.parse(sessionStorage.getItem('flock_portfolio') || '[]');
               <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:#1a1c16;">${p.ticker}</div>
               <div style="font-family:'Inter',sans-serif;font-size:11px;color:#707973;margin-top:2px;">Weight: ${w}%</div>
             </div>
-            <div style="background:${rs.bg};color:${rs.color};font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.05em;padding:3px 10px;border-radius:99px;display:flex;align-items:center;gap:5px;">
-              <div style="width:6px;height:6px;border-radius:50%;background:${rs.dot};"></div>
-              ${p.risk} Risk
+            <div class="risk-badge-wrap" style="cursor:default;">
+              <div class="risk-pill" style="background:${rs.bg};color:${rs.color};font-family:'Manrope',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.05em;padding:3px 10px;border-radius:99px;display:flex;align-items:center;gap:5px;transition:opacity 0.15s;">
+                <div style="width:6px;height:6px;border-radius:50%;background:${rs.dot};"></div>
+                ${p.risk} Risk
+              </div>
+              <div class="risk-tooltip">${p.riskTooltip}</div>
             </div>
           </div>
           <div style="margin-bottom:11px;">
