@@ -1,7 +1,7 @@
-# Graph Report - /home/shades/Documents/Claude_Projects/Flock  (2026-05-10)
+# Graph Report - /home/shades/Documents/Claude_Projects/Flock  (2026-05-12)
 
 ## Corpus Check
-- 62 files · ~100,427 words
+- 62 files · ~101,377 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
