@@ -12,7 +12,7 @@ from typing import Any
 logger = logging.getLogger(__name__)
 
 import httpx
-from sqlalchemy import select
+from sqlalchemy import func, select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.session import async_session_factory
@@ -130,38 +130,36 @@ class MfFetcher:
         self,
         session: AsyncSession,
         fund: MutualFund,
-        nav_data: dict[str, Any],
-    ) -> bool:
+        nav_records: list[dict],
+    ) -> int:
         """
-        Save NAV data to database.
+        Bulk-save NAV records using INSERT … ON CONFLICT DO NOTHING.
 
         Args:
             session: AsyncSession
             fund: MutualFund model instance
-            nav_data: Dict with NAV data
+            nav_records: List of {date, nav} dicts
 
         Returns:
-            True if inserted, False if skipped (duplicate)
+            Number of rows actually inserted (may be < len(nav_records) on re-runs)
         """
-        # Check if record exists
-        existing = await session.execute(
-            select(MfNav).where(
-                MfNav.fund_id == fund.id,
-                MfNav.date == nav_data["date"],
-            )
-        )
-        if existing.scalar_one_or_none():
-            return False  # Skip duplicate
+        if not nav_records:
+            return 0
 
-        # Insert new record
-        nav = MfNav(
-            fund_id=fund.id,
-            date=nav_data["date"],
-            nav=nav_data["nav"],
+        rows = [
+            {"fund_id": fund.id, "date": r["date"], "nav": float(r["nav"])}
+            for r in nav_records
+        ]
+
+        result = await session.execute(
+            text("""
+                INSERT INTO mf_navs (fund_id, date, nav)
+                VALUES (:fund_id, :date, :nav)
+                ON CONFLICT (fund_id, date) DO NOTHING
+            """),
+            rows,
         )
-        session.add(nav)
-        await session.flush()
-        return True
+        return result.rowcount if result.rowcount is not None else len(rows)
 
     async def fetch_and_save(
         self,
@@ -169,7 +167,11 @@ class MfFetcher:
         scheme_code: str,
     ) -> tuple[bool, int, str | None]:
         """
-        Fetch NAV history and save to database.
+        Incrementally fetch NAV history and save to database.
+
+        Checks the latest NAV date already stored for this fund and fetches
+        only the missing days forward to today.  For funds with no history,
+        falls back to a 365-day initial load.  Uses a single bulk upsert.
 
         Args:
             session: AsyncSession
@@ -179,41 +181,70 @@ class MfFetcher:
             (success, records_inserted, error_message)
         """
         # Get fund from database
-        fund = await session.execute(
+        fund_result = await session.execute(
             select(MutualFund).where(MutualFund.scheme_code == scheme_code)
         )
-        fund = fund.scalar_one_or_none()
+        fund = fund_result.scalar_one_or_none()
         if not fund:
             return False, 0, f"Fund {scheme_code} not found in database"
 
-        # Fetch NAV history
-        nav_history = await self.fetch_mf_nav_history(scheme_code)
+        # Find the last NAV date already stored
+        last_result = await session.execute(
+            select(func.max(MfNav.date)).where(MfNav.fund_id == fund.id)
+        )
+        last_date: date | None = last_result.scalar()
+
+        today = date.today()
+        if last_date is None:
+            days = 365  # initial load
+        else:
+            days = (today - last_date).days
+
+        if days <= 0:
+            return True, 0, None  # already up-to-date
+
+        # Fetch NAV history for the needed window
+        nav_history = await self.fetch_mf_nav_history(scheme_code, days=days)
         if nav_history is None:
             return False, 0, f"No NAV data returned for {scheme_code}"
 
-        # Save to database
-        inserted = 0
-        for nav_data in nav_history:
-            if await self.save_mf_nav(session, fund, nav_data):
-                inserted += 1
-
+        # Bulk upsert — single round-trip, skips existing dates
+        inserted = await self.save_mf_nav(session, fund, nav_history)
         return True, inserted, None
 
 
-async def run_mf_nav_pipeline(
-    scheme_codes: list[str],
-    days: int = 30,
-) -> PipelineRun:
+async def run_mf_nav_pipeline() -> PipelineRun:
     """
-    Run MF NAV fetch pipeline for multiple schemes.
+    Run MF NAV fetch pipeline for all active funds in the database.
 
-    Args:
-        scheme_codes: List of AMFI scheme codes
-        days: Days to fetch
+    Reads the list of active schemes from the mutual_funds table — no
+    hardcoded scheme codes.  Each fund is fetched incrementally (only
+    missing days since the last stored NAV date) and uses its own
+    short-lived session to avoid Neon idle timeouts.
 
     Returns:
         PipelineRun with results
     """
+    # First, load active scheme codes from the database
+    async with async_session_factory() as lookup_session:
+        result = await lookup_session.execute(
+            select(MutualFund.scheme_code).where(MutualFund.is_active == True)  # noqa: E712
+        )
+        scheme_codes: list[str] = [row[0] for row in result.all()]
+
+    if not scheme_codes:
+        logger.warning("[MfFetcher] No active mutual funds found in database. Seed mutual_funds first.")
+        return PipelineRun(
+            run_type="mf_nav_fetch",
+            started_at=datetime.now(UTC),
+            completed_at=datetime.now(UTC),
+            status="completed",
+            tickers_total=0,
+            tickers_success=0,
+            tickers_failed=0,
+            error_message="No active funds in mutual_funds table",
+        )
+
     fetcher = MfFetcher()
     run = PipelineRun(
         run_type="mf_nav_fetch",
@@ -224,23 +255,36 @@ async def run_mf_nav_pipeline(
         tickers_failed=0,
     )
 
-    async with async_session_factory() as session:
-        session.add(run)
-        await session.flush()
+    # Persist the initial run record
+    async with async_session_factory() as init_session:
+        init_session.add(run)
+        await init_session.commit()
+        await init_session.refresh(run)
+        run_id = run.id
 
-        success_count = 0
-        failed_count = 0
-        errors: list[str] = []
+    success_count = 0
+    failed_count = 0
+    errors: list[str] = []
 
-        for scheme_code in scheme_codes:
+    for scheme_code in scheme_codes:
+        # Fresh session per fund — keeps connections short-lived for Neon
+        async with async_session_factory() as session:
             success, _, error = await fetcher.fetch_and_save(session, scheme_code)
-            if success:
-                success_count += 1
-            else:
-                failed_count += 1
-                if error:
-                    errors.append(f"{scheme_code}: {error}")
+            await session.commit()
 
+        if success:
+            success_count += 1
+        else:
+            failed_count += 1
+            if error:
+                errors.append(f"{scheme_code}: {error}")
+
+    # Update the run record with final counts
+    async with async_session_factory() as final_session:
+        result = await final_session.execute(
+            select(PipelineRun).where(PipelineRun.id == run_id)
+        )
+        run = result.scalar_one()
         run.tickers_success = success_count
         run.tickers_failed = failed_count
         run.completed_at = datetime.now(UTC)
@@ -254,7 +298,7 @@ async def run_mf_nav_pipeline(
             run.status = "partial"
             run.error_message = "\n".join(errors[:10])
 
-        await session.commit()
+        await final_session.commit()
 
     return run
 

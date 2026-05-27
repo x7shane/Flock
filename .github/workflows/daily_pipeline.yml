@@ -8,6 +8,7 @@ on:
 jobs:
   update-data:
     runs-on: ubuntu-latest
+    timeout-minutes: 90  # Safety net — daily incremental runs should finish in ~15 min
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

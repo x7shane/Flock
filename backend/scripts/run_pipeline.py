@@ -19,6 +19,7 @@ from app.db.session import async_session_factory
 from app.services.fundamentals_fetcher import FundamentalsFetcher, run_fundamentals_pipeline
 from app.services.price_fetcher import run_price_fetch_pipeline
 from app.services.gold_fetcher import run_gold_price_pipeline
+from app.services.mf_fetcher import run_mf_nav_pipeline
 from app.services.score_calculator import run_scoring_pipeline
 from app.data.nifty200 import get_tickers
 
@@ -60,7 +61,7 @@ async def run_pipeline(
 
     if not fundamentals_only:
         # ── Step 2: Stock Prices ──
-        print(f"\n[2/4] Fetching stock prices for {total} tickers (30-day window)...")
+        print(f"\n[2/5] Fetching stock prices for {total} tickers (30-day window)...")
         print(f"    Rate limit: 0.5s/req → ETA: ~{total // 2} seconds")
         price_run = await run_price_fetch_pipeline(tickers, days=30)
         print(f"    ✅ Prices: {price_run.tickers_success}/{price_run.tickers_total} succeeded | Status: {price_run.status}")
@@ -70,16 +71,28 @@ async def run_pipeline(
                 print(f"    ⚠️  {e}")
 
         # ── Step 3: Gold Price ──
-        print(f"\n[3/4] Fetching gold price (GC=F × INR=X)...")
+        print(f"\n[3/5] Fetching gold price (GC=F × INR=X)...")
         try:
             gold_run = await run_gold_price_pipeline()
-            print(f"    ✅ Gold: Status: {gold_run.status}")
+            print(f"    ✅ Gold: Status: {gold_run.status} | {gold_run.error_message or ''}")
         except Exception as e:
             print(f"    ⚠️  Gold fetch failed: {e}")
 
-    # ── Step 4: Scoring ──
-    step_num = "2" if fundamentals_only else "4"
-    total_steps = "2" if fundamentals_only else "4"
+        # ── Step 4: Mutual Fund NAVs ──
+        print(f"\n[4/5] Fetching Mutual Fund NAVs (mfapi.in)...")
+        try:
+            mf_run = await run_mf_nav_pipeline()
+            print(f"    ✅ MF NAVs: {mf_run.tickers_success}/{mf_run.tickers_total} funds succeeded | Status: {mf_run.status}")
+            if mf_run.error_message:
+                mf_errors = mf_run.error_message.split("\n")[:3]
+                for e in mf_errors:
+                    print(f"    ⚠️  {e}")
+        except Exception as e:
+            print(f"    ⚠️  MF NAV fetch failed: {e}")
+
+    # ── Step 5: Scoring ──
+    step_num = "2" if fundamentals_only else "5"
+    total_steps = "2" if fundamentals_only else "5"
     print(f"\n[{step_num}/{total_steps}] Computing Flock Scores...")
     scoring_run = await run_scoring_pipeline()
     print(f"    ✅ Scoring: {scoring_run.tickers_success} stocks scored | Status: {scoring_run.status}")
@@ -115,22 +128,36 @@ async def verify_db_state() -> None:
         result = await session.execute(text("SELECT COUNT(*) FROM stock_prices"))
         price_rows = result.scalar()
 
+        result = await session.execute(text("SELECT MAX(date) FROM stock_prices"))
+        price_latest = result.scalar()
+
         # Gold
-        result = await session.execute(text("SELECT COUNT(*) FROM gold_prices"))
-        gold_count = result.scalar()
+        result = await session.execute(text("SELECT COUNT(*), MAX(date) FROM gold_prices"))
+        gold_row = result.one()
+        gold_count, gold_latest = gold_row[0], gold_row[1]
+
+        # MF NAVs
+        result = await session.execute(text("SELECT COUNT(*) FROM mutual_funds WHERE is_active = true"))
+        mf_funds = result.scalar()
+
+        result = await session.execute(text("SELECT COUNT(*), MAX(date) FROM mf_navs"))
+        mf_row = result.one()
+        mf_nav_rows, mf_nav_latest = mf_row[0], mf_row[1]
 
         # Pipeline runs
-        result = await session.execute(text("SELECT run_type, status, tickers_success, tickers_failed FROM pipeline_runs ORDER BY started_at DESC LIMIT 5"))
+        result = await session.execute(text("SELECT run_type, status, tickers_success, tickers_failed, started_at FROM pipeline_runs ORDER BY started_at DESC LIMIT 8"))
         runs = result.all()
 
     print(f"\n  📊 Database State:")
-    print(f"     Fundamentals: {fund_count} stocks with current data")
+    print(f"     Fundamentals:  {fund_count} stocks with current data")
     print(f"     Flock Scores:  {score_count} stocks scored")
-    print(f"     Stock Prices:  {price_rows} rows across {price_stocks} stocks")
-    print(f"     Gold Prices:   {gold_count} records")
+    print(f"     Stock Prices:  {price_rows} rows across {price_stocks} stocks (latest: {price_latest})")
+    print(f"     Gold Prices:   {gold_count} records (latest: {gold_latest})")
+    print(f"     MF NAVs:       {mf_nav_rows} rows across {mf_funds} active funds (latest: {mf_nav_latest})")
     print(f"\n  🔄 Recent Pipeline Runs:")
     for run in runs:
-        print(f"     {run[0]:25s} | {run[1]:10s} | ✅ {run[2] or 0} | ❌ {run[3] or 0}")
+        ts = str(run[4])[:16] if run[4] else "?"
+        print(f"     {run[0]:25s} | {run[1]:10s} | ✅ {run[2] or 0:4d} | ❌ {run[3] or 0:4d} | {ts}")
     print()
 
 

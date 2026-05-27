@@ -7,13 +7,13 @@ Handles rate limiting and logs failures to pipeline_runs.
 
 import asyncio
 import logging
-from datetime import date, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
 from typing import TYPE_CHECKING
 
 logger = logging.getLogger(__name__)
 
 import pandas as pd
-from sqlalchemy import select
+from sqlalchemy import func, select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import settings
@@ -131,9 +131,10 @@ class PriceFetcher:
         df: pd.DataFrame,
     ) -> int:
         """
-        Save price data to database.
+        Save price data to database using bulk upsert.
 
-        Uses upsert logic: insert new records, skip existing (by stock_id + date).
+        Uses INSERT … ON CONFLICT DO NOTHING so a single round-trip
+        handles the entire DataFrame — no per-row SELECT needed.
 
         Args:
             session: AsyncSession
@@ -146,49 +147,49 @@ class PriceFetcher:
         if df.empty:
             return 0
 
-        inserted = 0
+        rows = [
+            {
+                "stock_id": stock.id,
+                "date": row["date"],
+                "open": float(row["open"]) if row.get("open") is not None else None,
+                "high": float(row["high"]) if row.get("high") is not None else None,
+                "low": float(row["low"]) if row.get("low") is not None else None,
+                "close": float(row["close"]) if row.get("close") is not None else None,
+                "adj_close": float(row["adj_close"]) if row.get("adj_close") is not None else None,
+                "volume": int(row["volume"]) if row.get("volume") is not None else None,
+            }
+            for _, row in df.iterrows()
+        ]
 
-        for _, row in df.iterrows():
-            # Check if record exists
-            existing = await session.execute(
-                select(StockPrice).where(
-                    StockPrice.stock_id == stock.id,
-                    StockPrice.date == row["date"],
-                )
-            )
-            if existing.scalar_one_or_none():
-                continue  # Skip existing
-
-            # Insert new record
-            price = StockPrice(
-                stock_id=stock.id,
-                date=row["date"],
-                open=row.get("open"),
-                high=row.get("high"),
-                low=row.get("low"),
-                close=row.get("close"),
-                adj_close=row.get("adj_close"),
-                volume=row.get("volume"),
-            )
-            session.add(price)
-            inserted += 1
-
-        await session.flush()
+        result = await session.execute(
+            text("""
+                INSERT INTO stock_prices (stock_id, date, open, high, low, close, adj_close, volume)
+                VALUES (:stock_id, :date, :open, :high, :low, :close, :adj_close, :volume)
+                ON CONFLICT (stock_id, date) DO NOTHING
+            """),
+            rows,
+        )
+        # rowcount gives the number of rows actually inserted
+        inserted = result.rowcount if result.rowcount is not None else len(rows)
         return inserted
 
     async def fetch_and_save(
         self,
         session: AsyncSession,
         ticker: str,
-        days: int = 30,
+        days: int = 30,  # fallback window when no DB history exists
     ) -> tuple[bool, int, str | None]:
         """
-        Fetch prices and save to database.
+        Incrementally fetch prices and save to database.
+
+        Checks the latest date already stored for this stock and fetches
+        only the missing days forward to today.  For stocks with no history
+        at all, falls back to a 365-day initial load.
 
         Args:
             session: AsyncSession
             ticker: NSE ticker
-            days: Days to fetch
+            days: Fallback window (days) used only when no DB history exists
 
         Returns:
             (success, records_inserted, error_message)
@@ -199,10 +200,27 @@ class PriceFetcher:
         if not stock:
             return False, 0, f"Stock {ticker} not found in database"
 
-        # Fetch prices
-        df = await self.fetch_stock_prices(ticker, days=days)
+        # Find the last date already stored
+        result = await session.execute(
+            select(func.max(StockPrice.date)).where(StockPrice.stock_id == stock.id)
+        )
+        last_date: date | None = result.scalar()
+
+        today = date.today()
+        if last_date is None:
+            # No history yet — initial load
+            start_date = today - timedelta(days=365)
+        else:
+            start_date = last_date + timedelta(days=1)
+
+        if start_date > today:
+            # Already up-to-date
+            return True, 0, None
+
+        # Fetch only the missing window
+        df = await self.fetch_stock_prices(ticker, start_date=start_date, end_date=today)
         if df is None or df.empty:
-            return False, 0, f"No price data returned for {ticker}"
+            return False, 0, f"No price data returned for {ticker} ({start_date} → {today})"
 
         # Save to database
         inserted = await self.save_prices_to_db(session, stock, df)
@@ -211,14 +229,18 @@ class PriceFetcher:
 
 async def run_price_fetch_pipeline(
     tickers: list[str],
-    days: int = 30,
+    days: int = 30,  # only used for initial load fallback
 ) -> PipelineRun:
     """
     Run price fetch pipeline for multiple tickers.
 
+    Each ticker gets its own short-lived session to avoid Neon connection
+    idle timeouts during large backfills.  The PipelineRun record is
+    committed at the very end.
+
     Args:
         tickers: List of NSE tickers
-        days: Days to fetch
+        days: Fallback window used only for the initial (no-history) load
 
     Returns:
         PipelineRun with results
@@ -226,44 +248,57 @@ async def run_price_fetch_pipeline(
     fetcher = PriceFetcher()
     run = PipelineRun(
         run_type="price_fetch",
-        started_at=datetime.utcnow(),
+        started_at=datetime.now(UTC),
         status="running",
         tickers_total=len(tickers),
         tickers_success=0,
         tickers_failed=0,
     )
 
-    async with async_session_factory() as session:
-        session.add(run)
-        await session.flush()
+    # Persist the initial run record
+    async with async_session_factory() as init_session:
+        init_session.add(run)
+        await init_session.commit()
+        await init_session.refresh(run)
+        run_id = run.id
 
-        success_count = 0
-        failed_count = 0
-        errors: list[str] = []
+    success_count = 0
+    failed_count = 0
+    errors: list[str] = []
 
-        for ticker in tickers:
+    for ticker in tickers:
+        # Fresh session per ticker — keeps connections short-lived for Neon
+        async with async_session_factory() as session:
             success, _, error = await fetcher.fetch_and_save(session, ticker, days)
-            if success:
-                success_count += 1
-            else:
-                failed_count += 1
-                if error:
-                    errors.append(f"{ticker}: {error}")
+            await session.commit()
 
+        if success:
+            success_count += 1
+        else:
+            failed_count += 1
+            if error:
+                errors.append(f"{ticker}: {error}")
+
+    # Update the run record with final counts
+    async with async_session_factory() as final_session:
+        result = await final_session.execute(
+            select(PipelineRun).where(PipelineRun.id == run_id)
+        )
+        run = result.scalar_one()
         run.tickers_success = success_count
         run.tickers_failed = failed_count
-        run.completed_at = datetime.utcnow()
+        run.completed_at = datetime.now(UTC)
 
         if failed_count == 0:
             run.status = "completed"
         elif success_count == 0:
             run.status = "failed"
-            run.error_message = "\n".join(errors[:10])  # First 10 errors
+            run.error_message = "\n".join(errors[:10])
         else:
             run.status = "partial"
             run.error_message = "\n".join(errors[:10])
 
-        await session.commit()
+        await final_session.commit()
 
     return run
 
