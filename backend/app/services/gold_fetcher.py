@@ -110,6 +110,96 @@ class GoldFetcher:
             logger.error("[GoldFetcher] Failed to fetch gold price for %s: %s", target_date, e)
             return None
 
+    async def fetch_gold_price_range(
+        self,
+        start_date: date,
+        end_date: date,
+    ) -> list[dict]:
+        """
+        Fetch gold prices for a full date range (backfill support).
+
+        Downloads GC=F and INR=X for the given window and returns one
+        record per trading day available in yfinance.
+
+        Args:
+            start_date: First date to fetch (inclusive)
+            end_date:   Last date to fetch (inclusive)
+
+        Returns:
+            List of {date, price_per_gram_inr, fetched_at} dicts
+        """
+        await self._rate_limit()
+
+        try:
+            loop = asyncio.get_event_loop()
+
+            def _download() -> tuple[pd.DataFrame, pd.DataFrame]:
+                gold_df = yf.download(
+                    "GC=F",
+                    start=start_date,
+                    end=end_date + timedelta(days=1),
+                    progress=False,
+                    auto_adjust=False,
+                )
+                usd_inr_df = yf.download(
+                    "INR=X",
+                    start=start_date,
+                    end=end_date + timedelta(days=1),
+                    progress=False,
+                    auto_adjust=False,
+                )
+                return gold_df, usd_inr_df
+
+            gold_df, usd_inr_df = await loop.run_in_executor(None, _download)
+
+            if gold_df.empty or usd_inr_df.empty:
+                logger.warning(
+                    "[GoldFetcher] Empty range data from yfinance (%s → %s)",
+                    start_date, end_date,
+                )
+                return []
+
+            # Flatten MultiIndex columns
+            def _flatten(df: pd.DataFrame) -> pd.DataFrame:
+                if isinstance(df.columns, pd.MultiIndex):
+                    df.columns = [col[0].lower() for col in df.columns]
+                else:
+                    df.columns = [c.lower() for c in df.columns]
+                return df
+
+            gold_df = _flatten(gold_df)
+            usd_inr_df = _flatten(usd_inr_df)
+
+            # Align on common dates (both must have data for that day)
+            combined = gold_df[["close"]].rename(columns={"close": "gold_usd"}).join(
+                usd_inr_df[["close"]].rename(columns={"close": "usd_inr"}),
+                how="inner",
+            ).dropna()
+
+            fetched_at = datetime.now(UTC)
+            records = []
+            for idx, row in combined.iterrows():
+                actual_date = idx.date() if hasattr(idx, "date") else idx
+                price_inr = (float(row["gold_usd"]) * float(row["usd_inr"])) / TROY_OZ_PER_GRAM
+                records.append({
+                    "date": actual_date,
+                    "price_per_gram_inr": round(price_inr, 2),
+                    "fetched_at": fetched_at,
+                })
+
+            logger.info(
+                "[GoldFetcher] Range fetch returned %d records (%s → %s)",
+                len(records), start_date, end_date,
+            )
+            return records
+
+        except Exception as e:
+            logger.error(
+                "[GoldFetcher] Failed to fetch gold range %s→%s: %s",
+                start_date, end_date, e,
+            )
+            return []
+
     async def save_gold_price(
         self,
         session: AsyncSession,
@@ -171,9 +261,15 @@ async def run_gold_price_pipeline() -> PipelineRun:
     """
     Run gold price fetch pipeline.
 
+    Finds the last stored date in gold_prices and backfills all missing
+    trading days from there to today in a single yfinance range download.
+
     Returns:
         PipelineRun with results
     """
+    from sqlalchemy import func
+    from app.models.gold import GoldPrice
+
     fetcher = GoldFetcher()
     run = PipelineRun(
         run_type="gold_price_fetch",
@@ -188,13 +284,49 @@ async def run_gold_price_pipeline() -> PipelineRun:
         session.add(run)
         await session.flush()
 
-        success, error = await fetcher.fetch_and_save(session)
+        today = date.today()
 
-        run.tickers_success = 1 if success else 0
-        run.tickers_failed = 0 if success else 1
+        # Find the last date already stored
+        result = await session.execute(select(func.max(GoldPrice.date)))
+        last_date: date | None = result.scalar()
+
+        if last_date is None:
+            # No history — backfill last 365 days
+            start_date = today - timedelta(days=365)
+        else:
+            start_date = last_date + timedelta(days=1)
+
+        if start_date > today:
+            # Already up-to-date
+            run.tickers_success = 1
+            run.tickers_failed = 0
+            run.completed_at = datetime.now(UTC)
+            run.status = "completed"
+            run.error_message = "Already up-to-date"
+            await session.commit()
+            return run
+
+        records = await fetcher.fetch_gold_price_range(start_date, today)
+
+        if not records:
+            run.tickers_success = 0
+            run.tickers_failed = 1
+            run.completed_at = datetime.now(UTC)
+            run.status = "failed"
+            run.error_message = f"No gold data returned for {start_date} → {today}"
+            await session.commit()
+            return run
+
+        inserted = 0
+        for price_data in records:
+            if await fetcher.save_gold_price(session, price_data):
+                inserted += 1
+
+        run.tickers_success = 1
+        run.tickers_failed = 0
         run.completed_at = datetime.now(UTC)
-        run.status = "completed" if success else "failed"
-        run.error_message = error
+        run.status = "completed"
+        run.error_message = f"Inserted {inserted} new records ({start_date} → {today})"
 
         await session.commit()
 

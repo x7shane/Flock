@@ -37,9 +37,8 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("FEDERALBNK", "Federal Bank Ltd", "Financial Services", "Banks"),
     StockInfo("RBLBANK", "RBL Bank Ltd", "Financial Services", "Banks"),
     StockInfo("AUBANK", "AU Small Finance Bank Ltd", "Financial Services", "Banks"),
-    StockInfo("HDFC", "HDFC Ltd", "Financial Services", "Housing Finance"),
     StockInfo("BAJFINANCE", "Bajaj Finance Ltd", "Financial Services", "Consumer Finance"),
-    StockInfo("BAJFL", "Bajaj Finserv Ltd", "Financial Services", "Holding Company"),
+    StockInfo("BAJAJFINSV", "Bajaj Finserv Ltd", "Financial Services", "Holding Company"),
     StockInfo("CHOLAFIN", "Cholamandalam Investment and Finance Company Ltd", "Financial Services", "NBFC"),
     StockInfo("MUTHOOTFIN", "Muthoot Finance Ltd", "Financial Services", "NBFC"),
     StockInfo("SHRIRAMFIN", "Shriram Finance Ltd", "Financial Services", "NBFC"),
@@ -49,7 +48,7 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("PNBHOUSING", "PNB Housing Finance Ltd", "Financial Services", "Housing Finance"),
     StockInfo("GICRE", "General Insurance Corporation of India", "Financial Services", "Insurance"),
     StockInfo("ICICIGI", "ICICI Lombard General Insurance Company Ltd", "Financial Services", "Insurance"),
-    StockInfo("ICICIPRULIFE", "ICICI Prudential Life Insurance Company Ltd", "Financial Services", "Insurance"),
+    StockInfo("ICICIPRULI", "ICICI Prudential Life Insurance Company Ltd", "Financial Services", "Insurance"),
     StockInfo("HDFCLIFE", "HDFC Life Insurance Company Ltd", "Financial Services", "Insurance"),
     StockInfo("SBILIFE", "SBI Life Insurance Company Ltd", "Financial Services", "Insurance"),
     StockInfo("LICI", "Life Insurance Corporation of India", "Financial Services", "Insurance"),
@@ -72,7 +71,7 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("COFORGE", "Coforge Ltd", "Information Technology", "IT Services"),
     StockInfo("PERSISTENT", "Persistent Systems Ltd", "Information Technology", "IT Services"),
     StockInfo("MPHASIS", "Mphasis Ltd", "Information Technology", "IT Services"),
-    StockInfo("LTI", "Larsen & Toubro Infotech Ltd", "Information Technology", "IT Services"),
+    # LTI removed — merged into LTIM (LTIMindtree)
     StockInfo("OFSS", "Oracle Financial Services Software Ltd", "Information Technology", "IT Services"),
     StockInfo("CYIENT", "Cyient Ltd", "Information Technology", "IT Services"),
     StockInfo("SONATSOFTW", "Sonata Software Ltd", "Information Technology", "IT Services"),
@@ -87,7 +86,7 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("ONGC", "Oil and Natural Gas Corporation Ltd", "Energy", "Oil & Gas"),
     StockInfo("IOC", "Indian Oil Corporation Ltd", "Energy", "Oil & Gas"),
     StockInfo("BPCL", "Bharat Petroleum Corporation Ltd", "Energy", "Oil & Gas"),
-    StockInfo("HPCL", "Hindustan Petroleum Corporation Ltd", "Energy", "Oil & Gas"),
+    StockInfo("HINDPETRO", "Hindustan Petroleum Corporation Ltd", "Energy", "Oil & Gas"),
     StockInfo("GAIL", "GAIL (India) Ltd", "Energy", "Gas"),
     StockInfo("PETRONET", "Petronet LNG Ltd", "Energy", "Gas"),
     StockInfo("GUJGASLTD", "Gujarat Gas Ltd", "Energy", "Gas"),
@@ -95,7 +94,7 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("MGL", "Mahanagar Gas Ltd", "Energy", "Gas"),
     StockInfo("AEGISLOG", "Aegis Logistics Ltd", "Energy", "Gas"),
     StockInfo("OIL", "Oil India Ltd", "Energy", "Oil & Gas"),
-    StockInfo("BRGNPETRO", "Bharat Rasayanil Ltd", "Chemicals", "Petrochemicals"),
+    # BRGNPETRO removed — incorrect ticker, not available on yfinance
 
     # ========================================
     # POWER & UTILITIES
@@ -106,11 +105,11 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("ADANIPORTS", "Adani Ports and Special Economic Zone Ltd", "Industrials", "Ports"),
     StockInfo("ADANIPOWER", "Adani Power Ltd", "Utilities", "Power"),
     StockInfo("ADANIGREEN", "Adani Green Energy Ltd", "Utilities", "Power"),
-    StockInfo("ADANITRANS", "Adani Transmission Ltd", "Utilities", "Power"),
+    # ADANITRANS removed — delisted from NSE
     StockInfo("ADANIENT", "Adani Enterprises Ltd", "Conglomerates", "Diversified"),
     StockInfo("JSWENERGY", "JSW Energy Ltd", "Utilities", "Power"),
     StockInfo("NHPC", "NHPC Ltd", "Utilities", "Power"),
-    StockInfo("TATAPOWERO", "Tata Power Company Ltd", "Utilities", "Power"),
+    # TATAPOWERO removed — duplicate of TATAPOWER
 
     # ========================================
     # METALS & MINING
@@ -139,7 +138,7 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("TVSMOTOR", "TVS Motor Company Ltd", "Automobiles", "Two Wheelers"),
     StockInfo("MOTHERSON", "Motherson Sumi Systems Ltd", "Automobiles", "Auto Components"),
     StockInfo("BOSCHLTD", "Bosch Ltd", "Automobiles", "Auto Components"),
-    StockInfo("AMARAJABAT", "Amara Raja Energy & Mobility Ltd", "Industrials", "Batteries"),
+    # AMARAJABAT removed — not available on yfinance (use AMARAJAELE on BSE only)
     StockInfo("EXIDEIND", "Exide Industries Ltd", "Industrials", "Batteries"),
     StockInfo("ASHOKLEY", "Ashok Leyland Ltd", "Automobiles", "Commercial Vehicles"),
     StockInfo("ESCORTS", "Escorts Ltd", "Automobiles", "Tractors"),
@@ -156,11 +155,11 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("GODREJCP", "Godrej Consumer Products Ltd", "Consumer Goods", "FMCG"),
     StockInfo("MARICO", "Marico Ltd", "Consumer Goods", "FMCG"),
     StockInfo("COLPAL", "Colgate Palmolive (India) Ltd", "Consumer Goods", "FMCG"),
-    StockInfo("HINDSANITARY", "Hindustan Sanitaryware & Industries Ltd", "Consumer Goods", "FMCG"),
+    # HINDSANITARY removed — not available on yfinance
     StockInfo("PGHH", "Procter & Gamble Hygiene and Health Care Ltd", "Consumer Goods", "FMCG"),
     StockInfo("VBL", "Varun Beverages Ltd", "Consumer Goods", "Beverages"),
     StockInfo("RADICO", "Radico Khaitan Ltd", "Consumer Goods", "Beverages"),
-    StockInfo("UNITEDSPIRIT", "United Spirits Ltd", "Consumer Goods", "Beverages"),
+    # UNITEDSPIRIT removed — not available on yfinance (MCDOWELL-N also not found)
     StockInfo("UBL", "United Breweries Ltd", "Consumer Goods", "Beverages"),
     StockInfo("EMAMILTD", "Emami Ltd", "Consumer Goods", "FMCG"),
     StockInfo("TATACONSUM", "Tata Consumer Products Ltd", "Consumer Goods", "FMCG"),
@@ -173,7 +172,7 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("TRENT", "Trent Ltd", "Consumer Goods", "Retail"),
     StockInfo("DMART", "Avenue Supermarts Ltd", "Consumer Goods", "Retail"),
     StockInfo("PAGEIND", "Page Industries Ltd", "Consumer Goods", "Apparel"),
-    StockInfo("TCNSBRANDS", "TCNS Clothing Co Ltd", "Consumer Goods", "Apparel"),
+    # TCNSBRANDS removed — acquired by ABFRL, delisted
     StockInfo("ABFRL", "Aditya Birla Fashion and Retail Ltd", "Consumer Goods", "Apparel"),
     StockInfo("TITAN", "Titan Company Ltd", "Consumer Goods", "Jewellery"),
 
@@ -185,7 +184,7 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("DRREDDY", "Dr Reddys Laboratories Ltd", "Healthcare", "Pharmaceuticals"),
     StockInfo("LUPIN", "Lupin Ltd", "Healthcare", "Pharmaceuticals"),
     StockInfo("BIOCON", "Biocon Ltd", "Healthcare", "Pharmaceuticals"),
-    StockInfo("CADILAHC", "Zydus Lifesciences Ltd", "Healthcare", "Pharmaceuticals"),
+    StockInfo("ZYDUSLIFE", "Zydus Lifesciences Ltd", "Healthcare", "Pharmaceuticals"),
     StockInfo("DIVISLAB", "Divis Laboratories Ltd", "Healthcare", "Pharmaceuticals"),
     StockInfo("AUROPHARMA", "Aurobindo Pharma Ltd", "Healthcare", "Pharmaceuticals"),
     StockInfo("TORNTPHARM", "Torrent Pharmaceuticals Ltd", "Healthcare", "Pharmaceuticals"),
@@ -193,7 +192,7 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("GLENMARK", "Glenmark Pharmaceuticals Ltd", "Healthcare", "Pharmaceuticals"),
     StockInfo("IPCALAB", "IPCA Laboratories Ltd", "Healthcare", "Pharmaceuticals"),
     StockInfo("ALKEM", "Alkem Laboratories Ltd", "Healthcare", "Pharmaceuticals"),
-    StockInfo("LAOPHARMA", "La Renon Healthcare Ltd", "Healthcare", "Pharmaceuticals"),
+    # LAOPHARMA removed — not available on yfinance
     StockInfo("SYNGENE", "Syngene International Ltd", "Healthcare", "Biotechnology"),
     StockInfo("METROPOLIS", "Metropolis Healthcare Ltd", "Healthcare", "Diagnostics"),
     StockInfo("APOLLOHOSP", "Apollo Hospitals Enterprise Ltd", "Healthcare", "Hospital"),
@@ -214,23 +213,23 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("JKCEMENT", "JK Cement Ltd", "Materials", "Cement"),
     StockInfo("BALKRISIND", "Balkrishna Industries Ltd", "Industrials", "Tyres"),
     StockInfo("JKPAPER", "JK Paper Ltd", "Materials", "Paper"),
-    StockInfo("WESTCOAST", "West Coast Paper Mills Ltd", "Materials", "Paper"),
+    # WESTCOAST removed — not available on yfinance
 
     # ========================================
     # CAPITAL GOODS
     # ========================================
     StockInfo("SIEMENS", "Siemens Ltd", "Industrials", "Electrical Equipment"),
     StockInfo("ABB", "ABB India Ltd", "Industrials", "Electrical Equipment"),
-    StockInfo("HONEYWELL", "Honeywell Automation India Ltd", "Industrials", "Electrical Equipment"),
+    StockInfo("HONAUT", "Honeywell Automation India Ltd", "Industrials", "Electrical Equipment"),
     StockInfo("BHEL", "Bharat Heavy Electricals Ltd", "Industrials", "Electrical Equipment"),
     StockInfo("CROMPTON", "Crompton Greaves Consumer Electricals Ltd", "Consumer Goods", "Electrical"),
     StockInfo("HAVELLS", "Havells India Ltd", "Consumer Goods", "Electrical"),
     StockInfo("ORIENTELEC", "Orient Electric Ltd", "Consumer Goods", "Electrical"),
-    StockInfo("V-GUARD", "V-Guard Industries Ltd", "Consumer Goods", "Electrical"),
+    StockInfo("VGUARD", "V-Guard Industries Ltd", "Consumer Goods", "Electrical"),
     StockInfo("POLYCAB", "Polycab India Ltd", "Industrials", "Cables"),
     StockInfo("KEI", "KEI Industries Ltd", "Industrials", "Cables"),
     StockInfo("FINCABLES", "Finolex Cables Ltd", "Industrials", "Cables"),
-    StockInfo("ELGI", "Elgi Equipments Ltd", "Industrials", "Machinery"),
+    StockInfo("ELGIEQUIP", "Elgi Equipments Ltd", "Industrials", "Machinery"),
     StockInfo("INOXWIND", "Inox Wind Ltd", "Industrials", "Machinery"),
 
     # ========================================
@@ -255,21 +254,22 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("BERGEPAINT", "Berger Paints India Ltd", "Consumer Goods", "Paints"),
     StockInfo("KANSAINER", "Kansai Nerolac Paints Ltd", "Consumer Goods", "Paints"),
     StockInfo("INDIGO", "InterGlobe Aviation Ltd", "Industrials", "Airlines"),
-    StockInfo("SPICEJET", "SpiceJet Ltd", "Industrials", "Airlines"),
+    # SPICEJET removed — suspended from trading, no yfinance data
     StockInfo("GODREJPROP", "Godrej Properties Ltd", "Real Estate", "Real Estate"),
     StockInfo("DLF", "DLF Ltd", "Real Estate", "Real Estate"),
-    StockInfo("MARUTISUZ", "Maruti Suzuki India Ltd", "Automobiles", "Cars"),
+    # MARUTISUZ removed — duplicate of MARUTI
     StockInfo("PRAJIND", "Praj Industries Ltd", "Industrials", "Engineering"),
 
     # ========================================
     # MEDIA & ENTERTAINMENT
     # ========================================
     StockInfo("ZEEL", "Zee Entertainment Enterprises Ltd", "Media", "Media"),
-    StockInfo("PVR", "PVR Ltd", "Media", "Entertainment"),
-    StockInfo("INOXLEISUR", "Inox Leisure Ltd", "Media", "Entertainment"),
+    StockInfo("PVRINOX", "PVR Inox Ltd", "Media", "Entertainment"),
+    # INOXLEISUR removed — merged with PVR to form PVRINOX
+    # PVR removed — merged with INOX to form PVRINOX
     StockInfo("SUNTV", "Sun TV Network Ltd", "Media", "Media"),
     StockInfo("NETWORK18", "Network18 Media & Investments Ltd", "Media", "Media"),
-    StockInfo("DBSTOCK", "DB Corp Ltd", "Media", "Media"),
+    StockInfo("DBCORP", "DB Corp Ltd", "Media", "Media"),
 
     # ========================================
     # TELECOM
@@ -285,7 +285,7 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("LAURUSLABS", "Laurus Labs Ltd", "Healthcare", "Pharmaceuticals"),
     StockInfo("JUBLFOOD", "Jubilant FoodWorks Ltd", "Consumer Services", "Restaurants"),
     StockInfo("WESTLIFE", "Westlife Foodworld Ltd", "Consumer Services", "Restaurants"),
-    StockInfo("DOMSIND", "DOMS Industries Ltd", "Consumer Goods", "Stationery"),
+    StockInfo("DOMS", "DOMS Industries Ltd", "Consumer Goods", "Stationery"),
     StockInfo("CAMPUS", "Campus Activewear Ltd", "Consumer Goods", "Footwear"),
     StockInfo("LIBERTSHOE", "Liberty Shoes Ltd", "Consumer Goods", "Footwear"),
 
@@ -307,7 +307,7 @@ NIFTY_200: list[StockInfo] = [
     StockInfo("CENTURYPLY", "Century Plyboards (India) Ltd", "Consumer Goods", "Furniture"),
     StockInfo("GREENPANEL", "Greenpanel Industries Ltd", "Consumer Goods", "Furniture"),
     StockInfo("ASTRAL", "Astral Ltd", "Industrials", "Pipes"),
-    StockInfo("PRINCEPIPES", "Prince Pipes and Fittings Ltd", "Industrials", "Pipes"),
+    StockInfo("PRINCEPIPE", "Prince Pipes and Fittings Ltd", "Industrials", "Pipes"),
     StockInfo("SUPREMEINF", "Supreme Infrastructure India Ltd", "Industrials", "Construction"),
     StockInfo("HERANBA", "Heranba Industries Ltd", "Chemicals", "Agrochemicals"),
 ]

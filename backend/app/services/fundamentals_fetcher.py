@@ -314,6 +314,9 @@ async def run_fundamentals_pipeline(
     """
     Run fundamentals fetch pipeline for multiple tickers.
 
+    Each ticker gets its own short-lived session to avoid Neon connection
+    idle timeouts during the ~3-4 minute fetch window.
+
     Args:
         tickers: List of NSE tickers
 
@@ -323,33 +326,46 @@ async def run_fundamentals_pipeline(
     fetcher = FundamentalsFetcher()
     run = PipelineRun(
         run_type="fundamentals_fetch",
-        started_at=datetime.utcnow(),
+        started_at=datetime.now(UTC),
         status="running",
         tickers_total=len(tickers),
         tickers_success=0,
         tickers_failed=0,
     )
 
-    async with async_session_factory() as session:
-        session.add(run)
-        await session.flush()
+    # Persist the initial run record
+    async with async_session_factory() as init_session:
+        init_session.add(run)
+        await init_session.commit()
+        await init_session.refresh(run)
+        run_id = run.id
 
-        success_count = 0
-        failed_count = 0
-        errors: list[str] = []
+    success_count = 0
+    failed_count = 0
+    errors: list[str] = []
 
-        for ticker in tickers:
+    for ticker in tickers:
+        # Fresh session per ticker — keeps connections short-lived for Neon
+        async with async_session_factory() as session:
             success, message = await fetcher.fetch_and_save(session, ticker)
-            if success:
-                success_count += 1
-            else:
-                failed_count += 1
-                if message:
-                    errors.append(f"{ticker}: {message}")
+            await session.commit()
 
+        if success:
+            success_count += 1
+        else:
+            failed_count += 1
+            if message:
+                errors.append(f"{ticker}: {message}")
+
+    # Update the run record with final counts
+    async with async_session_factory() as final_session:
+        result = await final_session.execute(
+            select(PipelineRun).where(PipelineRun.id == run_id)
+        )
+        run = result.scalar_one()
         run.tickers_success = success_count
         run.tickers_failed = failed_count
-        run.completed_at = datetime.utcnow()
+        run.completed_at = datetime.now(UTC)
 
         if failed_count == 0:
             run.status = "completed"
@@ -360,7 +376,7 @@ async def run_fundamentals_pipeline(
             run.status = "partial"
             run.error_message = "\n".join(errors[:10])
 
-        await session.commit()
+        await final_session.commit()
 
     return run
 
