@@ -12,47 +12,49 @@ from sqlalchemy.ext.asyncio import (
     async_sessionmaker,
     create_async_engine,
 )
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import urlparse, parse_qs, urlunparse
 
 from app.core.config import settings
 
 # ── Normalise DATABASE_URL ────────────────────────────────
 def _asyncpg_url(url: str) -> tuple[str, dict]:
     """
-    Rewrite sync PostgreSQL URLs to async, and extract SSL mode.
+    Rewrite sync PostgreSQL URLs to async, stripping all incompatible query params.
+    asyncpg doesn't accept psycopg2-specific params like sslmode or channel_binding.
 
-    Returns: (rewritten_url, connect_args)
+    Returns: (rewritten_url_without_params, connect_args)
     """
     for prefix in ("postgresql://", "postgres://"):
         if url.startswith(prefix):
             url = "postgresql+asyncpg://" + url[len(prefix):]
             break
 
-    # Parse and remove sslmode from query string
+    # Parse URL to extract and remove ALL query parameters
     parsed = urlparse(url)
-    query_params = parse_qs(parsed.query)
+    query_params = parse_qs(parsed.query, keep_blank_values=True)
+
+    # Extract SSL mode before wiping params
     ssl_mode = query_params.pop("sslmode", [None])[0]
 
-    # Reconstruct URL without sslmode
-    if query_params:
-        remaining = "&".join(f"{k}={v[0]}" for k, v in query_params.items())
-        url = url.split("?")[0] + "?" + remaining
-    else:
-        url = url.split("?")[0]
+    # Rebuild URL with NO query string — asyncpg doesn't accept any
+    # psycopg2-style params (sslmode, channel_binding, options, etc.)
+    url_clean = urlunparse((
+        parsed.scheme,
+        parsed.netloc,
+        parsed.path,
+        parsed.params,
+        "",               # ← strip entire query string
+        parsed.fragment,
+    ))
 
     # Build connect_args for asyncpg
-    connect_args = {"timeout": 5}
-    if ssl_mode:
-        # Map psycopg2 ssl modes to asyncpg equivalents
-        ssl_map = {
-            "require": True,
-            "prefer": True,
-            "disable": False,
-        }
-        if ssl_mode in ssl_map:
-            connect_args["ssl"] = ssl_map[ssl_mode]
+    connect_args: dict = {"timeout": 5}
+    ssl_map = {"require": True, "prefer": True, "disable": False}
+    if ssl_mode and ssl_mode in ssl_map:
+        connect_args["ssl"] = ssl_map[ssl_mode]
 
-    return url, connect_args
+    return url_clean, connect_args
+
 
 _db_url, _connect_args = _asyncpg_url(settings.DATABASE_URL)
 
@@ -63,7 +65,7 @@ engine = create_async_engine(
     pool_size=10,
     max_overflow=20,
     pool_pre_ping=True,
-    connect_args=_connect_args,  # Now includes proper SSL handling
+    connect_args=_connect_args,
 )
 
 # ── Session Factory ──────────────────────────────────────
