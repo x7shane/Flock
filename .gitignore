@@ -55,3 +55,8 @@ key.pem
 
 # Graphify — exclude raw JSON (auto-generated, cosmetic churn); keep GRAPH_REPORT.md
 graphify-out/graph.json
+
+# Reports markdown files
+PROJECT_STATE.md
+FLOCK_DEEP_DIVE.md
+
