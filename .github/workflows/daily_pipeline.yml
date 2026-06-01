@@ -35,11 +35,12 @@ jobs:
           python - <<'EOF'
           import asyncio, sys
           async def check():
-              from app.db.session import _db_url
+              from app.db.session import _db_url, _connect_args
               if not _db_url.startswith("postgresql+asyncpg://"):
                   print(f"ERROR: URL rewrite failed — got: {_db_url[:40]}")
                   sys.exit(1)
-              print(f"URL OK: {_db_url[:50]}...")
+              print(f"URL OK:          {_db_url[:60]}...")
+              print(f"connect_args:    {_connect_args}")
               from sqlalchemy import text
               from app.db.session import async_session_factory
               async with async_session_factory() as s:
