@@ -18,6 +18,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.session import async_session_factory
 from app.models.mutual_fund import MfNav, MutualFund
 from app.models.pipeline import PipelineRun
+from app.utils.retry import retry_async
 
 # mfapi.in free API for Indian MF NAV data
 MFAPI_BASE_URL = "https://api.mfapi.in/mf"
@@ -51,7 +52,7 @@ class MfFetcher:
         """
         await self._rate_limit()
 
-        try:
+        async def _fetch() -> dict | None:
             async with httpx.AsyncClient(timeout=30.0) as client:
                 response = await client.get(f"{MFAPI_BASE_URL}/{scheme_code}")
                 if response.status_code != 200:
@@ -72,6 +73,8 @@ class MfFetcher:
                     "fetched_at": datetime.now(UTC),
                 }
 
+        try:
+            return await retry_async(_fetch, retries=3, base_delay=2.0, label=scheme_code)
         except Exception as e:
             logger.error("[MfFetcher] Failed to fetch NAV for scheme %s: %s", scheme_code, e)
             return None
@@ -93,7 +96,7 @@ class MfFetcher:
         """
         await self._rate_limit()
 
-        try:
+        async def _fetch() -> list[dict] | None:
             async with httpx.AsyncClient(timeout=30.0) as client:
                 response = await client.get(f"{MFAPI_BASE_URL}/{scheme_code}")
                 if response.status_code != 200:
@@ -122,6 +125,8 @@ class MfFetcher:
 
                 return nav_records
 
+        try:
+            return await retry_async(_fetch, retries=3, base_delay=2.0, label=scheme_code)
         except Exception as e:
             logger.error("[MfFetcher] Failed to fetch NAV history for scheme %s: %s", scheme_code, e)
             return None

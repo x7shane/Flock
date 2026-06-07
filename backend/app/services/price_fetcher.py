@@ -20,6 +20,7 @@ from app.core.config import settings
 from app.db.session import async_session_factory
 from app.models.pipeline import PipelineRun
 from app.models.stock import Stock, StockPrice
+from app.utils.retry import retry_async
 
 if TYPE_CHECKING:
     pass
@@ -76,18 +77,22 @@ class PriceFetcher:
             start_date = end_date - timedelta(days=days)
 
         try:
-            # Run yfinance in thread pool (it's synchronous)
+            # Run yfinance in thread pool (it's synchronous) with retry on timeout
             loop = asyncio.get_event_loop()
-            df = await loop.run_in_executor(
-                None,
-                lambda: yf.download(
-                    yf_ticker,
-                    start=start_date,
-                    end=end_date + timedelta(days=1),  # yfinance end is exclusive
-                    progress=False,
-                    auto_adjust=False,
+
+            async def _download() -> pd.DataFrame:
+                return await loop.run_in_executor(
+                    None,
+                    lambda: yf.download(
+                        yf_ticker,
+                        start=start_date,
+                        end=end_date + timedelta(days=1),  # yfinance end is exclusive
+                        progress=False,
+                        auto_adjust=False,
+                    )
                 )
-            )
+
+            df = await retry_async(_download, retries=3, base_delay=2.0, label=yf_ticker)
 
             if df.empty:
                 return None
