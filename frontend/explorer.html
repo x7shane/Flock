@@ -110,6 +110,53 @@
         .fund-na {
             color: #bfc9c1;
         }
+        /* ── Info tooltip system ── */
+        .tip-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 13px; height: 13px;
+            border-radius: 50%;
+            background: rgba(64,73,67,0.12);
+            color: #707973;
+            font-size: 8px;
+            font-weight: 900;
+            cursor: help;
+            flex-shrink: 0;
+            margin-left: 4px;
+            font-style: normal;
+            user-select: none;
+            transition: background 0.15s, color 0.15s;
+            line-height: 1;
+            letter-spacing: 0;
+        }
+        .tip-icon:hover { background: rgba(15,82,56,0.18); color: #0f5238; }
+        #flock-tip {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            background: #1a1c16;
+            color: #f1f1e7;
+            border-radius: 10px;
+            padding: 10px 14px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.06);
+            pointer-events: none;
+            font-family: 'Inter', sans-serif;
+            min-width: 160px;
+            font-size: 10px;
+            line-height: 1;
+        }
+        #flock-tip .t-title { font-weight: 800; color: #95d4b3; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+        #flock-tip .t-sub { color: #707973; font-size: 9px; margin-bottom: 8px; font-style: italic; }
+        #flock-tip .t-grid { display: grid; grid-template-columns: 1fr auto; gap: 5px 16px; align-items: center; }
+        #flock-tip .t-label { color: #a0a89f; }
+        #flock-tip .t-val { color: #f1f1e7; font-weight: 700; text-align: right; }
+        #flock-tip .t-hi { color: #95d4b3; font-weight: 800; }
+        #flock-tip .t-formula { color: #707973; font-size: 9px; margin-bottom: 5px; font-style: italic; }
+        #flock-tip .t-factors { color: #a0a89f; line-height: 1.8; }
+        #flock-tip .t-factor { color: #f1f1e7; }
+        #flock-tip .t-sep { color: #404943; margin: 0 3px; }
+        #flock-tip .t-note { color: #404943; font-size: 8.5px; margin-top: 7px; font-style: italic; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 5px; }
     </style>
 
   <script src="/js/format.js"></script>
@@ -402,19 +449,19 @@
             <p class="text-xs text-on-surface-variant mb-3 font-bold uppercase tracking-widest">Strategy Scores</p>
             <div class="grid grid-cols-2 gap-2">
               <div class="flex items-center justify-between p-2 bg-surface-container rounded-lg">
-                <span class="text-xs text-on-surface-variant">Balanced</span>
+                <span class="flex items-center text-xs text-on-surface-variant">Balanced<span class="tip-icon" data-tip-id="strat-balanced">i</span></span>
                 <span id="modal-score-balanced" class="text-sm font-bold text-primary">—</span>
               </div>
               <div class="flex items-center justify-between p-2 bg-surface-container rounded-lg">
-                <span class="text-xs text-on-surface-variant">Growth</span>
+                <span class="flex items-center text-xs text-on-surface-variant">Growth<span class="tip-icon" data-tip-id="strat-growth">i</span></span>
                 <span id="modal-score-growth" class="text-sm font-bold text-secondary">—</span>
               </div>
               <div class="flex items-center justify-between p-2 bg-surface-container rounded-lg">
-                <span class="text-xs text-on-surface-variant">Value</span>
+                <span class="flex items-center text-xs text-on-surface-variant">Value<span class="tip-icon" data-tip-id="strat-value">i</span></span>
                 <span id="modal-score-value" class="text-sm font-bold text-tertiary">—</span>
               </div>
               <div class="flex items-center justify-between p-2 bg-surface-container rounded-lg">
-                <span class="text-xs text-on-surface-variant">Conservative</span>
+                <span class="flex items-center text-xs text-on-surface-variant">Conservative<span class="tip-icon" data-tip-id="strat-conservative">i</span></span>
                 <span id="modal-score-conservative" class="text-sm font-bold text-primary">—</span>
               </div>
             </div>
@@ -433,7 +480,7 @@
           <div class="space-y-3 max-w-[180px]">
             <div>
               <div class="flex items-center justify-between mb-1">
-                <span class="text-xs font-medium text-on-surface">Profitability</span>
+                <span class="flex items-center text-xs font-medium text-on-surface">Profitability<span class="tip-icon" data-tip-id="pillar-profitability">i</span></span>
                 <span id="pillar-profitability" class="text-xs font-bold text-on-surface">—</span>
               </div>
               <div class="h-1.5 bg-surface-container rounded-full overflow-hidden">
@@ -442,7 +489,7 @@
             </div>
             <div>
               <div class="flex items-center justify-between mb-1">
-                <span class="text-xs font-medium text-on-surface">Growth</span>
+                <span class="flex items-center text-xs font-medium text-on-surface">Growth<span class="tip-icon" data-tip-id="pillar-growth">i</span></span>
                 <span id="pillar-growth" class="text-xs font-bold text-on-surface">—</span>
               </div>
               <div class="h-1.5 bg-surface-container rounded-full overflow-hidden">
@@ -451,7 +498,7 @@
             </div>
             <div>
               <div class="flex items-center justify-between mb-1">
-                <span class="text-xs font-medium text-on-surface">Health</span>
+                <span class="flex items-center text-xs font-medium text-on-surface">Health<span class="tip-icon" data-tip-id="pillar-health">i</span></span>
                 <span id="pillar-health" class="text-xs font-bold text-on-surface">—</span>
               </div>
               <div class="h-1.5 bg-surface-container rounded-full overflow-hidden">
@@ -460,7 +507,7 @@
             </div>
             <div>
               <div class="flex items-center justify-between mb-1">
-                <span class="text-xs font-medium text-on-surface">Valuation</span>
+                <span class="flex items-center text-xs font-medium text-on-surface">Valuation<span class="tip-icon" data-tip-id="pillar-valuation">i</span></span>
                 <span id="pillar-valuation" class="text-xs font-bold text-on-surface">—</span>
               </div>
               <div class="h-1.5 bg-surface-container rounded-full overflow-hidden">
@@ -469,7 +516,7 @@
             </div>
             <div>
               <div class="flex items-center justify-between mb-1">
-                <span class="text-xs font-medium text-on-surface">Quality</span>
+                <span class="flex items-center text-xs font-medium text-on-surface">Quality<span class="tip-icon" data-tip-id="pillar-quality">i</span></span>
                 <span id="pillar-quality" class="text-xs font-bold text-on-surface">—</span>
               </div>
               <div class="h-1.5 bg-surface-container rounded-full overflow-hidden">
@@ -768,5 +815,47 @@ function closeStockModal() {
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeStockModal(); });
 
 loadStocks();
+
+// ── Tooltip System ───────────────────────────────────────
+// Uses position:fixed so it escapes the modal's overflow:hidden
+const TIPS = {
+  'strat-balanced': `<div class="t-title">Balanced Strategy</div><div class="t-sub">Equal weight — suits most investors</div><div class="t-grid"><span class="t-label">Profitability</span><span class="t-val">20%</span><span class="t-label">Growth</span><span class="t-val">20%</span><span class="t-hi">Health</span><span class="t-hi">25% ★</span><span class="t-label">Valuation</span><span class="t-val">20%</span><span class="t-label">Quality</span><span class="t-val">15%</span></div>`,
+  'strat-growth': `<div class="t-title">Growth Strategy</div><div class="t-sub">Biased toward high-growth companies</div><div class="t-grid"><span class="t-label">Profitability</span><span class="t-val">15%</span><span class="t-hi">Growth</span><span class="t-hi">35% ★</span><span class="t-label">Health</span><span class="t-val">15%</span><span class="t-label">Valuation</span><span class="t-val">15%</span><span class="t-label">Quality</span><span class="t-val">20%</span></div>`,
+  'strat-value': `<div class="t-title">Value Strategy</div><div class="t-sub">Favours undervalued stocks</div><div class="t-grid"><span class="t-label">Profitability</span><span class="t-val">20%</span><span class="t-label">Growth</span><span class="t-val">10%</span><span class="t-label">Health</span><span class="t-val">25%</span><span class="t-hi">Valuation</span><span class="t-hi">35% ★</span><span class="t-label">Quality</span><span class="t-val">10%</span></div>`,
+  'strat-conservative': `<div class="t-title">Conservative Strategy</div><div class="t-sub">Prioritises financial stability</div><div class="t-grid"><span class="t-label">Profitability</span><span class="t-val">25%</span><span class="t-label">Growth</span><span class="t-val">10%</span><span class="t-hi">Health</span><span class="t-hi">35% ★</span><span class="t-label">Valuation</span><span class="t-val">15%</span><span class="t-label">Quality</span><span class="t-val">15%</span></div>`,
+  'pillar-profitability': `<div class="t-title">Profitability Pillar</div><div class="t-formula">= avg percentile rank within Nifty 200 of:</div><div class="t-factors"><span class="t-factor">ROE</span><span class="t-sep">·</span><span class="t-factor">ROCE</span><span class="t-sep">·</span><span class="t-factor">Net Profit Margin</span></div>`,
+  'pillar-growth': `<div class="t-title">Growth Pillar</div><div class="t-formula">= avg percentile rank within Nifty 200 of:</div><div class="t-factors"><span class="t-factor">Revenue CAGR (3Y)</span><span class="t-sep">·</span><span class="t-factor">EPS Growth (3Y)</span></div>`,
+  'pillar-health': `<div class="t-title">Financial Health Pillar</div><div class="t-formula">= avg percentile rank within Nifty 200 of:</div><div class="t-factors"><span class="t-factor">Debt / Equity</span><span class="t-sep">·</span><span class="t-factor">Current Ratio</span><span class="t-sep">·</span><span class="t-factor">Interest Coverage</span><span class="t-sep">·</span><span class="t-factor">Free Cash Flow</span></div><div class="t-note">↓ lower Debt/Equity scores higher</div>`,
+  'pillar-valuation': `<div class="t-title">Valuation Pillar</div><div class="t-formula">= avg percentile rank within Nifty 200 of:</div><div class="t-factors"><span class="t-factor">P/E Ratio</span><span class="t-sep">·</span><span class="t-factor">P/B Ratio</span><span class="t-sep">·</span><span class="t-factor">PEG Ratio</span><span class="t-sep">·</span><span class="t-factor">Dividend Yield</span></div><div class="t-note">↓ lower P/E, P/B, PEG scores higher</div>`,
+  'pillar-quality': `<div class="t-title">Quality Pillar</div><div class="t-formula">= avg percentile rank within Nifty 200 of:</div><div class="t-factors"><span class="t-factor">Promoter Holding %</span><span class="t-sep">·</span><span class="t-factor">Promoter Pledge %</span><span class="t-sep">·</span><span class="t-factor">FII / DII Trend</span></div><div class="t-note">↓ lower Promoter Pledge scores higher</div>`,
+};
+
+(function initTooltips() {
+  const tip = document.getElementById('flock-tip');
+  document.querySelectorAll('[data-tip-id]').forEach(function(el) {
+    el.addEventListener('mouseenter', function() {
+      const content = TIPS[this.dataset.tipId];
+      if (!content) return;
+      tip.innerHTML = content;
+      tip.style.display = 'block';
+      const r = this.getBoundingClientRect();
+      const tw = tip.offsetWidth, th = tip.offsetHeight;
+      // Default: show above the icon, centred
+      let left = r.left + r.width / 2 - tw / 2;
+      let top  = r.top - th - 10;
+      // If clipped at top, show below
+      if (top < 8) top = r.bottom + 10;
+      // Clamp horizontally
+      if (left < 8) left = 8;
+      if (left + tw > window.innerWidth - 8) left = window.innerWidth - tw - 8;
+      tip.style.left = left + 'px';
+      tip.style.top  = top  + 'px';
+    });
+    el.addEventListener('mouseleave', function() {
+      tip.style.display = 'none';
+    });
+  });
+})();
 </script>
+<div id="flock-tip"></div>
 </body></html>
