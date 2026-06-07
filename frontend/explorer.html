@@ -906,12 +906,20 @@ async function openStockModal(ticker) {
 
   // ── Helpers ─────────────────────────────────────────────
   function fillFundamentals(f, isDemo) {
-    const fmt = (v, suffix='', decimals=2) => (v !== null && v !== undefined) ? `${(+v).toFixed(decimals)}${suffix}` : '—';
-    document.getElementById('fd-roe').textContent      = fmt(f.roe, '%');
-    document.getElementById('fd-roce').textContent     = fmt(f.roce, '%');
-    document.getElementById('fd-npm').textContent      = fmt(f.net_profit_margin, '%');
-    document.getElementById('fd-rev-cagr').textContent = fmt(f.revenue_cagr_3yr, '%');
-    document.getElementById('fd-eps').textContent      = fmt(f.eps_growth_3yr, '%');
+    // Non-% fields: just format as number with suffix
+    const fmt  = (v, suffix='', decimals=2) => (v != null && !isNaN(+v)) ? `${(+v).toFixed(decimals)}${suffix}` : '—';
+    // % fields: yfinance stores as decimal fraction (0.26 = 26%).
+    // Demo mock data is already in percentage form (rng returns e.g. 26).
+    const pct  = (v, decimals=1) => {
+      if (v == null || isNaN(+v)) return '—';
+      const val = isDemo ? +v : (+v * 100);
+      return val.toFixed(decimals) + '%';
+    };
+    document.getElementById('fd-roe').textContent      = pct(f.roe);
+    document.getElementById('fd-roce').textContent     = pct(f.roce);
+    document.getElementById('fd-npm').textContent      = pct(f.net_profit_margin);
+    document.getElementById('fd-rev-cagr').textContent = pct(f.revenue_cagr_3yr);
+    document.getElementById('fd-eps').textContent      = pct(f.eps_growth_3yr);
     document.getElementById('fd-de').textContent       = fmt(f.debt_equity, 'x');
     document.getElementById('fd-cr').textContent       = fmt(f.current_ratio, 'x');
     document.getElementById('fd-ic').textContent       = fmt(f.interest_coverage, 'x');
@@ -919,9 +927,9 @@ async function openStockModal(ticker) {
     document.getElementById('fd-pe').textContent       = fmt(f.pe_ratio, 'x');
     document.getElementById('fd-pb').textContent       = fmt(f.pb_ratio, 'x');
     document.getElementById('fd-peg').textContent      = fmt(f.peg_ratio);
-    document.getElementById('fd-div').textContent      = fmt(f.dividend_yield, '%');
-    document.getElementById('fd-promo').textContent    = fmt(f.promoter_holding_pct, '%');
-    document.getElementById('fd-pledge').textContent   = fmt(f.promoter_pledge_pct, '%');
+    document.getElementById('fd-div').textContent      = pct(f.dividend_yield);
+    document.getElementById('fd-promo').textContent    = pct(f.promoter_holding_pct);
+    document.getElementById('fd-pledge').textContent   = pct(f.promoter_pledge_pct);
     document.getElementById('fd-fii').textContent      = fmt(f.fii_dii_trend);
     document.getElementById('fd-mcap').textContent     = f.market_cap ? `Mkt Cap: ₹${(f.market_cap/1e5).toFixed(0)} Cr` : 'Mkt Cap: —';
     document.getElementById('fd-fetched').textContent  = isDemo ? 'Demo data — run pipeline for live values' : (f.fetched_at ? `Data as of: ${f.fetched_at.slice(0,10)}` : 'Data as of: —');
