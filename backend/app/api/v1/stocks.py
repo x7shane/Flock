@@ -41,6 +41,11 @@ async def list_stocks(
             Stock.industry,
             Stock.is_active,
             CurrentScore.score_balanced,
+            CurrentScore.pillar_profitability,
+            CurrentScore.pillar_growth,
+            CurrentScore.pillar_health,
+            CurrentScore.pillar_valuation,
+            CurrentScore.pillar_quality,
         )
         .outerjoin(
             CurrentScore,
@@ -75,6 +80,11 @@ async def list_stocks(
             industry=row.industry,
             is_active=row.is_active,
             flock_score=round(float(row.score_balanced), 1) if row.score_balanced is not None else None,
+            pillar_profitability=round(float(row.pillar_profitability), 1) if row.pillar_profitability is not None else None,
+            pillar_growth=round(float(row.pillar_growth), 1) if row.pillar_growth is not None else None,
+            pillar_health=round(float(row.pillar_health), 1) if row.pillar_health is not None else None,
+            pillar_valuation=round(float(row.pillar_valuation), 1) if row.pillar_valuation is not None else None,
+            pillar_quality=round(float(row.pillar_quality), 1) if row.pillar_quality is not None else None,
         )
         for row in rows
     ]
