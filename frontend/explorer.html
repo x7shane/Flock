@@ -910,7 +910,7 @@ async function openStockModal(ticker) {
     const fmt  = (v, suffix='', decimals=2) => (v != null && !isNaN(+v)) ? `${(+v).toFixed(decimals)}${suffix}` : '—';
     // % fields: yfinance stores as decimal fraction (0.26 = 26%).
     // Demo mock data is already in percentage form (rng returns e.g. 26).
-    const pct  = (v, decimals=1) => {
+    const pct  = (v, decimals=2) => {
       if (v == null || isNaN(+v)) return '—';
       const val = isDemo ? +v : (+v * 100);
       return val.toFixed(decimals) + '%';
