@@ -173,7 +173,7 @@ def calculate_pillar_score(
 def calculate_flock_score(
     pillar_scores: dict[str, float | None],
     weights: dict[str, float],
-) -> float:
+) -> float | None:
     """
     Weighted sum of pillar scores, re-normalized if any pillar is missing.
 
@@ -191,7 +191,7 @@ def calculate_flock_score(
     }
 
     if not valid_pillars:
-        return 0.0
+        return None  # No data at all — return null, not a misleading 0
 
     # Re-normalize weights to sum to 1.0 (handles missing pillars)
     total_weight = sum(weights[p] for p in valid_pillars)

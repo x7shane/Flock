@@ -32,6 +32,25 @@ if TYPE_CHECKING:
 import yfinance as yf
 
 
+# ── Yahoo Finance Symbol Overrides ──────────────────────────────────────────
+# Some NSE tickers are not indexed or return 404 on Yahoo Finance's quoteSummary
+# endpoint. Map them to a working alternate symbol (usually BSE code or a known
+# Yahoo alias) so the fetcher can still attempt to retrieve data.
+#
+# Known gaps (as of June 2026):
+#   TATAMOTORS.NS — Yahoo Finance returns 404; BSE code 500570.BO also empty.
+#   LTIM.NS       — Post-merger entity (LTI + Mindtree); Yahoo hasn't indexed it.
+#                   BSE code 540005.BO exists but returns no fundamental fields.
+#
+# When a working alternate is found, add it here:
+#   'NSE_TICKER': 'ALTERNATE_SYMBOL'   e.g. 'TATAMOTORS': '500570.BO'
+#
+TICKER_ALIAS: dict[str, str] = {
+    # 'TATAMOTORS': '500570.BO',   # BSE code — uncomment if Yahoo fixes their data
+    # 'LTIM': '540005.BO',         # BSE code — uncomment if Yahoo fixes their data
+}
+
+
 class FundamentalsFetcher:
     """Fetches fundamental factors from yfinance with SCD2 tracking."""
 
@@ -60,8 +79,8 @@ class FundamentalsFetcher:
         """
         await self._rate_limit()
 
-        # NSE tickers need .NS suffix for yfinance
-        yf_ticker = f"{ticker}.NS"
+        # Use override alias if defined, otherwise default to NSE .NS suffix
+        yf_ticker = TICKER_ALIAS.get(ticker, f"{ticker}.NS")
 
         try:
             loop = asyncio.get_event_loop()
