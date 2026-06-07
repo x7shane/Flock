@@ -46,8 +46,13 @@ import yfinance as yf
 #   'NSE_TICKER': 'ALTERNATE_SYMBOL'   e.g. 'TATAMOTORS': '500570.BO'
 #
 TICKER_ALIAS: dict[str, str] = {
-    # 'TATAMOTORS': '500570.BO',   # BSE code — uncomment if Yahoo fixes their data
-    # 'LTIM': '540005.BO',         # BSE code — uncomment if Yahoo fixes their data
+    # Tata Motors demerged its passenger vehicle business (TMPV.NS) from the main
+    # commercial vehicle entity. Yahoo Finance now indexes the continuing entity
+    # (Tata Motors Ltd) as TMCV.NS instead of TATAMOTORS.NS.
+    "TATAMOTORS": "TMCV.NS",
+    # LTIMindtree (post LTI + Mindtree merger, Nov 2022) is indexed as LTM.NS on
+    # Yahoo Finance, not LTIM.NS which the NSE uses.
+    "LTIM": "LTM.NS",
 }
 
 
