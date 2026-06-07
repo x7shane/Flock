@@ -121,7 +121,7 @@
             color: #707973;
             font-size: 8px;
             font-weight: 900;
-            cursor: help;
+            cursor: pointer;
             flex-shrink: 0;
             margin-left: 4px;
             font-style: normal;
@@ -268,6 +268,11 @@
       <div class="h-16 bg-surface-container-low rounded-xl animate-pulse opacity-60"></div>
       <div class="h-16 bg-surface-container-low rounded-xl animate-pulse opacity-40"></div>
       <div class="h-16 bg-surface-container-low rounded-xl animate-pulse opacity-20"></div>
+      <!-- Cold-start hint: fades in after 4s if data hasn't loaded yet -->
+      <div id="coldstart-hint" class="hidden pt-4 flex items-center gap-3 text-on-surface-variant text-sm">
+        <span class="material-symbols-outlined animate-spin text-primary" style="font-size:18px">autorenew</span>
+        <span>Warming up the database&hellip; <span class="text-on-surface-variant/50 text-xs">Neon free tier cold start — usually under 30s</span></span>
+      </div>
     </div>
 
     <!-- Data Table — fills remaining viewport height -->
@@ -543,19 +548,27 @@ let portfolio = JSON.parse(sessionStorage.getItem('flock_portfolio') || '[]');
 
 // ── Load stocks on page load ───────────────────────────
 async function loadStocks() {
+  // Show "warming up" hint after 4s if DB is cold-starting
+  const coldTimer = setTimeout(() => {
+    const hint = document.getElementById('coldstart-hint');
+    if (hint) hint.classList.remove('hidden');
+  }, 4000);
+
   try {
     allStocks = await StocksAPI.list();
+    clearTimeout(coldTimer);
     renderTable(allStocks);
     document.getElementById('table-skeleton').classList.add('hidden');
     document.getElementById('stock-table').classList.remove('hidden');
     loadSectors();
     updatePortfolioBar();
   } catch (e) {
+    clearTimeout(coldTimer);
     document.getElementById('table-skeleton').innerHTML =
       `<div class="py-16 text-center text-on-surface-variant">
          <span class="material-symbols-outlined text-4xl mb-4 block">wifi_off</span>
-         <p class="font-headline font-bold text-lg mb-2">API not reachable</p>
-         <p class="text-sm">Start the backend: <code class="bg-surface-container px-2 py-1 rounded">uvicorn app.main:app --reload</code></p>
+         <p class="font-headline font-bold text-lg mb-2">Could not load data</p>
+         <p class="text-sm">Check your connection or try refreshing the page.</p>
        </div>`;
   }
 }
@@ -831,7 +844,12 @@ const TIPS = {
 };
 
 (function initTooltips() {
-  const tip = document.getElementById('flock-tip');
+  // Create tooltip div in JS — avoids getElementById returning null
+  // when the #flock-tip div is placed after the closing script tag in the DOM
+  const tip = document.createElement('div');
+  tip.id = 'flock-tip';
+  document.body.appendChild(tip);
+
   document.querySelectorAll('[data-tip-id]').forEach(function(el) {
     el.addEventListener('mouseenter', function() {
       const content = TIPS[this.dataset.tipId];
@@ -840,12 +858,12 @@ const TIPS = {
       tip.style.display = 'block';
       const r = this.getBoundingClientRect();
       const tw = tip.offsetWidth, th = tip.offsetHeight;
-      // Default: show above the icon, centred
+      // Default: show above the icon, centred horizontally
       let left = r.left + r.width / 2 - tw / 2;
       let top  = r.top - th - 10;
-      // If clipped at top, show below
+      // If clipped at top, flip below
       if (top < 8) top = r.bottom + 10;
-      // Clamp horizontally
+      // Clamp to viewport edges
       if (left < 8) left = 8;
       if (left + tw > window.innerWidth - 8) left = window.innerWidth - tw - 8;
       tip.style.left = left + 'px';
