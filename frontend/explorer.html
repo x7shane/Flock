@@ -157,6 +157,21 @@
         #flock-tip .t-factor { color: #f1f1e7; }
         #flock-tip .t-sep { color: #404943; margin: 0 3px; }
         #flock-tip .t-note { color: #404943; font-size: 8.5px; margin-top: 7px; font-style: italic; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 5px; }
+        /* ── Sort buttons ── */
+        .sort-btn { display: inline-flex; align-items: center; gap: 3px; cursor: pointer; background: none; border: none; padding: 0; font: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit; }
+        .sort-btn .sort-arrows { display: flex; flex-direction: column; line-height: 0.7; opacity: 0.25; font-size: 7px; }
+        .sort-btn.asc  .arr-up   { opacity: 1; color: #0f5238; }
+        .sort-btn.desc .arr-down { opacity: 1; color: #0f5238; }
+        .sort-btn:hover .sort-arrows { opacity: 0.6; }
+        /* ── Pillar range slider ── */
+        .pillar-slider { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px; background: #e2e3d9; outline: none; width: 100%; cursor: pointer; }
+        .pillar-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #0f5238; cursor: pointer; }
+        .pillar-slider::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: #0f5238; border: none; cursor: pointer; }
+        /* Fix Firefox double-arrow on native select */
+        select { -moz-appearance: none; }
+        /* Advanced filter panel */
+        #adv-panel { display: none; }
+        #adv-panel.open { display: block; }
     </style>
 
   <script src="/js/format.js"></script>
@@ -232,20 +247,71 @@
     <div class="flex items-center justify-between mb-3">
       <div class="flex items-center gap-4">
         <div class="relative">
-          <select id="sector-filter" class="appearance-none bg-surface-container-low border-none font-body text-sm rounded-xl px-6 py-3 pr-10 focus:ring-0 cursor-pointer hover:bg-surface-container-high transition-colors">
+          <select id="sector-filter" class="appearance-none bg-surface-container-low border-none font-body text-sm rounded-xl px-4 py-3 pr-9 focus:ring-0 cursor-pointer hover:bg-surface-container-high transition-colors" style="-webkit-appearance:none;-moz-appearance:none;">
             <option value="">All Sectors</option>
           </select>
-          <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+          <span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-base">expand_more</span>
         </div>
         <div id="stock-count" class="bg-primary/10 text-primary px-4 py-2 rounded-lg font-label text-[10px] font-bold tracking-[0.1em] uppercase">
           200 STOCKS FOUND
         </div>
       </div>
       <div class="flex items-center gap-3">
-        <button class="bg-surface-container-high px-4 py-2.5 rounded-xl font-body text-sm font-medium flex items-center gap-2 hover:bg-surface-container-highest transition-all">
+        <button id="adv-toggle" onclick="toggleAdvPanel()" class="bg-surface-container-high px-4 py-2.5 rounded-xl font-body text-sm font-medium flex items-center gap-2 hover:bg-surface-container-highest transition-all">
           <span class="material-symbols-outlined text-lg">tune</span>
           Advanced Filters
+          <span id="adv-active-dot" class="hidden w-2 h-2 rounded-full bg-primary"></span>
         </button>
+      </div>
+    </div>
+
+    <!-- Advanced Filters Panel -->
+    <div id="adv-panel" class="bg-surface-container-low rounded-2xl p-5 mb-3 border border-outline-variant/20">
+      <div class="flex items-center justify-between mb-4">
+        <p class="text-[10px] font-black text-on-surface-variant tracking-[0.15em] uppercase">Pillar Score Filters <span class="text-on-surface-variant/40 font-normal normal-case tracking-normal ml-1">— drag to set minimum score (0–100)</span></p>
+        <button onclick="resetPillarFilters()" class="text-[10px] text-primary font-bold hover:underline">Reset all</button>
+      </div>
+      <div class="grid grid-cols-5 gap-6">
+        <!-- Profitability -->
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Profitability</span>
+            <span id="pf-val" class="text-xs font-black text-primary">0</span>
+          </div>
+          <input type="range" id="pf-slider" min="0" max="100" value="0" class="pillar-slider" oninput="onSlider('pf','profitability')">
+        </div>
+        <!-- Growth -->
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Growth</span>
+            <span id="gr-val" class="text-xs font-black text-primary">0</span>
+          </div>
+          <input type="range" id="gr-slider" min="0" max="100" value="0" class="pillar-slider" oninput="onSlider('gr','growth')">
+        </div>
+        <!-- Health -->
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Health</span>
+            <span id="he-val" class="text-xs font-black text-primary">0</span>
+          </div>
+          <input type="range" id="he-slider" min="0" max="100" value="0" class="pillar-slider" oninput="onSlider('he','health')">
+        </div>
+        <!-- Valuation -->
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Valuation</span>
+            <span id="va-val" class="text-xs font-black text-primary">0</span>
+          </div>
+          <input type="range" id="va-slider" min="0" max="100" value="0" class="pillar-slider" oninput="onSlider('va','valuation')">
+        </div>
+        <!-- Quality -->
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Quality</span>
+            <span id="qu-val" class="text-xs font-black text-primary">0</span>
+          </div>
+          <input type="range" id="qu-slider" min="0" max="100" value="0" class="pillar-slider" oninput="onSlider('qu','quality')">
+        </div>
       </div>
     </div>
 
@@ -280,11 +346,31 @@
       <table class="w-full hidden" id="stock-table">
         <thead class="sticky top-0 bg-surface-container-low z-10">
           <tr>
-            <th class="py-3 pl-4 text-left text-[10px] font-black text-on-surface-variant/50 tracking-[0.2em] uppercase w-12">#</th>
-            <th class="py-3 text-left text-[10px] font-black text-on-surface-variant/50 tracking-[0.2em] uppercase w-28">Ticker</th>
-            <th class="py-3 text-left text-[10px] font-black text-on-surface-variant/50 tracking-[0.2em] uppercase">Company Name</th>
-            <th class="py-3 text-left text-[10px] font-black text-on-surface-variant/50 tracking-[0.2em] uppercase w-36">Sector</th>
-            <th class="py-3 text-right text-[10px] font-black text-on-surface-variant/50 tracking-[0.2em] uppercase w-28 pr-6">Flock Score</th>
+            <th class="py-3 pl-4 text-left text-[10px] font-black text-on-surface-variant/50 tracking-[0.2em] uppercase w-12">
+              <button class="sort-btn" id="sort-id" onclick="setSort('id')">
+                # <span class="sort-arrows"><span class="arr-up">▲</span><span class="arr-down">▼</span></span>
+              </button>
+            </th>
+            <th class="py-3 text-left text-[10px] font-black text-on-surface-variant/50 tracking-[0.2em] uppercase w-28">
+              <button class="sort-btn" id="sort-ticker" onclick="setSort('ticker')">
+                Ticker <span class="sort-arrows"><span class="arr-up">▲</span><span class="arr-down">▼</span></span>
+              </button>
+            </th>
+            <th class="py-3 text-left text-[10px] font-black text-on-surface-variant/50 tracking-[0.2em] uppercase">
+              <button class="sort-btn" id="sort-company_name" onclick="setSort('company_name')">
+                Company Name <span class="sort-arrows"><span class="arr-up">▲</span><span class="arr-down">▼</span></span>
+              </button>
+            </th>
+            <th class="py-3 text-left text-[10px] font-black text-on-surface-variant/50 tracking-[0.2em] uppercase w-36">
+              <button class="sort-btn" id="sort-sector" onclick="setSort('sector')">
+                Sector <span class="sort-arrows"><span class="arr-up">▲</span><span class="arr-down">▼</span></span>
+              </button>
+            </th>
+            <th class="py-3 text-right text-[10px] font-black text-on-surface-variant/50 tracking-[0.2em] uppercase w-28 pr-6">
+              <button class="sort-btn" id="sort-flock_score" onclick="setSort('flock_score')">
+                Flock Score <span class="sort-arrows"><span class="arr-up">▲</span><span class="arr-down">▼</span></span>
+              </button>
+            </th>
             <th class="py-3 text-center text-[10px] font-black text-on-surface-variant/50 tracking-[0.2em] uppercase w-24">Action</th>
           </tr>
         </thead>
@@ -663,12 +749,99 @@ function goToPortfolio() {
 document.getElementById('search-input').addEventListener('input', applyFilters);
 document.getElementById('sector-filter').addEventListener('change', applyFilters);
 
+// ── Sort state ─────────────────────────────────────────
+let sortCol = null;   // 'id' | 'ticker' | 'company_name' | 'sector' | 'flock_score'
+let sortDir = 'asc';
+
+// ── Pillar min-score filters ────────────────────────────
+const pillarMin = { profitability: 0, growth: 0, health: 0, valuation: 0, quality: 0 };
+
+// Toggle advanced panel open/closed
+function toggleAdvPanel() {
+  const panel = document.getElementById('adv-panel');
+  panel.classList.toggle('open');
+}
+
+// Slider input handler — updates displayed value + re-filters
+function onSlider(prefix, pillar) {
+  const val = parseInt(document.getElementById(prefix + '-slider').value);
+  document.getElementById(prefix + '-val').textContent = val;
+  pillarMin[pillar] = val;
+  // Show indicator dot on button if any filter is active
+  const anyActive = Object.values(pillarMin).some(v => v > 0);
+  document.getElementById('adv-active-dot').classList.toggle('hidden', !anyActive);
+  applyFilters();
+}
+
+// Reset all pillar sliders
+function resetPillarFilters() {
+  [['pf','profitability'],['gr','growth'],['he','health'],['va','valuation'],['qu','quality']].forEach(([p, k]) => {
+    document.getElementById(p + '-slider').value = 0;
+    document.getElementById(p + '-val').textContent = '0';
+    pillarMin[k] = 0;
+  });
+  document.getElementById('adv-active-dot').classList.add('hidden');
+  applyFilters();
+}
+
+// Sort button click — toggle asc/desc on same column, reset others
+function setSort(col) {
+  if (sortCol === col) {
+    sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+  } else {
+    sortCol = col;
+    sortDir = col === 'flock_score' ? 'desc' : 'asc'; // default desc for score
+  }
+  // Update all sort button visuals
+  document.querySelectorAll('.sort-btn').forEach(btn => {
+    btn.classList.remove('asc', 'desc');
+  });
+  const activeBtn = document.getElementById('sort-' + col);
+  if (activeBtn) activeBtn.classList.add(sortDir);
+  applyFilters();
+}
+
 function applyFilters() {
-  const q = document.getElementById('search-input').value.toLowerCase();
+  const q      = document.getElementById('search-input').value.toLowerCase();
   const sector = document.getElementById('sector-filter').value;
+
   let filtered = allStocks;
-  if (q) filtered = filtered.filter(s => s.ticker.toLowerCase().includes(q) || s.company_name.toLowerCase().includes(q));
+
+  // 1. Text search
+  if (q) filtered = filtered.filter(s =>
+    s.ticker.toLowerCase().includes(q) || s.company_name.toLowerCase().includes(q));
+
+  // 2. Sector
   if (sector) filtered = filtered.filter(s => s.sector === sector);
+
+  // 3. Pillar minimums (skip stocks with null pillar data if filter is active)
+  const pillars = [
+    ['profitability', 'pillar_profitability'],
+    ['growth',        'pillar_growth'],
+    ['health',        'pillar_health'],
+    ['valuation',     'pillar_valuation'],
+    ['quality',       'pillar_quality'],
+  ];
+  pillars.forEach(([key, field]) => {
+    if (pillarMin[key] > 0) {
+      filtered = filtered.filter(s => s[field] != null && s[field] >= pillarMin[key]);
+    }
+  });
+
+  // 4. Sort
+  if (sortCol) {
+    filtered = [...filtered].sort((a, b) => {
+      let va = a[sortCol], vb = b[sortCol];
+      // Nulls always at the end
+      if (va == null && vb == null) return 0;
+      if (va == null) return 1;
+      if (vb == null) return -1;
+      // String vs numeric compare
+      const cmp = typeof va === 'string' ? va.localeCompare(vb) : va - vb;
+      return sortDir === 'asc' ? cmp : -cmp;
+    });
+  }
+
   renderTable(filtered);
 }
 
@@ -733,12 +906,20 @@ async function openStockModal(ticker) {
 
   // ── Helpers ─────────────────────────────────────────────
   function fillFundamentals(f, isDemo) {
-    const fmt = (v, suffix='', decimals=2) => (v !== null && v !== undefined) ? `${(+v).toFixed(decimals)}${suffix}` : '—';
-    document.getElementById('fd-roe').textContent      = fmt(f.roe, '%');
-    document.getElementById('fd-roce').textContent     = fmt(f.roce, '%');
-    document.getElementById('fd-npm').textContent      = fmt(f.net_profit_margin, '%');
-    document.getElementById('fd-rev-cagr').textContent = fmt(f.revenue_cagr_3yr, '%');
-    document.getElementById('fd-eps').textContent      = fmt(f.eps_growth_3yr, '%');
+    // Non-% fields: just format as number with suffix
+    const fmt  = (v, suffix='', decimals=2) => (v != null && !isNaN(+v)) ? `${(+v).toFixed(decimals)}${suffix}` : '—';
+    // % fields: yfinance stores as decimal fraction (0.26 = 26%).
+    // Demo mock data is already in percentage form (rng returns e.g. 26).
+    const pct  = (v, decimals=2) => {
+      if (v == null || isNaN(+v)) return '—';
+      const val = isDemo ? +v : (+v * 100);
+      return val.toFixed(decimals) + '%';
+    };
+    document.getElementById('fd-roe').textContent      = pct(f.roe);
+    document.getElementById('fd-roce').textContent     = pct(f.roce);
+    document.getElementById('fd-npm').textContent      = pct(f.net_profit_margin);
+    document.getElementById('fd-rev-cagr').textContent = pct(f.revenue_cagr_3yr);
+    document.getElementById('fd-eps').textContent      = pct(f.eps_growth_3yr);
     document.getElementById('fd-de').textContent       = fmt(f.debt_equity, 'x');
     document.getElementById('fd-cr').textContent       = fmt(f.current_ratio, 'x');
     document.getElementById('fd-ic').textContent       = fmt(f.interest_coverage, 'x');
@@ -746,9 +927,9 @@ async function openStockModal(ticker) {
     document.getElementById('fd-pe').textContent       = fmt(f.pe_ratio, 'x');
     document.getElementById('fd-pb').textContent       = fmt(f.pb_ratio, 'x');
     document.getElementById('fd-peg').textContent      = fmt(f.peg_ratio);
-    document.getElementById('fd-div').textContent      = fmt(f.dividend_yield, '%');
-    document.getElementById('fd-promo').textContent    = fmt(f.promoter_holding_pct, '%');
-    document.getElementById('fd-pledge').textContent   = fmt(f.promoter_pledge_pct, '%');
+    document.getElementById('fd-div').textContent      = pct(f.dividend_yield);
+    document.getElementById('fd-promo').textContent    = pct(f.promoter_holding_pct);
+    document.getElementById('fd-pledge').textContent   = pct(f.promoter_pledge_pct);
     document.getElementById('fd-fii').textContent      = fmt(f.fii_dii_trend);
     document.getElementById('fd-mcap').textContent     = f.market_cap ? `Mkt Cap: ₹${(f.market_cap/1e5).toFixed(0)} Cr` : 'Mkt Cap: —';
     document.getElementById('fd-fetched').textContent  = isDemo ? 'Demo data — run pipeline for live values' : (f.fetched_at ? `Data as of: ${f.fetched_at.slice(0,10)}` : 'Data as of: —');

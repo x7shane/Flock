@@ -38,6 +38,12 @@ class StockListItem(BaseModel):
     industry: str | None = None
     is_active: bool = True
     flock_score: float | None = Field(None, description="Flock balanced score (0-100), None if not yet computed")
+    # Pillar scores — included in list so the explorer can filter client-side
+    pillar_profitability: float | None = None
+    pillar_growth: float | None = None
+    pillar_health: float | None = None
+    pillar_valuation: float | None = None
+    pillar_quality: float | None = None
 
 
 class FundamentalsResponse(BaseModel):

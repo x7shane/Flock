@@ -13,7 +13,7 @@ pydantic>=2.7.0
 pydantic-settings>=2.2.1
 
 # Financial Data & Analytics
-yfinance>=0.2.37
+yfinance>=1.4.1
 jugaad-data>=0.1.7
 mftool>=2.5
 pandas>=2.2.1
