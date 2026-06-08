@@ -920,12 +920,12 @@ async function openStockModal(ticker) {
     document.getElementById('fd-npm').textContent      = pct(f.net_profit_margin);
     document.getElementById('fd-rev-cagr').textContent = pct(f.revenue_cagr_3yr);
     document.getElementById('fd-eps').textContent      = pct(f.eps_growth_3yr);
-    document.getElementById('fd-de').textContent       = fmt(f.debt_equity, 'x');
-    document.getElementById('fd-cr').textContent       = fmt(f.current_ratio, 'x');
-    document.getElementById('fd-ic').textContent       = fmt(f.interest_coverage, 'x');
+    document.getElementById('fd-de').textContent       = fmt(f.debt_equity);
+    document.getElementById('fd-cr').textContent       = fmt(f.current_ratio);
+    document.getElementById('fd-ic').textContent       = fmt(f.interest_coverage);
     document.getElementById('fd-fcf').textContent      = f.free_cash_flow != null ? `₹${(f.free_cash_flow/1e7).toFixed(0)} Cr` : '—';
-    document.getElementById('fd-pe').textContent       = fmt(f.pe_ratio, 'x');
-    document.getElementById('fd-pb').textContent       = fmt(f.pb_ratio, 'x');
+    document.getElementById('fd-pe').textContent       = fmt(f.pe_ratio);
+    document.getElementById('fd-pb').textContent       = fmt(f.pb_ratio);
     document.getElementById('fd-peg').textContent      = fmt(f.peg_ratio);
     document.getElementById('fd-div').textContent      = pct(f.dividend_yield);
     document.getElementById('fd-promo').textContent    = pct(f.promoter_holding_pct);
