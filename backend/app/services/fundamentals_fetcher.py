@@ -90,31 +90,45 @@ class FundamentalsFetcher:
         try:
             loop = asyncio.get_event_loop()
 
-            def fetch_data() -> dict[str, Any]:
+            def fetch_data() -> tuple[dict[str, Any], Any, Any]:
                 stock = yf.Ticker(yf_ticker)
                 info = stock.info
-                return info
+                # Also fetch financial statements for ROCE computation
+                try:
+                    financials = stock.financials        # annual income statement
+                    balance_sheet = stock.balance_sheet  # annual balance sheet
+                except Exception:
+                    financials = None
+                    balance_sheet = None
+                return info, financials, balance_sheet
 
-            info = await loop.run_in_executor(None, fetch_data)
+            info, financials, balance_sheet = await loop.run_in_executor(None, fetch_data)
 
             if not info:
                 return None
 
             # Extract and normalize the 16 factors we care about
-            fundamentals = self._extract_factors(info)
+            fundamentals = self._extract_factors(info, financials, balance_sheet)
             fundamentals["fetched_at"] = datetime.now(UTC)
 
             return fundamentals
 
         except Exception as e:
-            logger.error("[FundamentalsFetcher] Failed to fetch %s.NS: %s", ticker, e)
+            logger.error("[FundamentalsFetcher] Failed to fetch %s: %s", yf_ticker, e)
             return None
 
-    def _extract_factors(self, info: dict[str, Any]) -> dict[str, Any]:
+    def _extract_factors(
+        self,
+        info: dict[str, Any],
+        financials: Any | None = None,
+        balance_sheet: Any | None = None,
+    ) -> dict[str, Any]:
         """
-        Extract and normalize 16 fundamental factors from yfinance info.
+        Extract and normalize fundamental factors from yfinance data.
 
-        Handles missing data and unit conversions.
+        ROCE is computed from financial statements (EBIT / Capital Employed)
+        rather than from operatingMargins (which is a margin, not a return on
+        invested capital and is therefore a fundamentally different metric).
         """
         def safe_float(value: Any) -> float | None:
             """Convert to float, return None if not possible."""
@@ -125,14 +139,33 @@ class FundamentalsFetcher:
             except (ValueError, TypeError):
                 return None
 
-        # Profitability factors
+        def stmt_val(df: Any, *row_names: str) -> float | None:
+            """Safely read the most-recent annual value from a statement DataFrame."""
+            if df is None or df.empty:
+                return None
+            for name in row_names:
+                if name in df.index:
+                    try:
+                        return float(df.loc[name].iloc[0])
+                    except Exception:
+                        continue
+            return None
+
+        # ── Profitability ────────────────────────────────────────────────────
         roe = safe_float(info.get("returnOnEquity"))
-        if roe is not None and roe > 1:  # Likely a percentage, convert to decimal
+        if roe is not None and roe > 1:
             roe = roe / 100
 
-        roce = safe_float(info.get("operatingMargins"))
-        if roce is not None and roce > 1:
-            roce = roce / 100
+        # ROCE = EBIT / Capital Employed (Total Assets − Current Liabilities)
+        # operatingMargins from info is NOT ROCE — it is Operating Income / Revenue
+        ebit = stmt_val(financials, "EBIT", "Operating Income")
+        total_assets = stmt_val(balance_sheet, "Total Assets")
+        current_liabilities = stmt_val(balance_sheet, "Current Liabilities")
+        if ebit is not None and total_assets is not None and current_liabilities is not None:
+            capital_employed = total_assets - current_liabilities
+            roce = (ebit / capital_employed) if capital_employed != 0 else None
+        else:
+            roce = None
 
         net_profit_margin = safe_float(info.get("profitMargins"))
         if net_profit_margin is not None and net_profit_margin > 1:
