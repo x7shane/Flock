@@ -179,7 +179,9 @@ class FundamentalsFetcher:
             Requires at least 5 quarters: compares df.columns[0] (most recent Q)
             vs df.columns[4] (same quarter 1 year ago).
             Returns decimal fraction (e.g. 0.194 for 19.4%) or None.
+            Skips NaN values and tries the next row name candidate.
             """
+            import math
             if df is None or df.empty or len(df.columns) < 5:
                 return None
             for name in row_names:
@@ -188,8 +190,12 @@ class FundamentalsFetcher:
                 try:
                     v_now = float(df.loc[name].iloc[0])
                     v_1y  = float(df.loc[name].iloc[4])
+                    # NaN in either value means data is missing for that row;
+                    # continue to the next candidate instead of propagating NaN.
+                    if math.isnan(v_now) or math.isnan(v_1y):
+                        continue
                     if v_1y == 0:
-                        return None
+                        continue
                     return (v_now - v_1y) / abs(v_1y)
                 except Exception:
                     continue
@@ -203,10 +209,19 @@ class FundamentalsFetcher:
         # We use stmt_growth_yoy to get true same-quarter figures directly.
         # Requires ≥5 quarters of history; newer/demerged entities may fall back.
 
-        # Revenue growth: Total Revenue Q[0] vs Q[4]
-        revenue_growth = stmt_growth_yoy(quarterly_fin, "Total Revenue", "Operating Revenue")
+        # Revenue growth: same-quarter YoY from quarterly statements.
+        # Row priority:
+        #   1. 'Net Interest Income'  — correct top-line for banks/NBFCs
+        #      (Total Revenue for banks is a net figure distorted by interest exp)
+        #   2. 'Total Revenue' / 'Operating Revenue' — for all other companies
+        # Falls back to info[revenueGrowth] if <5Q history.
+        revenue_growth = stmt_growth_yoy(
+            quarterly_fin,
+            "Net Interest Income",   # banks/NBFCs: true top-line
+            "Total Revenue",
+            "Operating Revenue",
+        )
         if revenue_growth is None:
-            # Fallback: yfinance info field (quarterly YoY per Yahoo's own calc)
             revenue_growth = safe_float(info.get("revenueGrowth"))
             if revenue_growth is not None and revenue_growth > 1:
                 revenue_growth = revenue_growth / 100
