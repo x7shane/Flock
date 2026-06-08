@@ -90,25 +90,26 @@ class FundamentalsFetcher:
         try:
             loop = asyncio.get_event_loop()
 
-            def fetch_data() -> tuple[dict[str, Any], Any, Any]:
+            def fetch_data() -> tuple[dict[str, Any], Any, Any, Any]:
                 stock = yf.Ticker(yf_ticker)
                 info = stock.info
-                # Also fetch financial statements for ROCE computation
                 try:
-                    financials = stock.financials        # annual income statement
-                    balance_sheet = stock.balance_sheet  # annual balance sheet
+                    financials       = stock.financials            # annual income stmt (ROCE)
+                    balance_sheet    = stock.balance_sheet         # annual BS (ROCE)
+                    quarterly_fin    = stock.quarterly_financials  # quarterly stmt (growth)
                 except Exception:
-                    financials = None
+                    financials    = None
                     balance_sheet = None
-                return info, financials, balance_sheet
+                    quarterly_fin = None
+                return info, financials, balance_sheet, quarterly_fin
 
-            info, financials, balance_sheet = await loop.run_in_executor(None, fetch_data)
+            info, financials, balance_sheet, quarterly_fin = await loop.run_in_executor(None, fetch_data)
 
             if not info:
                 return None
 
             # Extract and normalize the 16 factors we care about
-            fundamentals = self._extract_factors(info, financials, balance_sheet)
+            fundamentals = self._extract_factors(info, financials, balance_sheet, quarterly_fin)
             fundamentals["fetched_at"] = datetime.now(UTC)
 
             return fundamentals
@@ -122,6 +123,7 @@ class FundamentalsFetcher:
         info: dict[str, Any],
         financials: Any | None = None,
         balance_sheet: Any | None = None,
+        quarterly_fin: Any | None = None,
     ) -> dict[str, Any]:
         """
         Extract and normalize fundamental factors from yfinance data.
@@ -171,19 +173,55 @@ class FundamentalsFetcher:
         if net_profit_margin is not None and net_profit_margin > 1:
             net_profit_margin = net_profit_margin / 100
 
-        # ── Growth ──────────────────────────────────────────────────────────
-        # VERIFIED: yfinance revenueGrowth and earningsGrowth are QUARTERLY YoY
-        # figures — most recent quarter vs the same quarter in the prior year.
-        # NOT annual YoY, NOT 3-year CAGR.
-        # Example (TMCV.NS): Q4-FY26 ₹2.60L Cr vs Q4-FY25 ₹2.17L Cr = 19.75%
-        #                     matches info[revenueGrowth] = 0.194 exactly.
-        revenue_growth = safe_float(info.get("revenueGrowth"))
-        if revenue_growth is not None and revenue_growth > 1:
-            revenue_growth = revenue_growth / 100
+        def stmt_growth_yoy(df: Any, *row_names: str) -> float | None:
+            """
+            Compute same-quarter YoY growth from a quarterly statement DataFrame.
+            Requires at least 5 quarters: compares df.columns[0] (most recent Q)
+            vs df.columns[4] (same quarter 1 year ago).
+            Returns decimal fraction (e.g. 0.194 for 19.4%) or None.
+            """
+            if df is None or df.empty or len(df.columns) < 5:
+                return None
+            for name in row_names:
+                if name not in df.index:
+                    continue
+                try:
+                    v_now = float(df.loc[name].iloc[0])
+                    v_1y  = float(df.loc[name].iloc[4])
+                    if v_1y == 0:
+                        return None
+                    return (v_now - v_1y) / abs(v_1y)
+                except Exception:
+                    continue
+            return None
 
-        eps_growth = safe_float(info.get("earningsGrowth"))
-        if eps_growth is not None and eps_growth > 1:
-            eps_growth = eps_growth / 100
+        # ── Growth ──────────────────────────────────────────────────────────
+        # Prefer computing from quarterly financial statements (same Q YoY).
+        # yfinance info[revenueGrowth] / info[earningsGrowth] are fallbacks:
+        #   - revenueGrowth: quarterly revenue YoY (verified against TMCV.NS)
+        #   - earningsGrowth: net INCOME growth (NOT EPS — ignores dilution)
+        # We use stmt_growth_yoy to get true same-quarter figures directly.
+        # Requires ≥5 quarters of history; newer/demerged entities may fall back.
+
+        # Revenue growth: Total Revenue Q[0] vs Q[4]
+        revenue_growth = stmt_growth_yoy(quarterly_fin, "Total Revenue", "Operating Revenue")
+        if revenue_growth is None:
+            # Fallback: yfinance info field (quarterly YoY per Yahoo's own calc)
+            revenue_growth = safe_float(info.get("revenueGrowth"))
+            if revenue_growth is not None and revenue_growth > 1:
+                revenue_growth = revenue_growth / 100
+
+        # EPS growth: Basic EPS Q[0] vs Q[4] — per-share, accounts for dilution
+        # earningsGrowth in info is NET INCOME growth, not EPS growth.
+        eps_growth = stmt_growth_yoy(quarterly_fin, "Basic EPS", "Diluted EPS")
+        if eps_growth is None:
+            # Fallback: net income growth (same-quarter YoY)
+            eps_growth = stmt_growth_yoy(quarterly_fin, "Net Income", "Net Income Common Stockholders")
+        if eps_growth is None:
+            # Last resort: yfinance info field (net income based, not per-share)
+            eps_growth = safe_float(info.get("earningsGrowth"))
+            if eps_growth is not None and eps_growth > 1:
+                eps_growth = eps_growth / 100
 
         # ── Health ───────────────────────────────────────────────────────────
         # IMPORTANT: yfinance returns debtToEquity as ratio × 100 (percentage
