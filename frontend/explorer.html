@@ -450,11 +450,11 @@
           <p class="fund-label mb-3">Growth</p>
           <div class="grid grid-cols-2 gap-4 mb-6">
             <div class="bg-surface-container-low rounded-xl p-4">
-              <p class="fund-label mb-1">Revenue CAGR (3Y)</p>
+              <p class="fund-label mb-1">Revenue Growth (YoY)</p>
               <p id="fd-rev-cagr" class="fund-value">—</p>
             </div>
             <div class="bg-surface-container-low rounded-xl p-4">
-              <p class="fund-label mb-1">EPS Growth (3Y)</p>
+              <p class="fund-label mb-1">EPS Growth (YoY)</p>
               <p id="fd-eps" class="fund-value">—</p>
             </div>
           </div>
@@ -502,7 +502,7 @@
           <p class="fund-label mb-3">Quality</p>
           <div class="grid grid-cols-3 gap-4 mb-6">
             <div class="bg-surface-container-low rounded-xl p-4">
-              <p class="fund-label mb-1">Promoter Holding</p>
+              <p class="fund-label mb-1">Insider Holding (approx.)</p>
               <p id="fd-promo" class="fund-value">—</p>
             </div>
             <div class="bg-surface-container-low rounded-xl p-4">
@@ -1018,7 +1018,7 @@ const TIPS = {
   'strat-value': `<div class="t-title">Value Strategy</div><div class="t-sub">Favours undervalued stocks</div><div class="t-grid"><span class="t-label">Profitability</span><span class="t-val">20%</span><span class="t-label">Growth</span><span class="t-val">10%</span><span class="t-label">Health</span><span class="t-val">25%</span><span class="t-hi">Valuation</span><span class="t-hi">35% ★</span><span class="t-label">Quality</span><span class="t-val">10%</span></div>`,
   'strat-conservative': `<div class="t-title">Conservative Strategy</div><div class="t-sub">Prioritises financial stability</div><div class="t-grid"><span class="t-label">Profitability</span><span class="t-val">25%</span><span class="t-label">Growth</span><span class="t-val">10%</span><span class="t-hi">Health</span><span class="t-hi">35% ★</span><span class="t-label">Valuation</span><span class="t-val">15%</span><span class="t-label">Quality</span><span class="t-val">15%</span></div>`,
   'pillar-profitability': `<div class="t-title">Profitability Pillar</div><div class="t-formula">= avg percentile rank within Nifty 200 of:</div><div class="t-factors"><span class="t-factor">ROE</span><span class="t-sep">·</span><span class="t-factor">ROCE</span><span class="t-sep">·</span><span class="t-factor">Net Profit Margin</span></div>`,
-  'pillar-growth': `<div class="t-title">Growth Pillar</div><div class="t-formula">= avg percentile rank within Nifty 200 of:</div><div class="t-factors"><span class="t-factor">Revenue CAGR (3Y)</span><span class="t-sep">·</span><span class="t-factor">EPS Growth (3Y)</span></div>`,
+  'pillar-growth': `<div class="t-title">Growth Pillar</div><div class="t-formula">= avg percentile rank within Nifty 200 of:</div><div class="t-factors"><span class="t-factor">Revenue Growth (YoY)</span><span class="t-sep">·</span><span class="t-factor">EPS Growth (YoY)</span></div><div class="t-note">Source: trailing 12-month YoY via Yahoo Finance</div>`,
   'pillar-health': `<div class="t-title">Financial Health Pillar</div><div class="t-formula">= avg percentile rank within Nifty 200 of:</div><div class="t-factors"><span class="t-factor">Debt / Equity</span><span class="t-sep">·</span><span class="t-factor">Current Ratio</span><span class="t-sep">·</span><span class="t-factor">Interest Coverage</span><span class="t-sep">·</span><span class="t-factor">Free Cash Flow</span></div><div class="t-note">↓ lower Debt/Equity scores higher</div>`,
   'pillar-valuation': `<div class="t-title">Valuation Pillar</div><div class="t-formula">= avg percentile rank within Nifty 200 of:</div><div class="t-factors"><span class="t-factor">P/E Ratio</span><span class="t-sep">·</span><span class="t-factor">P/B Ratio</span><span class="t-sep">·</span><span class="t-factor">PEG Ratio</span><span class="t-sep">·</span><span class="t-factor">Dividend Yield</span></div><div class="t-note">↓ lower P/E, P/B, PEG scores higher</div>`,
   'pillar-quality': `<div class="t-title">Quality Pillar</div><div class="t-formula">= avg percentile rank within Nifty 200 of:</div><div class="t-factors"><span class="t-factor">Promoter Holding %</span><span class="t-sep">·</span><span class="t-factor">Promoter Pledge %</span><span class="t-sep">·</span><span class="t-factor">FII / DII Trend</span></div><div class="t-note">↓ lower Promoter Pledge scores higher</div>`,
