@@ -172,10 +172,11 @@ class FundamentalsFetcher:
             net_profit_margin = net_profit_margin / 100
 
         # ── Growth ──────────────────────────────────────────────────────────
-        # NOTE: yfinance revenueGrowth and earningsGrowth are trailing 12-month
-        # YoY figures, NOT 3-year CAGRs. We map them to the revenue_cagr_3yr and
-        # eps_growth_3yr columns as the closest available proxy. The UI labels
-        # should reflect this (YoY, not CAGR).
+        # VERIFIED: yfinance revenueGrowth and earningsGrowth are QUARTERLY YoY
+        # figures — most recent quarter vs the same quarter in the prior year.
+        # NOT annual YoY, NOT 3-year CAGR.
+        # Example (TMCV.NS): Q4-FY26 ₹2.60L Cr vs Q4-FY25 ₹2.17L Cr = 19.75%
+        #                     matches info[revenueGrowth] = 0.194 exactly.
         revenue_growth = safe_float(info.get("revenueGrowth"))
         if revenue_growth is not None and revenue_growth > 1:
             revenue_growth = revenue_growth / 100
