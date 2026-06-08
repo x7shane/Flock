@@ -171,7 +171,11 @@ class FundamentalsFetcher:
         if net_profit_margin is not None and net_profit_margin > 1:
             net_profit_margin = net_profit_margin / 100
 
-        # Growth factors
+        # ── Growth ──────────────────────────────────────────────────────────
+        # NOTE: yfinance revenueGrowth and earningsGrowth are trailing 12-month
+        # YoY figures, NOT 3-year CAGRs. We map them to the revenue_cagr_3yr and
+        # eps_growth_3yr columns as the closest available proxy. The UI labels
+        # should reflect this (YoY, not CAGR).
         revenue_growth = safe_float(info.get("revenueGrowth"))
         if revenue_growth is not None and revenue_growth > 1:
             revenue_growth = revenue_growth / 100
@@ -180,30 +184,40 @@ class FundamentalsFetcher:
         if eps_growth is not None and eps_growth > 1:
             eps_growth = eps_growth / 100
 
-        # Health factors
-        debt_equity = safe_float(info.get("debtToEquity"))
+        # ── Health ───────────────────────────────────────────────────────────
+        # IMPORTANT: yfinance returns debtToEquity as ratio × 100 (percentage
+        # form), e.g. 44.095 means a D/E ratio of 0.44, NOT 44. Always divide
+        # by 100 to get the actual ratio before storing.
+        _de_raw = safe_float(info.get("debtToEquity"))
+        debt_equity = (_de_raw / 100) if _de_raw is not None else None
+
         current_ratio = safe_float(info.get("currentRatio"))
         interest_coverage = safe_float(info.get("interestCoverage"))
 
-        # Free Cash Flow (in absolute value, convert to INR if needed)
+        # Free Cash Flow (absolute INR value from yfinance)
         fcf = safe_float(info.get("freeCashflow"))
 
-        # Valuation factors
+        # ── Valuation ────────────────────────────────────────────────────────
         pe_ratio = safe_float(info.get("trailingPE"))
         pb_ratio = safe_float(info.get("priceToBook"))
         peg_ratio = safe_float(info.get("pegRatio"))
         dividend_yield = safe_float(info.get("dividendYield"))
+        # dividendYield from yfinance is already in percentage form (1.08 = 1.08%),
+        # unlike the other ratio fields which are decimal fractions.
         if dividend_yield is not None and dividend_yield > 1:
             dividend_yield = dividend_yield / 100
 
-        # Quality factors
+        # ── Quality ──────────────────────────────────────────────────────────
+        # heldPercentInsiders is Yahoo Finance's insider-holding metric.
+        # For Indian stocks, true "promoter holding" per SEBI filings may differ;
+        # this is the closest available proxy from yfinance.
         promoter_holding = safe_float(info.get("heldPercentInsiders"))
         if promoter_holding is not None and promoter_holding > 1:
             promoter_holding = promoter_holding / 100
 
-        promoter_pledge = None  # Not available in yfinance, would need alternate source
+        promoter_pledge = None  # Not available in yfinance; needs alternate source
 
-        fii_dii_trend = None  # Would need alternate source (NSE/BSE data)
+        fii_dii_trend = None   # Needs alternate source (NSE/BSE data)
 
         # Market cap
         market_cap = safe_float(info.get("marketCap"))
