@@ -144,11 +144,11 @@ class TestRunMonteCarlo:
         }
 
     def test_returns_dict_with_required_keys(self):
-        """Output must contain final_values, paths, statistics."""
+        """Output must contain final_values and statistics."""
         result = run_monte_carlo(**self._default_inputs())
         assert "final_values" in result
-        assert "paths" in result
         assert "statistics" in result
+        assert "paths" not in result  # paths removed — use analytical sampling
 
     def test_final_values_shape(self):
         """Should have one final value per simulation."""
@@ -156,20 +156,12 @@ class TestRunMonteCarlo:
         result = run_monte_carlo(**inputs)
         assert len(result["final_values"]) == inputs["num_simulations"]
 
-    def test_paths_shape(self):
-        """Paths shape: (num_simulations, total_steps + 1)."""
+    def test_final_values_are_list(self):
+        """final_values should be a JSON-serialisable list (not a numpy array)."""
         inputs = self._default_inputs()
         result = run_monte_carlo(**inputs)
-        expected_cols = int(inputs["time_horizon_years"] * 252) + 1
-        assert result["paths"].shape == (inputs["num_simulations"], expected_cols)
-
-    def test_paths_start_at_initial_capital(self):
-        """First column of all paths should equal initial capital."""
-        inputs = self._default_inputs()
-        result = run_monte_carlo(**inputs)
-        np.testing.assert_array_equal(
-            result["paths"][:, 0], inputs["initial_capital"]
-        )
+        assert isinstance(result["final_values"], list)
+        assert len(result["final_values"]) == inputs["num_simulations"]
 
     def test_deterministic_with_seed(self):
         """Same seed → same results."""
