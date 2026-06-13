@@ -877,7 +877,11 @@ let portfolio = JSON.parse(sessionStorage.getItem('flock_portfolio') || '[]');
             <div class="crisis-drawdown ${ddColor}">${formatPct(r.portfolio_max_drawdown_pct)}</div>
             <div class="text-xs text-on-surface-variant font-medium mt-1">Max drawdown on ${r.max_drawdown_date || '—'}</div>
             <div class="text-xs text-on-surface-variant font-medium mt-1">Worst day: ${formatPct(r.worst_single_day_pct)}</div>
-            <div class="text-xs text-on-surface-variant font-medium mt-1">Recovery: ${r.recovery_days ? r.recovery_days + ' days' : r.recovery_date}</div>
+            <div class="text-xs text-on-surface-variant font-medium mt-1">Recovery: ${
+              r.recovery_days != null
+                ? `${r.recovery_days} days (by ${r.recovery_date})`
+                : '<span style="color:#ba1a1a;font-weight:600;">Did not recover in period</span>'
+            }</div>
             <div class="crisis-meta mt-sm" style="color:var(--text-muted);">Nifty 50: ${formatPct(r.nifty_50_drawdown_pct)}</div>
           </div>`;
       }).join('');
